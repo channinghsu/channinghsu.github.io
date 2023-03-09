@@ -482,12 +482,8 @@
                 lang: 'zh-CN',
                 dark: 'body[class~="dark-mode"]',
                 meta: ['nick'],
-                requiredMeta: ['nick'], 
                 login: ['disable'],
-                AVATAR_PROXY: 'true',
-                GRAVATAR_STR: 'https://seccdn.libravatar.org/avatar/{{mail|md5}}?d=retro'
-
-                // cannot customize by theme config, change it yourself
+                requiredMeta: ['nick'], // cannot customize by theme config, change it yourself
             });
         }
 
@@ -773,5 +769,5 @@
 
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/love.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
