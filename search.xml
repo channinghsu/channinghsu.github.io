@@ -1,6 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2023/03/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>主题样式模版</title>
+    <url>/2023/03/02/%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E6%A8%A1%E7%89%88/</url>
+    <content><![CDATA[<hr>
+<h1 id="H1-标题"><a href="#H1-标题" class="headerlink" title="H1 标题"></a>H1 标题</h1><h2 id="H2-标题"><a href="#H2-标题" class="headerlink" title="H2 标题"></a>H2 标题</h2><h3 id="H3-标题"><a href="#H3-标题" class="headerlink" title="H3 标题"></a>H3 标题</h3><h4 id="H4标题"><a href="#H4标题" class="headerlink" title="H4标题"></a>H4标题</h4><h5 id="H5-标题"><a href="#H5-标题" class="headerlink" title="H5 标题"></a>H5 标题</h5><h6 id="H6-标题"><a href="#H6-标题" class="headerlink" title="H6 标题"></a>H6 标题</h6><p><strong>加粗</strong></p>
+<p><em>斜体</em></p>
+<p><del>删除线</del></p>
+<p>这是一段文本</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://evan.beee.top/img/Screen%20Shot%202022-10-02%20at%209.26.37%20PM.png"
+                      alt="Screen Shot 2022-10-02 at 9.26.37 PM"
+                ></p>
+<p><code>行内代码</code></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">代码块</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;代码高亮&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h1 id="功能展示"><a href="#功能展示" class="headerlink" title="功能展示"></a>功能展示</h1><h2 id="Font-Awesome-6-1-0"><a href="#Font-Awesome-6-1-0" class="headerlink" title="Font Awesome 6.1.0"></a>Font Awesome 6.1.0</h2><p><strong>Solid:</strong> <i class="fa-solid fa-house"></i> <i class="fa-solid fa-envelope"></i></p>
+<p><strong>Regular:</strong> <i class="fa-regular fa-house"></i> <i class="fa-regular fa-envelope"></i></p>
+<p><strong>Light:</strong> <i class="fa-light fa-house"></i> <i class="fa-light fa-envelope"></i></p>
+<p><strong>Thin:</strong> <i class="fa-thin fa-house"></i> <i class="fa-thin fa-envelope"></i></p>
+<p><strong>Duotone:</strong> <i class="fa-duotone fa-house"></i> <i class="fa-duotone fa-envelope"></i></p>
+<link href="/css/thin.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/light.min.css" rel="stylesheet" type="text/css">
+
+
+
+<h2 id="Note-Large大号提示块"><a href="#Note-Large大号提示块" class="headerlink" title="Note Large大号提示块"></a>Note Large大号提示块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/note-module" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="note-large notel-default"><div class="notel-title"><p>信息</p>
+</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
+ </div></div>
+
+<div class="note-large notel-blue"><div class="notel-title"><p>提示</p>
+</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
+ </div></div>
+
+<div class="note-large notel-green"><div class="notel-title"><p>自定义标题</p>
+</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
+ </div></div>
+
+<div class="note-large notel-yellow"><div class="notel-title"><p>自定义标题</p>
+</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
+ </div></div>
+
+<div class="note-large notel-orange"><div class="notel-title"><p>自定义标题</p>
+</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
+ </div></div>
+
+<div class="note-large notel-red"><div class="notel-title"><p>自定义标题</p>
+</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
+ </div></div>
+
+<h2 id="Note-小号提示块"><a href="#Note-小号提示块" class="headerlink" title="Note 小号提示块"></a>Note 小号提示块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/note-module" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="note note-default icon-padding"><i class="note-icon fa-solid fa-info-circle"></i><p>默认 提示块标签</p>
+</div>
+
+<div class="note note-default icon-padding"><i class="note-icon fa-solid fa-info-circle"></i><p>default 提示块标签</p>
+</div>
+
+<div class="note note-primary icon-padding"><i class="note-icon fa-solid fa-circle-arrow-right"></i><p>primary 提示块标签</p>
+</div>
+
+<div class="note note-success icon-padding"><i class="note-icon fa-solid fa-check-circle"></i><p>success 提示块标签</p>
+</div>
+
+<div class="note note-info icon-padding"><i class="note-icon fa-solid fa-info-circle"></i><p>info 提示块标签</p>
+</div>
+
+<div class="note note-warning icon-padding"><i class="note-icon fa-solid fa-exclamation-circle"></i><p>warning 提示块标签</p>
+</div>
+
+<div class="note note-danger icon-padding"><i class="note-icon fa-solid fa-times-circle"></i><p>danger 提示块标签</p>
+</div>
+
+<div class="note note-red icon-padding"><i class="note-icon fa-solid fa-bolt"></i><p>自定义提示块标签</p>
+</div>
+
+<h2 id="Folding-折叠模块"><a href="#Folding-折叠模块" class="headerlink" title="Folding 折叠模块"></a>Folding 折叠模块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/folding" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<details class="yellow"><summary><i class="fa-solid fa-chevron-right"></i>Folding 测试： 点击查看更多 </summary>
+              <div class='content'>
+              <div class="note note-danger icon-padding"><i class="note-icon fa-solid fa-times-circle"></i><p>danger 提示块标签</p></div><div class="note note-tip icon-padding"><i class="note-icon fa-solid fa-lightbulb"></i><p>tip 提示块标签</p></div>
+              </div>
+            </details>
+
+
+
+<details class="green"><summary><i class="fa-solid fa-chevron-right"></i>Folding 测试： 点击查看更多 </summary>
+              <div class='content'>
+              <div class="note note-danger icon-padding"><i class="note-icon fa-solid fa-times-circle"></i><p>danger 提示块标签</p></div><div class="note note-tip icon-padding"><i class="note-icon fa-solid fa-lightbulb"></i><p>tip 提示块标签</p></div>
+              </div>
+            </details>
+
+
+
+<details class="blue"><summary><i class="fa-solid fa-chevron-right"></i>Folding 测试： 点击查看更多 </summary>
+              <div class='content'>
+              <p>啊啊啊啊啊</p><div class="note note-danger icon-padding"><i class="note-icon fa-solid fa-times-circle"></i><p>danger 提示块标签</p></div><div class="note note-tip icon-padding"><i class="note-icon fa-solid fa-lightbulb"></i><p>tip 提示块标签</p></div>
+              </div>
+            </details>
+
+<h2 id="Tabs-分栏模块"><a href="#Tabs-分栏模块" class="headerlink" title="Tabs 分栏模块"></a>Tabs 分栏模块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/tabs" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="tabs" id="tab-first-unique-name"><ul class="nav-tabs"><li class="tab active"><a class="#first-unique-name-1">First Tab</a></li><li class="tab"><a class="#first-unique-name-2">Second Tab</a></li><li class="tab"><a class="#first-unique-name-3">Third Tab</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p><strong>This is Tab 1.</strong></p></div><div class="tab-pane" id="first-unique-name-2"><p><strong>This is Tab 2.</strong></p>
+<p>This is Tab 2.</p></div><div class="tab-pane" id="first-unique-name-3"><p><strong>This is Tab 3.</strong></p>
+<p>This is Tab 3.</p>
+<p>This is Tab 3.</p></div></div></div>
+
+<h2 id="Button-按钮模块"><a href="#Button-按钮模块" class="headerlink" title="Button 按钮模块"></a>Button 按钮模块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/buttons" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>不设置任何参数的 <a class="button " href='/' title='按钮'>按钮</a> 适合融入段落中。</p>
+<p>regular 按钮适合独立于段落之外：</p>
+<a class="button  regular" href='https://www.ohevan.com' title='示例博客'><i class='fa-solid fa-play-circle'></i> 示例博客</a>
+
+<a class="button  regular" href='https://www.ohevan.com' title='示例博客'><i class='fa-solid fa-play-circle'></i> 示例博客</a>
+
+<p>large 按钮更具有强调作用，建议搭配 center 使用：</p>
+<a class="button  center large" href='https://redefine-docs.ohevan.com' title='开始使用'><i class='fa-solid fa-download'></i> 开始使用</a>
+]]></content>
+      <tags>
+        <tag>demo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MarkDown模版</title>
     <url>/2023/03/02/MarkDown%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<hr>
@@ -120,9 +263,24 @@ line 3 of code
 <h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><p><a class="link"   href="http://dev.nodeca.com/" >link text <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p><a class="link"   href="http://nodeca.github.io/pica/demo/"  title="title text!">link with title <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>Autoconverted link <a class="link"   href="https://github.com/nodeca/pica" >https://github.com/nodeca/pica <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> (enable linkify to see)</p>
-<h2 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h2><p><img src="https://octodex.github.com/images/minion.png" alt="Minion"><br><img src="https://octodex.github.com/images/stormtroopocat.jpg" alt="Stormtroopocat" title="The Stormtroopocat"></p>
+<h2 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://octodex.github.com/images/minion.png"
+                      alt="Minion"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://octodex.github.com/images/stormtroopocat.jpg"
+                      alt="Stormtroopocat" title="The Stormtroopocat"
+                ></p>
 <p>Like links, Images also have a footnote style syntax</p>
-<p><img src="https://octodex.github.com/images/dojocat.jpg" alt="Alt text" title="The Dojocat"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://octodex.github.com/images/dojocat.jpg"
+                      alt="Alt text" title="The Dojocat"
+                ></p>
 <p>With a reference later in the document defining the URL location:</p>
 <h2 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h2><p>The killer feature of <code>markdown-it</code> is very effective support of<br><a class="link"   href="https://www.npmjs.org/browse/keyword/markdown-it-plugin" >syntax plugins <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
 <h3 id="Emojies"><a href="#Emojies" class="headerlink" title="Emojies"></a><a class="link"   href="https://github.com/markdown-it/markdown-it-emoji" >Emojies <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></h3><blockquote>
@@ -159,144 +317,6 @@ Third paragraph of definition 2.
 <p>It converts “HTML”, but keep intact partial entries like “xxxHTMLyyy” and so on.</p>
 <p>*[HTML]: Hyper Text Markup Language</p>
 <h3 id="Custom-containers"><a href="#Custom-containers" class="headerlink" title="Custom containers"></a><a class="link"   href="https://github.com/markdown-it/markdown-it-container" >Custom containers <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></h3><p>::: warning<br><em>here be dragons</em><br>:::</p>
-]]></content>
-      <tags>
-        <tag>demo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/03/01/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>主题样式模版</title>
-    <url>/2023/03/02/%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E6%A8%A1%E7%89%88/</url>
-    <content><![CDATA[<hr>
-<h1 id="H1-标题"><a href="#H1-标题" class="headerlink" title="H1 标题"></a>H1 标题</h1><h2 id="H2-标题"><a href="#H2-标题" class="headerlink" title="H2 标题"></a>H2 标题</h2><h3 id="H3-标题"><a href="#H3-标题" class="headerlink" title="H3 标题"></a>H3 标题</h3><h4 id="H4标题"><a href="#H4标题" class="headerlink" title="H4标题"></a>H4标题</h4><h5 id="H5-标题"><a href="#H5-标题" class="headerlink" title="H5 标题"></a>H5 标题</h5><h6 id="H6-标题"><a href="#H6-标题" class="headerlink" title="H6 标题"></a>H6 标题</h6><p><strong>加粗</strong></p>
-<p><em>斜体</em></p>
-<p><del>删除线</del></p>
-<p>这是一段文本</p>
-<p><img src="https://evan.beee.top/img/Screen%20Shot%202022-10-02%20at%209.26.37%20PM.png" alt="Screen Shot 2022-10-02 at 9.26.37 PM"></p>
-<p><code>行内代码</code></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">代码块</span><br></pre></td></tr></table></figure></div>
-
-<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;代码高亮&quot;</span>)</span><br></pre></td></tr></table></figure></div>
-
-
-
-<h1 id="功能展示"><a href="#功能展示" class="headerlink" title="功能展示"></a>功能展示</h1><h2 id="Font-Awesome-6-1-0"><a href="#Font-Awesome-6-1-0" class="headerlink" title="Font Awesome 6.1.0"></a>Font Awesome 6.1.0</h2><p><strong>Solid:</strong> <i class="fa-solid fa-house"></i> <i class="fa-solid fa-envelope"></i></p>
-<p><strong>Regular:</strong> <i class="fa-regular fa-house"></i> <i class="fa-regular fa-envelope"></i></p>
-<p><strong>Light:</strong> <i class="fa-light fa-house"></i> <i class="fa-light fa-envelope"></i></p>
-<p><strong>Thin:</strong> <i class="fa-thin fa-house"></i> <i class="fa-thin fa-envelope"></i></p>
-<p><strong>Duotone:</strong> <i class="fa-duotone fa-house"></i> <i class="fa-duotone fa-envelope"></i></p>
-<link href="/css/thin.min.css" rel="stylesheet" type="text/css">
-
-<link href="/css/light.min.css" rel="stylesheet" type="text/css">
-
-
-
-<h2 id="Note-Large大号提示块"><a href="#Note-Large大号提示块" class="headerlink" title="Note Large大号提示块"></a>Note Large大号提示块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/note-module" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<div class="note-large notel-default"><div class="notel-title"><p>信息</p>
-</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
- </div></div>
-
-<div class="note-large notel-blue"><div class="notel-title"><p>提示</p>
-</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
- </div></div>
-
-<div class="note-large notel-green"><div class="notel-title"><p>自定义标题</p>
-</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
- </div></div>
-
-<div class="note-large notel-yellow"><div class="notel-title"><p>自定义标题</p>
-</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
- </div></div>
-
-<div class="note-large notel-orange"><div class="notel-title"><p>自定义标题</p>
-</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
- </div></div>
-
-<div class="note-large notel-red"><div class="notel-title"><p>自定义标题</p>
-</div><div class="notel-content"><p>换行测试<br>换行测试<br>换行测试</p>
- </div></div>
-
-<h2 id="Note-小号提示块"><a href="#Note-小号提示块" class="headerlink" title="Note 小号提示块"></a>Note 小号提示块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/note-module" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<div class="note note-default icon-padding"><i class="note-icon fa-solid fa-info-circle"></i><p>默认 提示块标签</p>
-</div>
-
-<div class="note note-default icon-padding"><i class="note-icon fa-solid fa-info-circle"></i><p>default 提示块标签</p>
-</div>
-
-<div class="note note-primary icon-padding"><i class="note-icon fa-solid fa-circle-arrow-right"></i><p>primary 提示块标签</p>
-</div>
-
-<div class="note note-success icon-padding"><i class="note-icon fa-solid fa-check-circle"></i><p>success 提示块标签</p>
-</div>
-
-<div class="note note-info icon-padding"><i class="note-icon fa-solid fa-info-circle"></i><p>info 提示块标签</p>
-</div>
-
-<div class="note note-warning icon-padding"><i class="note-icon fa-solid fa-exclamation-circle"></i><p>warning 提示块标签</p>
-</div>
-
-<div class="note note-danger icon-padding"><i class="note-icon fa-solid fa-times-circle"></i><p>danger 提示块标签</p>
-</div>
-
-<div class="note note-red icon-padding"><i class="note-icon fa-solid fa-bolt"></i><p>自定义提示块标签</p>
-</div>
-
-<h2 id="Folding-折叠模块"><a href="#Folding-折叠模块" class="headerlink" title="Folding 折叠模块"></a>Folding 折叠模块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/folding" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<details class="yellow"><summary><i class="fa-solid fa-chevron-right"></i>Folding 测试： 点击查看更多 </summary>
-              <div class='content'>
-              <div class="note note-danger icon-padding"><i class="note-icon fa-solid fa-times-circle"></i><p>danger 提示块标签</p></div><div class="note note-tip icon-padding"><i class="note-icon fa-solid fa-lightbulb"></i><p>tip 提示块标签</p></div>
-              </div>
-            </details>
-
-
-
-<details class="green"><summary><i class="fa-solid fa-chevron-right"></i>Folding 测试： 点击查看更多 </summary>
-              <div class='content'>
-              <div class="note note-danger icon-padding"><i class="note-icon fa-solid fa-times-circle"></i><p>danger 提示块标签</p></div><div class="note note-tip icon-padding"><i class="note-icon fa-solid fa-lightbulb"></i><p>tip 提示块标签</p></div>
-              </div>
-            </details>
-
-
-
-<details class="blue"><summary><i class="fa-solid fa-chevron-right"></i>Folding 测试： 点击查看更多 </summary>
-              <div class='content'>
-              <p>啊啊啊啊啊</p><div class="note note-danger icon-padding"><i class="note-icon fa-solid fa-times-circle"></i><p>danger 提示块标签</p></div><div class="note note-tip icon-padding"><i class="note-icon fa-solid fa-lightbulb"></i><p>tip 提示块标签</p></div>
-              </div>
-            </details>
-
-<h2 id="Tabs-分栏模块"><a href="#Tabs-分栏模块" class="headerlink" title="Tabs 分栏模块"></a>Tabs 分栏模块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/tabs" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<div class="tabs" id="tab-first-unique-name"><ul class="nav-tabs"><li class="tab active"><a class="#first-unique-name-1">First Tab</a></li><li class="tab"><a class="#first-unique-name-2">Second Tab</a></li><li class="tab"><a class="#first-unique-name-3">Third Tab</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p><strong>This is Tab 1.</strong></p></div><div class="tab-pane" id="first-unique-name-2"><p><strong>This is Tab 2.</strong></p>
-<p>This is Tab 2.</p></div><div class="tab-pane" id="first-unique-name-3"><p><strong>This is Tab 3.</strong></p>
-<p>This is Tab 3.</p>
-<p>This is Tab 3.</p></div></div></div>
-
-<h2 id="Button-按钮模块"><a href="#Button-按钮模块" class="headerlink" title="Button 按钮模块"></a>Button 按钮模块</h2><p><a class="link"   href="https://redefine-docs.ohevan.com/docs/advanced/plugins/buttons" >文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>不设置任何参数的 <a class="button " href='/' title='按钮'>按钮</a> 适合融入段落中。</p>
-<p>regular 按钮适合独立于段落之外：</p>
-<a class="button  regular" href='https://www.ohevan.com' title='示例博客'><i class='fa-solid fa-play-circle'></i> 示例博客</a>
-
-<a class="button  regular" href='https://www.ohevan.com' title='示例博客'><i class='fa-solid fa-play-circle'></i> 示例博客</a>
-
-<p>large 按钮更具有强调作用，建议搭配 center 使用：</p>
-<a class="button  center large" href='https://redefine-docs.ohevan.com' title='开始使用'><i class='fa-solid fa-download'></i> 开始使用</a>
 ]]></content>
       <tags>
         <tag>demo</tag>
