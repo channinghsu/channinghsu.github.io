@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="NENU 2025">
+    <meta name="author" content="Channing Hsu">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+    
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2022/06/22/第二章变量和基本类型/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《C++ Primer》第二章 变量和基本类型">
+<meta property="og:url" content="https://channinghsu.github.io/2022/06/22/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-22T02:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-28T11:07:35.677Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            《C++ Primer》第二章 变量和基本类型 -
+        
+        Channing&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/assets/fonts.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center"},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[],"icon":"fa-solid fa-bookmark"}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true},"home_banner":{"enable":true,"image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xbc1241888704@gmail.com"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"audios":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.1.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"},"Links":{"icon":"fa-regular fa-link","submenus":{"今天吃啥":"http://guozhivip.com/eat/","做一首歌":"https://aidn.jp/mikutap/","随便画点":"http://david.li/paint/","唱一唱":"https://www.adultswim.com/etcetera/choir/","捏捏脸":"https://www.adultswim.com/etcetera/elastic-man/"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/about"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-link"></i>
+                                        
+                                        链接&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="http://guozhivip.com/eat/">今天吃啥
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://aidn.jp/mikutap/">做一首歌
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="http://david.li/paint/">随便画点
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://www.adultswim.com/etcetera/choir/">唱一唱
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://www.adultswim.com/etcetera/elastic-man/">捏捏脸
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/about"  >
+                             
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-link"></i>
+                                
+                                链接&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="http://guozhivip.com/eat/">今天吃啥</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://aidn.jp/mikutap/">做一首歌</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="http://david.li/paint/">随便画点</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://www.adultswim.com/etcetera/choir/">唱一唱</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://www.adultswim.com/etcetera/elastic-man/">捏捏脸</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">《C++ Primer》第二章 变量和基本类型</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/me.JPG">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Channing Hsu</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2022-06-22 10:00</span>
+        <span class="mobile">2022-06-22 10</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-03-28 19:07:35</span>
+            <span class="mobile">2023-03-28 19:07</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C-C/">C/C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>10 分钟</span>
+        </span>
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p>任何常用的编程语言都具备一组公共的语法特征，最基本的特征包括：</p>
+<ul>
+<li>整型、字符型等内置类型</li>
+<li>变量，用来为对象命名</li>
+<li>表达式和语句，用于操作上述数据类型的具体值</li>
+<li>if 或 while 等控制结构，有选择地执行一些语句或重复地执行一些语句</li>
+<li>函数，用于定义可供随时调用的计算单元</li>
+</ul>
+<p>大多数编程语言通过两种方式来进一步补充其基本特征：</p>
+<ul>
+<li>自定义数据类型，实现对语言的扩展</li>
+<li>将一些有用的功能封装成库函数</li>
+</ul>
+<h3 id="基本内置类型"><a href="#基本内置类型" class="headerlink" title="基本内置类型"></a>基本内置类型</h3><p><strong>基本算数类型</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>最小尺寸</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bool</code></td>
+<td>布尔类型</td>
+<td>8bits</td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td>字符</td>
+<td>8bits</td>
+</tr>
+<tr>
+<td><code>wchar_t</code></td>
+<td>宽字符</td>
+<td>16bits</td>
+</tr>
+<tr>
+<td><code>char16_t</code></td>
+<td>Unicode字符</td>
+<td>16bits</td>
+</tr>
+<tr>
+<td><code>char32_t</code></td>
+<td>Unicode字符</td>
+<td>32bits</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>短整型</td>
+<td>16bits</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>整型</td>
+<td>16bits (在32位机器中是32bits)</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>长整型</td>
+<td>32bits</td>
+</tr>
+<tr>
+<td><code>long long</code></td>
+<td>长整型</td>
+<td>64bits （是在C++11中新定义的）</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>单精度浮点数</td>
+<td>6位有效数字</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>双精度浮点数</td>
+<td>10位有效数字</td>
+</tr>
+<tr>
+<td><code>long double</code></td>
+<td>扩展精度浮点数</td>
+<td>10位有效数字</td>
+</tr>
+</tbody></table>
+<h3 id="如何选择类型"><a href="#如何选择类型" class="headerlink" title="如何选择类型"></a>如何选择类型</h3><ul>
+<li>1.当明确知晓数值不可能是负数时，选用无符号类型；</li>
+<li>2.使用<code>int</code>执行整数运算。一般<code>long</code>的大小和<code>int</code>一样，而<code>short</code>常常显得太小。除非超过了<code>int</code>的范围，选择<code>long long</code>。</li>
+<li>3.算术表达式中不要使用<code>char</code>或<code>bool</code>。</li>
+<li>4.浮点运算选用<code>double</code>。</li>
+</ul>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><ul>
+<li>非布尔型赋给布尔型，初始值为0则结果为false，否则为true。</li>
+<li>布尔型赋给非布尔型，初始值为false结果为0，初始值为true结果为1。</li>
+</ul>
+<h3 id="字面值常量"><a href="#字面值常量" class="headerlink" title="字面值常量"></a>字面值常量</h3><ul>
+<li><p>一个形如<code>42</code>的值被称作<strong>字面值常量</strong>（literal）。</p>
+<ul>
+<li><p>整型和浮点型字面值。</p>
+</li>
+<li><p>字符和字符串字面值。</p>
+<ul>
+<li><p>使用空格连接，继承自C。</p>
+</li>
+<li><p>字符字面值：单引号， <code>&#39;a&#39;</code></p>
+</li>
+<li><p>字符串字面值：双引号， <code>&quot;Hello World&quot;</code></p>
+</li>
+<li><p>分多行书写字符串。</p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std:cout&lt;&lt;<span class="string">&quot;wow, a really, really long string&quot;</span></span><br><span class="line">          <span class="string">&quot;literal that spans two lines&quot;</span> &lt;&lt;std::endl;</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+</li>
+<li><p>转义序列。<code>\n</code>、<code>\t</code>等。</p>
+</li>
+<li><p>布尔字面值。<code>true</code>，<code>false</code>。</p>
+</li>
+<li><p>指针字面值。<code>nullptr</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>字符串型实际上时常量字符构成的数组，结尾处以<code>&#39;\0&#39;</code>结束，所以字符串类型实际上长度比内容多1。</p>
+</blockquote>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p><strong>变量</strong>提供一个<strong>具名</strong>的、可供程序操作的存储空间。   <code>C++</code>中<strong>变量</strong>和<strong>对象</strong>一般可以互换使用。</p>
+<h3 id="变量定义（define）"><a href="#变量定义（define）" class="headerlink" title="变量定义（define）"></a>变量定义（define）</h3><ul>
+<li><strong>定义形式</strong>：类型说明符（type specifier） + 一个或多个变量名组成的列表。如<code>int sum = 0, value, units_sold = 0;</code></li>
+<li><strong>初始化</strong>（initialize）：对象在创建时获得了一个特定的值。<ul>
+<li><strong>初始化不是赋值！</strong>：</li>
+<li>初始化 &#x3D; 创建变量 + 赋予初始值</li>
+<li>赋值 &#x3D; 擦除对象的当前值 + 用新值代替</li>
+<li><strong>列表初始化</strong>：使用花括号<code>&#123;&#125;</code>，如<code>int units_sold&#123;0&#125;;</code></li>
+<li>默认初始化：定义时没有指定初始值会被默认初始化；<strong>在函数体内部的内置类型变量将不会被初始化</strong>。</li>
+<li>建议初始化每一个内置类型的变量。</li>
+</ul>
+</li>
+</ul>
+<h3 id="变量的声明（declaration）-vs-定义（define）"><a href="#变量的声明（declaration）-vs-定义（define）" class="headerlink" title="变量的声明（declaration） vs 定义（define）"></a>变量的<strong>声明</strong>（declaration） vs <strong>定义</strong>（define）</h3><ul>
+<li>为了支持分离式编译，<code>C++</code>将声明和定义区分开。<strong>声明</strong>使得名字为程序所知。<strong>定义</strong>负责创建与名字关联的实体。</li>
+<li><strong>extern</strong>：只是说明变量定义在其他地方。</li>
+<li>只声明而不定义： 在变量名前添加关键字 <code>extern</code>，如<code>extern int i;</code>。但如果包含了初始值，就变成了定义：<code>extern double pi = 3.14;</code></li>
+<li>变量只能被定义一次，但是可以多次声明。定义只出现在一个文件中，其他文件使用该变量时需要对其声明。</li>
+<li>名字的<strong>作用域</strong>（namescope）<code>&#123;&#125;</code><ul>
+<li><strong>第一次使用变量时再定义它</strong>。</li>
+<li>嵌套的作用域<ul>
+<li>同时存在全局和局部变量时，已定义局部变量的作用域中可用<code>::reused</code>显式访问全局变量reused。</li>
+<li><strong>但是用到全局变量时，尽量不适用重名的局部变量。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="变量命名规范"><a href="#变量命名规范" class="headerlink" title="变量命名规范"></a>变量命名规范</h4><ol>
+<li>需体现实际意义</li>
+<li>变量名用小写字母</li>
+<li>自定义类名用大写字母开头：Sales_item</li>
+<li>标识符由多个单词组成，中间须有明确区分：student_loan或studentLoan，不要用studentloan。</li>
+</ol>
+<h2 id="左值和右值"><a href="#左值和右值" class="headerlink" title="左值和右值"></a>左值和右值</h2><ul>
+<li><strong>左值</strong>（l-value）<strong>可以</strong>出现在赋值语句的左边或者右边，比如变量；</li>
+<li><strong>右值</strong>（r-value）<strong>只能</strong>出现在赋值语句的右边，比如常量。</li>
+</ul>
+<h2 id="复合类型"><a href="#复合类型" class="headerlink" title="复合类型"></a>复合类型</h2><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
+<p>一般说的引用是指的左值引用</p>
+</blockquote>
+<ul>
+<li><strong>引用</strong>：引用是一个对象的别名，引用类型引用（refer to）另外一种类型。如<code>int &amp;refVal = val;</code>。</li>
+<li>引用必须初始化。</li>
+<li>引用和它的初始值是<strong>绑定bind</strong>在一起的，而<strong>不是拷贝</strong>。一旦定义就不能更改绑定为其他的对象</li>
+</ul>
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><blockquote>
+<p>int *p;      &#x2F;&#x2F;<strong>指向int型对象</strong>的指针</p>
+</blockquote>
+<ul>
+<li><p>是一种 <code>&quot;指向（point to）&quot;</code>另外一种类型的复合类型。</p>
+</li>
+<li><p><strong>定义</strong>指针类型： <code>int *ip1;</code>，<strong>从右向左读有助于阅读</strong>，<code>ip1</code>是指向<code>int</code>类型的指针。</p>
+</li>
+<li><p>指针存放某个对象的<strong>地址</strong>。</p>
+</li>
+<li><p>获取对象的地址： <code>int i=42; int *p = &amp;i;</code>。 <code>&amp;</code>是<strong>取地址符</strong>。</p>
+</li>
+<li><p>指针的类型与所指向的对象类型必须一致（均为同一类型int、double等）</p>
+</li>
+<li><p>指针的值的四种状态：</p>
+<ul>
+<li><p>1.指向一个对象；</p>
+</li>
+<li><p>2.指向紧邻对象的下一个位置；</p>
+</li>
+<li><p>3.空指针；</p>
+</li>
+<li><p>4.无效指针。</p>
+</li>
+<li><blockquote>
+<p><strong>对无效指针的操作均会引发错误，第二种和第三种虽为有效的，但理论上是不被允许的</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>指针访问对象： <code>cout &lt;&lt; *p;</code>输出p指针所指对象的数据， <code>*</code>是<strong>解引用符</strong>。</p>
+</li>
+<li><p>空指针不指向任何对象。使用<code>int *p=nullptr;</code>来使用空指针。</p>
+</li>
+<li><blockquote>
+<p>指针和引用的区别：引用本身并非一个对象，引用定义后就不能绑定到其他的对象了；指针并没有此限制，相当于变量一样使用。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>赋值语句永远改变的是<strong>左侧</strong>的对象。</p>
+</blockquote>
+</li>
+<li><p><code>void*</code>指针可以存放<strong>任意</strong>对象的地址。因无类型，仅操作内存空间，对所存对象无法访问。</p>
+</li>
+<li><p>其他指针类型必须要与所指对象<strong>严格匹配</strong>。</p>
+</li>
+<li><p>两个指针相减的类型是<code>ptrdiff_t</code>。</p>
+</li>
+<li><p>建议：初始化所有指针。</p>
+</li>
+<li><p><code>int* p1, p2;//*是对p1的修饰，所以p2还是int型</code></p>
+</li>
+</ul>
+<h2 id="const限定符"><a href="#const限定符" class="headerlink" title="const限定符"></a>const限定符</h2><ul>
+<li>动机：希望定义一些不能被改变值的变量。</li>
+</ul>
+<h3 id="初始化和const"><a href="#初始化和const" class="headerlink" title="初始化和const"></a>初始化和const</h3><ul>
+<li>const对象<strong>必须初始化</strong>，且<strong>不能被改变</strong>。</li>
+<li>const变量默认不能被其他文件访问，非要访问，必须在指定const定义之前加extern。要想在多个文件中使用const变量共享，定义和声明都加const关键字即可。</li>
+</ul>
+<h3 id="const的引用"><a href="#const的引用" class="headerlink" title="const的引用"></a>const的引用</h3><ul>
+<li><strong>reference to const</strong>（对常量的引用）：指向const对象的引用，如 <code>const int ival=1; const int &amp;refVal = ival;</code>，可以读取但不能修改<code>refVal</code>。</li>
+<li><strong>临时量</strong>（temporary）对象：当编译器需要一个空间来暂存表达式的求值结果时，临时创建的一个未命名的对象。</li>
+<li>对临时量的引用是非法行为。</li>
+</ul>
+<h3 id="指针和const"><a href="#指针和const" class="headerlink" title="指针和const"></a>指针和const</h3><ul>
+<li><strong>pointer to const</strong>（指向常量的指针）：不能用于改变其所指对象的值, 如 <code>const double pi = 3.14; const double *cptr = &amp;pi;</code>。</li>
+<li><strong>const pointer</strong>：指针本身是常量，也就是说指针固定指向该对象，（存放在指针中的地址不变，地址所对应的那个对象值可以修改）如 <code>int i = 0; int *const ptr = &amp;i;</code></li>
+</ul>
+<h3 id="顶层const"><a href="#顶层const" class="headerlink" title="顶层const"></a>顶层const</h3><ul>
+<li><code>顶层const</code>：指针本身是个常量。</li>
+<li><code>底层const</code>：指针指向的对象是个常量。拷贝时严格要求相同的底层const资格。</li>
+</ul>
+<h3 id="constexpr和常量表达式（▲可选）"><a href="#constexpr和常量表达式（▲可选）" class="headerlink" title="constexpr和常量表达式（▲可选）"></a><code>constexpr</code>和常量表达式（▲可选）</h3><ul>
+<li>常量表达式：指值不会改变，且在编译过程中就能得到计算结果的表达式。</li>
+<li><code>C++11</code>新标准规定，允许将变量声明为<code>constexpr</code>类型以便由编译器来验证变量的值是否是一个常量的表达式。</li>
+</ul>
+<h2 id="处理类型"><a href="#处理类型" class="headerlink" title="处理类型"></a>处理类型</h2><h3 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h3><ul>
+<li>传统别名：使用<strong>typedef</strong>来定义类型的同义词。 <code>typedef double wages;</code></li>
+<li>新标准别名：别名声明（alias declaration）： <code>using SI = Sales_item;</code>（C++11）</li>
+</ul>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对于复合类型（指针等）不能代回原式来进行理解</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> *pstring;  <span class="comment">// pstring是char*的别名</span></span><br><span class="line"><span class="type">const</span> pstring cstr = <span class="number">0</span>; <span class="comment">// 指向char的常量指针</span></span><br><span class="line"><span class="comment">// 如改写为const char *cstr = 0;不正确，为指向const char的指针</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辅助理解（可代回后加括号）</span></span><br><span class="line"><span class="comment">// const pstring cstr = 0;代回后const (char *) cstr = 0;</span></span><br><span class="line"><span class="comment">// const char *cstr = 0;即为(const char *) cstr = 0;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="auto类型说明符-c-11"><a href="#auto类型说明符-c-11" class="headerlink" title="auto类型说明符 c++11"></a>auto类型说明符 c++11</h3><ul>
+<li><strong>auto</strong>类型说明符：让编译器<strong>自动推断类型</strong>。</li>
+<li>一条声明语句只能有一个数据类型，所以一个auto声明多个变量时只能相同的变量类型(包括复杂类型&amp;和*)。<code>auto sz = 0, pi =3.14//错误</code></li>
+<li><code>int i = 0, &amp;r = i; auto a = r;</code> 推断<code>a</code>的类型是<code>int</code>。</li>
+<li>会忽略<code>顶层const</code>。</li>
+<li><code>const int ci = 1; const auto f = ci;</code>推断类型是<code>int</code>，如果希望是顶层const需要自己加<code>const</code></li>
+</ul>
+<h3 id="decltype类型指示符"><a href="#decltype类型指示符" class="headerlink" title="decltype类型指示符"></a>decltype类型指示符</h3><ul>
+<li>从表达式的类型推断出要定义的变量的类型。</li>
+<li><strong>decltype</strong>：选择并返回操作数的<strong>数据类型</strong>。</li>
+<li><code>decltype(f()) sum = x;</code> 推断<code>sum</code>的类型是函数<code>f</code>的返回类型。</li>
+<li>不会忽略<code>顶层const</code>。</li>
+<li>如果对变量加括号，编译器会将其认为是一个表达式，如int i–&gt;(i),则decltype((i))得到结果为int&amp;引用。</li>
+<li>赋值是会产生引用的一类典型表达式，引用的类型就是左值的类型。也就是说，如果 i 是 int，则表达式 i&#x3D;x 的类型是 int&amp;。</li>
+<li><code>C++11</code></li>
+</ul>
+<h2 id="自定义数据结构"><a href="#自定义数据结构" class="headerlink" title="自定义数据结构"></a>自定义数据结构</h2><h3 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h3><blockquote>
+<p>尽量不要吧类定义和对象定义放在一起。如<code>struct Student&#123;&#125; xiaoming,xiaofang;</code></p>
+</blockquote>
+<ul>
+<li>类可以以关键字<code>struct</code>开始，紧跟类名和类体。</li>
+<li>类数据成员：类体定义类的成员。</li>
+<li><code>C++11</code>：可以为类数据成员提供一个<strong>类内初始值</strong>（in-class initializer）。</li>
+</ul>
+<h3 id="编写自己的头文件"><a href="#编写自己的头文件" class="headerlink" title="编写自己的头文件"></a>编写自己的头文件</h3><ul>
+<li>头文件通常包含哪些只能被定义一次的实体：类、<code>const</code>和<code>constexpr</code>变量。</li>
+</ul>
+<p>预处理器概述：</p>
+<ul>
+<li><strong>预处理器</strong>（preprocessor）：确保头文件多次包含仍能安全工作。</li>
+<li>当预处理器看到<code>#include</code>标记时，会用指定的头文件内容代替<code>#include</code></li>
+<li><strong>头文件保护符</strong>（header guard）：头文件保护符依赖于预处理变量的状态：已定义和未定义。<ul>
+<li><code>#indef</code>已定义时为真</li>
+<li><code>#inndef</code>未定义时为真</li>
+<li>头文件保护符的名称需要唯一，且保持全部大写。养成良好习惯，不论是否该头文件被包含，要加保护符。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> SALES_DATA_H  <span class="comment">//SALES_DATA_H未定义时为真</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SALES_DATA_H</span></span><br><span class="line">strct Sale_data&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></div>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/C-C/">#C/C++</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/06/23/%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">《C++ Primer》第三章 字符串、向量和数组</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2022/06/21/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%80%E5%A7%8B/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">《C++ Primer》第一章 开始</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">《C++ Primer》第二章 变量和基本类型</div>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">基本内置类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%B1%BB%E5%9E%8B"><span class="nav-text">如何选择类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E9%9D%A2%E5%80%BC%E5%B8%B8%E9%87%8F"><span class="nav-text">字面值常量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%EF%BC%88define%EF%BC%89"><span class="nav-text">变量定义（define）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%EF%BC%88declaration%EF%BC%89-vs-%E5%AE%9A%E4%B9%89%EF%BC%88define%EF%BC%89"><span class="nav-text">变量的声明（declaration） vs 定义（define）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC"><span class="nav-text">左值和右值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-text">复合类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-text">引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E9%92%88"><span class="nav-text">指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-text">const限定符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8Cconst"><span class="nav-text">初始化和const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-text">const的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E5%92%8Cconst"><span class="nav-text">指针和const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B6%E5%B1%82const"><span class="nav-text">顶层const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constexpr%E5%92%8C%E5%B8%B8%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88%E2%96%B2%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-text">constexpr和常量表达式（▲可选）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="nav-text">处理类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="nav-text">类型别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auto%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E%E7%AC%A6-c-11"><span class="nav-text">auto类型说明符 c++11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decltype%E7%B1%BB%E5%9E%8B%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="nav-text">decltype类型指示符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">自定义数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#struct"><span class="nav-text">struct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-text">编写自己的头文件</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.1.0</a>
+        </div>
+        
+        
+        
+            <div id="start_div" style="display:none">
+                2023/03/01 15:00:00
+            </div>
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+
+</main>
+
+
+
+<script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/utils.js"></script><script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/main.js"></script><script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/layouts/navbarShrink.js"></script><script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/tools/scrollTopBottom.js"></script><script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/tools/lightDarkSwitch.js"></script>
+
+
+    <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/tools/localSearch.js"></script>
+
+
+
+    <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/tools/runtime.js"></script>
+    <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/layouts/odometer.min.js"></script>
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/libs/Typed.min.js"></script>
+  <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/tools/tocToggle.js"></script><script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/libs/anime.min.js"></script><script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/layouts/toc.js"></script><script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+    <script src="//evan.beee.top/projects/hexo-theme-redefine/v2.1.0/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
