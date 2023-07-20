@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -380,6 +376,7 @@
 <li>将一些有用的功能封装成库函数</li>
 </ul>
 <h3 id="基本内置类型"><a href="#基本内置类型" class="headerlink" title="基本内置类型"></a>基本内置类型</h3><p><strong>基本算数类型</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -388,7 +385,8 @@
 <th>最小尺寸</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>bool</code></td>
 <td>布尔类型</td>
 <td>8bits</td>
@@ -448,7 +446,9 @@
 <td>扩展精度浮点数</td>
 <td>10位有效数字</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="如何选择类型"><a href="#如何选择类型" class="headerlink" title="如何选择类型"></a>如何选择类型</h3><ul>
 <li>1.当明确知晓数值不可能是负数时，选用无符号类型；</li>
 <li>2.使用<code>int</code>执行整数运算。一般<code>long</code>的大小和<code>int</code>一样，而<code>short</code>常常显得太小。除非超过了<code>int</code>的范围，选择<code>long long</code>。</li>
@@ -473,7 +473,8 @@
 <li><p>字符串字面值：双引号， <code>&quot;Hello World&quot;</code></p>
 </li>
 <li><p>分多行书写字符串。</p>
-<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std:cout&lt;&lt;<span class="string">&quot;wow, a really, really long string&quot;</span></span><br><span class="line">          <span class="string">&quot;literal that spans two lines&quot;</span> &lt;&lt;std::endl;</span><br></pre></td></tr></table></figure></div></li>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std:cout&lt;&lt;<span class="string">&quot;wow, a really, really long string&quot;</span></span><br><span class="line">          <span class="string">&quot;literal that spans two lines&quot;</span> &lt;&lt;std::endl;</span><br></pre></td></tr></table></figure></div>
+</li>
 </ul>
 </li>
 <li><p>转义序列。<code>\n</code>、<code>\t</code>等。</p>
@@ -493,8 +494,8 @@
 <li><strong>定义形式</strong>：类型说明符（type specifier） + 一个或多个变量名组成的列表。如<code>int sum = 0, value, units_sold = 0;</code></li>
 <li><strong>初始化</strong>（initialize）：对象在创建时获得了一个特定的值。<ul>
 <li><strong>初始化不是赋值！</strong>：</li>
-<li>初始化 &#x3D; 创建变量 + 赋予初始值</li>
-<li>赋值 &#x3D; 擦除对象的当前值 + 用新值代替</li>
+<li>初始化 = 创建变量 + 赋予初始值</li>
+<li>赋值 = 擦除对象的当前值 + 用新值代替</li>
 <li><strong>列表初始化</strong>：使用花括号<code>&#123;&#125;</code>，如<code>int units_sold&#123;0&#125;;</code></li>
 <li>默认初始化：定义时没有指定初始值会被默认初始化；<strong>在函数体内部的内置类型变量将不会被初始化</strong>。</li>
 <li>建议初始化每一个内置类型的变量。</li>
@@ -505,14 +506,14 @@
 <li>为了支持分离式编译，<code>C++</code>将声明和定义区分开。<strong>声明</strong>使得名字为程序所知。<strong>定义</strong>负责创建与名字关联的实体。</li>
 <li><strong>extern</strong>：只是说明变量定义在其他地方。</li>
 <li>只声明而不定义： 在变量名前添加关键字 <code>extern</code>，如<code>extern int i;</code>。但如果包含了初始值，就变成了定义：<code>extern double pi = 3.14;</code></li>
-<li>变量只能被定义一次，但是可以多次声明。定义只出现在一个文件中，其他文件使用该变量时需要对其声明。</li>
-<li>名字的<strong>作用域</strong>（namescope）<code>&#123;&#125;</code><ul>
+<li>变量只能被定义一次，但是可以多次声明。定义只出现在一个文件中，其他文件使用该变量时需要对其声明。<ul>
+<li>名字的<strong>作用域</strong>（namescope）<code>&#123;&#125;</code></li>
+</ul>
+</li>
 <li><strong>第一次使用变量时再定义它</strong>。</li>
 <li>嵌套的作用域<ul>
 <li>同时存在全局和局部变量时，已定义局部变量的作用域中可用<code>::reused</code>显式访问全局变量reused。</li>
 <li><strong>但是用到全局变量时，尽量不适用重名的局部变量。</strong></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -535,7 +536,7 @@
 <li>引用和它的初始值是<strong>绑定bind</strong>在一起的，而<strong>不是拷贝</strong>。一旦定义就不能更改绑定为其他的对象</li>
 </ul>
 <h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><blockquote>
-<p>int *p;      &#x2F;&#x2F;<strong>指向int型对象</strong>的指针</p>
+<p>int <em>p;      //<em>*指向int型对象</em></em>的指针</p>
 </blockquote>
 <ul>
 <li><p>是一种 <code>&quot;指向（point to）&quot;</code>另外一种类型的复合类型。</p>
@@ -616,7 +617,6 @@
 <li>新标准别名：别名声明（alias declaration）： <code>using SI = Sales_item;</code>（C++11）</li>
 </ul>
 <div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对于复合类型（指针等）不能代回原式来进行理解</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> *pstring;  <span class="comment">// pstring是char*的别名</span></span><br><span class="line"><span class="type">const</span> pstring cstr = <span class="number">0</span>; <span class="comment">// 指向char的常量指针</span></span><br><span class="line"><span class="comment">// 如改写为const char *cstr = 0;不正确，为指向const char的指针</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辅助理解（可代回后加括号）</span></span><br><span class="line"><span class="comment">// const pstring cstr = 0;代回后const (char *) cstr = 0;</span></span><br><span class="line"><span class="comment">// const char *cstr = 0;即为(const char *) cstr = 0;</span></span><br></pre></td></tr></table></figure></div>
-
 <h3 id="auto类型说明符-c-11"><a href="#auto类型说明符-c-11" class="headerlink" title="auto类型说明符 c++11"></a>auto类型说明符 c++11</h3><ul>
 <li><strong>auto</strong>类型说明符：让编译器<strong>自动推断类型</strong>。</li>
 <li>一条声明语句只能有一个数据类型，所以一个auto声明多个变量时只能相同的变量类型(包括复杂类型&amp;和*)。<code>auto sz = 0, pi =3.14//错误</code></li>
@@ -629,8 +629,8 @@
 <li><strong>decltype</strong>：选择并返回操作数的<strong>数据类型</strong>。</li>
 <li><code>decltype(f()) sum = x;</code> 推断<code>sum</code>的类型是函数<code>f</code>的返回类型。</li>
 <li>不会忽略<code>顶层const</code>。</li>
-<li>如果对变量加括号，编译器会将其认为是一个表达式，如int i–&gt;(i),则decltype((i))得到结果为int&amp;引用。</li>
-<li>赋值是会产生引用的一类典型表达式，引用的类型就是左值的类型。也就是说，如果 i 是 int，则表达式 i&#x3D;x 的类型是 int&amp;。</li>
+<li>如果对变量加括号，编译器会将其认为是一个表达式，如int i—&gt;(i),则decltype((i))得到结果为int&amp;引用。</li>
+<li>赋值是会产生引用的一类典型表达式，引用的类型就是左值的类型。也就是说，如果 i 是 int，则表达式 i=x 的类型是 int&amp;。</li>
 <li><code>C++11</code></li>
 </ul>
 <h2 id="自定义数据结构"><a href="#自定义数据结构" class="headerlink" title="自定义数据结构"></a>自定义数据结构</h2><h3 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h3><blockquote>
@@ -1024,5 +1024,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

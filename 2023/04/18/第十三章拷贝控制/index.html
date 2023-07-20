@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -422,11 +418,11 @@
 </ul>
 </li>
 </ul>
-<h3 id="三-五法则"><a href="#三-五法则" class="headerlink" title="三&#x2F;五法则"></a>三&#x2F;五法则</h3><ul>
+<h3 id="三-五法则"><a href="#三-五法则" class="headerlink" title="三/五法则"></a>三/五法则</h3><ul>
 <li>需要析构函数的类也需要拷贝和赋值操作。</li>
 <li>需要拷贝操作的类也需要赋值操作，反之亦然。</li>
 </ul>
-<h3 id="使用-default"><a href="#使用-default" class="headerlink" title="使用&#x3D;default"></a>使用&#x3D;default</h3><ul>
+<h3 id="使用-default"><a href="#使用-default" class="headerlink" title="使用=default"></a>使用=default</h3><ul>
 <li>可以通过将拷贝控制成员定义为<code>=default</code>来显式地要求编译器生成合成的版本。</li>
 <li>合成的函数将隐式地声明为内联的。</li>
 </ul>
@@ -476,12 +472,12 @@
 </ul>
 </li>
 <li><strong>移动赋值运算符</strong>：<ul>
-<li><code>StrVec&amp; StrVec::operator=(StrVec &amp;&amp; rhs) noexcept&#123;&#125;</code></li>
+<li><code>StrVec&amp; StrVec::operator=(StrVec &amp;&amp; rhs) noexcept&#123;&#125;</code> </li>
 </ul>
 </li>
 <li>移动右值，拷贝左值。</li>
 <li>如果没有移动构造函数，右值也被拷贝。</li>
-<li>更新三&#x2F;五法则：如果一个类定义了任何一个拷贝操作，它就应该定义所有五个操作。</li>
+<li>更新三/五法则：如果一个类定义了任何一个拷贝操作，它就应该定义所有五个操作。</li>
 <li>移动迭代器：<ul>
 <li><code>make_move_iterator</code>函数讲一个普通迭代器转换为一个移动迭代器。</li>
 </ul>
@@ -863,5 +859,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

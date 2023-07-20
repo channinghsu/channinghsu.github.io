@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -350,7 +346,7 @@
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>6 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>5 分钟</span>
         </span>
     
     
@@ -395,7 +391,6 @@
 <li>小技巧，声明为引用类型可以避免对元素的拷贝，如下，如string特别大时可以节省大量时间。</li>
 </ul>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;string&gt; text;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span> &amp;s: text)&#123;</span><br><span class="line">  cout&lt;&lt;s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
 <h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h2><ul>
 <li>赋值运算的<strong>返回结果时它的左侧运算对象</strong>，且是一个左值。类型也就是左侧对象的类型。</li>
 <li>如果赋值运算的左右侧运算对象类型不同，则右侧运算对象将转换成左侧运算对象的类型。</li>
@@ -410,7 +405,6 @@
 <p><strong>优先使用前置</strong>版本，后置多一步储存原始值。（除非需要变化前的值）</p>
 <h3 id="混用解引用和递增运算符"><a href="#混用解引用和递增运算符" class="headerlink" title="混用解引用和递增运算符"></a>混用解引用和递增运算符</h3><p><code>*iter++</code>等价于<code>*(iter++)</code>，递增优先级较高</p>
 <div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> iter = vi.<span class="built_in">begin</span>();</span><br><span class="line"><span class="keyword">while</span> (iter!=vi.<span class="built_in">end</span>()&amp;&amp;*iter&gt;=<span class="number">0</span>)</span><br><span class="line">	cout&lt;&lt;*iter++&lt;&lt;endl;	<span class="comment">// 输出当前值，指针向前移1</span></span><br></pre></td></tr></table></figure></div>
-
 <blockquote>
 <p><strong>简介是一种美德</strong>，追求简洁能降低程序出错可能性</p>
 </blockquote>
@@ -421,13 +415,9 @@
 </li>
 <li><p>可以嵌套使用，<strong>右结合律</strong>，从右向左顺序组合</p>
 <ul>
-<li><pre><code class="c++">finalgrade = (grade &gt; 90) ? &quot;high pass&quot;
-    : (grade &lt; 60) ? &quot;fail&quot; : &quot;pass&quot;;
-//等价于
-finalgrade = (grade &gt; 90) ? &quot;high pass&quot;
-    : （(grade &lt; 60) ? &quot;fail&quot; : &quot;pass&quot;）;
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 输出表达式使用条件运算符记得加括号，条件运算符优先级太低。</span><br><span class="line"></span><br><span class="line">## 位运算符</span><br><span class="line"></span><br><span class="line">用于检查和设置二进制位的功能。</span><br><span class="line"></span><br><span class="line">- 位运算符是作用于**整数类型**的运算对象。</span><br><span class="line">- 二进制位向左移（`&lt;&lt;`）或者向右移（`&gt;&gt;`），移出边界外的位就被舍弃掉了。</span><br><span class="line">- 位取反（`~`）（逐位求反）、与（`&amp;`）、或（`|`）、异或（`^`）</span><br><span class="line"></span><br><span class="line">有符号数负值可能移位后变号，所以强烈建议**位运算符仅用于无符号数**。</span><br><span class="line"></span><br><span class="line">应用：</span><br><span class="line"></span><br><span class="line">```c++</span><br><span class="line">unsigned long quiz1 = 0;    // 每一位代表一个学生是否通过考试</span><br><span class="line">1UL &lt;&lt; 12;  // 代表第12个学生通过</span><br><span class="line">quiz1 |= (1UL &lt;&lt; 12);   // 将第12个学生置为已通过</span><br><span class="line">quiz1 &amp;= ~(1UL &lt;&lt; 12);  // 将第12个学生修改为未通过</span><br><span class="line">bool stu12 = quiz1 &amp; (1UL &lt;&lt; 12);   // 判断第12个学生是否通过</span><br></pre></td></tr></table></figure></div>
-</code></pre>
+<li>```c++<br>finalgrade = (grade &gt; 90) ? “high pass”<pre><code>: (grade &lt; 60) ? &quot;fail&quot; : &quot;pass&quot;;
+</code></pre>//等价于<br>finalgrade = (grade &gt; 90) ? “high pass”<pre><code>: （(grade &lt; 60) ? &quot;fail&quot; : &quot;pass&quot;）;
+</code></pre><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 输出表达式使用条件运算符记得加括号，条件运算符优先级太低。</span><br><span class="line"></span><br><span class="line">## 位运算符</span><br><span class="line"></span><br><span class="line">用于检查和设置二进制位的功能。</span><br><span class="line"></span><br><span class="line">- 位运算符是作用于**整数类型**的运算对象。</span><br><span class="line">- 二进制位向左移（`&lt;&lt;`）或者向右移（`&gt;&gt;`），移出边界外的位就被舍弃掉了。</span><br><span class="line">- 位取反（`~`）（逐位求反）、与（`&amp;`）、或（`|`）、异或（`^`）</span><br><span class="line"></span><br><span class="line">有符号数负值可能移位后变号，所以强烈建议**位运算符仅用于无符号数**。</span><br><span class="line"></span><br><span class="line">应用：</span><br><span class="line"></span><br><span class="line">```c++</span><br><span class="line">unsigned long quiz1 = 0;    // 每一位代表一个学生是否通过考试</span><br><span class="line">1UL &lt;&lt; 12;  // 代表第12个学生通过</span><br><span class="line">quiz1 |= (1UL &lt;&lt; 12);   // 将第12个学生置为已通过</span><br><span class="line">quiz1 &amp;= ~(1UL &lt;&lt; 12);  // 将第12个学生修改为未通过</span><br><span class="line">bool stu12 = quiz1 &amp; (1UL &lt;&lt; 12);   // 判断第12个学生是否通过</span><br></pre></td></tr></table></figure></div>
 </li>
 </ul>
 </li>
@@ -448,7 +438,6 @@ finalgrade = (grade &gt; 90) ? &quot;high pass&quot;
 <li>可用sizeof返回数组的大小</li>
 </ul>
 <div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ia[<span class="number">10</span>];</span><br><span class="line"><span class="comment">// sizeof(ia)返回整个数组所占空间的大小</span></span><br><span class="line"><span class="comment">// sizeof(ia)/sizeof(*ia)返回数组的大小</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="type">size_t</span> sz = <span class="built_in">sizeof</span>(ia)/<span class="built_in">sizeof</span>(*ia);</span><br><span class="line"><span class="type">int</span> arr[sz];</span><br></pre></td></tr></table></figure></div>
-
 <h2 id="逗号运算符"><a href="#逗号运算符" class="headerlink" title="逗号运算符"></a>逗号运算符</h2><p>从左向右依次求值。</p>
 <p>左侧求值结果丢弃，逗号运算符<strong>结果是右侧表达式</strong>的值。</p>
 <h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><h3 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h3><blockquote>
@@ -853,5 +842,20 @@ finalgrade = (grade &gt; 90) ? &quot;high pass&quot;
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

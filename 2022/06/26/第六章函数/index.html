@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -423,6 +419,7 @@
 <li>第一个形参代表参数的个数；第二个形参是参数C风格字符串数组。</li>
 </ul>
 <h3 id="可变形参"><a href="#可变形参" class="headerlink" title="可变形参"></a>可变形参</h3><p><code>initializer_list</code>提供的操作（<code>C++11</code>）：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -430,7 +427,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>initializer_list&lt;T&gt; lst;</code></td>
 <td>默认初始化；<code>T</code>类型元素的空列表</td>
 </tr>
@@ -458,10 +456,11 @@
 <td><code>lst.end()</code></td>
 <td>返回指向<code>lst</code>中微元素下一位置的指针</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><code>initializer_list</code>使用demo：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">err_msg</span><span class="params">(ErrCode e, initializer_list&lt;string&gt; il)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; e.msg &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> bed = il.<span class="built_in">begin</span>(); beg != il.<span class="built_in">end</span>(); ++ beg)</span><br><span class="line">        cout &lt;&lt; *beg &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">err_msg</span>(<span class="built_in">ErrCode</span>(<span class="number">0</span>), &#123;<span class="string">&quot;functionX&quot;</span>, <span class="string">&quot;okay&#125;);</span></span><br></pre></td></tr></table></figure></div>
-
 <ul>
 <li>所有实参类型相同，可以使用 <code>initializer_list</code>的标准库类型。</li>
 <li>实参类型不同，可以使用<code>可变参数模板</code>。</li>
@@ -513,7 +512,6 @@
 <p>开关调试状态：</p>
 <p><code>CC -D NDEBUG main.c</code>可以定义这个变量<code>NDEBUG</code>。</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">ifndef</span> NDEBUG</span></span><br><span class="line">        cerr &lt;&lt; __func__ &lt;&lt; <span class="string">&quot;...&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
 <h2 id="函数匹配"><a href="#函数匹配" class="headerlink" title="函数匹配"></a>函数匹配</h2><ul>
 <li>重载函数匹配的<strong>三个步骤</strong>：1.候选函数；2.可行函数；3.寻找最佳匹配。</li>
 <li><strong>候选函数</strong>：选定本次调用对应的重载函数集，集合中的函数称为候选函数（candidate function）。</li>
@@ -898,5 +896,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

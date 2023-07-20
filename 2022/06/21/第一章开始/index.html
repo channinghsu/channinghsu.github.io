@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -366,7 +362,7 @@
             
 
             <div class="article-content markdown-body">
-                <h2 id="熟悉编译器"><a href="#熟悉编译器" class="headerlink" title="熟悉编译器"></a>熟悉编译器</h2><p>**g++**：</p>
+                <h2 id="熟悉编译器"><a href="#熟悉编译器" class="headerlink" title="熟悉编译器"></a>熟悉编译器</h2><p><strong>g++</strong>：</p>
 <ul>
 <li>编译：<code>g++ --std=c++11 ch01.cpp -o main</code></li>
 <li>运行：<code>./prog1</code></li>
@@ -375,10 +371,8 @@
 </ul>
 <p>输入 <code>g++ --help</code>，查看编译器选项：</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">Usage: g++ [options] file...</span><br><span class="line">Options:</span><br><span class="line">  -pass-exit-codes         Exit with highest error code from a phase</span><br><span class="line">  --help                   Display this information</span><br><span class="line">  --target-help            Display target specific command line options</span><br><span class="line">  --help=&#123;common|optimizers|params|target|warnings|[^]&#123;joined|separate|undocumented&#125;&#125;[,...]</span><br><span class="line">                           Display specific types of command line options</span><br><span class="line">  (Use &#x27;-v --help&#x27; to display command line options of sub-processes)</span><br><span class="line">  --version                Display compiler version information</span><br><span class="line">  -dumpspecs               Display all of the built in spec strings</span><br><span class="line">  -dumpversion             Display the version of the compiler</span><br><span class="line">  -dumpmachine             Display the compiler&#x27;s target processor</span><br><span class="line">  -print-search-dirs       Display the directories in the compiler&#x27;s search path</span><br><span class="line">  -print-libgcc-file-name  Display the name of the compiler&#x27;s companion library</span><br><span class="line">  -print-file-name=&lt;lib&gt;   Display the full path to library &lt;lib&gt;</span><br><span class="line">  -print-prog-name=&lt;prog&gt;  Display the full path to compiler component &lt;prog&gt;</span><br><span class="line">  -print-multiarch         Display the target&#x27;s normalized GNU triplet, used as</span><br><span class="line">                           a component in the library path</span><br><span class="line">  -print-multi-directory   Display the root directory for versions of libgcc</span><br><span class="line">  -print-multi-lib         Display the mapping between command line options and</span><br><span class="line">                           multiple library search directories</span><br><span class="line">  -print-multi-os-directory Display the relative path to OS libraries</span><br><span class="line">  -print-sysroot           Display the target libraries directory</span><br><span class="line">  -print-sysroot-headers-suffix Display the sysroot suffix used to find headers</span><br><span class="line">  -Wa,&lt;options&gt;            Pass comma-separated &lt;options&gt; on to the assembler</span><br><span class="line">  -Wp,&lt;options&gt;            Pass comma-separated &lt;options&gt; on to the preprocessor</span><br><span class="line">  -Wl,&lt;options&gt;            Pass comma-separated &lt;options&gt; on to the linker</span><br><span class="line">  -Xassembler &lt;arg&gt;        Pass &lt;arg&gt; on to the assembler</span><br><span class="line">  -Xpreprocessor &lt;arg&gt;     Pass &lt;arg&gt; on to the preprocessor</span><br><span class="line">  -Xlinker &lt;arg&gt;           Pass &lt;arg&gt; on to the linker</span><br><span class="line">  -save-temps              Do not delete intermediate files</span><br><span class="line">  -save-temps=&lt;arg&gt;        Do not delete intermediate files</span><br><span class="line">  -no-canonical-prefixes   Do not canonicalize paths when building relative</span><br><span class="line">                           prefixes to other gcc components</span><br><span class="line">  -pipe                    Use pipes rather than intermediate files</span><br><span class="line">  -time                    Time the execution of each subprocess</span><br><span class="line">  -specs=&lt;file&gt;            Override built-in specs with the contents of &lt;file&gt;</span><br><span class="line">  -std=&lt;standard&gt;          Assume that the input sources are for &lt;standard&gt;</span><br><span class="line">  --sysroot=&lt;directory&gt;    Use &lt;directory&gt; as the root directory for headers</span><br><span class="line">                           and libraries</span><br><span class="line">  -B &lt;directory&gt;           Add &lt;directory&gt; to the compiler&#x27;s search paths</span><br><span class="line">  -v                       Display the programs invoked by the compiler</span><br><span class="line">  -###                     Like -v but options quoted and commands not executed</span><br><span class="line">  -E                       Preprocess only; do not compile, assemble or link</span><br><span class="line">  -S                       Compile only; do not assemble or link</span><br><span class="line">  -c                       Compile and assemble, but do not link</span><br><span class="line">  -o &lt;file&gt;                Place the output into &lt;file&gt;</span><br><span class="line">  -pie                     Create a position independent executable</span><br><span class="line">  -shared                  Create a shared library</span><br><span class="line">  -x &lt;language&gt;            Specify the language of the following input files</span><br><span class="line">                           Permissible languages include: c c++ assembler none</span><br><span class="line">                           &#x27;none&#x27; means revert to the default behavior of</span><br><span class="line">                           guessing the language based on the file&#x27;s extension</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
 <p>输入 <code>g++ -v --help</code>可以看到更完整的指令。<br>例如还有些常用的：</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-h FILENAME, -soname FILENAME: Set internal name of shared library</span><br><span class="line">-I PROGRAM, --dynamic-linker PROGRAM: Set PROGRAM as the dynamic linker to use</span><br><span class="line">-l LIBNAME, --library LIBNAME: Search for library LIBNAME</span><br><span class="line">-L DIRECTORY, --library-path DIRECTORY: Add DIRECTORY to library search path</span><br></pre></td></tr></table></figure></div>
-
 <p><strong>获得程序状态</strong>:</p>
 <ul>
 <li>windows: <code>echo %ERRORLEVEL%</code></li>
@@ -395,7 +389,6 @@
 <p><strong>头文件</strong>：类的类型一般存储在头文件中，标准库的头文件使用<code>&lt;&gt;</code>，非标准库的头文件使用<code>&quot;&quot;</code>。申明写在<code>.h</code>文件，定义实现写在<code>.cpp</code>文件。</p>
 <p><strong>避免多次包含同一头文件</strong>：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> SALESITEM_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SALESITEM_H</span></span><br><span class="line"><span class="comment">// Definition of Sales_itemclass and related functions goes here</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></div>
-
 <p><strong>成员函数（类方法）</strong>：使用<code>.</code>调用。</p>
 <p><strong>命名空间（namespace）</strong>：使用作用域运算符<code>::</code>调用。</p>
 <h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
@@ -403,7 +396,6 @@
 <li>多行注释： <code>/**/</code>。编译器将<code>/*</code>和<code>*/</code>之间的内容都作为注释内容忽略。注意不能嵌套。</li>
 </ul>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SALESITEM_H</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 多行注释格式</span></span><br><span class="line"><span class="comment"> * 每一行加一个*</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure></div>
-
 <h2 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h2><p>循环执行，（直到条件（condition）为假。</p>
 <h2 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h2><p>循环头由三部分组成：</p>
 <ul>
@@ -765,5 +757,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

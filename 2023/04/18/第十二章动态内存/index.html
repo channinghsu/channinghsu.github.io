@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -398,6 +394,7 @@
 </li>
 </ul>
 <h3 id="shared-ptr类"><a href="#shared-ptr类" class="headerlink" title="shared_ptr类"></a>shared_ptr类</h3><p><strong>shared_ptr和unique_ptr都支持的操作</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -405,7 +402,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>shared_ptr&lt;T&gt; sp</code>  <code>unique_ptr&lt;T&gt; up</code></td>
 <td>空智能指针，可以指向类型是<code>T</code>的对象</td>
 </tr>
@@ -429,8 +427,11 @@
 <td><code>swap(p, q)</code> <code>p.swap(q)</code></td>
 <td>交换<code>p</code>和<code>q</code>中的指针</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>shared_ptr独有的操作</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -438,7 +439,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>make_shared&lt;T&gt;(args)</code></td>
 <td>返回一个<code>shared_ptr</code>，指向一个动态分配的类型为<code>T</code>的对象。使用<code>args</code>初始化此对象。</td>
 </tr>
@@ -458,7 +460,9 @@
 <td><code>p.use_count()</code></td>
 <td>返回与<code>p</code>共享对象的智能指针数量；可能很慢，主要用于调试。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ul>
 <li><strong>使用动态内存的三种原因</strong>：<ul>
 <li>程序不知道自己需要使用多少对象（比如容器类）。</li>
@@ -488,6 +492,7 @@
 <li>坚持只使用智能指针可以避免上述所有问题。</li>
 </ul>
 <h3 id="shared-ptr和new结合使用"><a href="#shared-ptr和new结合使用" class="headerlink" title="shared_ptr和new结合使用"></a>shared_ptr和new结合使用</h3><p><strong>定义和改变shared_ptr的其他方法</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -495,7 +500,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>shared_ptr&lt;T&gt; p(q)</code></td>
 <td><code>p</code>管理内置指针<code>q</code>所指向的对象；<code>q</code>必须指向<code>new</code>分配的内存，且能够转换为<code>T*</code>类型</td>
 </tr>
@@ -523,7 +529,9 @@
 <td><code>p.reset(q, d)</code></td>
 <td>同上</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="智能指针和异常"><a href="#智能指针和异常" class="headerlink" title="智能指针和异常"></a>智能指针和异常</h3><ul>
 <li>如果使用智能指针，即使程序块由于异常过早结束，智能指针类也能确保在内存不需要的时候将其释放。</li>
 <li><strong>智能指针陷阱</strong>：<ul>
@@ -540,6 +548,7 @@
 <li>向后兼容：<code>auto_ptr</code>：老版本，具有<code>unique_ptr</code>的部分特性。特别是，不能在容器中保存<code>auto_ptr</code>，也不能从函数返回<code>auto_ptr</code>。</li>
 </ul>
 <p><strong>unique_ptr操作</strong>:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -547,7 +556,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>unique_ptr&lt;T&gt; u1</code></td>
 <td>空<code>unique_ptr</code>，可以指向类型是<code>T</code>的对象。<code>u1</code>会使用<code>delete</code>来是释放它的指针。</td>
 </tr>
@@ -579,13 +589,16 @@
 <td><code>u.reset(nullptr)</code></td>
 <td>将<code>u</code>置空</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h3><ul>
 <li><code>weak_ptr</code>是一种不控制所指向对象生存期的智能指针。</li>
 <li>指向一个由<code>shared_ptr</code>管理的对象，不改变<code>shared_ptr</code>的引用计数。</li>
 <li>一旦最后一个指向对象的<code>shared_ptr</code>被销毁，对象就会被释放，不管有没有<code>weak_ptr</code>指向该对象。</li>
 </ul>
 <p><strong>weak_ptr操作</strong>:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -593,7 +606,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>weak_ptr&lt;T&gt; w</code></td>
 <td>空<code>weak_ptr</code>可以指向类型为<code>T</code>的对象</td>
 </tr>
@@ -621,7 +635,9 @@
 <td><code>w.lock()</code></td>
 <td>如果<code>expired</code>为<code>true</code>，则返回一个空<code>shared_ptr</code>；否则返回一个指向<code>w</code>的对象的<code>shared_ptr</code>。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h2><h3 id="new和数组"><a href="#new和数组" class="headerlink" title="new和数组"></a>new和数组</h3><ul>
 <li><p><code>new</code>一个动态数组：</p>
 <ul>
@@ -641,6 +657,7 @@
 </ul>
 </li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -648,7 +665,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>unique_ptr&lt;T[]&gt; u</code></td>
 <td><code>u</code>可以指向一个动态分配的数组，整数元素类型为<code>T</code></td>
 </tr>
@@ -660,7 +678,9 @@
 <td><code>u[i]</code></td>
 <td>返回<code>u</code>拥有的数组中位置<code>i</code>处的对象。<code>u</code>必须指向一个数组。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="allocator类"><a href="#allocator类" class="headerlink" title="allocator类"></a>allocator类</h3><ul>
 <li>标准库<code>allocator</code>类定义在头文件<code>memory</code>中，帮助我们将内存分配和对象构造分离开。</li>
 <li>分配的是原始的、未构造的内存。</li>
@@ -668,6 +688,7 @@
 <li><code>allocator&lt;string&gt; alloc;</code></li>
 </ul>
 <p><strong>标准库allocator类及其算法</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -675,7 +696,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>allocator&lt;T&gt; a</code></td>
 <td>定义了一个名为<code>a</code>的<code>allocator</code>对象，它可以为类型为<code>T</code>的对象分配内存</td>
 </tr>
@@ -695,8 +717,11 @@
 <td><code>a.destroy(p)</code></td>
 <td><code>p</code>为<code>T*</code>类型的指针，此算法对<code>p</code>指向的对象执行析构函数。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>allocator伴随算法</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -704,7 +729,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>uninitialized_copy(b, e, b2)</code></td>
 <td>从迭代器<code>b</code>和<code>e</code>给定的输入范围中拷贝元素到迭代器<code>b2</code>指定的未构造的原始内存中。<code>b2</code>指向的内存必须足够大，能够容纳输入序列中元素的拷贝。</td>
 </tr>
@@ -720,7 +746,9 @@
 <td><code>uninitialized_fill_n(b, n, t)</code></td>
 <td>从迭代器<code>b</code>指向的内存地址开始创建<code>n</code>个对象。<code>b</code>必须指向足够大的未构造的原始内存，能够容纳给定数量的对象。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ul>
 <li>定义在头文件<code>memory</code>中。</li>
 <li>在给定目的位置创建元素，而不是由系统分配内存给他们。</li>
@@ -1093,5 +1121,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

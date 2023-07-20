@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -437,10 +433,8 @@
 </li>
 </ul>
 <h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><ul>
-<li><p>有时可能希望操作可以接受更多的参数。</p>
-</li>
-<li><p><code>lambda</code>表达式表示一个可调用的代码单元，可以理解成是一个未命名的内联函数。</p>
-</li>
+<li>有时可能希望操作可以接受更多的参数。</li>
+<li><code>lambda</code>表达式表示一个可调用的代码单元，可以理解成是一个未命名的内联函数。</li>
 <li><p>形式：<code>[capture list](parameter list) -&gt; return type &#123;function body&#125;</code>。</p>
 <ul>
 <li>其中<code>capture list</code>捕获列表是一个<code>lambda</code>所在函数定义的局部变量的列表（通常为空）。不可忽略。</li>
@@ -474,6 +468,7 @@
 <li><strong>隐式捕获</strong>：让编译器推断捕获列表，在捕获列表中写一个<code>&amp;</code>（引用方式）或<code>=</code>（值方式）。<code>auto f3 = [=] &#123;return v1;&#125;</code></li>
 </ul>
 <p><strong>lambda捕获列表</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -481,7 +476,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>[]</code></td>
 <td>空捕获列表。<code>lambda</code>不能使用所在函数中的变量。一个<code>lambda</code>只有在捕获变量后才能使用它们。</td>
 </tr>
@@ -505,7 +501,9 @@
 <td><code>[=, identifier_list]</code></td>
 <td><code>identifier_list</code>中的变量采用引用方式捕获，而任何隐式捕获的变量都采用值方式捕获。<code>identifier_list</code>中的名字不能包括<code>this</code>，且前面必须使用<code>&amp;</code></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="参数绑定"><a href="#参数绑定" class="headerlink" title="参数绑定"></a>参数绑定</h3><ul>
 <li><code>lambda</code>表达式更适合在一两个地方使用的简单操作。</li>
 <li>如果是很多地方使用相同的操作，还是需要定义函数。</li>
@@ -530,6 +528,7 @@
 </li>
 </ul>
 <p><strong>插入迭代器操作</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -537,7 +536,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>it=t</code></td>
 <td>在<code>it</code>指定的当前位置插入值<code>t</code>。假定<code>c</code>是<code>it</code>绑定的容器，依赖于插入迭代器的不同种类，此赋值会分别调用<code>c.push_back(t)</code>、<code>c.push_front(t)</code>、<code>c.insert(t, p)</code>，其中<code>p</code>是传递给<code>inserter</code>的迭代器位置</td>
 </tr>
@@ -545,12 +545,15 @@
 <td><code>*it, ++it, it++</code></td>
 <td>这些操作虽然存在，但不会对<code>it</code>做任何事情，每个操作都返回<code>it</code></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="iostream迭代器"><a href="#iostream迭代器" class="headerlink" title="iostream迭代器"></a>iostream迭代器</h3><ul>
 <li>迭代器可与输入或输出流绑定在一起，用于迭代遍历所关联的 IO 流。</li>
 <li>通过使用流迭代器，我们可以用泛型算法从流对象中读取数据以及向其写入数据。</li>
 </ul>
 <p><strong>istream_iterator的操作</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -558,7 +561,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>istream_iterator&lt;T&gt; in(is);</code></td>
 <td><code>in</code>从输入流<code>is</code>读取类型为<code>T</code>的值</td>
 </tr>
@@ -586,8 +590,11 @@
 <td><code>++in, in++</code></td>
 <td>使用元素类型所定义的<code>&gt;&gt;</code>运算符从流中读取下一个值。前置版本返回一个指向递增后迭代器的引用，后置版本返回旧值。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>ostream_iterator的操作</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -595,7 +602,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>ostream_iterator&lt;T&gt; out(os);</code></td>
 <td><code>out</code>将类型为<code>T</code>的值写到输出流<code>os</code>中</td>
 </tr>
@@ -611,13 +619,16 @@
 <td><code>*out, ++out, out++</code></td>
 <td>这些运算符是存在的，但不对<code>out</code>做任何事情。每个运算符都返回<code>out</code>。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="反向迭代器"><a href="#反向迭代器" class="headerlink" title="反向迭代器"></a>反向迭代器</h3><ul>
 <li>反向迭代器就是在容器中从尾元素向首元素反向移动的迭代器。</li>
 <li>对于反向迭代器，递增和递减的操作含义会颠倒。</li>
 <li>实现向后遍历，配合<code>rbegin</code>和<code>rend</code>。</li>
 </ul>
-<h2 id="泛型算法结构"><a href="#泛型算法结构" class="headerlink" title="泛型算法结构"></a>泛型算法结构</h2><h3 id="5类迭代器"><a href="#5类迭代器" class="headerlink" title="5类迭代器"></a>5类迭代器</h3><table>
+<h2 id="泛型算法结构"><a href="#泛型算法结构" class="headerlink" title="泛型算法结构"></a>泛型算法结构</h2><h3 id="5类迭代器"><a href="#5类迭代器" class="headerlink" title="5类迭代器"></a>5类迭代器</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>迭代器类别</th>
@@ -625,7 +636,8 @@
 <th>支持的操作</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>输入迭代器</td>
 <td>只读，不写；单遍扫描，只能递增</td>
 <td><code>==</code>,<code>!=</code>,<code>++</code>,<code>*</code>,<code>-&gt;</code></td>
@@ -648,9 +660,11 @@
 <tr>
 <td>随机访问迭代器</td>
 <td>可读写，多遍扫描，支持全部迭代器运算</td>
-<td><code>==</code>,<code>!=</code>,<code>&lt;</code>,<code>&lt;=</code>,<code>&gt;</code>,<code>&gt;=</code>,<code>++</code>,<code>--</code>,<code>+</code>,<code>+=</code>,<code>-</code>,<code>-=</code>,<code>*</code>,<code>-&gt;</code>,<code>iter[n]</code>&#x3D;&#x3D;<code>*(iter[n])</code></td>
+<td><code>==</code>,<code>!=</code>,<code>&lt;</code>,<code>&lt;=</code>,<code>&gt;</code>,<code>&gt;=</code>,<code>++</code>,<code>--</code>,<code>+</code>,<code>+=</code>,<code>-</code>,<code>-=</code>,<code>*</code>,<code>-&gt;</code>,<code>iter[n]</code>==<code>*(iter[n])</code></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="算法的形参模式"><a href="#算法的形参模式" class="headerlink" title="算法的形参模式"></a>算法的形参模式</h3><ul>
 <li><code>alg(beg, end, other args);</code></li>
 <li><code>alg(beg, end, dest, other args);</code></li>
@@ -667,6 +681,7 @@
 <li>对于<code>list</code>和<code>forward_list</code>，优先使用成员函数版本的算法而不是通用算法。</li>
 </ul>
 <p><strong>list和forward_list成员函数版本的算法</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -674,7 +689,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>lst.merge(lst2)</code></td>
 <td>将来自<code>lst2</code>的元素合并入<code>lst</code>，二者都必须是有序的，元素将从<code>lst2</code>中删除。</td>
 </tr>
@@ -684,7 +700,7 @@
 </tr>
 <tr>
 <td><code>lst.remove(val)</code></td>
-<td>调用<code>erase</code>删除掉与给定值相等(&#x3D;&#x3D;)的每个元素</td>
+<td>调用<code>erase</code>删除掉与给定值相等(==)的每个元素</td>
 </tr>
 <tr>
 <td><code>lst.remove_if(pred)</code></td>
@@ -710,11 +726,14 @@
 <td><code>lst.unique(pred)</code></td>
 <td>调用<code>erase</code>删除同一个值的连续拷贝。使用给定的二元谓词。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ul>
-<li>上面的操作都返回<code>void</code></li>
+<li>上面的操作都返回<code>void</code> </li>
 </ul>
 <p><strong>list和forward_list的splice成员函数版本的参数</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -722,7 +741,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>(p, lst2)</code></td>
 <td><code>p</code>是一个指向<code>lst</code>中元素的迭代器，或者一个指向<code>flst</code>首前位置的迭代器。函数将<code>lst2</code>中的所有元素移动到<code>lst</code>中<code>p</code>之前的位置或是<code>flst</code>中<code>p</code>之后的位置。将元素从<code>lst2</code>中删除。<code>lst2</code>的类型必须和<code>lst</code>相同，而且不能是同一个链表。</td>
 </tr>
@@ -734,7 +754,9 @@
 <td><code>(p, lst2, b, e)</code></td>
 <td><code>b</code>和<code>e</code>表示<code>lst2</code>中的合法范围。将给定范围中的元素从<code>lst2</code>移动到<code>lst</code>或<code>first</code>中。<code>lst2</code>与<code>lst</code>可以使相同的链表，但<code>p</code>不能指向给定范围中的元素。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ul>
 <li>使用<code>lst.splice(args)</code>或<code>flst.splice_after(args)</code></li>
 </ul>
@@ -1106,5 +1128,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

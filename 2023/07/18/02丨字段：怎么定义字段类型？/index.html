@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -345,7 +341,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.8k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.7k 字</span>
         </span>
     
     
@@ -367,6 +363,7 @@
 
             <div class="article-content markdown-body">
                 <h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><p>整数类型一共有 5 种，包括 TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT，它们的区别如下表所示：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -375,7 +372,8 @@
 <th>使用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>TINYINT</td>
 <td>1</td>
 <td>一般用于枚举数据，比如系统设定等取值范围很小且固定的场景</td>
@@ -400,7 +398,9 @@
 <td>8</td>
 <td>只有当你处理特别巨的整数时才会用到。比如双十一的交易量、大型门户网站点击量、证券公司衍生产品持仓等</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="浮点数类型和定点数类型"><a href="#浮点数类型和定点数类型" class="headerlink" title="浮点数类型和定点数类型"></a>浮点数类型和定点数类型</h2><p>MySQL 支持的浮点数类型，分别是 FLOAT、DOUBLE、REAL。</p>
 <ul>
 <li>FLOAT 表示单精度浮点数，占用字节数少，取值范围小</li>
@@ -408,11 +408,11 @@
 <li>REAL 默认就是 DOUBLE。</li>
 </ul>
 <p>若要MySQL 认为 REAL 是 FLOAT，就可以通过<code>SET sql_mode  = &quot;REAL_AS_FLOAT&quot;;</code>实现</p>
-<h5 id="问题：浮点数类型不精准"><a href="#问题：浮点数类型不精准" class="headerlink" title="问题：浮点数类型不精准"></a>问题：浮点数类型不精准</h5><p>假设用求和函数求和，期待的运行结果是：0.47 + 0.44 + 0.19 &#x3D; 1.1，可结果是 1.0999999999999999。尝试把数据类型改成 FLOAT，然后运行求和查询，得到的是1.0999999940395355。显然，误差更大了。</p>
+<h5 id="问题：浮点数类型不精准"><a href="#问题：浮点数类型不精准" class="headerlink" title="问题：浮点数类型不精准"></a>问题：浮点数类型不精准</h5><p>假设用求和函数求和，期待的运行结果是：0.47 + 0.44 + 0.19 = 1.1，可结果是 1.0999999999999999。尝试把数据类型改成 FLOAT，然后运行求和查询，得到的是1.0999999940395355。显然，误差更大了。</p>
 <p><strong>问题出在 MySQL 对浮点类型数据的存储方式上。</strong></p>
 <p>MySQL 用 <strong>4 个字节</strong>存储 <strong>FLOAT</strong> 类型数据，用 <strong>8 个字节</strong>来存储 <strong>DOUBLE</strong> 类型数据。无论哪个，都是采用二进制的方式来进行存储的。比如 9.625，用二进制来表达，就是1001.101，或者表达成 1.001101×2^3。如果尾数不是 0 或 5（比如9.624），就无法用一个二进制数来精确表达。所以就只好在取值允许的范围内进行近似（四舍五入）。</p>
 <p>若要使用精准没有误差的类型，就需要用定点数类型：<strong>DECIMAL</strong>。浮点数类型是把十进制数转换成二进制数存储，DECIMAL 则不同，它是把十进制数的整数部分和小数部分拆开，分别转换成十六进制数，进行存储。这样，所有的数值，就都可以精准表达了，不会存在因为无法表达而损失精度的问题。</p>
-<p>MySQL 用 DECIMAL（M,D）的方式表示高精度小数。其中，M 表示整数部分加小数部分，一共有多少位，M&lt;&#x3D;65。D 表示小数部分位数，D&lt;M。</p>
+<p>MySQL 用 DECIMAL（M,D）的方式表示高精度小数。其中，M 表示整数部分加小数部分，一共有多少位，M&lt;=65。D 表示小数部分位数，D&lt;M。</p>
 <h5 id="简单小结下浮点数和定点数的特点："><a href="#简单小结下浮点数和定点数的特点：" class="headerlink" title="简单小结下浮点数和定点数的特点："></a>简单小结下浮点数和定点数的特点：</h5><ul>
 <li><p>浮点类型取值范围大，但是不精准，适用于需要取值范围大，又可以容忍微小误差的科学计算场景（比如计算化学、分子建模、流体动力学等）；</p>
 </li>
@@ -437,52 +437,55 @@
 </li>
 </ul>
 <h2 id="日期与时间格式"><a href="#日期与时间格式" class="headerlink" title="日期与时间格式"></a>日期与时间格式</h2><p>用得最多的日期时间类型，就是 <strong>DATETIME</strong>。虽然 MySQL 也支持 YEAR（年）、TIME（时间）、DATE（日期），以及 TIMESTAMP 类型，但尽量用 DATETIME 类型。因为这个数据类型包括了完整的日期和时间信息，使用起来比较方便。毕竟，如果日期时间信息分散在好几个字段，就会很不容易记，而且查询的时候，SQL 语句也会更加复杂。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>类型</th>
-<th align="center">日期格式</th>
+<th style="text-align:center">日期格式</th>
 <th>范围</th>
-<th align="right">占用字节</th>
+<th style="text-align:right">占用字节</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>YEAR</td>
-<td align="center">YYYY</td>
+<td style="text-align:center">YYYY</td>
 <td>1901~2155</td>
-<td align="right">1</td>
+<td style="text-align:right">1</td>
 </tr>
 <tr>
 <td>TIME</td>
-<td align="center">HH:MM:SS</td>
+<td style="text-align:center">HH:MM:SS</td>
 <td>838:59:59~838:59:59</td>
-<td align="right">3</td>
+<td style="text-align:right">3</td>
 </tr>
 <tr>
 <td>DATE</td>
-<td align="center">YYYY-MM-DD</td>
+<td style="text-align:center">YYYY-MM-DD</td>
 <td>1000-01-01~9999-12-3</td>
-<td align="right">3</td>
+<td style="text-align:right">3</td>
 </tr>
 <tr>
 <td>DATETIME</td>
-<td align="center">YYYY-MM-DD HH:MM:SS</td>
+<td style="text-align:center">YYYY-MM-DD HH:MM:SS</td>
 <td>1000-01-01 00:00:00~9999-12-31 23:59:59</td>
-<td align="right">8</td>
+<td style="text-align:right">8</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td align="center">YYYY-MM-DD HH:MM:SS</td>
+<td style="text-align:center">YYYY-MM-DD HH:MM:SS</td>
 <td>1970-01-01 00:00:01 UTC~2038-01-1903:14:07 UTC</td>
-<td align="right">4</td>
+<td style="text-align:right">4</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>为了确保数据的完整性和系统的稳定性，优先考虑使用<strong>DATETIME</strong> 类型。因为虽然 DATETIME 类型占用的存储空间最多，但是它表达的时间最为完整，取值范围也最大。</p>
 <p>为什么时间类型 TIME 的取值范围不是 -23:59:59～23:59:59呢？</p>
 <p>原因是 MySQL 设计的 TIME 类型，不光表示一天之内的时间，而且可以用来表示一个<strong>时间间隔</strong>，这个时间间隔可以超过 24 小时。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>今天，介绍了几个常用的字段数据类型，包括整数类型、浮点数类型、定点数类型、文本类型和日期时间类型。同时，我们还清楚了为什么整数类型用得少，浮点数为什么不精准，以及常用的日期时间类型。另外，还学习了几个新的 SQL 语句。尤其是第 2 条，我们在项目中会经常用到，你一定要重点牢记。</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-- 修改字段类型语句</span><br><span class="line">ALTER TABLE demo.goodmaster</span><br><span class="line">MODIFY COLUMN price DOUBLE;</span><br><span class="line"></span><br><span class="line">-- 计算字段合计函数</span><br><span class="line">SELECT SUM(price)</span><br><span class="line">FROM demo.goodmaster;</span><br></pre></td></tr></table></figure></div>
-
 <p>最后，我还想再给你分享 1 个小技巧。</p>
 <p>在定义数据类型时，</p>
 <ul>
@@ -860,5 +863,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

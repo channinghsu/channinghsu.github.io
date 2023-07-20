@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -385,6 +381,7 @@
 </li>
 </ul>
 <p><strong>运算符</strong>:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -392,20 +389,24 @@
 <th>不可以被重载</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>^</code></td>
 <td><code>::</code>, <code>.*</code>, <code>.</code>, <code>? :</code>,</td>
 </tr>
 <tr>
-<td><code>&amp;</code>, &#96;</td>
-<td><code>, </code>~&#96;, <code>!</code>, <code>,</code>, <code>=</code></td>
+<td><code>&amp;</code>, `</td>
+<td><code>,</code>~<code>,</code>!<code>,</code>,<code>,</code>=`</td>
+<td></td>
 </tr>
 <tr>
 <td><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>++</code>, <code>--</code></td>
 <td></td>
 </tr>
 <tr>
-<td><code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>==</code>, <code>!=</code>, <code>&amp;&amp;</code>, &#96;</td>
+<td><code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>==</code>, <code>!=</code>, <code>&amp;&amp;</code>, `</td>
+<td></td>
+<td>`</td>
 <td></td>
 </tr>
 <tr>
@@ -413,26 +414,27 @@
 <td></td>
 </tr>
 <tr>
-<td>&#124;&#x3D;, <code>*=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>[]</code>, <code>()</code></td>
+<td>&#124;=, <code>*=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>[]</code>, <code>()</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>-&gt;</code>, <code>-&gt;*</code>, <code>new</code>, <code>new[]</code>, <code>delete</code>, <code>delete[]</code></td>
-<td></td>
 </tr>
-</tbody></table>
-<h2 id="输入和输出运算符"><a href="#输入和输出运算符" class="headerlink" title="输入和输出运算符"></a>输入和输出运算符</h2><h3 id="重载输出运算符"><a href="#重载输出运算符" class="headerlink" title="重载输出运算符&lt;&lt;"></a>重载输出运算符&lt;&lt;</h3><ul>
+</tbody>
+</table>
+</div>
+<h2 id="输入和输出运算符"><a href="#输入和输出运算符" class="headerlink" title="输入和输出运算符"></a>输入和输出运算符</h2><h3 id="重载输出运算符-lt-lt"><a href="#重载输出运算符-lt-lt" class="headerlink" title="重载输出运算符&lt;&lt;"></a>重载输出运算符&lt;&lt;</h3><ul>
 <li>第一个形参通常是一个非常量的<code>ostream</code>对象的引用。非常量是因为向流中写入会改变其状态；而引用是因为我们无法复制一个<code>ostream</code>对象。</li>
 <li>输入输出运算符必须是非成员函数。</li>
 </ul>
-<h3 id="重载输入运算符"><a href="#重载输入运算符" class="headerlink" title="重载输入运算符&gt;&gt;"></a>重载输入运算符&gt;&gt;</h3><ul>
+<h3 id="重载输入运算符-gt-gt"><a href="#重载输入运算符-gt-gt" class="headerlink" title="重载输入运算符&gt;&gt;"></a>重载输入运算符&gt;&gt;</h3><ul>
 <li>第一个形参通常是运算符将要读取的流的引用，第二个形参是将要读取到的（非常量）对象的引用。</li>
 <li>输入运算符必须处理输入可能失败的情况，而输出运算符不需要。</li>
 </ul>
-<h2 id="算数和关系运算符（-、-、-、-）"><a href="#算数和关系运算符（-、-、-、-）" class="headerlink" title="算数和关系运算符（+、-、*、&#x2F;）"></a>算数和关系运算符（+、-、*、&#x2F;）</h2><ul>
+<h2 id="算数和关系运算符（-、-、-、-）"><a href="#算数和关系运算符（-、-、-、-）" class="headerlink" title="算数和关系运算符（+、-、*、/）"></a>算数和关系运算符（+、-、*、/）</h2><ul>
 <li>如果类同时定义了算数运算符和相关的复合赋值运算符，则通常情况下应该使用复合赋值来实现算数运算符。</li>
 </ul>
-<h3 id="相等运算符"><a href="#相等运算符" class="headerlink" title="相等运算符&#x3D;&#x3D;"></a>相等运算符&#x3D;&#x3D;</h3><ul>
+<h3 id="相等运算符"><a href="#相等运算符" class="headerlink" title="相等运算符=="></a>相等运算符==</h3><ul>
 <li>如果定义了<code>operator==</code>，则这个类也应该定义<code>operator!=</code>。</li>
 <li>相等运算符和不等运算符的一个应该把工作委托给另一个。</li>
 <li>相等运算符应该具有传递性。</li>
@@ -441,7 +443,7 @@
 <h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><ul>
 <li>如果存在唯一一种逻辑可靠的<code>&lt;</code>定义，则应该考虑为这个类定义<code>&lt;</code>运算符。如果同时还包含<code>==</code>，则当且晋档<code>&lt;</code>的定义和<code>++</code>产生的结果一直时才定义<code>&lt;</code>运算符。</li>
 </ul>
-<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符&#x3D;"></a>赋值运算符&#x3D;</h2><ul>
+<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符="></a>赋值运算符=</h2><ul>
 <li>我们可以重载赋值运算符。不论形参的类型是什么，赋值运算符都必须定义为成员函数。</li>
 <li>赋值运算符必须定义成类的成员，复合赋值运算符通常情况下也应该这么做。这两类运算符都应该返回左侧运算对象的引用。</li>
 </ul>
@@ -453,14 +455,14 @@
 </ul>
 </li>
 </ul>
-<h2 id="递增和递减运算符（-、–）"><a href="#递增和递减运算符（-、–）" class="headerlink" title="递增和递减运算符（++、–）"></a>递增和递减运算符（++、–）</h2><ul>
+<h2 id="递增和递减运算符（-、—）"><a href="#递增和递减运算符（-、—）" class="headerlink" title="递增和递减运算符（++、—）"></a>递增和递减运算符（++、—）</h2><ul>
 <li>定义递增和递减运算符的类应该同时定义前置版本和后置版本。</li>
 <li>通常应该被定义成类的成员。</li>
 <li>为了和内置版本保持一致，前置运算符应该返回递增或递减后对象的引用。</li>
 <li>同样为了和内置版本保持一致，后置运算符应该返回递增或递减前对象的值，而不是引用。</li>
 <li>后置版本接受一个额外的，不被使用的<code>int</code>类型的形参。因为不会用到，所以无需命名。</li>
 </ul>
-<h2 id="成员访问运算符（-、-）"><a href="#成员访问运算符（-、-）" class="headerlink" title="成员访问运算符（*、-&gt;）"></a>成员访问运算符（*、-&gt;）</h2><ul>
+<h2 id="成员访问运算符（-、-gt-）"><a href="#成员访问运算符（-、-gt-）" class="headerlink" title="成员访问运算符（*、-&gt;）"></a>成员访问运算符（*、-&gt;）</h2><ul>
 <li>箭头运算符必须是类的成员。解引用运算符通常也是类的成员，尽管并非必须如此。</li>
 <li>重载的箭头运算符必须返回类的指针或者自定义了箭头运算符的某个类的对象。</li>
 <li>解引用和乘法的区别是一个是一元运算符，一个是二元运算符。</li>
@@ -475,6 +477,7 @@
 <li><code>lambda</code>捕获变量：<code>lambda</code>产生的类必须为每个值捕获的变量建立对应的数据成员，同时创建构造函数。</li>
 </ul>
 <h3 id="标准库定义的函数对象"><a href="#标准库定义的函数对象" class="headerlink" title="标准库定义的函数对象"></a>标准库定义的函数对象</h3><p><strong>标准库函数对象</strong>:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -483,7 +486,8 @@
 <th>逻辑</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>plus&lt;Type&gt;</code></td>
 <td><code>equal_to&lt;Type&gt;</code></td>
 <td><code>logical_and&lt;Type&gt;</code></td>
@@ -511,13 +515,15 @@
 <tr>
 <td><code>negate&lt;Type&gt;</code></td>
 <td><code>less_equal&lt;Type&gt;</code></td>
-<td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ul>
 <li>可以在算法中使用标准库函数对象。</li>
 </ul>
 <h3 id="可调用对象与function"><a href="#可调用对象与function" class="headerlink" title="可调用对象与function"></a>可调用对象与function</h3><p><strong>标准库function类型</strong>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -525,7 +531,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>function&lt;T&gt; f;</code></td>
 <td><code>f</code>是一个用来存储可调用对象的空<code>function</code>，这些可调用对象的调用形式应该与类型<code>T</code>相同。</td>
 </tr>
@@ -561,7 +568,9 @@
 <td><code>second_argument_type</code></td>
 <td>第二个实参的类型</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ul>
 <li>例如：声明一个<code>function</code>类型，它可以表示接受两个<code>int</code>，返回一个<code>int</code>的可调用对象。<code>function&lt;int(int, int)&gt;</code></li>
 </ul>
@@ -692,7 +701,7 @@
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">《C++ Primer》第十四章 重载运算与类型转换</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">输入和输出运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">重载输出运算符&lt;&lt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E8%BE%93%E5%85%A5%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">重载输入运算符&gt;&gt;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E5%92%8C%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81-%E3%80%81-%E3%80%81-%EF%BC%89"><span class="nav-text">算数和关系运算符（+、-、*、&#x2F;）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">相等运算符&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">关系运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">赋值运算符&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">下标运算符[]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%A2%9E%E5%92%8C%E9%80%92%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81%E2%80%93%EF%BC%89"><span class="nav-text">递增和递减运算符（++、–）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81-%EF%BC%89"><span class="nav-text">成员访问运算符（*、-&gt;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">函数调用运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lambda%E6%98%AF%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="nav-text">lambda是函数对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%BA%93%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="nav-text">标准库定义的函数对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E4%B8%8Efunction"><span class="nav-text">可调用对象与function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E3%80%81%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E3%80%81%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">重载、类型转换、运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">类型转换运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%9C%89%E4%BA%8C%E4%B9%89%E6%80%A7%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-text">避免有二义性的类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8C%B9%E9%85%8D%E4%B8%8E%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">函数匹配与重载运算符</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">输入和输出运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6-lt-lt"><span class="nav-text">重载输出运算符&lt;&lt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E8%BE%93%E5%85%A5%E8%BF%90%E7%AE%97%E7%AC%A6-gt-gt"><span class="nav-text">重载输入运算符&gt;&gt;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E5%92%8C%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81-%E3%80%81-%E3%80%81-%EF%BC%89"><span class="nav-text">算数和关系运算符（+、-、*、&#x2F;）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">相等运算符&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">关系运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">赋值运算符&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">下标运算符[]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%A2%9E%E5%92%8C%E9%80%92%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81%E2%80%94%EF%BC%89"><span class="nav-text">递增和递减运算符（++、—）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81-gt-%EF%BC%89"><span class="nav-text">成员访问运算符（*、-&gt;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">函数调用运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lambda%E6%98%AF%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="nav-text">lambda是函数对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%BA%93%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="nav-text">标准库定义的函数对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E4%B8%8Efunction"><span class="nav-text">可调用对象与function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E3%80%81%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E3%80%81%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">重载、类型转换、运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">类型转换运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%9C%89%E4%BA%8C%E4%B9%89%E6%80%A7%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-text">避免有二义性的类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8C%B9%E9%85%8D%E4%B8%8E%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">函数匹配与重载运算符</span></a></li></ol></li></ol>
 
     </div>
 </div>
@@ -952,5 +961,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

@@ -80,11 +80,7 @@
     
     
     
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -391,11 +387,9 @@
 <h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>处理构造函数初始值异常的唯一方法是将构造函数协程函数<code>try</code>语句块。</p>
 <p>示例：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">Blob&lt;T&gt;::<span class="built_in">Blob</span>(std::initializer_list&lt;T&gt; il) <span class="keyword">try</span>: </span><br><span class="line">    <span class="built_in">data</span>(std::make_shared&lt;std::vector&lt;T&gt; &gt;(il)&#123;</span><br><span class="line">        <span class="comment">/*函数体*/</span></span><br><span class="line">    &#125; <span class="built_in">catch</span>(<span class="type">const</span> std::bad_alloc &amp;e)&#123; <span class="built_in">handle_out_of_memory</span>(e); &#125;</span><br></pre></td></tr></table></figure></div>
-
 <h3 id="noexcept异常说明"><a href="#noexcept异常说明" class="headerlink" title="noexcept异常说明"></a>noexcept异常说明</h3><p>使用<code>noexcept</code>说明指定某个函数不会抛出异常。</p>
 <p>示例：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">recoup</span><span class="params">(<span class="type">int</span>)</span> <span class="keyword">noexcept</span></span>; <span class="comment">//C++11</span></span><br><span class="line"><span class="function">coid <span class="title">recoup</span><span class="params">(<span class="type">int</span>)</span> <span class="title">throw</span><span class="params">()</span></span>; <span class="comment">//老版本</span></span><br></pre></td></tr></table></figure></div>
-
 <h3 id="异常类层次"><a href="#异常类层次" class="headerlink" title="异常类层次"></a>异常类层次</h3><p>标准exception层次：</p>
 <ul>
 <li>exception<ul>
@@ -420,35 +414,28 @@
 <p>自定义异常类：</p>
 <p>示例：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">out_of_stock</span>: <span class="keyword">public</span> std::runtime_error &#123;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">out_of_stock</span><span class="params">(<span class="type">const</span> std::string &amp;s)</span>:</span></span><br><span class="line"><span class="function">    std::runtime_error(s)&#123;</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
-
 <h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>多个库将名字放置在全局命名空间中将引发<strong>命名空间污染</strong>（namespace pollution）。<strong>命名空间</strong>（namespace）分割了全局命名空间，其中每个命名空间是一个作用域。</p>
 <h3 id="命名空间定义"><a href="#命名空间定义" class="headerlink" title="命名空间定义"></a>命名空间定义</h3><p>命名空间的定义包含两部分：1.关键字<code>namespace</code>；2.命名空间名称。后面是一系列由花括号括起来的声明和定义。命名空间作用域后面无需分号。</p>
 <p>示例：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> cplusplus_primer&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
 <p>每个命名空间都是一个<strong>作用域</strong>。定义在某个命名空间内的名字可以被该命名空间内的其他成员直接访问，也可以被这些成员内嵌套作用域中的任何单位访问。位于该命名空间之外的代码必须明确指出所用的名字是属于哪个命名空间的。</p>
 <p>命名空间可以是<strong>不连续</strong>的。这点不同于其他作用域，意味着同一命名空间可以在多处出现。</p>
 <p><strong>内联命名空间</strong>（C++11）：</p>
 <p>无需使用该命名空间的前缀，通过外层命名空间就可以直接访问。</p>
 <p>示例：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> cplusplus_primer&#123;</span><br><span class="line">    <span class="keyword">inline</span> <span class="keyword">namespace</span> FifthEd&#123;</span><br><span class="line">        <span class="comment">// 表示本书第5版代码</span></span><br><span class="line">        <span class="keyword">class</span> <span class="title class_">Query_base</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cplusplus_primer::Query_base qb;</span><br></pre></td></tr></table></figure></div>
-
 <p><strong>未命名的命名空间</strong>：</p>
 <p>指关键字<code>namespace</code>后面紧跟花括号的用法。未命名的命名空间中定义的变量拥有静态的声明周期：在第一次使用前创建，直到程序结束才销毁。不能跨越多个文件。</p>
 <h3 id="使用命名空间成员"><a href="#使用命名空间成员" class="headerlink" title="使用命名空间成员"></a>使用命名空间成员</h3><p>像<code>namespace_name::member_name</code>这样使用命名空间的成员非常繁琐。</p>
 <p><strong>命名空间的别名</strong>：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> primer = cplusplus_primer;</span><br></pre></td></tr></table></figure></div>
-
 <p><strong>using声明</strong>（using declaration）：</p>
 <p>一条<code>using</code>声明语句一次只引入命名空间的一个成员。</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> std::string;</span><br><span class="line"></span><br><span class="line">string s = <span class="string">&quot;hello&quot;</span>;</span><br></pre></td></tr></table></figure></div>
-
 <p><strong>using指示</strong>（using directive）：</p>
 <p>使得某个特定的命名空间中所有的名字都可见。</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">string s = <span class="string">&quot;hello&quot;</span>;</span><br></pre></td></tr></table></figure></div>
-
 <h3 id="类、命名空间与作用域"><a href="#类、命名空间与作用域" class="headerlink" title="类、命名空间与作用域"></a>类、命名空间与作用域</h3><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> A&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">C1</span>&#123;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="function"><span class="type">int</span> <span class="title">f3</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A::C1::f3</span><br></pre></td></tr></table></figure></div>
-
 <h3 id="重载与命名空间"><a href="#重载与命名空间" class="headerlink" title="重载与命名空间"></a>重载与命名空间</h3><p><code>using</code>声明语句声明的是一个名字，而非特定的函数，也就是包括该函数的所有版本，都被引入到当前作用域中。</p>
 <h2 id="多重继承与虚继承"><a href="#多重继承与虚继承" class="headerlink" title="多重继承与虚继承"></a>多重继承与虚继承</h2><h3 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h3><h3 id="类型转换与多个基类"><a href="#类型转换与多个基类" class="headerlink" title="类型转换与多个基类"></a>类型转换与多个基类</h3><h3 id="多重继承下的类作用域"><a href="#多重继承下的类作用域" class="headerlink" title="多重继承下的类作用域"></a>多重继承下的类作用域</h3><ul>
 <li>当一个类拥有多个基类时，有可能出现派生类从两个或更多基类中继承了同名成员的情况。此时，不加前缀限定符直接使用该名字将引发二义性。</li>
@@ -829,5 +816,20 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
