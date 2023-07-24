@@ -6894,7 +6894,7 @@ Third paragraph of definition 2.
 <p>题意：<br>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
 <p>为了表示给定链表中的环，使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
 <p><strong>说明</strong>：不允许修改给定的链表。</p>
-<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>这道题目，不仅考察对链表的操作，而且还需要一些数学运算。</p>
+<h2 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h2><p>这道题目，不仅考察对链表的操作，而且还需要一些数学运算。</p>
 <p>主要考察两知识点：</p>
 <ul>
 <li>判断链表是否环</li>
@@ -6954,7 +6954,7 @@ Third paragraph of definition 2.
   <entry>
     <title>05丨主键：如何正确设置主键？</title>
     <url>/2023/07/23/05%E4%B8%A8%E4%B8%BB%E9%94%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE%EF%BC%9F/</url>
-    <content><![CDATA[<p>前面在讲存储的时候，我提到过主键，它可以<strong>唯一</strong>标识表中的某一条记录，对数据表来说非常重要。当我们需要查询和引用表中的一条记录的时候，最好的办法就是通过<strong>主键</strong>。只有合理地设置主键，才能确保我们准确、快速地找到所需要的数据记录。今天我就借助咱们的超市项目的实际需求，来给你讲一讲怎么正确设置主键。</p>
+    <content><![CDATA[<p>主键可以<strong>唯一</strong>标识表中的某一条记录，对数据表来说非常重要。当我们需要查询和引用表中的一条记录的时候，最好的办法就是通过<strong>主键</strong>。只有合理地设置主键，才能确保我们准确、快速地找到所需要的数据记录。</p>
 <p>在项目中，客户要进行会员营销，相应的，我们就需要处理会员信息。会员信息表（demo.membermaster）的设计大体如下：</p>
 <p><img lazyload src="/images/loading.svg" data-src="https://static001.geekbang.org/resource/image/87/c0/87977152197dbaa92d6a86cc9911c1c0.jpg?wh=3657*825" alt></p>
 <p>为了能够唯一地标识一个会员的信息，我们需要为会员信息表设置一个主键。那么，怎么为这个表设置主键，才能达到我们理想的目标呢？今天，就学习下三种设置主键的思路：<strong>业务字段做主键、自增字段做主键和手动赋值字段做主键。</strong></p>
@@ -7039,6 +7039,321 @@ Third paragraph of definition 2.
 </ul>
 <p>给已有的字段增加主键：</p>
 <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo.importhead modify listnumber <span class="type">int</span> <span class="keyword">primary</span> key;</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码随想录-哈希表</title>
+    <url>/2023/07/24/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E5%93%88%E5%B8%8C%E8%A1%A8/</url>
+    <content><![CDATA[<h1 id="哈希表基础理论"><a href="#哈希表基础理论" class="headerlink" title="哈希表基础理论"></a>哈希表基础理论</h1><blockquote>
+<p>哈希表（Hash table）又称散列表，是根据关键码的值而直接进行访问的数据结构。</p>
+</blockquote>
+<p>数组就是一张哈希表，关键码对应数组的索引下标，然后通过下标直接访问数组中的元素，如下图所示：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210104234805168.png" alt="哈希表1"></p>
+<blockquote>
+<p>哈希表可以用来<strong>快速判断一个元素是否出现在集合里</strong>。</p>
+</blockquote>
+<h2 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h2><p>哈希函数通过<code>hashCode</code>把名字转化为数值，一般<code>hashCode</code>是同多特定编码方式，可以将其他数据格式转化为不同的数值。</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/2021010423484818.png" alt="哈希表2"></p>
+<h2 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a>哈希碰撞</h2><p>如图所示，小李和小王都映射到了索引下标 1 的位置，<strong>这一现象叫做哈希碰撞</strong>。</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/2021010423494884.png" alt="哈希表3"></p>
+<p>一般解决方法有两种，拉链法和线性探测法。</p>
+<h3 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h3><p>小李和小王在<strong>索引1</strong>的位置发生了冲突，发生冲突的元素都被存储在链表中。 这样就通过<strong>索引</strong>找到小李和小王了。</p>
+<p><img lazyload src="/images/loading.svg" data-src="http://code-thinking-1253855093.file.myqcloud.com/pics/20210104235015226.png" alt="哈希表4"></p>
+<p>（数据规模是dataSize， 哈希表的大小为tableSize）</p>
+<p>拉链法要选择适当的<strong>哈希表的大小</strong>，这样既不会因为数组空值而浪费大量内存，也不会因为链表太长而在查找上浪费太多时间。</p>
+<h3 id="线性探测法"><a href="#线性探测法" class="headerlink" title="线性探测法"></a>线性探测法</h3><p>依靠哈希表中的<strong>空位</strong>来解决碰撞问题。例如冲突的位置，放了小李，那么就向下找一个空位放置小王的信息。</p>
+<p>所以要求<strong>tableSize一定要大于dataSize</strong> ，要不然哈希表上就没有空位来存放冲突的数据了。如图所示：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210104235109950.png" alt="哈希表5"></p>
+<h2 id="常见的三种哈希结构"><a href="#常见的三种哈希结构" class="headerlink" title="常见的三种哈希结构"></a>常见的三种哈希结构</h2><ul>
+<li>数组</li>
+<li><p>set（集合）</p>
+</li>
+<li><p>map（映射）</p>
+</li>
+</ul>
+<p>在C++中，set 和 map 分别提供以下三种数据结构，其底层实现以及优劣如下表所示：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>集合</th>
+<th>底层实现</th>
+<th>是否有序</th>
+<th>数值是否可以重复</th>
+<th>能否更改数值</th>
+<th>查询效率</th>
+<th>增删效率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>std::set</code></td>
+<td>红黑树</td>
+<td>有序</td>
+<td>否</td>
+<td>否</td>
+<td>$O(log n)$</td>
+<td>$O(log n)$</td>
+</tr>
+<tr>
+<td><code>std::multiset</code></td>
+<td>红黑树</td>
+<td>有序</td>
+<td>是</td>
+<td>否</td>
+<td>$O(logn)$</td>
+<td>$O(logn)$</td>
+</tr>
+<tr>
+<td><code>std::unordered_set</code></td>
+<td>哈希表</td>
+<td>无序</td>
+<td>否</td>
+<td>否</td>
+<td>$O(1)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><code>std::unordered_map</code> 底层实现为哈希表</li>
+<li><code>std::map</code> 和<code>std::multimap</code>的底层实现是红黑树。</li>
+<li><code>std::map</code>和<code>std::multimap</code>的<code>key</code>是有序的。</li>
+</ul>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>当使用<strong>集合</strong>来解决哈希问题的时候</p>
+<ul>
+<li>优先使用<code>unordered_set</code>，因为它的查询和增删效率是最优的</li>
+<li>若需集合是<strong>有序</strong>的，那么就用<code>set</code></li>
+<li>若要求不仅有序还要有<strong>重复数据</strong>的话，用<code>multiset</code></li>
+</ul>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p><code>map</code> 是一个<code>key value</code>的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用<strong>红黑树</strong>实现的。java里的HashMap ，TreeMap 都是一样的原理。</p>
+<p>虽然<code>std::set、std::multiset</code>的底层实现是红黑树，不是哈希表，<code>std::set、std::multiset</code>使用红黑树来索引和存储，不过使用方式，还是哈希法的使用方式，即<code>key</code>和<code>value</code>。</p>
+<p><code>unordered_set</code>在C++11的时候被引入标准库了，而<code>hash_set</code>并没有，所以建议使用<code>unordered_set</code>比较好，这就好比一个是官方认证的，<code>hash_set，hash_map</code> 是<code>C++11</code>标准之前民间高手自发造的轮子。</p>
+<p><img lazyload src="/images/loading.svg" data-src="http://code-thinking-1253855093.file.myqcloud.com/pics/20210104235134572.png" alt="哈希表6"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结一下，<strong>当我们遇到了要快速判断一个元素是否出现集合里的时候，就要考虑哈希法</strong>。</p>
+<p>但哈希法也是<strong>牺牲了空间换取了时间</strong>，因为要使用额外的数组，set或map来存放数据，实现快速的查找。</p>
+<h1 id="242-有效的字母异位词"><a href="#242-有效的字母异位词" class="headerlink" title="242.有效的字母异位词"></a>242.有效的字母异位词</h1><p><a class="link" href="https://leetcode.cn/problems/valid-anagram/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。</p>
+<p>示例 1:<br>输入: s = “anagram”, t = “nagaram”<br>输出: true</p>
+<p>示例 2:<br>输入: s = “rat”, t = “car”<br>输出: false</p>
+<p><strong>说明:</strong><br>你可以假设字符串只包含小写字母。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><strong>数组就是一个简单哈希表</strong>，而且这道题目中字符串只有小写字符，那么就可以定义一个数组，来记录字符串s里字符出现的次数。定一个大小为26的数组，数组的元素分别代表’a‘~’z‘字母，初始化为0，因为字符a到字符z的ASCII也是26个连续的数值。</p>
+<p>为了方便举例，判断一下字符串s= “aee”, t = “eae”。</p>
+<p>操作动画如下：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/242.%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D.gif" alt="242.有效的字母异位词"></p>
+<h3 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h3><ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂的：$O(1)$</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isAnagram</span><span class="params">(string s, string t)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 用数组记录s中各个字母出现的次数</span></span><br><span class="line">         <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">record</span><span class="params">(<span class="number">26</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">          <span class="comment">// s[i] - &#x27;a&#x27;为当前字母与a的差值</span></span><br><span class="line">          <span class="comment">// record[]代表当前的字母在数组中的位置</span></span><br><span class="line">            record[s[i] - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 计算t中各个字母出现的次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; t.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            record[t[i] - <span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看数组中各个元素是不是都为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(record[i] != <span class="number">0</span> ) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 要注意是 !=</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+<h1 id="1002-查找常用字符"><a href="#1002-查找常用字符" class="headerlink" title="1002. 查找常用字符"></a>1002. 查找常用字符</h1><p><a class="link" href="https://leetcode.cn/problems/find-common-characters/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给你一个字符串数组 words ，请你找出所有在 words 的每个字符串中都出现的共用字符（ 包括重复字符），并以数组形式返回。你可以按 任意顺序 返回答案。</p>
+<p>示例 1：</p>
+<p>输入：words = [“bella”,”label”,”roller”]<br>输出：[“e”,”l”,”l”]<br>示例 2：</p>
+<p>输入：words = [“cool”,”lock”,”cook”]<br>输出：[“c”,”o”]</p>
+<p>提示：</p>
+<p>1 &lt;= words.length &lt;= 100<br>1 &lt;= words[i].length &lt;= 100<br>words[i] 由小写英文字母组成</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">commonChars</span><span class="params">(vector&lt;string&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        vector&lt;string&gt; res;</span><br><span class="line">        <span class="keyword">if</span> (words.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">hash</span><span class="params">(<span class="number">26</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="comment">// 统计第一个字符串字符的出现频率</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; words[<span class="number">0</span>].<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            hash[words[<span class="number">0</span>][i] - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 统计除第一个字符串外字符的出现频率</span></span><br><span class="line">        <span class="type">int</span> hashOtherStr[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; words.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memset</span>(hashOtherStr, <span class="number">0</span>, <span class="number">26</span> * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; words[i].<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                hashOtherStr[words[i][j] - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 更新hash，保证hash里统计26个字符在所有字符串里出现的最小次数</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">26</span>; k++)&#123;</span><br><span class="line">                hash[k] = <span class="built_in">min</span>(hash[k], hashOtherStr[k]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 添加hash[i]个当前字母到结果中并返回</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)&#123;</span><br><span class="line">                <span class="keyword">while</span> (hash[i] != <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="function">string <span class="title">s</span><span class="params">(<span class="number">1</span>, i + <span class="string">&#x27;a&#x27;</span>)</span></span>;</span><br><span class="line">                    res.<span class="built_in">push_back</span>(s);</span><br><span class="line">                    hash[i]--;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>06丨外键和连接：如何做关联查询？</title>
+    <url>/2023/07/24/06%E4%B8%A8%E5%A4%96%E9%94%AE%E5%92%8C%E8%BF%9E%E6%8E%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%9F/</url>
+    <content><![CDATA[<p>在实际的数据库应用开发过程中，经常需要把 2 个或 2 个以上的表进行关联，以获取需要的数据。这是因为，为了提高存取效率，会把不同业务模块的信息分别存放在不同的表里面。但是，从业务层面上看，需要完整全面的信息为经营决策提供数据支撑。</p>
+<p><strong>把分散在多个不同的表里的数据查询出来的操作，就是多表查询。</strong></p>
+<p>项目的进货模块，有这样 2 个数据表，分别是<strong>进货单头表</strong>（importhead）和<strong>进货单明细表</strong>（importdetails），每天都要对这两个表进行增删改查的操作。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>listnumber (进货单号)</th>
+<th>supplierid （供货商编号）</th>
+<th>stocknumber （仓库编号）</th>
+<th>importtype （进货类别）</th>
+<th>totalquantity （总计数量）</th>
+<th>totalvalue （总计金额）</th>
+<th>recorder （录入人编号）</th>
+<th>recordingdate （录入时间）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1234</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>30</td>
+<td>1110</td>
+<td>1</td>
+<td>2020-12-20</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>进货单明细表记录了每次进货的商品明细信息。一条进货单头数据记录，对应多条进货商品的明细数据，也就是所谓的一对多的关系。具体信息如下表所示：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>listnumber (进货单号)</th>
+<th>itemnumber （商品编号）</th>
+<th>quantity （进货数量）</th>
+<th>importprice （进货价格）</th>
+<th>importvalue （进货金额）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1234</td>
+<td>1</td>
+<td>10</td>
+<td>89</td>
+<td>890</td>
+</tr>
+<tr>
+<td>1234</td>
+<td>2</td>
+<td>20</td>
+<td>12</td>
+<td>240</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>查询一次进货的所有相关数据，包括进货单的总体信息和进货商品的明细，就需要把 2 个表关联起来。</p>
+<h1 id="创建外键约束"><a href="#创建外键约束" class="headerlink" title="创建外键约束"></a>创建外键约束</h1><p>假设有 2 个表，分别是表 A 和表 B，它们通过一个公共字段“id”发生关联关系，我们把这个关联关系叫做 R。如果“id”在表 A 中是主键，那么，表 A 就是这个关系 R 中的主表。相应的，表 B 就是这个关系中的从表，表 B 中的“id”，就是表 B 用来引用表 A 中数据的，叫外键。所以，外键就是从表中用来引用主表中数据的那个公共字段。</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/f506239d70c845d592acfb9dcae43f30.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt></p>
+<p>如图所示，在关联关系 R 中，公众字段（字段 A）是表 A 的主键，所以表 A 是主表，表 B 是从表；表 B 中的公共字段（字段 A）是外键。</p>
+<p>在 MySQL 中，外键是通过外键约束来定义的。外键约束就是约束的一种，它必须在从表中定义，包括指明哪个是外键字段，以及外键字段所引用的主表中的主键字段是什么。MySQL 系统会根据外键约束的定义，监控对主表中数据的删除操作。如果发现要删除的主表记录，正在被从表中某条记录的外键字段所引用，MySQL 就会提示错误，从而确保了关联数据不会缺失。</p>
+<p>在创建表的时候定义外键约束：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 从表名</span><br><span class="line">(</span><br><span class="line">  字段名 类型,</span><br><span class="line">  ...</span><br><span class="line"><span class="comment">-- 定义外键约束，指出外键字段和参照的主表字段</span></span><br><span class="line"><span class="keyword">constraint</span> 外键约束名</span><br><span class="line"><span class="keyword">foreign</span> key (字段名) <span class="keyword">references</span> 主表名 (字段名)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+<p>修改表来定义外键约束：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 从表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 约束名 <span class="keyword">foreign</span> key(字段名) <span class="keyword">references</span> 主表名(字段名);</span><br></pre></td></tr></table></figure></div>
+<p>一般情况下，表与表的关联都是提前设计好了的，因此，会在创建表的时候就把外键约束定义好。不过，如果需要修改表的设计（比如添加新的字段，增加新的关联关系），但没有预先定义外键约束，那么，就要用修改表的方式来补充定义。</p>
+<p>创建主表 demo.importhead：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> demo.importhead (</span><br><span class="line">    listnumber <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    supplierid <span class="type">INT</span>,</span><br><span class="line">    stocknumber <span class="type">INT</span>,</span><br><span class="line">    importtype <span class="type">INT</span>,</span><br><span class="line">    importquantity <span class="type">DECIMAL</span>(<span class="number">10</span> , <span class="number">3</span> ),</span><br><span class="line">    importvalue <span class="type">DECIMAL</span>(<span class="number">10</span> , <span class="number">2</span> ),</span><br><span class="line">    recorder <span class="type">INT</span>,</span><br><span class="line">    recordingdate DATETIME</span><br><span class="line">);</span><br></pre></td></tr></table></figure></div>
+<p>创建从表 demo.importdetails，并且给它定义外键约束：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> demo.importdetails</span><br><span class="line">(</span><br><span class="line">  listnumber <span class="type">INT</span>,</span><br><span class="line">  itemnumber <span class="type">INT</span>,</span><br><span class="line">  quantity <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">3</span>),</span><br><span class="line">  importprice <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>),</span><br><span class="line">  importvalue <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>),</span><br><span class="line">  <span class="comment">-- 定义外键约束，指出外键字段和参照的主表字段</span></span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_importdetails_importhead</span><br><span class="line">  <span class="keyword">FOREIGN</span> KEY (listnumber) <span class="keyword">REFERENCES</span> importhead (listnumber)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></div>
+<p>在创建表的同时定义了一个名字叫 fk_importdetails_importhead 的外键约束，同时声明，这个外键约束的字段 listnumber 引用的是表 importhead 里面的字段 listnumber。</p>
+<p>使用 sql 语句确认：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> constraint_name, <span class="comment">-- 表示外键约束名称</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> table_name,<span class="comment">-- 表示外键约束所属数据表的名称</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> column_name,<span class="comment">-- 表示外键约束的字段名称</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> referenced_table_name,<span class="comment">-- 表示外键约束所参照的数据表名称</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> referenced_column_name <span class="comment">-- 表示外键约束所参照的字段名称</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">FROM</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> information_schema.KEY_COLUMN_USAGE</span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">WHERE</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> constraint_name <span class="operator">=</span> <span class="string">&#x27;fk_importdetails_importhead&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------+---------------+-------------+-----------------------+------------------------+</span></span><br><span class="line"><span class="operator">|</span> CONSTRAINT_NAME             <span class="operator">|</span> TABLE_NAME    <span class="operator">|</span> COLUMN_NAME <span class="operator">|</span> REFERENCED_TABLE_NAME <span class="operator">|</span> REFERENCED_COLUMN_NAME <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------+---------------+-------------+-----------------------+------------------------+</span></span><br><span class="line"><span class="operator">|</span> fk_importdetails_importhead <span class="operator">|</span> importdetails <span class="operator">|</span> listnumber  <span class="operator">|</span> importhead            <span class="operator">|</span> listnumber             <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------+---------------+-------------+-----------------------+------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>通过查询可以看到，外键约束所在的表是“importdetails”，外键字段是“listnumber”，参照的主表是“importhead”，参照的主表字段是“listnumber”。</p>
+<h1 id="内外连接"><a href="#内外连接" class="headerlink" title="内外连接"></a>内外连接</h1><p>在 MySQL 中，有 2 种类型的连接，分别是<strong>内连接（INNER JOIN）</strong>和<strong>外连接（OUTERJOIN）</strong>。</p>
+<ul>
+<li>内连接表示查询结果只返回符合连接条件的记录，这种连接方式比较常用；</li>
+<li>外连接则不同，表示查询结果返回某一个表中的所有记录，以及另一个表中满足连接条件的记录。</li>
+</ul>
+<p>实际举例：项目中有<strong>会员销售</strong>的需求，所以流水表中的数据记录，既包括非会员的普通销售，又包括会员销售。区别是，会员销售的数据记录包括会员编号，而在非会员销售的数据记录中，会员编号为空。</p>
+<p>销售表（demo.trans) ，假设业务字段 cardno 是会员信息表的主键：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>transactionnumber (流水单号)</th>
+<th>itemnumber （商品编号）</th>
+<th>price （价格）</th>
+<th>quantity （数量）</th>
+<th>cardno （会员卡号）</th>
+<th>transdate （交易时间）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>89</td>
+<td>1</td>
+<td>10000001</td>
+<td>2020-12-01</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>12</td>
+<td>1</td>
+<td>NULL</td>
+<td>2020-12-02</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>会员信息表（demo.membermaster）：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>carno (会员卡号)</th>
+<th>membername （会员名称）</th>
+<th>memberphone （会员电话）</th>
+<th>memberpid （会员身份证号）</th>
+<th>sex （会员行性别）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10000001</td>
+<td>张三</td>
+<td>13698765432</td>
+<td>475145197001012356</td>
+<td>女</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>表 <code>demo.trans</code>中的字段<code>cardno</code>是这个关联关系中的外键。</p>
+<p>通过内连接（公共字段<code>cardno</code>把两个表关联到了一起），查询所有会员销售的流水记录：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transactionno, a.itemnumber, a.quantity, a.price, a.transdate, b.membername</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.trans <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.membermaster <span class="keyword">as</span> b <span class="keyword">on</span> (a.cardno <span class="operator">=</span> b.cardno);</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br><span class="line"><span class="operator">|</span> transactionno <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> transdate           <span class="operator">|</span> membername <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张三       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>关键字 <code>JOIN</code>与关键字<code>ON</code>配对使用。</p>
+<p> 跟内连接只返回符合连接条件的记录不同的是，外连接还可以返回表中的所有记录，它包括两类，分别是左连接和右连接。</p>
+<ul>
+<li>左连接，一般简写成 <code>left join</code>，返回左边表中的所有记录，以及右表中符合连接条件的记录</li>
+<li>右连接，一般简写成 <code>right join</code>，返回右边表中的所有记录，以及左表中符合连接条件的记录</li>
+</ul>
+<p>查询全部流水信息的时候，就会用到外连接：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transactionno, a.itemnumber, a.quantity, a.price, a.transdate, b.membername</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.trans <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">left</span> <span class="keyword">join</span> demo.membermaster <span class="keyword">as</span> b <span class="comment">-- left join, 以demo.trans为主</span></span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">on</span> (a.cardno <span class="operator">=</span> b.cardno);</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br><span class="line"><span class="operator">|</span> transactionno <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> transdate           <span class="operator">|</span> membername <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张三       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transactionno, a.itemnumber, a.quantity, a.price, a.transdate, b.membername</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.membermaster <span class="keyword">as</span> b</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">right</span> <span class="keyword">join</span> demo.trans <span class="keyword">as</span> a  <span class="comment">-- right join, a,b顺序颠倒了，还是demo.trans为主</span></span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">on</span> (a.cardno <span class="operator">=</span> b.cardno);</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br><span class="line"><span class="operator">|</span> transactionno <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> transdate           <span class="operator">|</span> membername <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张三       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+---------------------+------------+</span></span><br></pre></td></tr></table></figure></div>
+<h1 id="关联查询的误区"><a href="#关联查询的误区" class="headerlink" title="关联查询的误区"></a>关联查询的误区</h1><p>在 MySQL 中，外键约束不是关联查询的必要条件。</p>
+<p>很多人往往在设计表的时候，觉得只要连接查询就可以搞定一切了，外键约束太麻烦，没有必要。如果这么想，就进入了一个误区。</p>
+<p>举例：假设一次进货数据是这样的：供货商编号是 1，进货仓库编号是 1。进货的商品编号是 1234，进货数量是 1，进货价格是 10，进货金额是 10。</p>
+<p>先插入单头数据：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.importhead</span><br><span class="line">(listnumber, supplierid, stocknumber)</span><br><span class="line"><span class="keyword">values</span> (<span class="number">1234</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.importhead;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------------+-------------+------------+----------------+-------------+----------+---------------+</span></span><br><span class="line"><span class="operator">|</span> listnumber <span class="operator">|</span> supplierid <span class="operator">|</span> stocknumber <span class="operator">|</span> importtype <span class="operator">|</span> importquantity <span class="operator">|</span> importvalue <span class="operator">|</span> recorder <span class="operator">|</span> recordingdate <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------------+-------------+------------+----------------+-------------+----------+---------------+</span></span><br><span class="line"><span class="operator">|</span>       <span class="number">1234</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>           <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>           <span class="keyword">NULL</span> <span class="operator">|</span>        <span class="keyword">NULL</span> <span class="operator">|</span>     <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------------+-------------+------------+----------------+-------------+----------+---------------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>向进货单明细表中插入进货明细数据：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.importdetails</span><br><span class="line">(listnumber,itemnumber,quantity,importprice,importvalue)</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1234</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">10</span>);</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.importdetails;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------------+----------+-------------+-------------+</span></span><br><span class="line"><span class="operator">|</span> listnumber <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> importprice <span class="operator">|</span> importvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------------+----------+-------------+-------------+</span></span><br><span class="line"><span class="operator">|</span>       <span class="number">1234</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span>       <span class="number">10.00</span> <span class="operator">|</span>       <span class="number">10.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------------+----------+-------------+-------------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>此时，如果删除进货单头表的数据，就会出现只有明细、没有单头的数据缺失情况，MySQL 会提示错误，因为数据删除违反了外键约束。MySQL 阻止了数据不一致的情况出现。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">delete</span> <span class="keyword">from</span> demo.importhead <span class="keyword">where</span> listnumber <span class="operator">=</span> <span class="number">1234</span>;</span><br><span class="line">ERROR <span class="number">1451</span> (<span class="number">23000</span>): Cannot <span class="keyword">delete</span> <span class="keyword">or</span> <span class="keyword">update</span> a parent <span class="type">row</span>: a <span class="keyword">foreign</span> key <span class="keyword">constraint</span> fails (`demo`.`importdetails`, <span class="keyword">CONSTRAINT</span> `fk_importdetails_importhead` <span class="keyword">FOREIGN</span> KEY (`listnumber`) <span class="keyword">REFERENCES</span> `importhead` (`listnumber`))</span><br></pre></td></tr></table></figure></div>
+<p>这里，插入数据的顺序：为什么要先插入进货单头表的数据，再插入进货单明细表的数据呢？是因为，如果先插入数据到从表，也就是进货单明细表，会导致 MySQL 找不到参照的主表信息，会提示错误，因为添加数据违反了外键约束。</p>
+<p>当然，按照信息系统的操作逻辑，生成一张进货单的时候，一定是先生成单头，再插入明细。同样，删除一张进货单的时候，一定是先删除明细，再删除单头。</p>
+<p>然而，既然把进货数据拆成了 2 个表，这就决定了无论是数据添加，还是数据删除，都不能通过一条 SQL 语句实现。实际工作中，什么突发情况都是有可能发生的。你认为一定会完成的操作，完全有可能只执行了一部分。</p>
+<p>因此，虽然你不用外键约束，也可以进行关联查询，但是有了它，MySQL 系统才会保护你的数据，避免出现误删的情况，从而提高系统整体的可靠性。</p>
+<p>为什么在 MySQL 里，没有外键约束也可以进行关联查询呢？</p>
+<p>原因是外键约束是有<strong>成本</strong>的，需要消耗系统资源。对于大并发的 SQL 操作，有可能会不适合。比如大型网站的中央数据库，可能会因为外键约束的系统开销而变得非常慢。所以，MySQL 允许你不使用系统自带的外键约束，在应用层面完成检查数据一致性的逻辑。也就是说，即使你不用外键约束，也要想办法通过应用层面的附加逻辑，来实现外键约束的功能，确保数据的一致性。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li><p><strong>外键约束</strong></p>
+<ul>
+<li>确定从表中的外键字段与主表中的主键字段之间的引用关系</li>
+<li>确保从表中数据所引用的主表数据不会被删除，从而保证了 2 个表中数据的一致性。</li>
+</ul>
+</li>
+<li><p><strong>连接</strong></p>
+<p>对 2 个相关的表进行连接查询，从 2 个表中获取需要的信息。</p>
+<ul>
+<li>左连接表示连接以<strong>左边</strong>的表为主，结果集中要包括左边表中的所有记录；</li>
+<li>右连接表示连接以<strong>右边</strong>的表为主，结果集中要包括右边表中的所有记录。</li>
+</ul>
+</li>
+</ul>
+<p>常用 SQL 语句：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 定义外键约束：</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 从表名</span><br><span class="line">(</span><br><span class="line">字段 字段类型</span><br><span class="line">....</span><br><span class="line"><span class="keyword">constraint</span> 外键约束名称</span><br><span class="line"><span class="keyword">foreign</span> key (字段名) <span class="keyword">references</span> 主表名 (字段名称)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 从表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 约束名 <span class="keyword">foreign</span> key(字段名) <span class="keyword">references</span> 主表名(字段名);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 连接查询</span></span><br><span class="line"><span class="keyword">select</span> 字段名</span><br><span class="line"><span class="keyword">from</span> 表名 <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">join</span> 表名 <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">on</span> (a.字段名称<span class="operator">=</span>b.字段名称);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">select</span> 字段名</span><br><span class="line"><span class="keyword">from</span> 表名 <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> 表名 <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">on</span> (a.字段名称 <span class="operator">=</span> b.字段名称);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">select</span> 字段名</span><br><span class="line"><span class="keyword">from</span> 表名 <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">right</span> <span class="keyword">join</span> 表名 <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">on</span> (a.字段名称<span class="operator">=</span>b.字段名称);</span><br></pre></td></tr></table></figure></div>
 ]]></content>
       <tags>
         <tag>MySQL</tag>
