@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+        
+            <link rel="preconnect" href="https://npm.elemecdn.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/07/25/07丨条件语句：where与having有什么不同/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="07丨条件语句：WHERE与HAVING有什么不同">
+<meta property="og:url" content="https://channinghsu.github.io/2023/07/25/07%E4%B8%A8%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%EF%BC%9AWHERE%E4%B8%8EHAVING%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/711cd6e6e6c34ccdad76e8c3ddaae666.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6db65626069d45af898109c8cf828d99.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1706fdd4962f41ffb4753d40c07a5489.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/188a378799b54f50b3cfe1872751d4ab.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2023-07-25T12:20:56.000Z">
+<meta property="article:modified_time" content="2023-07-25T13:04:19.766Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/711cd6e6e6c34ccdad76e8c3ddaae666.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            07丨条件语句：WHERE与HAVING有什么不同 -
+        
+        Channing&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/fonts/fonts.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/fonts/Satoshi/satoshi.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/fonts/Chillax/chillax.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[],"icon":"fa-solid fa-bookmark"}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xbc1241888704@gmail.com"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.2","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/about"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/about"  >
+                             
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                
+                  <h1 class="article-title-regular">07丨条件语句：WHERE与HAVING有什么不同</h1>
+                
+              </div>
+              
+                     
+            
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/me.JPG">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Channing Hsu</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-07-25 20:20:56</span>
+        <span class="mobile">2023-07-25 20:20:56</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-07-25 21:04:19</span>
+            <span class="mobile">2023-07-25 21:04:19</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MySQL/">MySQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>15 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p>查询的时候，经常需要按条件对查询结果进行筛选，这就要用到条件语句 <code>WHERE</code> 和 <code>HAVING</code>了。</p>
+<ul>
+<li><p>WHERE 是直接对表中的字段进行限定，来筛选结果；</p>
+</li>
+<li><p>HAVING 则需要跟分组关键字 <code>GROUP BY</code> 一起使用，通过对分组字段或分组计算函数进行限定，来筛选结果。</p>
+</li>
+</ul>
+<p>虽然它们都是对查询进行限定，却有着各自的特点和适用场景。很多时候，会遇到 2 个都可以用的情况。一旦用错，就很容易出现执行效率低下、查询结果错误，甚至是查询无法运行的情况。</p>
+<h1 id="实际查询需求"><a href="#实际查询需求" class="headerlink" title="实际查询需求"></a>实际查询需求</h1><p>超市的经营者提出，要查<strong>单笔销售金额超过 50 元的商品</strong>。我们来分析一下这个需求：需要查询出一个商品记录集，限定条件是单笔销售金额超过 50 元。</p>
+<p>假设我们有一个这样的商品信息表（<code>demo.goodsmaster</code>），里面有 2 种商品：书和笔。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line">use demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> demo.goodsmaster</span><br><span class="line">(</span><br><span class="line">itemnumber <span class="type">int</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">barcode text,</span><br><span class="line">goodsname text,</span><br><span class="line">specification text,</span><br><span class="line">unit text,</span><br><span class="line">saleprice <span class="type">decimal</span>(<span class="number">5</span>,<span class="number">2</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">describe</span> goodsmaster;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.goodsmaster (itemnumber, barcode, goodsname, specification, unit, saleprice) <span class="keyword">values</span> (<span class="number">1</span>, <span class="string">&#x27;0001&#x27;</span>, <span class="string">&#x27;书&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;本&#x27;</span>, <span class="number">89</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.goodsmaster (itemnumber, barcode, goodsname, specification, unit, saleprice) <span class="keyword">values</span> (<span class="number">2</span>, <span class="string">&#x27;0002&#x27;</span>, <span class="string">&#x27;笔&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;支&#x27;</span>, <span class="number">5</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.goodsmaster;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> demo.transactiondetails</span><br><span class="line">(</span><br><span class="line">transactionid <span class="type">int</span>,</span><br><span class="line">itemnumber <span class="type">int</span>,</span><br><span class="line">quantity <span class="type">decimal</span>(<span class="number">10</span>,<span class="number">3</span>),</span><br><span class="line">price <span class="type">decimal</span>(<span class="number">5</span>,<span class="number">2</span>),</span><br><span class="line">salesvalue <span class="type">decimal</span>(<span class="number">5</span>,<span class="number">2</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">describe</span> transactiondetails;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.transactiondetails (transactionid, itemnumber, quantity, price, salesvalue) <span class="keyword">values</span> (<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">89</span>, <span class="number">89</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.transactiondetails (transactionid, itemnumber, quantity, price, salesvalue) <span class="keyword">values</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">10</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.transactiondetails (transactionid, itemnumber, quantity, price, salesvalue) <span class="keyword">values</span> (<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">89</span>, <span class="number">178</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.transactiondetails (transactionid, itemnumber, quantity, price, salesvalue) <span class="keyword">values</span> (<span class="number">3</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">50</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.transactiondetails;</span><br></pre></td></tr></table></figure></div>
+<p>商品信息表：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> saleprice <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">0001</span>    <span class="operator">|</span> 书        <span class="operator">|</span>               <span class="operator">|</span> 本   <span class="operator">|</span>     <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">0002</span>    <span class="operator">|</span> 笔        <span class="operator">|</span>               <span class="operator">|</span> 支   <span class="operator">|</span>      <span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>商品销售明细表：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.transactiondetails;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> salesvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>      <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">10.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>   <span class="number">10.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">50.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>使用 where查询：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> b.goodsname</span><br><span class="line"><span class="keyword">from</span> demo.transactiondetails <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">join</span> demo.goodsmaster <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber)</span><br><span class="line"><span class="keyword">where</span> a.salesvalue <span class="operator">&gt;</span> <span class="number">50</span>;</span><br></pre></td></tr></table></figure></div>
+<p>使用 <code>having</code> 查询：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b.goodsname</span><br><span class="line"><span class="keyword">from</span> demo.transactiondetails <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">join</span> demo.goodsmaster <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber)</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> b.goodsname</span><br><span class="line"><span class="keyword">having</span> <span class="built_in">max</span>(a.salesvalue) <span class="operator">&gt;</span> <span class="number">50</span>;</span><br></pre></td></tr></table></figure></div>
+<h2 id="where"><a href="#where" class="headerlink" title="where"></a>where</h2><p>分析一下使用 WHERE 条件的查询语句，是如何执行这个查询的</p>
+<ol>
+<li>首先，MySQL 从数据表 <code>demo.transactiondetails</code>中抽取满足条件 <code>a.salesvalue&gt;50</code>的记录：</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">as</span> a  <span class="keyword">where</span> a.salesvalue <span class="operator">&gt;</span> <span class="number">50</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> salesvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>      <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>为了获取到销售信息所对应的商品名称，需要通过公共字段 <code>itemnumbers</code> 与数据表 <code>demo.goodsmaster</code> 进行关联，从 <code>demo.goodsmaster</code> 中获取商品名称：</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.<span class="operator">*</span>, b.goodsname</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.goodsmaster b</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">where</span> a.salesvalue <span class="operator">&gt;</span> <span class="number">50</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+-----------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> salesvalue <span class="operator">|</span> goodsname <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+-----------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>      <span class="number">89.00</span> <span class="operator">|</span> 书        <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span> 书        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+-----------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>查询商品名称，就会出现两个重复的记录：</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> b.goodsname <span class="keyword">from</span>  demo.transactiondetails a <span class="keyword">join</span> demo.goodsmaster b <span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber) <span class="keyword">where</span> a.salesvalue <span class="operator">&gt;</span> <span class="number">50</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> goodsname <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> 书        <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 书        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>为了消除重复的语句，这里我们需要用到一个关键字：<code>DISTINCT</code>，它的作用是返回唯一不同的值。比如，DISTINCT 字段 1，就表示返回所有字段 1 的不同的值</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="keyword">distinct</span>( b.goodsname )<span class="keyword">from</span>  demo.transactiondetails a <span class="keyword">join</span> demo.goodsmaster b <span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber) <span class="keyword">where</span> a.salesvalue <span class="operator">&gt;</span> <span class="number">50</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> goodsname <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> 书        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p><code>WHERE</code>关键字的特点是，直接用表的<strong>字段</strong>对数据集进行筛选。</p>
+<p>如果需要通过关联查询从其他的表获取需要的信息，那么执行的时候，也是先通过 WHERE 条件进行筛选，用筛选后的比较小的数据集进行连接。</p>
+<p>这样一来，连接过程中占用的资源比较少，执行效率也比较高。</p>
+<h2 id="having"><a href="#having" class="headerlink" title="having"></a>having</h2><p>HAVING 不能单独使用，必须要跟 GROUP BY 一起使用。可以把 GROUP BY 理解成对数据进行分组，方便对组内的数据进行统计计算。</p>
+<h2 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h2><p>先说明 <code>GROUP BY</code>如何使用，以及如何在分组里面进行统计计算。<br>假设现在有一组销售数据，我们需要从里面查询每天、每个收银员的销售数量和销售金额。</p>
+<p>数据准备：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> demo.transactionhead</span><br><span class="line">(</span><br><span class="line">transactionid <span class="type">int</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">transactionno text,</span><br><span class="line">operatorid <span class="type">int</span>,</span><br><span class="line">transdate datetime</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.transactionhead (transactionid, transactionno, operatorid, transdate) <span class="keyword">values</span> (<span class="number">1</span>, <span class="string">&#x27;0120201201000001&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;2020-12-10 00:00:00&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.transactionhead (transactionid, transactionno, operatorid, transdate) <span class="keyword">values</span> (<span class="number">2</span>, <span class="string">&#x27;0120201202000001&#x27;</span>, <span class="number">2</span>, <span class="string">&#x27;2020-12-11 00:00:00&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> demo.transactionhead (transactionid, transactionno, operatorid, transdate) <span class="keyword">values</span> (<span class="number">3</span>, <span class="string">&#x27;0120201202000002&#x27;</span>, <span class="number">2</span>, <span class="string">&#x27;2020-12-12 00:00:00&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.transactionhead;</span><br></pre></td></tr></table></figure></div>
+<p>当前数据：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> demo.transactionhead;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------+------------+---------------------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> transactionno    <span class="operator">|</span> operatorid <span class="operator">|</span> transdate           <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------+------------+---------------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span> <span class="number">0120201201000001</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-10</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span> <span class="number">0120201202000001</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-11</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span> <span class="number">0120201202000002</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-12</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------+------------+---------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> demo.transactiondetails;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> salesvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>      <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">10.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>   <span class="number">10.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">50.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> demo.operator;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+--------------+-------------+---------+--------------------+--------+</span></span><br><span class="line"><span class="operator">|</span> operatorid <span class="operator">|</span> branchid <span class="operator">|</span> workno <span class="operator">|</span> operatorname <span class="operator">|</span> phone       <span class="operator">|</span> address <span class="operator">|</span> pid                <span class="operator">|</span> duty   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+--------------+-------------+---------+--------------------+--------+</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">001</span>    <span class="operator">|</span> 张静         <span class="operator">|</span> <span class="number">18612345678</span> <span class="operator">|</span> 北京    <span class="operator">|</span> <span class="number">110392197501012332</span> <span class="operator">|</span> 店长   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">002</span>    <span class="operator">|</span> 李强         <span class="operator">|</span> <span class="number">13312345678</span> <span class="operator">|</span> 北京    <span class="operator">|</span> <span class="number">110222199501012332</span> <span class="operator">|</span> 收银员 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+--------------+-------------+---------+--------------------+--------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> saleprice <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">0001</span>    <span class="operator">|</span> 书        <span class="operator">|</span>               <span class="operator">|</span> 本   <span class="operator">|</span>     <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">0002</span>    <span class="operator">|</span> 笔        <span class="operator">|</span>               <span class="operator">|</span> 支   <span class="operator">|</span>      <span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br></pre></td></tr></table></figure></div>
+<p>查询：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> a.transdate, c.operatorname, d.goodsname, b.quantity, b.price, b.salesvalue</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">FROM</span> demo.transactionhead <span class="keyword">AS</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">JOIN</span> demo.transactiondetails <span class="keyword">AS</span> b <span class="keyword">ON</span> (a.transactionid <span class="operator">=</span> b.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">JOIN</span> demo.operator <span class="keyword">AS</span> c <span class="keyword">ON</span> (a.operatorid <span class="operator">=</span> c.operatorid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">JOIN</span> demo.goodsmaster <span class="keyword">AS</span> d <span class="keyword">ON</span> (b.itemnumber <span class="operator">=</span> d.itemnumber);</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> transdate           <span class="operator">|</span> operatorname <span class="operator">|</span> goodsname <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> salesvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-10</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张静         <span class="operator">|</span> 书        <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>      <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-10</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张静         <span class="operator">|</span> 笔        <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">10.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-11</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span> 书        <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-12</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span> 笔        <span class="operator">|</span>   <span class="number">10.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">50.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------+----------+-------+------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>如果想看看每天的销售数量和销售金额，可以按照一个字段 transdate 对数据进行分组和统计：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transdate, <span class="built_in">sum</span>(b.quantity), <span class="built_in">sum</span>(b.salesvalue)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactionhead <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactiondetails <span class="keyword">as</span> b <span class="keyword">on</span> (a.transactionid <span class="operator">=</span> b.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> a.transdate;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> transdate           <span class="operator">|</span> <span class="built_in">sum</span>(b.quantity) <span class="operator">|</span> <span class="built_in">sum</span>(b.salesvalue) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-10</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span>           <span class="number">3.000</span> <span class="operator">|</span>             <span class="number">99.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-11</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span>           <span class="number">2.000</span> <span class="operator">|</span>            <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-12</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span>          <span class="number">10.000</span> <span class="operator">|</span>             <span class="number">50.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+-----------------+-------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>如果想看每天、每个收银员的销售数量和销售金额，就可以按 2 个字段进行分组和统计，分别是 transdate 和 operatorname：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transdate, c.operatorname, <span class="built_in">sum</span>(b.quantity), <span class="built_in">sum</span>(b.salesvalue)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactionhead <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactiondetails <span class="keyword">as</span> b <span class="keyword">on</span> (a.transactionid <span class="operator">=</span> b.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.operator <span class="keyword">as</span> c <span class="keyword">on</span> (a.operatorid <span class="operator">=</span> c.operatorid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> a.transdate, c.operatorid;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> transdate           <span class="operator">|</span> operatorname <span class="operator">|</span> <span class="built_in">sum</span>(b.quantity) <span class="operator">|</span> <span class="built_in">sum</span>(b.salesvalue) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-10</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张静         <span class="operator">|</span>           <span class="number">3.000</span> <span class="operator">|</span>             <span class="number">99.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-11</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span>           <span class="number">2.000</span> <span class="operator">|</span>            <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-12</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span>          <span class="number">10.000</span> <span class="operator">|</span>             <span class="number">50.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>通过对销售数据按照交易日期和收银员进行分组，再对组内数据进行求和统计，就实现了对每天、每个收银员的销售数量和销售金额的查询。</p>
+<h2 id="having-1"><a href="#having-1" class="headerlink" title="having"></a>having</h2><p>回到开头的超市经营者的需求：查询单笔销售金额超过 50 元的商品：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.goodsname</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.goodsmaster <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactiondetails <span class="keyword">as</span> b <span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> a.goodsname</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">having</span> <span class="built_in">max</span>(b.salesvalue) <span class="operator">&gt;</span> <span class="number">50</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> goodsname <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> 书        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>这种查询方式在 MySQL 里面是分四步实现的：</p>
+<p>第一步，把<strong>流水明细表</strong>和<strong>商品信息表</strong>通过公共字段<code>itemnumber</code>连接起来，从 2 个表中获取数据：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.<span class="operator">*</span>, b.<span class="operator">*</span></span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.goodsmaster <span class="keyword">as</span> b <span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber);</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> salesvalue <span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> saleprice <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>      <span class="number">89.00</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">0001</span>    <span class="operator">|</span> 书        <span class="operator">|</span>               <span class="operator">|</span> 本   <span class="operator">|</span>     <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">10.00</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">0002</span>    <span class="operator">|</span> 笔        <span class="operator">|</span>               <span class="operator">|</span> 支   <span class="operator">|</span>      <span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">0001</span>    <span class="operator">|</span> 书        <span class="operator">|</span>               <span class="operator">|</span> 本   <span class="operator">|</span>     <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>   <span class="number">10.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">50.00</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">0002</span>    <span class="operator">|</span> 笔        <span class="operator">|</span>               <span class="operator">|</span> 支   <span class="operator">|</span>      <span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+------------+---------+-----------+---------------+------+-----------+</span></span><br></pre></td></tr></table></figure></div>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/711cd6e6e6c34ccdad76e8c3ddaae666.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt></p>
+<p>第二步，把结果集按照商品名称（itemnumber）分组：</p>
+<p>组 1：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/6db65626069d45af898109c8cf828d99.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>组 2：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/1706fdd4962f41ffb4753d40c07a5489.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>第三步，对分组后的数据集进行筛选，把组中字段 salesvalue 的最大值 &gt;50 的组筛选出来：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/188a378799b54f50b3cfe1872751d4ab.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>第四步，返回商品名称。这时就得到了需要的结果：单笔销售金额超过 50 元的商品就是“书”。</p>
+<p>简单小结下使用 HAVING 的查询过程。</p>
+<ul>
+<li>首先，把所有的信息都准备好，包括从关联表中获取需要的信息，对数据集进行分组，形成一个包含所有需要的信息的数据集合</li>
+<li>接着，再通过 HAVING 条件的筛选，得到需要的数据</li>
+</ul>
+<h1 id="正确使用where和having"><a href="#正确使用where和having" class="headerlink" title="正确使用where和having"></a>正确使用where和having</h1><h2 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a><strong>关联查询</strong></h2><ul>
+<li>若要通过连接从关联表中获取需要的数据<ul>
+<li>where是先筛选后连接</li>
+<li>having是先连接后筛选</li>
+</ul>
+</li>
+</ul>
+<p>这一点，就决定了在<strong>关联查询</strong>中，<strong>where比having更高效</strong>。</p>
+<ul>
+<li><p>where可以先筛选，用一个筛选后的较小数据集和关联表进行连接，占用的资源少，执行效率高。</p>
+</li>
+<li><p>having要先把结果集准备好，用未被筛选的数据集进行关联，然后对这个大的数据集进行筛选，这样占用的资源就比较多，执行效率也较低。</p>
+</li>
+</ul>
+<h2 id="分组统计"><a href="#分组统计" class="headerlink" title="分组统计"></a>分组统计</h2><ul>
+<li><p>where可以直接使用表中的字段作为筛选条件，但不能使用分组中的计算函数作为筛选条件；</p>
+</li>
+<li><p>having必须要与group by配合使用，可以把分组计算的函数和分组字段作为筛选条件</p>
+</li>
+</ul>
+<p>这决定了，在需要对数据进行分组统计的时候，having可以完成where不能完成的任务。这是因为，在查询语法结构中，</p>
+<ul>
+<li><p>where在 group by之前，所以无法对分组结果进行筛选。</p>
+</li>
+<li><p>having在group by之后，可以使用分组字段和分组中的计算函数，对分组的结果集进行筛选，这个功能是where无法完成的。</p>
+</li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>假如超市经营者提出，要查询一下是哪个收银员、在哪天卖了 2 单商品。这种必须先分组才能筛选的查询，用 where 语句实现就比较难，我们可能要分好几步，通过把中间结果存储起来，才能搞定。但是用 having，则很轻松，代码如下：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transdate, c.operatorname</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactionhead <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactiondetails <span class="keyword">as</span> b <span class="keyword">on</span> (a.transactionid <span class="operator">=</span> b.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.operator <span class="keyword">as</span> c <span class="keyword">on</span> (a.operatorid <span class="operator">=</span> c.operatorid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> a.transdate, c.operatorid</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">having</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+</span></span><br><span class="line"><span class="operator">|</span> transdate           <span class="operator">|</span> operatorname <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-10</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张静         <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>where</td>
+<td>先筛选数据，再关联，执行效率高</td>
+<td>不能使用分组中俄计算函数进行筛选</td>
+</tr>
+<tr>
+<td>having</td>
+<td>可以使用分组中的计算函数</td>
+<td>在最后的结果集中进行筛选，执行效率较低</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>需要注意的是，where 和 having 也不是互相排斥的，我们可以在一个查询里面同时使用where 和 having。</p>
+<p>举个例子，假设现在有一组销售数据，包括交易时间、收银员、商品名称、销售数量、价格和销售金额等信息，超市的经营者要查询“2020-12-10”和“2020-12-11”这两天收银金额超过 100 元的销售日期、收银员名称、销售数量和销售金额。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transdate, c.operatorname, d.goodsname, b.quantity, b.price, b.salesvalue</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactionhead <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactiondetails <span class="keyword">as</span> b <span class="keyword">on</span> (b.transactionid <span class="operator">=</span> a.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.operator <span class="keyword">as</span> c <span class="keyword">on</span> (c.operatorid <span class="operator">=</span> a.operatorid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.goodsmaster <span class="keyword">as</span> d <span class="keyword">on</span> (d.itemnumber <span class="operator">=</span> b.itemnumber);</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> transdate           <span class="operator">|</span> operatorname <span class="operator">|</span> goodsname <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> salesvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-10</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张静         <span class="operator">|</span> 书        <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>      <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-10</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 张静         <span class="operator">|</span> 笔        <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">10.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-11</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span> 书        <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-12</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span> 笔        <span class="operator">|</span>   <span class="number">10.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">50.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------+----------+-------+------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>分析需求：由于是要按照销售日期和收银员进行统计，所以，必须按照销售日期和收银员进行分组，因此，我们可以通过使用<code>group by</code>和<code>having</code>进行查询：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transdate, c.operatorname, <span class="built_in">sum</span>(b.quantity), <span class="built_in">sum</span>(b.salesvalue)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactionhead <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactiondetails <span class="keyword">as</span> b <span class="keyword">on</span> (b.transactionid <span class="operator">=</span> a.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.operator <span class="keyword">as</span> c <span class="keyword">on</span> (c.operatorid <span class="operator">=</span> a.operatorid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> a.transdate, c.operatorname</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">having</span> a.transdate <span class="keyword">in</span> (<span class="string">&#x27;2020-12-10&#x27;</span> , <span class="string">&#x27;2020-12-11&#x27;</span>) <span class="keyword">and</span> <span class="built_in">sum</span>(b.salesvalue) <span class="operator">&gt;</span> <span class="number">100</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> transdate           <span class="operator">|</span> operatorname <span class="operator">|</span> <span class="built_in">sum</span>(b.quantity) <span class="operator">|</span> <span class="built_in">sum</span>(b.salesvalue) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-11</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span>           <span class="number">2.000</span> <span class="operator">|</span>            <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>其实<code>having</code>后面的筛选条件，就会发现，条件 <code>a.transdate IN (&#39;2020-12-10&#39; , &#39;2020-12-11&#39;)</code>，其实可以用<code>where</code>来限定：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transdate, c.operatorname, <span class="built_in">sum</span>(b.quantity), <span class="built_in">sum</span>(b.salesvalue)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactionhead <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactiondetails <span class="keyword">as</span> b <span class="keyword">on</span> (b.transactionid <span class="operator">=</span> a.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.operator <span class="keyword">as</span> c <span class="keyword">on</span> (c.operatorid <span class="operator">=</span> a.operatorid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">where</span> a.transdate <span class="keyword">in</span> (<span class="string">&#x27;2020-12-10&#x27;</span> , <span class="string">&#x27;2020-12-11&#x27;</span>)  <span class="comment">-- 先按日期筛选</span></span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> a.transdate, c.operatorname</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">having</span> <span class="built_in">sum</span>(b.salesvalue) <span class="operator">&gt;</span> <span class="number">100</span>;  <span class="comment">-- 后按金额筛选</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> transdate           <span class="operator">|</span> operatorname <span class="operator">|</span> <span class="built_in">sum</span>(b.quantity) <span class="operator">|</span> <span class="built_in">sum</span>(b.salesvalue) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-11</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span>           <span class="number">2.000</span> <span class="operator">|</span>            <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>得到了需要的结果，这是因为把条件拆分开，包含分组统计函数的条件用<code>having</code>，普通条件用<code>where</code>。这就既利用了<code>where</code>条件的高效快速，又发挥了<code>having</code>可以使用包含分组统计函数的查询条件的优点。当数据量特别大的时候，运行效率会有很大的差别。</p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/MySQL/">#MySQL</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/07/24/06%E4%B8%A8%E5%A4%96%E9%94%AE%E5%92%8C%E8%BF%9E%E6%8E%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%9F/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">06丨外键和连接：如何做关联查询？</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">07丨条件语句：WHERE与HAVING有什么不同</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%9F%A5%E8%AF%A2%E9%9C%80%E6%B1%82"><span class="nav-text">实际查询需求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#where"><span class="nav-text">where</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#having"><span class="nav-text">having</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-by"><span class="nav-text">group by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#having-1"><span class="nav-text">having</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8where%E5%92%8Chaving"><span class="nav-text">正确使用where和having</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="nav-text">关联查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="nav-text">分组统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">优缺点</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.2</a>
+        </div>
+        
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+
+</main>
+
+
+
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/utils.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/main.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/layouts/navbarShrink.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/tools/scrollTopBottom.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/tools/lightDarkSwitch.js"></script>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/tools/localSearch.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/libs/Typed.min.js"></script>
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/tools/tocToggle.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/libs/anime.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/layouts/toc.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.2.2/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
