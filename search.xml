@@ -7569,11 +7569,11 @@ Third paragraph of definition 2.
 <p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/711cd6e6e6c34ccdad76e8c3ddaae666.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt></p>
 <p>第二步，把结果集按照商品名称（itemnumber）分组：</p>
 <p>组 1：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/6db65626069d45af898109c8cf828d99.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/6db65626069d45af898109c8cf828d99.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt></p>
 <p>组 2：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/1706fdd4962f41ffb4753d40c07a5489.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/1706fdd4962f41ffb4753d40c07a5489.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt></p>
 <p>第三步，对分组后的数据集进行筛选，把组中字段 salesvalue 的最大值 &gt;50 的组筛选出来：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/188a378799b54f50b3cfe1872751d4ab.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/188a378799b54f50b3cfe1872751d4ab.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt></p>
 <p>第四步，返回商品名称。这时就得到了需要的结果：单笔销售金额超过 50 元的商品就是“书”。</p>
 <p>简单小结下使用 HAVING 的查询过程。</p>
 <ul>
