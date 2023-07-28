@@ -7299,7 +7299,7 @@ Third paragraph of definition 2.
 <p>然后再用ransomNote去验证这个数组是否包含了ransomNote所需要的所有字母。</p>
 <p>依然是数组在哈希法中的应用。</p>
 <p>一些同学可能想，用数组干啥，都用map完事了，<strong>其实在本题的情况下，使用map的空间消耗要比数组大一些的，因为map要维护红黑树或者哈希表，而且还要做哈希函数，是费时的！数据量大的话就能体现出来差别了。 所以数组更加简单直接有效！</strong></p>
-<p>代码如下：</p>
+<p><code>magazine.at(i)</code>提供了更安全的访问方式，可以确保在索引越界时抛出异常，而<code>magazine[i]</code>则需要在使用时自行确保索引不越界，否则可能导致程序出现不稳定行为。</p>
 <h2 id="C-代码-5"><a href="#C-代码-5" class="headerlink" title="C++ 代码"></a>C++ 代码</h2><ul>
 <li>时间复杂度: <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></li>
 <li>空间复杂度: <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></li>
@@ -7311,37 +7311,84 @@ Third paragraph of definition 2.
 <p>示例：</p>
 <p>给定数组 nums = [-1, 0, 1, 2, -1, -4]，</p>
 <p>满足要求的三元组集合为：<br>[<br>  [-1, 0, 1],<br>  [-1, -1, 2]<br>]</p>
-<h2 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h2><h2 id="C-代码-6"><a href="#C-代码-6" class="headerlink" title="C++代码"></a>C++代码</h2><h1 id="18-四数之和"><a href="#18-四数之和" class="headerlink" title="18. 四数之和"></a>18. 四数之和</h1><p><a class="link" href="https://leetcode.cn/problems/4sum/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h2><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p><strong>这道题目使用双指针法 要比哈希法高效一些</strong>，那么来讲解一下具体实现的思路。</p>
+<p>动画效果如下：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.gif" alt="15.三数之和"></p>
+<p>拿这个<code>nums</code>数组来举例，首先将数组排序，然后有一层<code>for</code>循环，<code>i</code>从下标<code>0</code>的地方开始，同时定一个下标<code>left</code> 定义在<code>i+1</code>的位置上，定义下标<code>right</code>在数组结尾的位置上。</p>
+<p>依然还是在数组中找到 <code>abc</code> 使得<code>a + b +c =0</code>，我们这里相当于  <code>a = nums[i]，b = nums[left]，c = nums[right]</code>。</p>
+<p>接下来如何移动<code>left</code> 和<code>right</code>呢， 如果<code>nums[i] + nums[left] + nums[right] &gt; 0</code>  就说明 此时三数之和大了，因为数组是排序后了，所以<code>right</code>下标就应该向左移动，这样才能让三数之和小一些。</p>
+<p>如果 <code>nums[i] + nums[left] + nums[right] &lt; 0</code>说明 此时 三数之和小了，<code>left</code> 就向右移动，才能让三数之和大一些，直到<code>left</code>与<code>right</code>相遇为止。</p>
+<p>时间复杂度：<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.452ex" role="img" focusable="false" viewbox="0 -833.9 2577.6 1083.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container>。</p>
+<h2 id="C-代码-6"><a href="#C-代码-6" class="headerlink" title="C++代码"></a>C++代码</h2><ul>
+<li>时间复杂度: <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.452ex" role="img" focusable="false" viewbox="0 -833.9 2577.6 1083.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></li>
+<li>空间复杂度: <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt; &amp;nums) {</span><br><span class="line">        <span class="comment">// 排序 + 双指针</span></span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="comment">// 若数组中最小的值大于0</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) <span class="keyword">return</span> res;</span><br><span class="line">            <span class="comment">// 若i相同</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> left = i + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right) {</span><br><span class="line">                <span class="type">int</span> sum = nums[i] + nums[left] + nums[right];</span><br><span class="line">                <span class="keyword">if</span> (sum &lt; <span class="number">0</span>) left++;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; <span class="number">0</span>) right--;</span><br><span class="line">                <span class="keyword">else</span> {</span><br><span class="line">                    res.<span class="built_in">push_back</span>(vector&lt;<span class="type">int</span>&gt;{nums[i], nums[left], nums[right]});</span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left + <span class="number">1</span>]) left++;</span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right - <span class="number">1</span>]) right--;</span><br><span class="line">                    left++;</span><br><span class="line">                    right--;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="a的去重"><a href="#a的去重" class="headerlink" title="a的去重"></a>a的去重</h3><p>说道去重，其实主要考虑三个数的去重。 a, b ,c,  对应的就是 nums[i]，nums[left]，nums[right] </p>
+<p>a 如果重复了怎么办，a是nums里遍历的元素，那么应该直接跳过去。 </p>
+<p>但这里有一个问题，是判断 nums[i] 与 nums[i + 1]是否相同，还是判断 nums[i] 与 nums[i-1] 是否相同。 </p>
+<p>有同学可能想，这不都一样吗。</p>
+<p>其实不一样！</p>
+<p>都是和 nums[i]进行比较，是比较它的前一个，还是比较他的后一个。  </p>
+<p>如果我们的写法是 这样：</p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (nums[i] == nums[i + <span class="number">1</span>]) { <span class="comment">// 去重操作</span></span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>那就我们就把 三元组中出现重复元素的情况直接pass掉了。 例如{-1, -1 ,2} 这组数据，当遍历到第一个-1 的时候，判断 下一个也是-1，那这组数据就pass了。</p>
+<p><strong>我们要做的是 不能有重复的三元组，但三元组内的元素是可以重复的！</strong></p>
+<p>所以这里是有两个重复的维度。</p>
+<p>那么应该这么写： </p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) {</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>这么写就是当前使用 nums[i]，我们判断前一位是不是一样的元素，在看 {-1, -1 ,2} 这组数据，当遍历到 第一个 -1 的时候，只要前一位没有-1，那么  {-1, -1 ,2} 这组数据一样可以收录到 结果集里。 </p>
+<p>这是一个非常细节的思考过程。 </p>
+<h3 id="b与c的去重"><a href="#b与c的去重" class="headerlink" title="b与c的去重"></a>b与c的去重</h3><p>很多同学写本题的时候，去重的逻辑多加了 对right 和left 的去重：（代码中注释部分） </p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (right &gt; left) {</span><br><span class="line">    <span class="keyword">if</span> (nums[i] + nums[left] + nums[right] &gt; <span class="number">0</span>) {</span><br><span class="line">        right--;</span><br><span class="line">        <span class="comment">// 去重 right</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right + <span class="number">1</span>]) right--;</span><br><span class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] + nums[left] + nums[right] &lt; <span class="number">0</span>) {</span><br><span class="line">        left++;</span><br><span class="line">        <span class="comment">// 去重 left</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left - <span class="number">1</span>]) left++;</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>但细想一下，这种去重其实对提升程序运行效率是没有帮助的。 </p>
+<p>拿right去重为例，即使不加这个去重逻辑，依然根据  <code>while (right &gt; left)</code> 和 <code>if (nums[i] + nums[left] + nums[right] &gt; 0)</code>  去完成right— 的操作。 </p>
+<p>多加了 <code>while (left &lt; right &amp;&amp; nums[right] == nums[right + 1]) right--;</code> 这一行代码，其实就是把 需要执行的逻辑提前执行了，但并没有减少 判断的逻辑。  </p>
+<p>最直白的思考过程，就是right还是一个数一个数的减下去的，所以在哪里减的都是一样的。 </p>
+<p>所以这种去重 是可以不加的。 仅仅是 把去重的逻辑提前了而已。</p>
+<h1 id="18-四数之和"><a href="#18-四数之和" class="headerlink" title="18. 四数之和"></a>18. 四数之和</h1><p><a class="link" href="https://leetcode.cn/problems/4sum/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>题意：给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。</p>
 <p><strong>注意：</strong></p>
 <p>答案中不可以包含重复的四元组。</p>
 <p>示例：<br>给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。<br>满足要求的四元组集合为：<br>[<br>  [-1,  0, 0, 1],<br>  [-2, -1, 1, 2],<br>  [-2,  0, 0, 2]<br>]</p>
-<h2 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h2><p>nSum 系列问题的核心思路就是<strong>排序 + 双指针</strong>。</p>
-<p>先给数组从小到大排序，然后双指针 <code>lo</code> 和 <code>hi</code> 分别在数组开头和结尾，这样就可以控制 <code>nums[lo]</code> 和 <code>nums[hi]</code> 这两数之和的大小：</p>
-<p>如果你想让它俩的和大一些，就让 <code>lo++</code>，如果你想让它俩的和小一些，就让 <code>hi--</code>。</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://labuladong.github.io/pictures/nSum/1.jpeg" alt="1"></p>
-<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="comment">// n 为 3，从 nums[0] 开始计算和为 0 的三元组</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">nSumTarget</span>(nums, <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 注意：调用这个函数之前一定要先给 nums 排序 */</span></span><br><span class="line">    <span class="comment">// n 填写想求的是几数之和，start 从哪个索引开始计算（一般填 0），target 填想凑出的目标和</span></span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">nSumTarget</span>(</span><br><span class="line">            vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> n, <span class="type">int</span> start, <span class="type">int</span> target) {</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> sz = nums.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="comment">// 至少是 2Sum，且数组大小不应该小于 n</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span> || sz &lt; n) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="comment">// 2Sum 是 base case</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">2</span>) {</span><br><span class="line">            <span class="comment">// 双指针那一套操作</span></span><br><span class="line">            <span class="type">int</span> lo = start, hi = sz - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (lo &lt; hi) {</span><br><span class="line">                <span class="type">int</span> sum = nums[lo] + nums[hi];</span><br><span class="line">                <span class="type">int</span> left = nums[lo], right = nums[hi];</span><br><span class="line">                <span class="keyword">if</span> (sum &lt; target) {</span><br><span class="line">                    <span class="keyword">while</span> (lo &lt; hi &amp;&amp; nums[lo] == left) lo++;</span><br><span class="line">                } <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) {</span><br><span class="line">                    <span class="keyword">while</span> (lo &lt; hi &amp;&amp; nums[hi] == right) hi--;</span><br><span class="line">                } <span class="keyword">else</span> {</span><br><span class="line">                    res.<span class="built_in">push_back</span>({left, right});</span><br><span class="line">                    <span class="keyword">while</span> (lo &lt; hi &amp;&amp; nums[lo] == left) lo++;</span><br><span class="line">                    <span class="keyword">while</span> (lo &lt; hi &amp;&amp; nums[hi] == right) hi--;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            <span class="comment">// n &gt; 2 时，递归计算 (n-1)Sum 的结果</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt; sz; i++) {</span><br><span class="line">                vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;</span><br><span class="line">                        sub = <span class="built_in">nSumTarget</span>(nums, n - <span class="number">1</span>, i + <span class="number">1</span>, target - nums[i]);</span><br><span class="line">                <span class="keyword">for</span> (vector&lt;<span class="type">int</span>&gt;&amp; arr : sub) {</span><br><span class="line">                    <span class="comment">// (n-1)Sum 加上 nums[i] 就是 nSum</span></span><br><span class="line">                    arr.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">                    res.<span class="built_in">push_back</span>(arr);</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">while</span> (i &lt; sz - <span class="number">1</span> &amp;&amp; nums[i] == nums[i + <span class="number">1</span>]) i++;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
-<h1 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h1><h2 id="哈希表理论基础"><a href="#哈希表理论基础" class="headerlink" title="哈希表理论基础"></a>哈希表理论基础</h2><p>在<a class="link" href="https://programmercarl.com/哈希表理论基础.html">关于哈希表，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，我们介绍了哈希表的基础理论知识，不同于枯燥的讲解，这里介绍了都是对刷题有帮助的理论知识点。</p>
-<p><strong>一般来说哈希表都是用来快速判断一个元素是否出现集合里</strong>。</p>
+<h2 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h2><p>四数之和，和<a class="link" href="https://programmercarl.com/0015.三数之和.html">15.三数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>是一个思路，都是使用双指针法, 基本解法就是在<a class="link" href="https://programmercarl.com/0015.三数之和.html">15.三数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的基础上再套一层for循环。</p>
+<p>但是有一些细节需要注意，例如： 不要判断<code>nums[k] &gt; target</code> 就返回了，三数之和 可以通过 <code>nums[i] &gt; 0</code> 就返回了，因为 0 已经是确定的数了，四数之和这道题目 target是任意值，逻辑变成<code>nums[i] &gt; target &amp;&amp; (nums[i] &gt;=0 || target &gt;= 0)</code>。</p>
+<p><a class="link" href="https://programmercarl.com/0015.三数之和.html">15.三数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的双指针解法是一层<code>for</code>循环<code>num[i]</code>为确定值，然后循环内有left和right下标作为双指针，找到<code>nums[i] + nums[left] + nums[right] == 0</code>。</p>
+<p>四数之和的双指针解法是两层<code>for</code>循环<code>nums[k] + nums[i]</code>为确定值，依然是循环内有<code>left</code>和<code>right</code>下标作为双指针，找出<code>nums[k] + nums[i] + nums[left] + nums[right] == target</code>的情况，三数之和的时间复杂度是<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.452ex" role="img" focusable="false" viewbox="0 -833.9 2577.6 1083.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container>，四数之和的时间复杂度是<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.451ex" role="img" focusable="false" viewbox="0 -833.2 2577.6 1083.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container> 。</p>
+<p>那么一样的道理，五数之和、六数之和等等都采用这种解法。</p>
+<p>对于<a class="link" href="https://programmercarl.com/0015.三数之和.html">15.三数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>双指针法就是将原本暴力<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.451ex" role="img" focusable="false" viewbox="0 -833.2 2577.6 1083.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container>的解法，降为<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.452ex" role="img" focusable="false" viewbox="0 -833.9 2577.6 1083.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container>的解法，四数之和的双指针解法就是将原本暴力<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.47ex" role="img" focusable="false" viewbox="0 -841.7 2577.6 1091.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container>的解法，降为<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.451ex" role="img" focusable="false" viewbox="0 -833.2 2577.6 1083.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container>的解法。</p>
+<p>之前我们讲过哈希表的经典题目：<a class="link" href="https://programmercarl.com/0454.四数相加II.html">454.四数相加II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相对于本题简单很多，因为本题是要求在一个集合中找出四个数相加等于target，同时四元组不能重复。</p>
+<p>而<a class="link" href="https://programmercarl.com/0454.四数相加II.html">454.四数相加II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>是四个独立的数组，只要找到A[i] + B[j] + C[k] + D[l] = 0就可以，不用考虑有重复的四个元素相加等于0的情况，所以相对于本题还是简单了不少！</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">fourSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target) {</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++){</span><br><span class="line">            <span class="comment">// if (nums[i] &gt; target) return res; 错误剪枝，因为值是任意值</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; target &amp;&amp; nums[i] &gt;= <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = i + <span class="number">1</span>; k &lt; nums.<span class="built_in">size</span>(); k++){</span><br><span class="line">                <span class="comment">// 2级剪枝处理</span></span><br><span class="line">                <span class="keyword">if</span> (nums[k] + nums[i] &gt; target &amp;&amp; nums[k] + nums[i] &gt;= <span class="number">0</span>) {</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                }</span><br><span class="line">                <span class="type">int</span> left = k + <span class="number">1</span>;</span><br><span class="line">                <span class="type">int</span> right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (k &gt; i + <span class="number">1</span> &amp;&amp; nums[k] == nums[k - <span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// k &gt; i+ 1</span></span><br><span class="line">                <span class="keyword">while</span> (left &lt; right) {</span><br><span class="line">                    <span class="type">long</span> sum = (<span class="type">long</span>)nums[i] + nums[k] + nums[left] + nums[right]; <span class="comment">// 数值太大超过int了</span></span><br><span class="line">                    <span class="keyword">if</span> (sum &lt; target) left++;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) right--;</span><br><span class="line">                    <span class="keyword">else</span> {</span><br><span class="line">                        res.<span class="built_in">push_back</span>(vector&lt;<span class="type">int</span>&gt;{nums[i], nums[k], nums[left], nums[right]});</span><br><span class="line">                        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left + <span class="number">1</span>]) left++;</span><br><span class="line">                        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right - <span class="number">1</span>]) right--;</span><br><span class="line">                        left++;</span><br><span class="line">                        right--;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">                                    </span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>二级剪枝的部分：</p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (nums[k] + nums[i] &gt; target &amp;&amp; nums[k] + nums[i] &gt;= <span class="number">0</span>) {</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>可以优化为： </p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (nums[k] + nums[i] &gt; target &amp;&amp; nums[i] &gt;= <span class="number">0</span>) {</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>因为只要 nums[k] + nums[i] &gt; target，那么 nums[i] 后面的数都是正数的话，就一定 不符合条件了。 </p>
+<p>不过这种剪枝 其实有点 小绕，大家能够理解 文章给的完整代码的剪枝 就够了。 </p>
+<h1 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h1><h2 id="哈希表理论基础"><a href="#哈希表理论基础" class="headerlink" title="哈希表理论基础"></a>哈希表理论基础</h2><p><strong>一般来说哈希表都是用来快速判断一个元素是否出现集合里</strong>。</p>
 <p>对于哈希表，要知道<strong>哈希函数</strong>和<strong>哈希碰撞</strong>在哈希表中的作用.</p>
-<p>哈希函数是把传入的key映射到符号表的索引上。</p>
-<p>哈希碰撞处理有多个key映射到相同索引上时的情景，处理碰撞的普遍方式是拉链法和线性探测法。</p>
+<ul>
+<li><p><strong>哈希函数</strong>是把传入的key映射到符号表的索引上。</p>
+</li>
+<li><p><strong>哈希碰撞</strong>处理有多个key映射到相同索引上时的情景，处理碰撞的普遍方式是<strong>拉链法</strong>和<strong>线性探测法</strong>。</p>
+</li>
+</ul>
 <p>接下来是常见的三种哈希结构：</p>
 <ul>
 <li>数组</li>
 <li>set（集合）</li>
 <li>map（映射）</li>
 </ul>
-<p>在C++语言中，set 和 map 都分别提供了三种数据结构，每种数据结构的底层实现和用途都有所不同，在<a class="link" href="https://programmercarl.com/哈希表理论基础.html">关于哈希表，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我给出了详细分析，这一知识点很重要！</p>
-<p>例如什么时候用std::set，什么时候用std::multiset，什么时候用std::unordered_set，都是很有考究的。</p>
-<p><strong>只有对这些数据结构的底层实现很熟悉，才能灵活使用，否则很容易写出效率低下的程序</strong>。 </p>
 <h2 id="哈希表经典题目"><a href="#哈希表经典题目" class="headerlink" title="哈希表经典题目"></a>哈希表经典题目</h2><h3 id="数组作为哈希表"><a href="#数组作为哈希表" class="headerlink" title="数组作为哈希表"></a>数组作为哈希表</h3><p>一些应用场景就是为数组量身定做的。</p>
-<p>在<a class="link" href="https://programmercarl.com/0242.有效的字母异位词.html">242.有效的字母异位词 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，我们提到了数组就是简单的哈希表，但是数组的大小是受限的！</p>
-<p>这道题目包含小写字母，那么使用数组来做哈希最合适不过。</p>
-<p>在<a class="link" href="https://programmercarl.com/0383.赎金信.html">383.赎金信 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中同样要求只有小写字母，那么就给我们浓浓的暗示，用数组！</p>
+<ul>
+<li><p><a class="link" href="https://programmercarl.com/0242.有效的字母异位词.html">242.有效的字母异位词 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，我们提到了数组就是简单的哈希表，但是数组的大小是受限的！这道题目包含小写字母，那么使用数组来做哈希最合适不过。</p>
+</li>
+<li><p><a class="link" href="https://programmercarl.com/0383.赎金信.html">383.赎金信 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中同样要求只有<strong>小写字母</strong>，那么就给我们浓浓的暗示，用数组！</p>
+</li>
+</ul>
 <p>本题和<a class="link" href="https://programmercarl.com/0242.有效的字母异位词.html">242.有效的字母异位词 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>很像，<a class="link" href="https://programmercarl.com/0242.有效的字母异位词.html">242.有效的字母异位词 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>是求 字符串a 和 字符串b 是否可以相互组成，在<a class="link" href="https://programmercarl.com/0383.赎金信.html">383.赎金信 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中是求字符串a能否组成字符串b，而不用管字符串b 能不能组成字符串a。</p>
-<p>一些同学可能想，用数组干啥，都用map不就完事了。</p>
-<p><strong>上面两道题目用map确实可以，但使用map的空间消耗要比数组大一些，因为map要维护红黑树或者符号表，而且还要做哈希函数的运算。所以数组更加简单直接有效！</strong> </p>
+<p><strong>上面两题用map也可以，但使用map的空间消耗要比数组大一些，因为map要维护红黑树或者符号表，而且还要做哈希函数的运算。所以数组更加简单直接有效！</strong> </p>
 <h3 id="set作为哈希表"><a href="#set作为哈希表" class="headerlink" title="set作为哈希表"></a>set作为哈希表</h3><p>在<a class="link" href="https://programmercarl.com/0349.两个数组的交集.html">349. 两个数组的交集 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们给出了什么时候用数组就不行了，需要用set。</p>
 <p>这道题目没有限制数值的大小，就无法使用数组来做哈希表了。</p>
 <p><strong>主要因为如下两点：</strong></p>
@@ -7352,11 +7399,11 @@ Third paragraph of definition 2.
 <p>所以此时一样的做映射的话，就可以使用set了。</p>
 <p>关于set，C++ 给提供了如下三种可用的数据结构：（详情请看<a class="link" href="https://programmercarl.com/哈希表理论基础.html">关于哈希表，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>）</p>
 <ul>
-<li>std::set</li>
-<li>std::multiset</li>
-<li>std::unordered_set</li>
+<li><code>std::set</code></li>
+<li><code>std::multiset</code></li>
+<li><code>std::unordered_set</code></li>
 </ul>
-<p>std::set和std::multiset底层实现都是红黑树，std::unordered_set的底层实现是哈希， 使用unordered_set 读写效率是最高的，本题并不需要对数据进行排序，而且还不要让数据重复，所以选择unordered_set。</p>
+<p><code>std::set</code>和<code>std::multiset</code>底层实现都是红黑树，<code>std::unordered_set</code>的底层实现是哈希， 使用<code>unordered_set</code> 读写效率是最高的，本题并不需要对数据进行排序，而且还不要让数据重复，所以选择<code>unordered_set</code>。</p>
 <p>在<a class="link" href="https://programmercarl.com/0202.快乐数.html">202.快乐数 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，我们再次使用了unordered_set来判断一个数是否重复出现过。</p>
 <h3 id="map作为哈希表"><a href="#map作为哈希表" class="headerlink" title="map作为哈希表"></a>map作为哈希表</h3><p>在<a class="link" href="https://programmercarl.com/0001.两数之和.html">1.两数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中map正式登场。</p>
 <p>来说一说：使用数组和set来做哈希法的局限。</p>
@@ -7367,12 +7414,12 @@ Third paragraph of definition 2.
 <p>map是一种<code>&lt;key, value&gt;</code>的结构，本题可以用key保存数值，用value在保存数值所在的下标。所以使用map最为合适。</p>
 <p>C++提供如下三种map：：（详情请看<a class="link" href="https://programmercarl.com/哈希表理论基础.html">关于哈希表，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>）</p>
 <ul>
-<li>std::map</li>
-<li>std::multimap</li>
-<li>std::unordered_map </li>
+<li><code>std::map</code></li>
+<li><code>std::multimap</code></li>
+<li><code>std::unordered_map</code></li>
 </ul>
-<p>std::unordered_map 底层实现为哈希，std::map 和std::multimap 的底层实现是红黑树。</p>
-<p>同理，std::map 和std::multimap 的key也是有序的（这个问题也经常作为面试题，考察对语言容器底层的理解），<a class="link" href="https://programmercarl.com/0001.两数之和.html">1.两数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中并不需要key有序，选择std::unordered_map 效率更高！</p>
+<p><code>std::unordered_map</code> 底层实现为哈希，<code>std::map</code> 和<code>std::multimap</code> 的底层实现是红黑树。</p>
+<p>同理，<code>std::map</code> 和<code>std::multimap</code> 的key也是有序的（这个问题也经常作为面试题，考察对语言容器底层的理解），<a class="link" href="https://programmercarl.com/0001.两数之和.html">1.两数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中并不需要key有序，选择<code>std::unordered_map</code>效率更高！</p>
 <p>在<a class="link" href="https://programmercarl.com/0454.四数相加II.html">454.四数相加 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们提到了其实需要哈希的地方都能找到map的身影。</p>
 <p>本题咋眼一看好像和<a class="link" href="https://programmercarl.com/0018.四数之和.html">18. 四数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" href="https://programmercarl.com/0015.三数之和.html">15.三数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>差不多，其实差很多！</p>
 <p><strong>关键差别是本题为四个独立的数组，只要找到A[i] + B[j] + C[k] + D[l] = 0就可以，不用考虑重复问题，而<a class="link" href="https://programmercarl.com/0018.四数之和.html">18. 四数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" href="https://programmercarl.com/0015.三数之和.html">15.三数之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>是一个数组（集合）里找到和为0的组合，可就难很多了！</strong></p>
@@ -7717,6 +7764,467 @@ Third paragraph of definition 2.
 <p>其实<code>having</code>后面的筛选条件，就会发现，条件 <code>a.transdate IN (&#39;2020-12-10&#39; , &#39;2020-12-11&#39;)</code>，其实可以用<code>where</code>来限定：</p>
 <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.transdate, c.operatorname, <span class="built_in">sum</span>(b.quantity), <span class="built_in">sum</span>(b.salesvalue)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactionhead <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactiondetails <span class="keyword">as</span> b <span class="keyword">on</span> (b.transactionid <span class="operator">=</span> a.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.operator <span class="keyword">as</span> c <span class="keyword">on</span> (c.operatorid <span class="operator">=</span> a.operatorid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">where</span> a.transdate <span class="keyword">in</span> (<span class="string">&#x27;2020-12-10&#x27;</span> , <span class="string">&#x27;2020-12-11&#x27;</span>)  <span class="comment">-- 先按日期筛选</span></span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> a.transdate, c.operatorname</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">having</span> <span class="built_in">sum</span>(b.salesvalue) <span class="operator">&gt;</span> <span class="number">100</span>;  <span class="comment">-- 后按金额筛选</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> transdate           <span class="operator">|</span> operatorname <span class="operator">|</span> <span class="built_in">sum</span>(b.quantity) <span class="operator">|</span> <span class="built_in">sum</span>(b.salesvalue) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-11</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 李强         <span class="operator">|</span>           <span class="number">2.000</span> <span class="operator">|</span>            <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+--------------+-----------------+-------------------+</span></span><br></pre></td></tr></table></figure></div>
 <p>得到了需要的结果，这是因为把条件拆分开，包含分组统计函数的条件用<code>having</code>，普通条件用<code>where</code>。这就既利用了<code>where</code>条件的高效快速，又发挥了<code>having</code>可以使用包含分组统计函数的查询条件的优点。当数据量特别大的时候，运行效率会有很大的差别。</p>
+]]></content>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>09丨时间函数：时间类数据，MySQL是怎么处理的？</title>
+    <url>/2023/07/28/09%E4%B8%A8%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%EF%BC%9A%E6%97%B6%E9%97%B4%E7%B1%BB%E6%95%B0%E6%8D%AE%EF%BC%8CMySQL%E6%98%AF%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F/</url>
+    <content><![CDATA[<p>时间函数就是用来处理时间的函数。时间，几乎可以说是各类项目中都会存在的数据，项目需求不同，需要的时间函数也不一样。</p>
+<ul>
+<li>如果要统计一天之中不同时间段的销售情况，就要获取时间值中的小时值，这就会用到函数 <code>HOUR()</code>；</li>
+<li><p>要计算与去年同期相比的增长率，这就要计算去年同期的日期时间，会用到函数 <code>DATE_ADD()</code>；</p>
+</li>
+<li><p>要计算今天是周几、有没有优惠活动，这就要用到函数 <code>DAYOFWEEK()</code>了；</p>
+</li>
+</ul>
+<h2 id="获取日期时间数据中部分信息的函数"><a href="#获取日期时间数据中部分信息的函数" class="headerlink" title="获取日期时间数据中部分信息的函数"></a>获取日期时间数据中部分信息的函数</h2><p>超市的经营者提出，他们希望通过实际的销售数据，了解到一天当中什么时间段卖得好，什么时间段卖得不好，这样他们就可以根据不同时间的销售情况，合理安排商品陈列和人员促销，以实现收益最大化。要达到这个目标，我们就需要统计一天中每小时的销售数量和销售金额。</p>
+<p>这里涉及 3 组数据，分别是<code>销售单头表（demo.transactionhead)、销售单明细表 (demo.transactiondetails) 和商品信息表（demo.goodsmaster）</code>（为了便于你理解，表的结构和表里的记录都是经过简化的）。</p>
+<p>销售单头表（<code>demo.transactionhead</code>)，包含了销售单的整体信息，包括流水单号、交易时间、收款机编号、会员编号和收银员编号等。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>transactionid</th>
+<th style="text-align:center">transactionno</th>
+<th style="text-align:right">cashierid</th>
+<th>memberid</th>
+<th>operatorid</th>
+<th>transdate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:center">0120191201000001</td>
+<td style="text-align:right">1</td>
+<td>1</td>
+<td>1</td>
+<td>2019-12-01 09:25:56</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:center">0120191202000001</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>2</td>
+<td>2019-12-02 09:50:50</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:center">0120191202000002</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2019-12-02 10:10:05</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center">0120201102000001</td>
+<td style="text-align:right">1</td>
+<td>2</td>
+<td>1</td>
+<td>2020-11-02 11:15:06</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align:center">0120201102000002</td>
+<td style="text-align:right">1</td>
+<td>1</td>
+<td>2</td>
+<td>2020-11-02 12:20:03</td>
+</tr>
+<tr>
+<td>6</td>
+<td style="text-align:center">0120201102000003</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2020-11-02 13:05:01</td>
+</tr>
+<tr>
+<td>7</td>
+<td style="text-align:center">0120201202000001</td>
+<td style="text-align:right">1</td>
+<td>2</td>
+<td>1</td>
+<td>2020-12-02 15:25:22</td>
+</tr>
+<tr>
+<td>8</td>
+<td style="text-align:center">0120201202000002</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2020-12-02 17:10:25</td>
+</tr>
+<tr>
+<td>9</td>
+<td style="text-align:center">0120201202000003</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2020-12-02 18:35:33</td>
+</tr>
+<tr>
+<td>10</td>
+<td style="text-align:center">0120201202000004</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2020-12-02 19:33:55</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>销售明细表（<code>demo.transactiondetails</code>)保存的是交易明细数据，包括商品编号、销售数量、价格、销售金额等。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>transactionid</th>
+<th>itemnumber</th>
+<th>quantity</th>
+<th>price</th>
+<th>salesvalue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>89</td>
+<td>178</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>5</td>
+<td>25</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+<td>89</td>
+<td>267</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>6</td>
+<td>5</td>
+<td>30</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>89</td>
+<td>89</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>10</td>
+<td>5</td>
+<td>50</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+<td>10</td>
+<td>3</td>
+<td>30</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>40</td>
+<td>5</td>
+<td>200</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1</td>
+<td>5</td>
+<td>89</td>
+<td>445</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2</td>
+<td>6</td>
+<td>5</td>
+<td>30</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1</td>
+<td>2</td>
+<td>89</td>
+<td>178</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>商品信息表（<code>demo.goodsmaster</code>）主要包括商品编号、条码、商品名称、规格、单位和售价。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>itemnumber</th>
+<th>barcode</th>
+<th>goodsname</th>
+<th>specification</th>
+<th>unit</th>
+<th>salesprice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>书</td>
+<td>16开</td>
+<td>本</td>
+<td>89</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>笔</td>
+<td>10支装</td>
+<td>包</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>橡皮</td>
+<td>NULL</td>
+<td>个</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>销售单明细表</strong>通过流水编号与<strong>销售单头表</strong>关联，其中流水编号是外键。通过流水编号，<strong><em>销售单明细表</em></strong>引用<em>销售单头表</em>里的交易时间、会员编号等信息，同时，通过商品编号与<strong><em>商品信息表</em></strong>关联，引用<strong><em>商品信息表</em></strong>里的商品名称等信息。如图所示：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/3570cf43fba242ec8fa33547bc306021.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt></p>
+<p>需求：统计一天中每小时的销售数量和销售金额</p>
+<p>要统计一天中每小时的销售情况，实际上就是要把销售数据按照小时进行分组统计。那么，解决问题的关键，就是把交易时间的小时部分提取出来。这就要用到 MySQL 的日期时间处理函数 extract() 和 hour() 了。</p>
+<p><code>extract（type from date）</code>表示从日期时间数据“date”中抽取“type”指定的部分。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="built_in">extract</span>(<span class="keyword">hour</span> <span class="keyword">from</span> b.transdate) <span class="keyword">as</span> time_part,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">sum</span>(a.quantity) <span class="keyword">as</span> quantity,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">sum</span>(a.salesvalue) <span class="keyword">as</span> salesvalue</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactionhead <span class="keyword">as</span> b <span class="keyword">on</span> (b.transactionid <span class="operator">=</span> a.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="built_in">extract</span>(<span class="keyword">hour</span> <span class="keyword">from</span> b.transdate)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="built_in">extract</span>(<span class="keyword">hour</span> <span class="keyword">from</span> b.transdate);</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+------------+</span></span><br><span class="line"><span class="operator">|</span> time_part <span class="operator">|</span> quantity <span class="operator">|</span> salesvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+------------+</span></span><br><span class="line"><span class="operator">|</span>         <span class="number">9</span> <span class="operator">|</span>   <span class="number">16.000</span> <span class="operator">|</span>     <span class="number">500.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">10</span> <span class="operator">|</span>   <span class="number">11.000</span> <span class="operator">|</span>     <span class="number">139.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">11</span> <span class="operator">|</span>   <span class="number">10.000</span> <span class="operator">|</span>      <span class="number">30.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">12</span> <span class="operator">|</span>   <span class="number">40.000</span> <span class="operator">|</span>     <span class="number">200.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">13</span> <span class="operator">|</span>    <span class="number">5.000</span> <span class="operator">|</span>     <span class="number">445.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">15</span> <span class="operator">|</span>    <span class="number">6.000</span> <span class="operator">|</span>      <span class="number">30.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">17</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span>       <span class="number">3.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">18</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">19</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>       <span class="number">6.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+------------+</span></span><br><span class="line"><span class="number">9</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>查询的过程是这样的：</p>
+<ol>
+<li>从交易时间中抽取小时信息：<code>extract(hour from b.transdate)</code></li>
+<li>按交易的小时信息分组；</li>
+<li>按分组统计销售数量和销售金额的和；</li>
+<li>按交易的小时信息排序。</li>
+</ol>
+<p>需要获取其他时间部分的信息，可以参考下<a class="link" href="https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals">时间单位 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p><code>extract()</code> 函数中的 hour 表示要<a class="link" href="https://so.csdn.net/so/search?q=获取时间&amp;spm=1001.2101.3001.7020">获取时间 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的类型，而 <code>hour()</code> 是一个函数，<code>hour(time)</code> 可以单独使用，表示返回 time 的小时部分信息。可以把 EXTRACT 函数改成 HOUR 函数，来实现相同的功能，如下所示：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">HOUR</span>(b.transdate) <span class="keyword">AS</span> 时段, <span class="comment">-- 改为使用HOUR函数</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">SUM</span>(a.quantity) <span class="keyword">AS</span> 数量,</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">SUM</span>(a.salesvalue) <span class="keyword">AS</span> 金额</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">FROM</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> demo.transactiondetails a</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">JOIN</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> demo.transactionhead b <span class="keyword">ON</span> (a.transactionid <span class="operator">=</span> b.transactionid)</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(b.transdate) <span class="comment">-- 改写为HOUR函数</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(b.transdate);<span class="comment">-- 改写为HOUR函数</span></span><br></pre></td></tr></table></figure></div>
+<p>其他时间函数：</p>
+<ul>
+<li>YEAR（date）：获取 date 中的年</li>
+<li>MONTH（date）：获取 date 中的月</li>
+<li>DAY（date）：获取 date 中的日</li>
+<li>HOUR（date）：获取 date 中的小时</li>
+<li>MINUTE（date）：获取 date 中的分</li>
+<li>SECOND（date）：获取 date 中的秒</li>
+</ul>
+<h2 id="计算日期时间的函数"><a href="#计算日期时间的函数" class="headerlink" title="计算日期时间的函数"></a>计算日期时间的函数</h2><ul>
+<li>date_add（date, interval 表达式 type）：表示计算从时间点“date”开始，向前或者向后一段时间间隔的时间。“表达式”的值为时间间隔数，正数表示向后，负数表示向前，“type”表示时间间隔的单位（比如年、月、日等）</li>
+<li>last_day（date）：表示获取日期时间“date”所在月份的最后一天的日期。<br>需求：计算这个月单品销售金额的统计，以及与去年同期相比的增长率。</li>
+</ul>
+<p>假设今天是 2020 年 12 月 10 日，那么也就是要需要获取 2019 年 12 月的销售数据。</p>
+<p>步骤：</p>
+<ol>
+<li>用<code>date_add</code>函数，获取到 2020 年 12 月 10 日上一年的日期：2019 年 12 月 10 日</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-12</span><span class="number">-10</span>                                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>获取 2019 年 12 月 10 日这个时间节点开始上个月的日期，这样做的目的是方便获取月份的起始时间</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-11</span><span class="number">-10</span>                                                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li><p>获取 2019 年 11 月 10 日这个时间点月份的最后一天，继续接近的目标：2019 年 12 月 01 日</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> last_day(date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>));</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> last_day(date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>)) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-11</span><span class="number">-30</span>                                                                        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ol>
+<p>如果用 11-30 作为统计销售额的起始日期，可能就多算了这一天的销售，所以应该找这个时间的下一天。</p>
+<ol>
+<li>计算 2019 年 11 月 30 日后一天的日期</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_add(last_day(date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_add(last_day(date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-12</span><span class="number">-01</span>                                                                                                   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>​    此时，终于获得了正确的起始日期：2019 年 12 月 01 日。</p>
+<p>同样类似方法，获得截止日期：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_add(last_day(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_add(last_day(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-01</span><span class="number">-01</span>                                                                     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>可以用 <code>date_add()</code> 来计算从某个时间点开始，过去或者未来一个时间间隔的时间；通过<code>last_day()</code> 函数，获得某个时间节点当月的最后一天的日期。借助它们，就可以获取从某个时间节点出发的指定月份的起始日期和截止日期。</p>
+<p>除了 <code>date_add()，adddate()、date_sub()</code>和<code>subdate()</code>也能达到同样的效果：</p>
+<ul>
+<li><p>adddate()：跟 date_add() 用法一致</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> adddate(last_day(adddate(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> adddate(last_day(adddate(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-01</span><span class="number">-01</span>                                                                   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<ul>
+<li><p>date_sub()，subdate()：与 date_add() 用法类似，方向相反，执行日期的减操作</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_sub(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="number">1</span> <span class="keyword">year</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_sub(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="number">1</span> <span class="keyword">year</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-12</span><span class="number">-10</span>                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> subdate(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="number">-1</span> <span class="keyword">year</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> subdate(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="number">-1</span> <span class="keyword">year</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2021</span><span class="number">-12</span><span class="number">-10</span>                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<h2 id="其他日期时间函数"><a href="#其他日期时间函数" class="headerlink" title="其他日期时间函数"></a>其他日期时间函数</h2><p><code>curdate()、dayofweek()、date_format 、datediff()</code></p>
+<ul>
+<li><code>curdate()</code>：获取当前的日期。日期格式为“YYYY-MM-DD”，也就是年月日的格式。</li>
+<li><code>dayofweek(date)</code>：获取日期“date”是周几。1 表示周日，2 表示周一，以此类推，直到 7 表示周六。</li>
+</ul>
+<p>举例：按照周中不同的日期进行促销，<strong>单品促销信息</strong>（demo.discountrule）。</p>
+<p>这个表中的信息表示单品打折的时间和折扣率：</p>
+<ul>
+<li><p>编号是 1 的商品，周一、周三和周五打折，折扣率分别是 9 折、75 折和 88 折；</p>
+</li>
+<li><p>编号是 2 的商品，周二、周四和周六打折，折扣率分别是 5 折、65 折和 8 折。</p>
+</li>
+<li><p>周日，所有商品打 5 折。</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>branchid</th>
+<th>itemnumber</th>
+<th>weekday</th>
+<th>discountrate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>5</td>
+<td>0.88</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>0.65</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>6</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>7</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>7</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>3</td>
+<td>7</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> demo.discountrule </span><br><span class="line">(</span><br><span class="line">branchid <span class="type">int</span>,</span><br><span class="line">itemnumber text,</span><br><span class="line">weekday text,</span><br><span class="line">discountrate text</span><br><span class="line">);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.discountrule;</span><br></pre></td></tr></table></figure></div>
+<p>查询今天商品的全部折后价格：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> curdate() <span class="keyword">as</span> 日期,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">case</span> dayofweek(curdate()) <span class="operator">-</span> <span class="number">1</span> <span class="keyword">when</span> <span class="number">0</span> <span class="keyword">then</span> <span class="number">7</span> <span class="keyword">else</span> dayofweek(curdate()) <span class="operator">-</span> <span class="number">1</span> <span class="keyword">end</span> <span class="keyword">as</span> 周几,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> a.goodsname <span class="keyword">as</span> 商品名称,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> a.salesprice <span class="keyword">as</span> 价格,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> ifnull(b.discountrate, <span class="number">1</span>) <span class="keyword">as</span> 折扣率,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> a.salesprice <span class="operator">*</span> ifnull(b.discountrate, <span class="number">1</span>) <span class="keyword">as</span> 折后价格</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.goodsmaster a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">left</span> <span class="keyword">join</span> demo.discountrule b <span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber <span class="keyword">and</span> <span class="keyword">case</span> dayofweek(curdate()) <span class="operator">-</span> <span class="number">1</span> <span class="keyword">when</span> <span class="number">0</span> <span class="keyword">then</span> <span class="number">7</span> <span class="keyword">else</span> dayofweek(curdate()) <span class="number">-1</span> <span class="keyword">end</span> <span class="operator">=</span> b.weekday);</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------+----------+--------+--------+----------+</span></span><br><span class="line"><span class="operator">|</span> 日期       <span class="operator">|</span> 周几 <span class="operator">|</span> 商品名称 <span class="operator">|</span> 价格   <span class="operator">|</span> 折扣率 <span class="operator">|</span> 折后价格 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------+----------+--------+--------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2022</span><span class="number">-03</span><span class="number">-09</span> <span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> 书       <span class="operator">|</span> <span class="number">89.000</span> <span class="operator">|</span> <span class="number">0.75</span>   <span class="operator">|</span>    <span class="number">66.75</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2022</span><span class="number">-03</span><span class="number">-09</span> <span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> 笔       <span class="operator">|</span>  <span class="number">5.000</span> <span class="operator">|</span> <span class="number">1</span>      <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2022</span><span class="number">-03</span><span class="number">-09</span> <span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> 橡皮     <span class="operator">|</span>  <span class="number">3.000</span> <span class="operator">|</span> <span class="number">1</span>      <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------+----------+--------+--------+----------+</span></span><br></pre></td></tr></table></figure></div>
+<p>这个查询，用到了 CURDATE（）函数来获取当前日期，也用到了 DAYOFWEEK（）函数来获取当前是周几的信息。由于 DAYOFWEEK() 函数，以周日为 1 开始计，周一是2……，周六是 7，而数据表中是从周一为 1 开始计算，为了对齐，我用到了条件判断函数CASE，我来解释下这个函数。</p>
+<h3 id="MySQL-中-CASE-函数的语法如下："><a href="#MySQL-中-CASE-函数的语法如下：" class="headerlink" title="MySQL 中 CASE 函数的语法如下："></a>MySQL 中 CASE 函数的语法如下：</h3><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CASE</span> 表达式 <span class="keyword">WHEN</span> 值<span class="number">1</span> <span class="keyword">THEN</span> 表达式<span class="number">1</span> [ <span class="keyword">WHEN</span> 值<span class="number">2</span> <span class="keyword">THEN</span> 表达式<span class="number">2</span>] <span class="keyword">ELSE</span> 表达式m <span class="keyword">END</span></span><br></pre></td></tr></table></figure></div>
+<p>在当前业务查询中，“表达式”有 7 种可能的值。通过 case 函数，可以根据 dayofweek() 函数返回的值对每个返回值进行处理，从而跟促销信息表中的字段 weekday 对应。</p>
+<p>关系图：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/8f1e20e26d4841f2ba1e0b32e9aeae06.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16" alt></p>
+<p>除了获取特定的日期，还经常需要把日期按照一定的格式显示出来，这就要用到日期时间格式化的函数 <code>date_format()</code>，它表示将日期时间“date”按照指定格式显示。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%T&quot;);  <span class="comment">-- 24小时制</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%T&quot;) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">13</span>:<span class="number">25</span>:<span class="number">50</span>                                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%r&quot;);  <span class="comment">-- 上下午时间</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%r&quot;) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">01</span>:<span class="number">25</span>:<span class="number">50</span> PM                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p><code>datediff(date1,date2)</code>，表示日期“date1”与日期“date2”之间差几天</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> datediff(&quot;2021-02-01&quot;,&quot;2020-12-01&quot;);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> datediff(&quot;2021-02-01&quot;,&quot;2020-12-01&quot;) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------+</span></span><br><span class="line"><span class="operator">|</span>                                  <span class="number">62</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------+</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>今天，我们学习了 MySQL 的<strong>时间处理函数</strong>，包括获取日期时间类型数据中部分信息的函数、计算日期时间的函数和获取特定日期的函数，我用图片来帮你汇总了下。</p>
+<ol>
+<li><p>获取日期时间 数据中部分信息函数</p>
+<ul>
+<li>extract() 获取日期时间中指定的值</li>
+<li>hour() 小时；</li>
+<li>year() 年份；</li>
+<li>month() 月份</li>
+<li>day() 日；</li>
+<li>minute() 分；</li>
+<li>second() 秒</li>
+</ul>
+</li>
+<li><p>日期时间计算函数</p>
+<ul>
+<li><code>date_add() 、adddate()</code>计算从某个时间点出发过去或未来一段时间间隔的时。</li>
+<li><code>subdate()、date_sub()</code>与<code>date_add()</code>相似，方向相反。</li>
+<li><code>datediff()</code>计算两个时间点之间相隔的天数</li>
+<li><code>last_day()</code>计算给定时间点当月的最后一天的日期</li>
+</ul>
+</li>
+<li><p>其他时间函数</p>
+<ul>
+<li><code>curdate()</code>当前时间</li>
+<li><code>weekofday()</code> 今天是星期几，周日为1，周一为2，递推</li>
+<li><code>date_format()</code>格式化日期时间</li>
+</ul>
+</li>
+</ol>
+<p>MySQL 中获取的时间，其实就是 MySQL 服务器计算机的系统时间。如果你的系统有一定规模，需要在多台计算机上运行，就要注意时间校准的问题。</p>
+<p>比如我们的信息系统受门店经营环境和操作人员的素质所限，有时会遇到误操作、停电等故障而导致的计算机系统时间失准问题。这对整个信息系统的可靠性影响非常大。</p>
+<p>针对这个问题，有 2 种解决办法。</p>
+<ul>
+<li><p>第一种方法是，可以利用 Windows 系统自带的网络同步的方式，来校准系统时间。</p>
+</li>
+<li><p>另一种办法就是，门店统一从总部 MySQL 服务器获取时间。</p>
+</li>
+</ul>
+<p>由于总部的服务器的配置和运维状况一般要好于门店，所以系统时间出现误差的可能性也较小。如果采用云服务器，系统时间的可靠性会更高。</p>
 ]]></content>
       <tags>
         <tag>MySQL</tag>
