@@ -6952,7 +6952,7 @@ Third paragraph of definition 2.
       </tags>
   </entry>
   <entry>
-    <title>05丨主键：如何正确设置主键？</title>
+    <title>MySQL必知必会 05丨主键：如何正确设置主键？</title>
     <url>/2023/07/23/05%E4%B8%A8%E4%B8%BB%E9%94%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE%EF%BC%9F/</url>
     <content><![CDATA[<p>主键可以<strong>唯一</strong>标识表中的某一条记录，对数据表来说非常重要。当我们需要查询和引用表中的一条记录的时候，最好的办法就是通过<strong>主键</strong>。只有合理地设置主键，才能确保我们准确、快速地找到所需要的数据记录。</p>
 <p>在项目中，客户要进行会员营销，相应的，我们就需要处理会员信息。会员信息表（demo.membermaster）的设计大体如下：</p>
@@ -7436,7 +7436,7 @@ Third paragraph of definition 2.
       </tags>
   </entry>
   <entry>
-    <title>06丨外键和连接：如何做关联查询？</title>
+    <title>MySQL必知必会 06丨外键和连接：如何做关联查询？</title>
     <url>/2023/07/24/06%E4%B8%A8%E5%A4%96%E9%94%AE%E5%92%8C%E8%BF%9E%E6%8E%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%9F/</url>
     <content><![CDATA[<p>在实际的数据库应用开发过程中，经常需要把 2 个或 2 个以上的表进行关联，以获取需要的数据。这是因为，为了提高存取效率，会把不同业务模块的信息分别存放在不同的表里面。但是，从业务层面上看，需要完整全面的信息为经营决策提供数据支撑。</p>
 <p><strong>把分散在多个不同的表里的数据查询出来的操作，就是多表查询。</strong></p>
@@ -7631,7 +7631,7 @@ Third paragraph of definition 2.
       </tags>
   </entry>
   <entry>
-    <title>07丨条件语句：WHERE与HAVING有什么不同</title>
+    <title>MySQL必知必会 07丨条件语句：WHERE与HAVING有什么不同</title>
     <url>/2023/07/25/07%E4%B8%A8%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%EF%BC%9AWHERE%E4%B8%8EHAVING%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C/</url>
     <content><![CDATA[<p>查询的时候，经常需要按条件对查询结果进行筛选，这就要用到条件语句 <code>WHERE</code> 和 <code>HAVING</code>了。</p>
 <ul>
@@ -7770,7 +7770,7 @@ Third paragraph of definition 2.
       </tags>
   </entry>
   <entry>
-    <title>09丨时间函数：时间类数据，MySQL是怎么处理的？</title>
+    <title>MySQL必知必会 09丨时间函数：时间类数据，MySQL是怎么处理的？</title>
     <url>/2023/07/28/09%E4%B8%A8%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%EF%BC%9A%E6%97%B6%E9%97%B4%E7%B1%BB%E6%95%B0%E6%8D%AE%EF%BC%8CMySQL%E6%98%AF%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F/</url>
     <content><![CDATA[<p>时间函数就是用来处理时间的函数。时间，几乎可以说是各类项目中都会存在的数据，项目需求不同，需要的时间函数也不一样。</p>
 <ul>
@@ -8231,7 +8231,7 @@ Third paragraph of definition 2.
       </tags>
   </entry>
   <entry>
-    <title>08丨聚合函数：怎么高效地进行分组统计？</title>
+    <title>MySQL必知必会 08丨聚合函数：怎么高效地进行分组统计？</title>
     <url>/2023/07/29/08%E4%B8%A8%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%EF%BC%9A%E6%80%8E%E4%B9%88%E9%AB%98%E6%95%88%E5%9C%B0%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1%EF%BC%9F/</url>
     <content><![CDATA[<p>MySQL 中有 5 种聚合函数较为常用，分别是</p>
 <ul>
@@ -8444,7 +8444,7 @@ Third paragraph of definition 2.
       </tags>
   </entry>
   <entry>
-    <title>10丨如何进行数学计算、字符串处理和条件判断？</title>
+    <title>MySQL必知必会 10丨如何进行数学计算、字符串处理和条件判断？</title>
     <url>/2023/07/29/10%E4%B8%A8%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E5%AD%A6%E8%AE%A1%E7%AE%97%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%92%8C%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%EF%BC%9F/</url>
     <content><![CDATA[]]></content>
       <tags>
