@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+        
+            <link rel="preconnect" href="https://npm.elemecdn.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/08/02/10丨如何进行数学计算、字符串处理和条件判断？/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL必知必会 10丨如何进行数学计算、字符串处理和条件判断？">
+<meta property="og:url" content="https://channinghsu.github.io/2023/08/02/10%E4%B8%A8%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E5%AD%A6%E8%AE%A1%E7%AE%97%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%92%8C%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-02T08:13:03.000Z">
+<meta property="article:modified_time" content="2023-08-02T08:56:21.118Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            MySQL必知必会 10丨如何进行数学计算、字符串处理和条件判断？ -
+        
+        Channing&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/fonts/fonts.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/fonts/Satoshi/satoshi.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/fonts/Chillax/chillax.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[],"icon":"fa-solid fa-bookmark"}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xbc1241888704@gmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.3.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+    
+
+    
+
+    <div class="main-content-container">
+        
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/about"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/about"  >
+                             
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">MySQL必知必会 10丨如何进行数学计算、字符串处理和条件判断？</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-02 16:13:03</span>
+        <span class="mobile">2023-08-02 16:13:03</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-08-02 16:56:21</span>
+            <span class="mobile">2023-08-02 16:56:21</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MySQL/">MySQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.4k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>10 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h2><p>主要用来处理数值数据，常用的主要有 3 类，分别是</p>
+<ul>
+<li><p>取整函数<code>ROUND()、CEIL()、FLOOR()</code></p>
+</li>
+<li><p>绝对值函数<code>ABS()</code> </p>
+</li>
+<li>求余函数 <code>MOD()</code></li>
+</ul>
+<p>数据准备：</p>
+<p><code>demo.transactiondetail</code></p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> transactionid, itemnumber, quantity, price, discount, salesvalue</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">order</span> <span class="keyword">by</span> transactionid, itemnumber;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+----------+------------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> discount <span class="operator">|</span> salesvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+----------+------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">0.99</span> <span class="operator">|</span>     <span class="number">176.22</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>     <span class="number">0.99</span> <span class="operator">|</span>      <span class="number">24.75</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">0.88</span> <span class="operator">|</span>     <span class="number">234.96</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>     <span class="number">0.88</span> <span class="operator">|</span>      <span class="number">26.40</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">0.95</span> <span class="operator">|</span>      <span class="number">84.55</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>       <span class="number">10</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>     <span class="number">0.95</span> <span class="operator">|</span>      <span class="number">47.50</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+----------+------------+</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><code>demo.transacionhead</code></p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> transactionid, transactionno, cashierid, memberid, operatorid, transdate</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactionhead;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------+-----------+----------+------------+---------------------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> transactionno    <span class="operator">|</span> cashierid <span class="operator">|</span> memberid <span class="operator">|</span> operatorid <span class="operator">|</span> transdate           <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------+-----------+----------+------------+---------------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span> <span class="number">0120201201000001</span> <span class="operator">|</span>         <span class="number">1</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span> <span class="number">0120201202000001</span> <span class="operator">|</span>         <span class="number">1</span> <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-02</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span> <span class="number">0120201202000002</span> <span class="operator">|</span>         <span class="number">1</span> <span class="operator">|</span>     <span class="keyword">NULL</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">01</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------+-----------+----------+------------+---------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>demo.goodsmaster</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> saleprice <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">0001</span>    <span class="operator">|</span> 书        <span class="operator">|</span>               <span class="operator">|</span> 本   <span class="operator">|</span>     <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">0002</span>    <span class="operator">|</span> 笔        <span class="operator">|</span>               <span class="operator">|</span> 支   <span class="operator">|</span>      <span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-----------+</span></span><br></pre></td></tr></table></figure></div>
+<p>demo.membermaster</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> memberid, branchid, cardno, membername, address, phone, pid, memeberpoints, memberdeposit <span class="keyword">from</span> demo.membermaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+----------+------------+---------+-------------+--------------------+---------------+---------------+</span></span><br><span class="line"><span class="operator">|</span> memberid <span class="operator">|</span> branchid <span class="operator">|</span> cardno   <span class="operator">|</span> membername <span class="operator">|</span> address <span class="operator">|</span> phone       <span class="operator">|</span> pid                <span class="operator">|</span> memeberpoints <span class="operator">|</span> memberdeposit <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+----------+------------+---------+-------------+--------------------+---------------+---------------+</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">10000001</span> <span class="operator">|</span> 张三       <span class="operator">|</span> 天津    <span class="operator">|</span> <span class="number">13698765432</span> <span class="operator">|</span> <span class="number">475145197001012356</span> <span class="operator">|</span>          <span class="number">0.00</span> <span class="operator">|</span>          <span class="number">0.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">10000002</span> <span class="operator">|</span> 李四       <span class="operator">|</span> 上海    <span class="operator">|</span> <span class="number">18758079161</span> <span class="operator">|</span> <span class="number">123123199001012356</span> <span class="operator">|</span>          <span class="number">0.00</span> <span class="operator">|</span>          <span class="number">0.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+----------+------------+---------+-------------+--------------------+---------------+---------------+</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h2 id="取整函数"><a href="#取整函数" class="headerlink" title="取整函数"></a>取整函数</h2><ul>
+<li>向上取整 <code>ceil(X)</code> 和<code>ceiling(X)</code>：返回大于等于 X 的最小 INT 型整数</li>
+<li>向下取整 <code>floor(X)</code>：返回小于等于 X 的最大 INT 型整数</li>
+<li>舍入函数<code>round(X,D)</code>：X 表示要处理的数，D 表示保留的小数位数，处理的方式是四舍五入，<code>ROUND(X)</code> 表示保留 0 位小数</li>
+</ul>
+<p>比如说，在超市项目的实际开发过程中，会有这样的<strong>需求</strong>：</p>
+<ul>
+<li><p>会员积分的规则是一元积一分，不满一元不积分，显然是向下取整，那就可以用 <code>FLOOR（）</code>函数。</p>
+</li>
+<li><p>在打印小票的时候，收银纸的宽度是固定的，怎么才能让打印的结果清晰而整齐呢？这个时候，就要用到 <code>CONCAT()</code> 等字符串处理函数；</p>
+</li>
+<li><p>不同数据的处理方式不同，怎么选择正确的处理方式呢？这就会用到 <code>IF(表达式，V1，V2)</code> 这样的条件判断函数；</p>
+</li>
+</ul>
+<p>通过关联查询，获得会员消费的相关信息：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> c.membername <span class="keyword">as</span> <span class="string">&#x27;会员&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> b.transactionno <span class="keyword">as</span> <span class="string">&#x27;单号&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> b.transdate <span class="keyword">as</span> <span class="string">&#x27;时间&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> d.goodsname <span class="keyword">as</span> <span class="string">&#x27;商品名称&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> a.salesvalue <span class="keyword">as</span> <span class="string">&#x27;交易金额&#x27;</span></span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactionhead b <span class="keyword">on</span> (b.transactionid <span class="operator">=</span> a.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.membermaster c <span class="keyword">on</span> (c.memberid <span class="operator">=</span> b.memberid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.goodsmaster d <span class="keyword">on</span> (d.itemnumber <span class="operator">=</span> a.itemnumber);</span><br><span class="line"><span class="operator">+</span><span class="comment">------+------------------+---------------------+----------+----------+</span></span><br><span class="line"><span class="operator">|</span> 会员 <span class="operator">|</span> 单号             <span class="operator">|</span> 时间                <span class="operator">|</span> 商品名称 <span class="operator">|</span> 交易金额 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------------------+---------------------+----------+----------+</span></span><br><span class="line"><span class="operator">|</span> 张三 <span class="operator">|</span> <span class="number">0120201201000001</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 书       <span class="operator">|</span>   <span class="number">176.22</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 张三 <span class="operator">|</span> <span class="number">0120201201000001</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 笔       <span class="operator">|</span>    <span class="number">24.75</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 李四 <span class="operator">|</span> <span class="number">0120201202000001</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-02</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 书       <span class="operator">|</span>   <span class="number">234.96</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 李四 <span class="operator">|</span> <span class="number">0120201202000001</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-02</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 笔       <span class="operator">|</span>    <span class="number">26.40</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------------------+---------------------+----------+----------+</span></span><br></pre></td></tr></table></figure></div>
+<p>用 <code>floor(a.salesvalue)</code>，对销售金额向下取整，获取会员积分值。如果用户的积分规则改为“不满一元积一分”，其实就是对金额数值向上取整，这个时候就可以用 <code>CEIL()</code> 函数。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c.membername <span class="keyword">as</span> <span class="string">&#x27;会员&#x27;</span>,</span><br><span class="line">b.transactionno <span class="keyword">as</span> <span class="string">&#x27;单号&#x27;</span>,</span><br><span class="line">b.transdate <span class="keyword">as</span> <span class="string">&#x27;时间&#x27;</span>,</span><br><span class="line">d.goodsname <span class="keyword">as</span> <span class="string">&#x27;商品名称&#x27;</span>,</span><br><span class="line"><span class="built_in">floor</span>(a.salesvalue) <span class="keyword">as</span> <span class="string">&#x27;积分&#x27;</span></span><br><span class="line"><span class="keyword">from</span> demo.transactiondetails a</span><br><span class="line"><span class="keyword">join</span> demo.transactionhead b <span class="keyword">on</span> (b.transactionid <span class="operator">=</span> a.transactionid)</span><br><span class="line"><span class="keyword">join</span> demo.membermaster c <span class="keyword">on</span> (c.memberid <span class="operator">=</span> b.memberid)</span><br><span class="line"><span class="keyword">join</span> demo.goodsmaster d <span class="keyword">on</span> (d.itemnumber <span class="operator">=</span> a.itemnumber);</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------------------+---------------------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> 会员 <span class="operator">|</span> 单号             <span class="operator">|</span> 时间                <span class="operator">|</span> 商品名称 <span class="operator">|</span> 积分 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------------------+---------------------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> 张三 <span class="operator">|</span> <span class="number">0120201201000001</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 书       <span class="operator">|</span>  <span class="number">176</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 张三 <span class="operator">|</span> <span class="number">0120201201000001</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 笔       <span class="operator">|</span>   <span class="number">24</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 李四 <span class="operator">|</span> <span class="number">0120201202000001</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-02</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 书       <span class="operator">|</span>  <span class="number">234</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 李四 <span class="operator">|</span> <span class="number">0120201202000001</span> <span class="operator">|</span> <span class="number">2020</span><span class="number">-12</span><span class="number">-02</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="operator">|</span> 笔       <span class="operator">|</span>   <span class="number">26</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------------------+---------------------+----------+------+</span></span><br></pre></td></tr></table></figure></div>
+<p>或者：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 使用函数 mod() 计算浮点数的小数部分，并从原始值中减去该小数部分的结果</span></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="number">1.5</span> <span class="operator">-</span> <span class="built_in">mod</span>(<span class="number">1.5</span>, <span class="number">1</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1.5</span> <span class="operator">-</span> <span class="built_in">mod</span>(<span class="number">1.5</span>, <span class="number">1</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br><span class="line"><span class="operator">|</span>               <span class="number">1.0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="number">1.1</span> <span class="operator">-</span> <span class="built_in">mod</span>(<span class="number">1.1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1.1</span> <span class="operator">-</span> <span class="built_in">mod</span>(<span class="number">1.1</span>, <span class="number">1</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br><span class="line"><span class="operator">|</span>               <span class="number">1.0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>需求</strong>：收银的时候，应收金额可以被设定四舍五入到哪一位。比如，可以设定四舍五入到元、到角，或者到分。用 <code>ROUND（X,D）</code>了。它的作用是通过四舍五入，对数值 X 保留 D 位小数。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> round(salesvalue, <span class="number">2</span>)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">where</span> transactionid<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> itemnumber<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+</span></span><br><span class="line"><span class="operator">|</span> round(salesvalue, <span class="number">2</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+</span></span><br><span class="line"><span class="operator">|</span>               <span class="number">176.22</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> round(salesvalue, <span class="number">1</span>)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">where</span> transactionid<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> itemnumber<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+</span></span><br><span class="line"><span class="operator">|</span> round(salesvalue, <span class="number">1</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+</span></span><br><span class="line"><span class="operator">|</span>                <span class="number">176.2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> round(salesvalue)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">where</span> transactionid<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> itemnumber<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br><span class="line"><span class="operator">|</span> round(salesvalue) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br><span class="line"><span class="operator">|</span>               <span class="number">176</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>MySQL 还支持<code>绝对值函数 ABS（）</code>和<code>求余函数 MOD（）</code>，<code>ABS（X）</code>表示获取 X 的绝对值；<code>MOD（X，Y）</code>表示获取 X 被 Y 除后的余数。</p>
+<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><p>常用的字符串函数有 4 个。</p>
+<ul>
+<li><code>concat(s1,s2,…)</code>：表示把字符串 s1、s2…… 拼接起来，组成一个字符串</li>
+<li><code>cast(表达式 as char)</code>：表示将表达式的值转换成字符串</li>
+<li><code>char_length(字符串)</code>：表示获取字符串的长度</li>
+<li><code>space(n)</code>：表示获取一个由 n 个空格组成的字符串</li>
+</ul>
+<p><strong>需求</strong>：完成交易之后，系统必须要打出一张小票。打印小票时，对格式有很多要求。比如说，一张小票纸，57 毫米宽，大概可以打 32 个字符，也就是 16 个汉字。用户要求一条流水打 2 行，第一行是商品信息，第二行要包括数量、价格、折扣和金额 4 种信息。那么，怎么才能清晰地在小票上打印出这些信息，并且打印得整齐漂亮呢？</p>
+<ol>
+<li>打印第一行的商品信息。商品信息包括：商品名称和商品规格，而且商品规格要包含在括号里面。这样就必须把商品名称和商品规格拼接起来，变成一个字符串。</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> concat(goodsname, <span class="string">&#x27;(&#x27;</span>, specification, <span class="string">&#x27;)&#x27;</span>) <span class="keyword">as</span> 商品信息</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.goodsmaster <span class="keyword">where</span> itemnumber<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> 商品信息 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> 书(<span class="number">16</span>开) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>如何打印第二行。第二行包括数量、价格、折扣和金额，一共是 4 种信息。</li>
+</ol>
+<ul>
+<li>把数量转为字符串，用到<code>CAST（）</code>函数。</li>
+</ul>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="built_in">cast</span>(quantity <span class="keyword">as</span> <span class="type">char</span>)  <span class="comment">-- 把数量转换成字符串，把decimal类型转换成字符串</span></span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">where</span> transactionid<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> itemnumber<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="built_in">cast</span>(quantity <span class="keyword">as</span> <span class="type">char</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>                      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><p>计算字符串的长度，用到 <code>CHAR_LENGTH（）</code>函数。</p>
+<p>需要注意的是，虽然每个汉字打印的时候占 2 个字符长度，但是这个函数获取的是汉字的个数。因此，如果字符串中有汉字，函数获取的字符串长度跟实际打印的长度是不一样的，需要用空格来补齐。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="keyword">char_length</span>(<span class="built_in">cast</span>(quantity <span class="keyword">as</span> <span class="type">char</span>)) <span class="keyword">as</span> 长度</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">where</span> transactionid<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> itemnumber<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br><span class="line"><span class="operator">|</span> 长度 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>空格补齐 7 位长度，用到 <code>SPACE（）</code>函数。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> concat(<span class="built_in">cast</span>(quantity <span class="keyword">as</span> <span class="type">char</span>), space(<span class="number">7</span><span class="operator">-</span><span class="keyword">char_length</span>(<span class="built_in">cast</span>(quantity <span class="keyword">as</span> <span class="type">char</span>)))) <span class="keyword">as</span> 数量</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">where</span> transactionid<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> itemnumber<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> 数量    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<h3 id="条件判断函数"><a href="#条件判断函数" class="headerlink" title="条件判断函数"></a>条件判断函数</h3><p>条件判断函数的主要作用，就是根据特定的条件返回不同的值，常用的有两种：</p>
+<ul>
+<li><code>ifnull(V1, V2)</code>：表示如果 V1 的值不为空值，则返回 V1，否则返回 V2</li>
+<li><code>if(表达式, V1, V2)</code>：如果表达式为真（TRUE），则返回 V1，否则返回 V2</li>
+</ul>
+<p>我们希望规格是空的商品，拼接商品信息字符串的时候，规格不要是空。这个问题，可以通过IFNULL(specification, ‘’) 函数来解决。具体点说就是，对字段“specification”是否为空进行判断，如果为空，就返回空字符串，否则就返回商品规格 specification 的值。代码如下所示：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> goodsname,</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> specification,</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> CONCAT(goodsname,<span class="string">&#x27;(&#x27;</span>, IFNULL(specification,<span class="string">&#x27;&#x27;</span>),<span class="string">&#x27;)&#x27;</span>) <span class="keyword">AS</span> 拼接 <span class="comment">-- 用条件判断</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">FROM</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> 拼接 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> 书 <span class="operator">|</span> <span class="number">16</span>开 <span class="operator">|</span> 书(<span class="number">16</span>开) <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 笔 <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> 笔() <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+---------------+----------+</span></span><br></pre></td></tr></table></figure></div>
+<p>结果是，如果规格为空，商品信息就变成了“商品信息（）”，好像还不错。但是也存在一点问题：商品名称后面的那个空括号“()”会让客人觉得奇怪，能不能去掉呢？</p>
+<p>如果用<code>IFNULL（V1，V2）</code>函数，就不容易做到，但是没关系，我们可以尝试用另一个条件判断函数 <code>IF（表达式，V1，V2）</code>来解决。这里表达式是<code>ISNULL(specification)</code>，这个函数用来判断字段”specificaiton”是否为空，V1 是返回商品名称，V2 是返回商品名称拼接规格。代码如下所示：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> goodsname,</span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> specification,</span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> <span class="comment">-- 这里做判断，如果是空值，返回商品名称，否则就拼接规格</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> IF(ISNULL(specification),</span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> goodsname,</span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> CONCAT(goodsname,<span class="string">&#x27;(&#x27;</span>, specification,<span class="string">&#x27;)&#x27;</span>)) <span class="keyword">AS</span> 拼接</span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">FROM</span></span><br><span class="line">		<span class="operator">-</span><span class="operator">&gt;</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> 拼接 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> 书 <span class="operator">|</span> <span class="number">16</span>开 <span class="operator">|</span> 书(<span class="number">16</span>开) <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 笔 <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> 笔 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+---------------+----------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.02</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>这个结果就是，如果规格为空，商品信息就是商品名称；如果规格不为空，商品信息是商品名称拼接商品规格，这就达到了我们的目的。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="数学计算函数"><a href="#数学计算函数" class="headerlink" title="数学计算函数"></a>数学计算函数</h3><ul>
+<li><code>floor(x)</code>: 获取小于等于x的最大整数</li>
+<li><code>ceil(x)</code>: 获取大于等于x的最小整数</li>
+<li><code>round(x, d)</code>: 通过四舍五入，获得最接近x的，保留d位小数的数值</li>
+<li><code>abs()</code>: 获取x的绝对值</li>
+<li><code>mod(x, y)</code>: 获取x被y整除后的余数</li>
+<li><code>concat(s1,s2,…)</code>: 连接字符串s1，s2，…</li>
+<li><code>char_length(s)</code>: 获取字符串s中的字符的个数，一个汉字算一个字符</li>
+</ul>
+<h3 id="字符串函数-1"><a href="#字符串函数-1" class="headerlink" title="字符串函数"></a>字符串函数</h3><ul>
+<li><code>space(n)</code>: 获取由n个空格组成的字符串</li>
+<li><code>substr()</code> 和<code>mid()</code>: 获取字符串中的子字符串</li>
+<li><code>trim()</code>: 删除字符串开头两端的子字符串</li>
+<li><code>ltrim()</code>: 删除字符串开头部分的空格</li>
+<li><code>rtrim()</code>: 删除字符串结尾部分的空格</li>
+</ul>
+<h3 id="条件判断函数-1"><a href="#条件判断函数-1" class="headerlink" title="条件判断函数"></a>条件判断函数</h3><ul>
+<li><p>ifnull(v1, v2): 如果v1为空，返回v2，否则返回v1</p>
+</li>
+<li><p>if(表达式, v1, v2): 如果表达式为真，返回v1，否则返回v</p>
+</li>
+</ul>
+<p>函数也有一些坑，比如<code>round(x)</code>对x四舍五入后不一定比原来的x大：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> round(<span class="number">-1.5</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+</span></span><br><span class="line"><span class="operator">|</span> round(<span class="number">-1.5</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">-2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> round(<span class="number">-1.5</span>, <span class="number">0</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br><span class="line"><span class="operator">|</span> round(<span class="number">-1.5</span>, <span class="number">0</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">-2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> round(<span class="number">-1.5</span>, <span class="number">1</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br><span class="line"><span class="operator">|</span> round(<span class="number">-1.5</span>, <span class="number">1</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br><span class="line"><span class="operator">|</span>           <span class="number">-1.5</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br></pre></td></tr></table></figure></div>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/MySQL/">#MySQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/07/29/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E5%AD%97%E7%AC%A6%E4%B8%B2/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">代码随想录-字符串</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">MySQL必知必会 10丨如何进行数学计算、字符串处理和条件判断？</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="nav-text">数学函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%96%E6%95%B4%E5%87%BD%E6%95%B0"><span class="nav-text">取整函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="nav-text">字符串函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0"><span class="nav-text">条件判断函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0"><span class="nav-text">数学计算函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0-1"><span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0-1"><span class="nav-text">条件判断函数</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.3.0</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+
+</main>
+
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/libs/SwupScrollPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.on("pageView", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/utils.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/main.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/layouts/navbarShrink.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/tools/scrollTopBottom.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/tools/lightDarkSwitch.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/layouts/categoryList.js"></script>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/tools/localSearch.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/libs/Typed.min.js"></script>
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/tools/tocToggle.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/layouts/toc.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/libs/anime.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.3.0/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
