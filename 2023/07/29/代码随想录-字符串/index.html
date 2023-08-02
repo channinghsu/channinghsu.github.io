@@ -33,8 +33,9 @@
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC.gif">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/%E5%89%91%E6%8C%87Offer58-II.%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.png">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/KMP%E7%B2%BE%E8%AE%B23.gif">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2_1.png">
 <meta property="article:published_time" content="2023-07-29T05:34:42.000Z">
-<meta property="article:modified_time" content="2023-08-01T14:50:07.424Z">
+<meta property="article:modified_time" content="2023-08-02T05:08:44.936Z">
 <meta property="article:author" content="Channing Hsu">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="字符串">
@@ -437,8 +438,8 @@ mjx-container[display="true"] + br {
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-08-01 22:50:07</span>
-            <span class="mobile">2023-08-01 22:50:07</span>
+            <span class="desktop">2023-08-02 13:08:44</span>
+            <span class="mobile">2023-08-02 13:08:44</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -464,12 +465,12 @@ mjx-container[display="true"] + br {
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.6k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>5.4k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>14 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>21 分钟</span>
         </span>
     
     
@@ -640,7 +641,58 @@ mjx-container[display="true"] + br {
 <li>输出: True      </li>
 <li>解释: 可由子字符串 “abc” 重复四次构成。 (或者子字符串 “abcabc” 重复两次构成。)</li>
 </ul>
-<h2 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h2><h2 id="C-代码-6"><a href="#C-代码-6" class="headerlink" title="C++代码"></a>C++代码</h2>
+<h2 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h2><p><strong>数组长度减去最长相同前后缀的长度相当于是第一个周期的长度，也就是一个周期的长度，如果这个周期可以被整除，就说明整个数组就是这个周期的循环。</strong></p>
+<p>如图：</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/459.重复的子字符串_1.png" alt="459.重复的子字符串_1"></p>
+<p><code>len = next[s.size() - 1] = 7</code>，<code>len+ 1 = 8</code>，8就是此时字符串<code>asdfasdfasdf</code>的最长相同前后缀的长度。</p>
+<h2 id="C-代码-6"><a href="#C-代码-6" class="headerlink" title="C++代码"></a>C++代码</h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 计算next数组</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">getNext</span><span class="params">(<span class="type">int</span>* next, string&amp; s)</span></span>{</span><br><span class="line">        <span class="type">int</span> j = <span class="number">-1</span>;</span><br><span class="line">        next[<span class="number">0</span>] = j;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span>  i = <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>(); i++){</span><br><span class="line">            <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; s[i] != s[j + <span class="number">1</span>]) {</span><br><span class="line">                j = next[j];</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span> (s[i] == s[j+<span class="number">1</span>]){</span><br><span class="line">                j++;</span><br><span class="line">            }</span><br><span class="line">            next[i] = j;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">repeatedSubstringPattern</span><span class="params">(string s)</span> </span>{</span><br><span class="line">        <span class="type">int</span> next [s.<span class="built_in">size</span>()];</span><br><span class="line">        <span class="built_in">getNext</span>(next, s); </span><br><span class="line">        <span class="comment">// 整个s的最长相同前后缀</span></span><br><span class="line">        <span class="type">int</span> len = next[s.<span class="built_in">size</span>() - <span class="number">1</span>]; </span><br><span class="line">        <span class="comment">// 数组长度-最长相等前后缀的长度</span></span><br><span class="line">        <span class="type">int</span> subStr = s.<span class="built_in">size</span>() - (len + <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (len != <span class="number">-1</span> &amp;&amp; s.<span class="built_in">size</span>() % subStr == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h1 id="字符串：总结篇"><a href="#字符串：总结篇" class="headerlink" title="字符串：总结篇"></a>字符串：总结篇</h1><h2 id="什么是字符串"><a href="#什么是字符串" class="headerlink" title="什么是字符串"></a>什么是字符串</h2><p>字符串是若干字符组成的有限序列，也可以理解为是一个字符数组，但是很多语言对字符串做了特殊的规定，接下来我来说一说C/C++中的字符串。</p>
+<p>在C语言中，把一个字符串存入一个数组时，也把结束符 ‘\0’存入数组，并以此作为该字符串是否结束的标志。</p>
+<p>例如这段代码：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char a[5] = "asd";</span><br><span class="line">for (int i = 0; a[i] != '\0'; i++) {</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>在C++中，提供一个string类，string类会提供 size接口，可以用来判断string类字符串是否结束，就不用’\0’来判断是否结束。</p>
+<p>例如这段代码:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string a = "asd";</span><br><span class="line">for (int i = 0; i &lt; a.size(); i++) {</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>那么vector&lt; char &gt; 和 string 又有什么区别呢？ </p>
+<p>其实在基本操作上没有区别，但是 string提供更多的字符串处理的相关接口，例如string 重载了+，而vector却没有。</p>
+<p>所以想处理字符串，我们还是会定义一个string类型。</p>
+<h2 id="要不要使用库函数"><a href="#要不要使用库函数" class="headerlink" title="要不要使用库函数"></a>要不要使用库函数</h2><p>在文章<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0344.反转字符串.html">344.反转字符串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中强调了<strong>打基础的时候，不要太迷恋于库函数。</strong></p>
+<p>甚至一些同学习惯于调用substr，split，reverse之类的库函数，却不知道其实现原理，也不知道其时间复杂度，这样实现出来的代码，如果在面试现场，面试官问：“分析其时间复杂度”的话，一定会一脸懵逼！</p>
+<p>所以建议<strong>如果题目关键的部分直接用库函数就可以解决，建议不要使用库函数。</strong></p>
+<p><strong>如果库函数仅仅是 解题过程中的一小部分，并且你已经很清楚这个库函数的内部实现原理的话，可以考虑使用库函数。</strong></p>
+<h2 id="双指针法"><a href="#双指针法" class="headerlink" title="双指针法"></a>双指针法</h2><p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0344.反转字符串.html">344.反转字符串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> ，我们使用双指针法实现了反转字符串的操作，<strong>双指针法在数组，链表和字符串中很常用。</strong></p>
+<p>接着在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/剑指Offer05.替换空格.html">字符串：替换空格 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，同样还是使用双指针法在时间复杂度O(n)的情况下完成替换空格。</p>
+<p><strong>其实很多数组填充类的问题，都可以先预先给数组扩容带填充后的大小，然后在从后向前进行操作。</strong></p>
+<p>那么针对数组删除操作的问题，其实在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0027.移除元素.html">27. 移除元素 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中就已经提到了使用双指针法进行移除操作。</p>
+<p>同样的道理在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0151.翻转字符串里的单词.html">151.翻转字符串里的单词 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们使用O(n)的时间复杂度，完成了删除冗余空格。</p>
+<p>一些同学会使用for循环里调用库函数erase来移除元素，这其实是O(n^2)的操作，因为erase就是O(n)的操作，所以这也是典型的不知道库函数的时间复杂度，上来就用的案例了。</p>
+<h2 id="反转系列"><a href="#反转系列" class="headerlink" title="反转系列"></a>反转系列</h2><p>在反转上还可以在加一些玩法，其实考察的是对代码的掌控能力。</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0541.反转字符串II.html">541. 反转字符串II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，一些同学可能为了处理逻辑：每隔2k个字符的前k的字符，写了一堆逻辑代码或者再搞一个计数器，来统计2k，再统计前k个字符。 </p>
+<p>其实<strong>当需要固定规律一段一段去处理字符串的时候，要想想在在for循环的表达式上做做文章</strong>。</p>
+<p>只要让 i += (2 <em> k)，i 每次移动 2 </em> k 就可以了，然后判断是否需要有反转的区间。</p>
+<p>因为要找的也就是每2 * k 区间的起点，这样写程序会高效很多。</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0151.翻转字符串里的单词.html">151.翻转字符串里的单词 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中要求翻转字符串里的单词，这道题目可以说是综合考察了字符串的多种操作。是考察字符串的好题。</p>
+<p>这道题目通过 <strong>先整体反转再局部反转</strong>，实现了反转字符串里的单词。</p>
+<p>后来发现反转字符串还有一个牛逼的用处，就是达到左旋的效果。</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/剑指Offer58-II.左旋转字符串.html">字符串：反转个字符串还有这个用处？ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，我们通过<strong>先局部反转再整体反转</strong>达到了左旋的效果。</p>
+<h2 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h2><p>KMP的主要思想是<strong>当出现字符串不匹配时，可以知道一部分之前已经匹配的文本内容，可以利用这些信息避免从头再去做匹配了。</strong></p>
+<p>KMP的精髓所在就是前缀表，在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0028.实现strStr.html">KMP精讲 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中提到了，什么是KMP，什么是前缀表，以及为什么要用前缀表。</p>
+<p>前缀表：起始位置到下标i之前（包括i）的子串中，有多大长度的相同前缀后缀。</p>
+<p>那么使用KMP可以解决两类经典问题：</p>
+<ol>
+<li>匹配问题：<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0028.实现strStr.html">28. 实现 strStr() <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li>重复子串问题：<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0459.重复的子字符串.html">459.重复的子字符串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ol>
+<p>再一次强调了什么是前缀，什么是后缀，什么又是最长相等前后缀。</p>
+<p>前缀：指不包含最后一个字符的所有以第一个字符开头的连续子串。</p>
+<p>后缀：指不包含第一个字符的所有以最后一个字符结尾的连续子串。</p>
+<p>然后<strong>针对前缀表到底要不要减一，这其实是不同KMP实现的方式</strong>，我们在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0028.实现strStr.html">KMP精讲 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中针对之前两个问题，分别给出了两个不同版本的的KMP实现。</p>
+<p>其中主要<strong>理解j=next[x]这一步最为关键！</strong></p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>字符串类类型的题目，往往想法比较简单，但是实现起来并不容易，复杂的字符串题目非常考验对代码的掌控能力。</p>
+<p>双指针法是字符串处理的常客。</p>
+<p>KMP算法是字符串查找最重要的算法，但彻底理解KMP并不容易，我们已经写了五篇KMP的文章，不断总结和完善，最终才把KMP讲清楚。</p>
+<p>好了字符串相关的算法知识就介绍到了这里了，明天开始新的征程，大家加油！</p>
+
         </div>
 
         
@@ -737,7 +789,7 @@ mjx-container[display="true"] + br {
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">代码随想录-字符串</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#344-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">344.反转字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#541-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II"><span class="nav-text">541. 反转字符串II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-1"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%91%E6%8C%87Offer-05-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC"><span class="nav-text">剑指Offer 05.替换空格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-2"><span class="nav-text">C++ 代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#151-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D"><span class="nav-text">151.翻转字符串里的单词</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-3"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%91%E6%8C%87Offer58-II-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">剑指Offer58-II.左旋转字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-4"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#28-%E6%89%BE%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8C%B9%E9%85%8D%E9%A1%B9%E7%9A%84%E4%B8%8B%E6%A0%87"><span class="nav-text">28. 找出字符串中第一个匹配项的下标 </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-5"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A"><span class="nav-text">1. 初始化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%84%E7%90%86%E5%89%8D%E5%90%8E%E7%BC%80%E4%B8%8D%E7%9B%B8%E5%90%8C%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-text">2. 处理前后缀不相同的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%A4%84%E7%90%86%E5%89%8D%E5%90%8E%E7%BC%80%E7%9B%B8%E5%90%8C%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-text">3. 处理前后缀相同的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8next%E6%95%B0%E7%BB%84%E6%9D%A5%E5%81%9A%E5%8C%B9%E9%85%8D"><span class="nav-text">使用next数组来做匹配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-5"><span class="nav-text">C++代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E8%A1%A8%E7%BB%9F%E4%B8%80%E5%87%8F%E4%B8%80-C-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">前缀表统一减一 C++代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#459-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">459.重复的子字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-6"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-6"><span class="nav-text">C++代码</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#344-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">344.反转字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#541-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II"><span class="nav-text">541. 反转字符串II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-1"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%91%E6%8C%87Offer-05-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC"><span class="nav-text">剑指Offer 05.替换空格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-2"><span class="nav-text">C++ 代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#151-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D"><span class="nav-text">151.翻转字符串里的单词</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-3"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%91%E6%8C%87Offer58-II-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">剑指Offer58-II.左旋转字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-4"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#28-%E6%89%BE%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8C%B9%E9%85%8D%E9%A1%B9%E7%9A%84%E4%B8%8B%E6%A0%87"><span class="nav-text">28. 找出字符串中第一个匹配项的下标 </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-5"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A"><span class="nav-text">1. 初始化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%84%E7%90%86%E5%89%8D%E5%90%8E%E7%BC%80%E4%B8%8D%E7%9B%B8%E5%90%8C%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-text">2. 处理前后缀不相同的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%A4%84%E7%90%86%E5%89%8D%E5%90%8E%E7%BC%80%E7%9B%B8%E5%90%8C%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-text">3. 处理前后缀相同的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8next%E6%95%B0%E7%BB%84%E6%9D%A5%E5%81%9A%E5%8C%B9%E9%85%8D"><span class="nav-text">使用next数组来做匹配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-5"><span class="nav-text">C++代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E8%A1%A8%E7%BB%9F%E4%B8%80%E5%87%8F%E4%B8%80-C-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">前缀表统一减一 C++代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#459-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">459.重复的子字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-6"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81-6"><span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9A%E6%80%BB%E7%BB%93%E7%AF%87"><span class="nav-text">字符串：总结篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">什么是字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%81%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%BA%93%E5%87%BD%E6%95%B0"><span class="nav-text">要不要使用库函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E6%B3%95"><span class="nav-text">双指针法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E8%BD%AC%E7%B3%BB%E5%88%97"><span class="nav-text">反转系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP"><span class="nav-text">KMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-text">总结</span></a></li></ol></li></ol>
 
     </div>
 </div>
@@ -992,5 +1044,20 @@ mjx-container[display="true"] + br {
 </div>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
