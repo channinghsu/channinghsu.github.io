@@ -8856,7 +8856,40 @@ Third paragraph of definition 2.
 <p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/7df2c3b6aac048e0a3879c27e9f418b5.png" alt="在这里插入图片描述"></p>
 <h3 id="1-4-2-带宽"><a href="#1-4-2-带宽" class="headerlink" title="1.4.2 带宽"></a>1.4.2 带宽</h3><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/5f18227be9794bdaa83a3c62521080fe.png" alt="在这里插入图片描述"></p>
 <p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/a64fc23cc60a4b46b2112ff74990673a.png" alt></p>
-<h2 id="1-5-计算机网络的体系结构"><a href="#1-5-计算机网络的体系结构" class="headerlink" title="1.5 计算机网络的体系结构"></a>1.5 计算机网络的体系结构</h2><h3 id="1-5-1-常见的三种计算机网络体系结构"><a href="#1-5-1-常见的三种计算机网络体系结构" class="headerlink" title="1.5.1 常见的三种计算机网络体系结构"></a>1.5.1 常见的三种计算机网络体系结构</h3><h3 id="1-5-2-计算机网络体系结构分层的必要性"><a href="#1-5-2-计算机网络体系结构分层的必要性" class="headerlink" title="1.5.2 计算机网络体系结构分层的必要性"></a>1.5.2 计算机网络体系结构分层的必要性</h3><h3 id="1-5-3-计算机网络体系结构分层思想举例"><a href="#1-5-3-计算机网络体系结构分层思想举例" class="headerlink" title="1.5.3 计算机网络体系结构分层思想举例"></a>1.5.3 计算机网络体系结构分层思想举例</h3><h3 id="1-5-4-计算机网络体系结构中的专用术语"><a href="#1-5-4-计算机网络体系结构中的专用术语" class="headerlink" title="1.5.4 计算机网络体系结构中的专用术语"></a>1.5.4 计算机网络体系结构中的专用术语</h3>]]></content>
+<h3 id="1-4-3-吞吐量"><a href="#1-4-3-吞吐量" class="headerlink" title="1.4.3 吞吐量"></a>1.4.3 吞吐量</h3><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/baf3143957c040a98c7c2d17a2dba1a6.png" alt="在这里插入图片描述"></p>
+<h3 id="1-4-4-时延"><a href="#1-4-4-时延" class="headerlink" title="1.4.4 时延"></a>1.4.4 时延</h3><p>时延是指<strong>数据从网络的一端传送到另一端所耗费的时间</strong>，也称为<strong>延迟</strong>或迟延。 数据可由一个或多个分组、甚至是一个比特构成。</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/2767665600824f5baf8995769b5d070a.png" alt="在这里插入图片描述"></p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/ca67e1236b7140f2abde49665933f6df.png" alt="在这里插入图片描述"></p>
+<h3 id="1-4-5-时延带宽积"><a href="#1-4-5-时延带宽积" class="headerlink" title="1.4.5 时延带宽积"></a>1.4.5 时延带宽积</h3><p>时延带宽积是<strong>传播时延和带宽的乘积。</strong></p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/e702cc8cf0c34c8bade327ca268c64c0.png" alt="在这里插入图片描述"></p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/cf5e842d1ca342ef98c69e3cd9a343e9.png" alt="在这里插入图片描述"></p>
+<h3 id="1-4-6-往返时间"><a href="#1-4-6-往返时间" class="headerlink" title="1.4.6 往返时间"></a>1.4.6 往返时间</h3><p>往返时间（Round-Trip Time，RTT）是指从发送端<strong>发送数据分组</strong>开始，到发送端收到接收端发来的相应<strong>确认分组</strong>为止，总共耗费的时间。</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/0a3a24fc0706499ba091b23e7c81c954.png" alt="在这里插入图片描述"></p>
+<h3 id="1-4-7-利用率"><a href="#1-4-7-利用率" class="headerlink" title="1.4.7 利用率"></a>1.4.7 利用率</h3><h2 id="1-5-计算机网络的体系结构"><a href="#1-5-计算机网络的体系结构" class="headerlink" title="1.5 计算机网络的体系结构"></a>1.5 计算机网络的体系结构</h2><h3 id="1-5-1-常见的三种计算机网络体系结构"><a href="#1-5-1-常见的三种计算机网络体系结构" class="headerlink" title="1.5.1 常见的三种计算机网络体系结构"></a>1.5.1 常见的三种计算机网络体系结构</h3><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/6183c881c76145b59209fb6751a9a299.png" alt="在这里插入图片描述"></p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/7bf46e811314401d8e42c2ba0d36bceb.png" alt="在这里插入图片描述"></p>
+<h3 id="1-5-2-计算机网络体系结构分层的必要性"><a href="#1-5-2-计算机网络体系结构分层的必要性" class="headerlink" title="1.5.2 计算机网络体系结构分层的必要性"></a>1.5.2 计算机网络体系结构分层的必要性</h3><p>计算机网络是个非常复杂的系统，“分层”可将庞大复杂的问题转化为若干较小的局部问题。</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/fd5262a51a684fbfbeb308f406fea52c.png" alt="在这里插入图片描述"></p>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/164d2353d7254d49bf9d44c6e3f2ea7a.png" alt="在这里插入图片描述"></p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/196be52fbeee4c3a93e1b256e45aa530.png" alt="在这里插入图片描述"></p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/87ba5454bb484f11b6791069468622c5.png" alt="在这里插入图片描述"></p>
+<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/87ba5454bb484f11b6791069468622c5.png" alt="在这里插入图片描述"></p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/0bb4d9af07f945fb9a07ef5412215254.png" alt="在这里插入图片描述"></p>
+<h3 id="1-5-3-计算机网络体系结构分层思想举例"><a href="#1-5-3-计算机网络体系结构分层思想举例" class="headerlink" title="1.5.3 计算机网络体系结构分层思想举例"></a>1.5.3 计算机网络体系结构分层思想举例</h3><p><img lazyload src="/images/loading.svg" data-src="../../../../Library/Application%20Support/typora-user-images/image-20230803100312341.png" alt="image-20230803100312341"></p>
+<h3 id="1-5-4-计算机网络体系结构中的专用术语"><a href="#1-5-4-计算机网络体系结构中的专用术语" class="headerlink" title="1.5.4 计算机网络体系结构中的专用术语"></a>1.5.4 计算机网络体系结构中的专用术语</h3><h4 id="实体"><a href="#实体" class="headerlink" title="实体"></a>实体</h4><ul>
+<li>实体是指任何可发送或接收信息的硬件或软件进程。</li>
+<li>对等实体是指通信双方相同层次中的实体。</li>
+<li><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/68c510dec8a34efcb2f69f567afa5d2b.png" alt="在这里插入图片描述"></li>
+</ul>
+<h4 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h4><p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/16d8da3d37c146a7a3f88ec5bc9bb6c6.png" alt="在这里插入图片描述"></p>
+<h4 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h4><ul>
+<li>在协议的控制下，两个对等实体在水平方向的逻辑通信使得本层能够向上一层提供服务。要实现本层协议，还需要使用下面一层所提供的服务。</li>
+<li>协议是“水平”的，而服务是“垂直”的。实体看得见下层提供的服务，但并不知道实现该服务的具体协议。下层的协议对上层的实体是“透明”的。</li>
+<li>在同一系统中相邻两层的实体交换信息的逻辑接口称为服务访问点SAP，它被用于区分不同的服务类型。帧的“类型”字段、IP数据报的“协议”字段，TCP报文段或UDP用户数据报的“端口号”字段都是SAP。</li>
+<li>上层要使用下层所提供的服务，必须通过与下层交换一些命令，这些命令称为服务原语。</li>
+<li>对等层次之间传送的数据包称为该层的协议数据单元（Protocol Data Unit，PDU）。同一系统内层与层之交换的数据包称为服务数据单元（Service Data Unit，SDU）。</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="https://img-blog.csdnimg.cn/d6f21d73d1cf4f0a9434a30a498cf8b6.png" alt="在这里插入图片描述"></p>
+]]></content>
       <tags>
         <tag>计算机网络</tag>
       </tags>
