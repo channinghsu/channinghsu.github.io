@@ -369,7 +369,12 @@
 <p>这节课，我们就来学习下具体的方法。</p>
 <p>在超市项目里，客户经常需要进货，这就需要在 MySQL 数据库里面创建一个表，来管理进货相关的数据。我们先看看这个表里有什么内容。</p>
 <p>假设这个表叫做进货单头表（importhead），如下图所示：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/image-20230720082546248APsFCd.png" alt="image-20230720082546248"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/image-20230720082546248APsFCd.png"
+                      alt="image-20230720082546248"
+                ></p>
 <p>这里的 1、2、3 表示门店的 3 种进货方式，分别是</p>
 <ul>
 <li>配送中心配送</li>
@@ -880,5 +885,20 @@
 </div>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

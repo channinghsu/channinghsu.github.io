@@ -485,7 +485,7 @@ mjx-container[display="true"] + br {
 <li>p-slip/<code>P(S)</code>：在知道某一知识点时，做题表现为错误的失误概率；</li>
 <li>p-guess/<code>P(G)</code>：在不知道某一知识点时，做题表现为正确的猜测概率。</li>
 </ol>
-<p>BKT参数可以用向量或矩阵形式表示。全局先验的向量<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.697ex" height="1.538ex" role="img" focusable="false" viewbox="0 -680 750 680"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A0" d="M128 619Q121 626 117 628T101 631T58 634H25V680H724V634H691Q651 633 640 631T622 619V61Q628 51 639 49T691 46H724V0H713Q692 3 569 3Q434 3 425 0H414V46H447Q489 47 498 49T517 61V634H232V348L233 61Q239 51 250 49T302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V619Z"/></g></g></g></svg></mjx-container>包含<code>P(Lo)</code>参数。在先验向量中有<code>N=2</code>个元素，假设<code>P(Lo)</code>是<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.697ex" height="1.538ex" role="img" focusable="false" viewbox="0 -680 750 680"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A0" d="M128 619Q121 626 117 628T101 631T58 634H25V680H724V634H691Q651 633 640 631T622 619V61Q628 51 639 49T691 46H724V0H713Q692 3 569 3Q434 3 425 0H414V46H447Q489 47 498 49T517 61V634H232V348L233 61Q239 51 250 49T302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V619Z"/></g></g></g></svg></mjx-container>向量的第一个元素。</p>
+<p>BKT参数可以用向量或矩阵形式表示。全局先验的向量<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.697ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 750 680"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A0" d="M128 619Q121 626 117 628T101 631T58 634H25V680H724V634H691Q651 633 640 631T622 619V61Q628 51 639 49T691 46H724V0H713Q692 3 569 3Q434 3 425 0H414V46H447Q489 47 498 49T517 61V634H232V348L233 61Q239 51 250 49T302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V619Z"></path></g></g></g></svg></mjx-container>包含<code>P(Lo)</code>参数。在先验向量中有<code>N=2</code>个元素，假设<code>P(Lo)</code>是<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.697ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 750 680"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A0" d="M128 619Q121 626 117 628T101 631T58 634H25V680H724V634H691Q651 633 640 631T622 619V61Q628 51 639 49T691 46H724V0H713Q692 3 569 3Q434 3 425 0H414V46H447Q489 47 498 49T517 61V634H232V348L233 61Q239 51 250 49T302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V619Z"></path></g></g></g></svg></mjx-container>向量的第一个元素。</p>
 <p>在状态转移矩阵<code>A</code>中，<code>p(T)</code>是一个元素，涵盖掌握状态变化的概率，其大小为<code>N * N</code>。设置<code>A [1,2]=0</code>将不予捕获遗忘过程（从掌握到未掌握）。<code>P(T)</code>对应于<code>A [2,1]</code> - 从未掌握到掌握。</p>
 <p>观测矩阵<code>B</code>中指定了<code>P(G)</code>和<code>P(S)</code>，该矩阵的大小为<code>N*M</code>，其中<code>M</code>是观察数（在标准BKT中为M=2）。第一列对应于<strong>正确</strong>的观察结果，第二列对应于<strong>错误</strong>的观察结果。在具有两个观察结果的标准BKT中，<code>P(G)</code>是B[2,1] - 未掌握的技能但是正确的响应，<code>P(S)</code>是B[1,2] - 掌握的技能但是错误的响应。</p>
 <hr>
@@ -968,5 +968,20 @@ mjx-container[display="true"] + br {
 </div>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

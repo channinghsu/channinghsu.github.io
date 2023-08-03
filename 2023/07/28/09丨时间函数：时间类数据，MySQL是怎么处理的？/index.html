@@ -622,7 +622,12 @@
 </table>
 </div>
 <p><strong>销售单明细表</strong>通过流水编号与<strong>销售单头表</strong>关联，其中流水编号是外键。通过流水编号，<strong><em>销售单明细表</em></strong>引用<em>销售单头表</em>里的交易时间、会员编号等信息，同时，通过商品编号与<strong><em>商品信息表</em></strong>关联，引用<strong><em>商品信息表</em></strong>里的商品名称等信息。如图所示：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120034020Khn9a3.png" alt></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120034020Khn9a3.png"
+                      alt=""
+                ></p>
 <p>需求：统计一天中每小时的销售数量和销售金额</p>
 <p>要统计一天中每小时的销售情况，实际上就是要把销售数据按照小时进行分组统计。那么，解决问题的关键，就是把交易时间的小时部分提取出来。这就要用到 MySQL 的日期时间处理函数 extract() 和 hour() 了。</p>
 <p><code>extract（type from date）</code>表示从日期时间数据“date”中抽取“type”指定的部分。</p>
@@ -634,8 +639,8 @@
 <li>按分组统计销售数量和销售金额的和；</li>
 <li>按交易的小时信息排序。</li>
 </ol>
-<p>需要获取其他时间部分的信息，可以参考下<a class="link" target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals">时间单位 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
-<p><code>extract()</code> 函数中的 hour 表示要<a class="link" target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=获取时间&amp;spm=1001.2101.3001.7020">获取时间 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的类型，而 <code>hour()</code> 是一个函数，<code>hour(time)</code> 可以单独使用，表示返回 time 的小时部分信息。可以把 EXTRACT 函数改成 HOUR 函数，来实现相同的功能，如下所示：</p>
+<p>需要获取其他时间部分的信息，可以参考下<a class="link"   target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals" >时间单位 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p><code>extract()</code> 函数中的 hour 表示要<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=获取时间&amp;spm=1001.2101.3001.7020" >获取时间 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的类型，而 <code>hour()</code> 是一个函数，<code>hour(time)</code> 可以单独使用，表示返回 time 的小时部分信息。可以把 EXTRACT 函数改成 HOUR 函数，来实现相同的功能，如下所示：</p>
 <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">HOUR</span>(b.transdate) <span class="keyword">AS</span> 时段, <span class="comment">-- 改为使用HOUR函数</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">SUM</span>(a.quantity) <span class="keyword">AS</span> 数量,</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">SUM</span>(a.salesvalue) <span class="keyword">AS</span> 金额</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">FROM</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> demo.transactiondetails a</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">JOIN</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> demo.transactionhead b <span class="keyword">ON</span> (a.transactionid <span class="operator">=</span> b.transactionid)</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(b.transdate) <span class="comment">-- 改写为HOUR函数</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(b.transdate);<span class="comment">-- 改写为HOUR函数</span></span><br></pre></td></tr></table></figure></div>
 <p>其他时间函数：</p>
 <ul>
@@ -775,7 +780,12 @@
 <h3 id="MySQL-中-CASE-函数的语法如下："><a href="#MySQL-中-CASE-函数的语法如下：" class="headerlink" title="MySQL 中 CASE 函数的语法如下："></a>MySQL 中 CASE 函数的语法如下：</h3><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CASE</span> 表达式 <span class="keyword">WHEN</span> 值<span class="number">1</span> <span class="keyword">THEN</span> 表达式<span class="number">1</span> [ <span class="keyword">WHEN</span> 值<span class="number">2</span> <span class="keyword">THEN</span> 表达式<span class="number">2</span>] <span class="keyword">ELSE</span> 表达式m <span class="keyword">END</span></span><br></pre></td></tr></table></figure></div>
 <p>在当前业务查询中，“表达式”有 7 种可能的值。通过 case 函数，可以根据 dayofweek() 函数返回的值对每个返回值进行处理，从而跟促销信息表中的字段 weekday 对应。</p>
 <p>关系图：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120040665I0Z189.png" alt></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120040665I0Z189.png"
+                      alt=""
+                ></p>
 <p>除了获取特定的日期，还经常需要把日期按照一定的格式显示出来，这就要用到日期时间格式化的函数 <code>date_format()</code>，它表示将日期时间“date”按照指定格式显示。</p>
 <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%T&quot;);  <span class="comment">-- 24小时制</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%T&quot;) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">13</span>:<span class="number">25</span>:<span class="number">50</span>                                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%r&quot;);  <span class="comment">-- 上下午时间</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%r&quot;) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">01</span>:<span class="number">25</span>:<span class="number">50</span> PM                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
 <p><code>datediff(date1,date2)</code>，表示日期“date1”与日期“date2”之间差几天</p>
@@ -1182,5 +1192,20 @@
 </div>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

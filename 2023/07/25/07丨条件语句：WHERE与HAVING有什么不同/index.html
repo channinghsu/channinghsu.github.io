@@ -425,14 +425,34 @@
 <p>这种查询方式在 MySQL 里面是分四步实现的：</p>
 <p>第一步，把<strong>流水明细表</strong>和<strong>商品信息表</strong>通过公共字段<code>itemnumber</code>连接起来，从 2 个表中获取数据：</p>
 <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> a.<span class="operator">*</span>, b.<span class="operator">*</span></span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.goodsmaster <span class="keyword">as</span> b <span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber);</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span> transactionid <span class="operator">|</span> itemnumber <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span> salesvalue <span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> saleprice <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+------------+---------+-----------+---------------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>      <span class="number">89.00</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">0001</span>    <span class="operator">|</span> 书        <span class="operator">|</span>               <span class="operator">|</span> 本   <span class="operator">|</span>     <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">10.00</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">0002</span>    <span class="operator">|</span> 笔        <span class="operator">|</span>               <span class="operator">|</span> 支   <span class="operator">|</span>      <span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span> <span class="number">89.00</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span>          <span class="number">1</span> <span class="operator">|</span> <span class="number">0001</span>    <span class="operator">|</span> 书        <span class="operator">|</span>               <span class="operator">|</span> 本   <span class="operator">|</span>     <span class="number">89.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span>   <span class="number">10.000</span> <span class="operator">|</span>  <span class="number">5.00</span> <span class="operator">|</span>      <span class="number">50.00</span> <span class="operator">|</span>          <span class="number">2</span> <span class="operator">|</span> <span class="number">0002</span>    <span class="operator">|</span> 笔        <span class="operator">|</span>               <span class="operator">|</span> 支   <span class="operator">|</span>      <span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+----------+-------+------------+------------+---------+-----------+---------------+------+-----------+</span></span><br></pre></td></tr></table></figure></div>
-<p><img lazyload src="/images/loading.svg" data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803115954644xDD1yZ.png" alt></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803115954644xDD1yZ.png"
+                      alt=""
+                ></p>
 <p>第二步，把结果集按照商品名称（itemnumber）分组：</p>
 <p>组 1：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-202308031159568223ffG2A.png" alt></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-202308031159568223ffG2A.png"
+                      alt=""
+                ></p>
 <p>组 2：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-202308031200073089wZzX3.png" alt></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-202308031200073089wZzX3.png"
+                      alt=""
+                ></p>
 <p>第三步，对分组后的数据集进行筛选，把组中字段 salesvalue 的最大值 &gt;50 的组筛选出来：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120004724flBNmo.png" alt></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120004724flBNmo.png"
+                      alt=""
+                ></p>
 <p>第四步，返回商品名称。这时就得到了需要的结果：单笔销售金额超过 50 元的商品就是“书”。</p>
 <p>简单小结下使用 HAVING 的查询过程。</p>
 <ul>
@@ -862,5 +882,20 @@
 </div>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

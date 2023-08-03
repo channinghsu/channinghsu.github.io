@@ -2629,6 +2629,14 @@ pre .deletion {
     right: 12px;
   }
 }
+.transition-fade {
+  transition: 0.4s;
+  opacity: 1;
+}
+html.is-animating .transition-fade {
+  opacity: 0;
+  transition: 0.4s;
+}
 :root {
   --background-color: #fff;
   --background-color-transparent: rgba(255,255,255,0.6);
@@ -4357,46 +4365,38 @@ pre .deletion {
   width: 100%;
   z-index: 1009;
 }
-.progress-bar-container .pjax-progress-bar {
+.progress-bar-container .swup-progress-icon {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 2px;
-  width: 0;
-  background: var(--pjax-progress-bar-color);
-  visibility: hidden;
-  opacity: 0;
-  z-index: 1008;
-  transition-property: color, background, box-shadow, border-color, width;
-  transition-delay: 0s, 0s, 0s, 0s, 0s;
-  transition-duration: 0.2s, 0.2s, 0.2s, 0.2s, 0.1s;
-  transition-timing-function: ease, ease, ease, ease, linear;
-}
-.progress-bar-container .pjax-progress-bar.show {
-  opacity: 1;
-  visibility: visible;
-}
-.progress-bar-container .pjax-progress-icon {
-  position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 8px;
   z-index: 1008;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 7px 6px 0 0;
-  visibility: hidden;
   font-size: 1.1rem;
   color: var(--default-text-color);
+  opacity: 0;
+  transition: opacity 0.1s ease-out;
 }
 @media (max-width: 780px) {
-  .progress-bar-container .pjax-progress-icon {
+  .progress-bar-container .swup-progress-icon {
     padding: 6px 5px 0 0;
     font-size: 1rem;
   }
 }
-.progress-bar-container .pjax-progress-icon.show {
-  visibility: visible;
+html.is-animating .scroll-progress-bar {
+  opacity: 0;
+  transition: opacity 0.1s ease-out;
+}
+html.is-animating .swup-progress-icon {
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+.swup-progress-bar {
+  background: #12c2e9;
+  height: 2px;
+  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
 }
 :root {
   --background-color: #fff;
@@ -6706,6 +6706,8 @@ pre .deletion {
 .page-template-container #masonry-container {
   position: relative;
   display: none;
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
 }
 .page-template-container #masonry-container .masonry-item {
   position: absolute;
@@ -6724,6 +6726,8 @@ pre .deletion {
   display: block;
   justify-content: center;
   align-items: center;
+  opacity: 1;
+  transition: opacity 0.1s ease-out;
 }
 .page-template-container .loading {
   -webkit-animation: gradient-slide 1.1s ease infinite;
@@ -7149,6 +7153,36 @@ pre .deletion {
 }
 .home-banner-container .content .social-contacts .social-contact-item:last-child {
   margin-right: 0;
+}
+.home-banner-container .content .social-contacts .social-contact-item-qr {
+  margin-right: 20px;
+  cursor: pointer;
+  line-height: 2;
+  color: #fff;
+}
+.home-banner-container .content .social-contacts .social-contact-item-qr:last-child {
+  margin-right: 0;
+}
+.home-banner-container .content .social-contacts .social-qr-container {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+  border-radius: 14px;
+  box-shadow: inset 0 0 2000px var(--home-banner-icons-container-background-color);
+  border: 1.5px solid var(--home-banner-icons-container-border-color);
+  overflow: hidden;
+}
+.home-banner-container .content .social-contacts .social-qr-container .social-contacts-qr {
+  display: flex;
+  width: 150px;
+  padding: 15px;
+}
+.home-banner-container .content .social-contacts .social-contact-item-qr:hover .social-qr-container {
+  display: initial;
 }
 .image-viewer-container {
   position: fixed;

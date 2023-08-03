@@ -305,10 +305,20 @@
 <h4 id="2-1-马尔科夫模型"><a href="#2-1-马尔科夫模型" class="headerlink" title="2.1 马尔科夫模型"></a>2.1 马尔科夫模型</h4><p>我们通常都习惯寻找一个事物在一段时间里的变化模式(规律)，一种做法是假设模型的当前状态仅仅依赖于前面的几个状态，这被称为<strong>马尔科夫假设</strong>，它极大地简化了问题。一个马尔科夫过程是状态间的转移仅依赖于前 n 个状态的过程。这个过程被称之为 <strong>n 阶马尔科夫模型</strong>，其中 n 是影响下一个状态选择的(前)n 个状态。最简单的马尔科夫过程是一阶模型，它的状态选择仅与前一个状态有关,下一个状态的选择由相应的概率决定，并不是确定性的。</p>
 <p>对于有M个状态的一阶马尔科夫模型，共有M^2^个状态转移，因为任何一个状态都有可能是所有状态的下一个转移状态。每个转移状态都有一个概率值，称为转移概率，也就是从一个状态转移到另一个状态的概率。所有的M^2^个概率可以用一个状态转移矩阵表示，这些概率不随时间变化而不同。</p>
 <h4 id="2-2-马尔科夫过程"><a href="#2-2-马尔科夫过程" class="headerlink" title="2.2 马尔科夫过程"></a>2.2 马尔科夫过程</h4><p>下面是一个天气预测中可能的状态转移概率：</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230319173407679.png" alt="image-20230319173407679" style="zoom: 33%;"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230319173407679.png"
+                      alt="image-20230319173407679" style="zoom: 33%;" 
+                ></p>
 <p>也就是说，如果昨天是晴天，那么今天的是晴天的概率为0.5，多云的概率是0.375，下雨的概率为0.125，每一行的概率之和为1。</p>
 <p>要初始化这样一个系统，我们需要确定起始日天气的情况，定义其为一个初始概率向量，称为$\pi$向量。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230319174858992.png" alt="image-20230319174858992" style="zoom: 33%;">也就是说第一天为晴天的概率为1，多云或下雨的概率都为0。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230319174858992.png"
+                      alt="image-20230319174858992" style="zoom: 33%;" 
+                >也就是说第一天为晴天的概率为1，多云或下雨的概率都为0。</p>
 <p>现在定义一个一阶马尔科夫模型如下：</p>
 <ul>
 <li><p>状态：晴天、多云、雨天</p>
@@ -323,10 +333,20 @@
 <p>在这个例子中我们有两组状态，<strong>观察</strong>的状态(水藻的状态)和<strong>隐藏</strong>的状态(天气的状态)。我们希望设计一种算法，在不能直接观察天气的情况下，通过水藻和马尔科夫假设来预测天气。</p>
 <p>观察到的状态序列与隐藏过程有一定的<strong>概率关系</strong>，使用<strong>隐马尔科夫模型</strong>对这样的过程建模，这个模型包含了一个底层隐藏的随时间改变的<strong>马尔科夫过程</strong>，以及一个与隐藏状态某种程度相关的可观察到的<strong>状态集合</strong>。</p>
 <p>下图显示的是天气例子中的<strong>隐藏状态</strong>和<strong>观察状态</strong>。假设隐藏状态(实际的天气)由一个简单的一阶马尔科夫过程描述，那么它们之间都相互连接。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230319193205802.png" alt="image-20230319193205802" style="zoom:50%;"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230319193205802.png"
+                      alt="image-20230319193205802" style="zoom:50%;" 
+                ></p>
 <p>隐藏状态和观察状态之间的连接表示:在给定的马尔科夫过程中，一个特定的隐藏状态生成特定的观察状态的概率。</p>
 <h5 id="2-3-2-混淆矩阵"><a href="#2-3-2-混淆矩阵" class="headerlink" title="2.3.2 混淆矩阵"></a>2.3.2 混淆矩阵</h5><p>除了定义了马尔科夫过程的概率关系，还需一个<strong>混淆矩阵</strong>(confusion matrix)，它包含了给定一个隐藏状态后得到的观察状态的概率。 对于天气例子，混淆矩阵是:</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230319193326451.png" alt="image-20230319193326451" style="zoom:50%;"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230319193326451.png"
+                      alt="image-20230319193326451" style="zoom:50%;" 
+                ></p>
 <p>我们已经看到在一些过程中一个<strong>观察序列</strong>与一个<strong>底层马尔科夫过程</strong>是概率相关的。在这些例子中，观察状态的数目可以和隐藏状态的数目不同。 我们使用一个隐马尔科夫模型(HMM)对这些例子建模。</p>
 <p>这个模型包含<strong>两组状态集合</strong>和<strong>三组概率集合</strong>:</p>
 <ul>
@@ -344,8 +364,18 @@
 <p>值得注意的一点是，这里面定义的概率都是与时间不相关的，意味着这些概率不会随着时间的变化而变化，这一点假设与实际情况不符合，但是将问题大大简化了。</p>
 <h3 id="3-模型构建"><a href="#3-模型构建" class="headerlink" title="3. 模型构建"></a>3. 模型构建</h3><p>​        标准的 BKT 模型是一种以学习者对知识点掌握情况的潜在变量和答题表现结果的观察变量来构建学习者知识水平的追踪模型，它可以通过观察学习者过去的学习状态，预测其当前的知识点状态的掌握情况和未来表现。                                                                                                                                                                                                                                                                                                                                                                                                         </p>
 <p>BKT中主要有四个参数：</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230316101337825.png" alt="image-20230316101337825">        BKT模型本质上是一种特殊的隐马尔科夫模型，它把所有要学习的知识内容分为一系列以层级关系连接的若干个知识点，把学习者对每个知识点的答题情况分为对应的表现节点，每个表现节点的掌握情况分别用一组二元变量（“掌握”，“未掌握”)表示，并且各个节点之间的转移过程不可逆如下图所示。其中 K 为学习的知识节点， Q 为答题的表现节点，1 表示该节点状态为“掌握”，0 表示该节点状态为“未掌握”。模型中的下一个节点仅依赖于学习者的上一系列知识节点状态和表现节点状态，因此，我们可以借助 BKT 模型观察学习者知识节点状态，追踪学习、者当前的一系列不同的知识节点状态，来预测其下一知识节点的掌握情况和当前表现节点的答题表现情况。</p>
-<h3 id><a href="#" class="headerlink" title></a><img lazyload src="/images/loading.svg" data-src="/Users/channinghsu/Downloads/IMG_D677B2190C30-1.jpeg" alt="IMG_D677B2190C30-1" style="zoom:50%;"></h3><h3 id="3-训练过程"><a href="#3-训练过程" class="headerlink" title="3. 训练过程"></a>3. 训练过程</h3><h3 id="4-测试过程"><a href="#4-测试过程" class="headerlink" title="4. 测试过程"></a>4. 测试过程</h3>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Users/channinghsu/Library/Application Support/typora-user-images/image-20230316101337825.png"
+                      alt="image-20230316101337825"
+                >        BKT模型本质上是一种特殊的隐马尔科夫模型，它把所有要学习的知识内容分为一系列以层级关系连接的若干个知识点，把学习者对每个知识点的答题情况分为对应的表现节点，每个表现节点的掌握情况分别用一组二元变量（“掌握”，“未掌握”)表示，并且各个节点之间的转移过程不可逆如下图所示。其中 K 为学习的知识节点， Q 为答题的表现节点，1 表示该节点状态为“掌握”，0 表示该节点状态为“未掌握”。模型中的下一个节点仅依赖于学习者的上一系列知识节点状态和表现节点状态，因此，我们可以借助 BKT 模型观察学习者知识节点状态，追踪学习、者当前的一系列不同的知识节点状态，来预测其下一知识节点的掌握情况和当前表现节点的答题表现情况。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Users/channinghsu/Downloads/IMG_D677B2190C30-1.jpeg"
+                      alt="IMG_D677B2190C30-1" style="zoom:50%;" 
+                ></h3><h3 id="3-训练过程"><a href="#3-训练过程" class="headerlink" title="3. 训练过程"></a>3. 训练过程</h3><h3 id="4-测试过程"><a href="#4-测试过程" class="headerlink" title="4. 测试过程"></a>4. 测试过程</h3>
         
     </div>
     <div class="page-template-comments">
@@ -578,5 +608,20 @@
 </div>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

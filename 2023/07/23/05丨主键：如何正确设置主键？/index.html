@@ -367,7 +367,12 @@
         <div class="article-content markdown-body">
             <p>主键可以<strong>唯一</strong>标识表中的某一条记录，对数据表来说非常重要。当我们需要查询和引用表中的一条记录的时候，最好的办法就是通过<strong>主键</strong>。只有合理地设置主键，才能确保我们准确、快速地找到所需要的数据记录。</p>
 <p>在项目中，客户要进行会员营销，相应的，我们就需要处理会员信息。会员信息表（demo.membermaster）的设计大体如下：</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/87977152197dbaa92d6a86cc9911c1c0QHG6Fr.jpeg" alt></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/87977152197dbaa92d6a86cc9911c1c0QHG6Fr.jpeg"
+                      alt=""
+                ></p>
 <p>为了能够唯一地标识一个会员的信息，我们需要为会员信息表设置一个主键。那么，怎么为这个表设置主键，才能达到我们理想的目标呢？今天，就学习下三种设置主键的思路：<strong>业务字段做主键、自增字段做主键和手动赋值字段做主键。</strong></p>
 <h2 id="业务字段做主键"><a href="#业务字段做主键" class="headerlink" title="业务字段做主键"></a>业务字段做主键</h2><p>针对这个需求，我们最容易想到的，是选择表中已有的字段，也就是跟业务相关的字段做主键。会员卡号（cardno）看起来比较合适，因为会员卡号不能为空，而且有唯一性，可以用来标识一条会员记录。我们来尝试一下用会员卡号做主键。</p>
 <p>我们可以用下面的代码，在创建表的时候，设置字段 cardno 为主键：    </p>
@@ -813,5 +818,20 @@
 </div>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
