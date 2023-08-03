@@ -9171,4 +9171,73 @@ Third paragraph of definition 2.
         <tag>memo</tag>
       </tags>
   </entry>
+  <entry>
+    <title>《深入浅出计算机网络》第二章物理层</title>
+    <url>/2023/08/03/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%89%A9%E7%90%86%E5%B1%82/</url>
+    <content><![CDATA[<h2 id="2-1-物理层概述"><a href="#2-1-物理层概述" class="headerlink" title="2.1 物理层概述"></a>2.1 物理层概述</h2><h3 id="2-1-1、物理层要实现的的功能"><a href="#2-1-1、物理层要实现的的功能" class="headerlink" title="2.1.1、物理层要实现的的功能"></a>2.1.1、物理层要实现的的功能</h3><p>解决在各种传输媒体上传输比特0和1的问题，进而给数据链路层提供透明传输比特流的服务。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/ddd053b4675f43ba939e2ca5289f18c28UXPs8.png"
+                      alt="ddd053b4675f43ba939e2ca5289f18c2"
+                ></p>
+<h3 id="2-1-2-物理层接口特性"><a href="#2-1-2-物理层接口特性" class="headerlink" title="2.1.2 物理层接口特性"></a>2.1.2 物理层接口特性</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/a8cde6b4361c4ed4a07201046eabd10cOke6ZM.png"
+                      alt="a8cde6b4361c4ed4a07201046eabd10c"
+                ></p>
+<h2 id="2-2-物理层下面的传输媒体"><a href="#2-2-物理层下面的传输媒体" class="headerlink" title="2.2 物理层下面的传输媒体"></a>2.2 物理层下面的传输媒体</h2><ul>
+<li>传输媒体是计算机网络设备之间的物理通路，也称为传输介质或传输媒介。</li>
+<li>传输媒体并不包含在计算机网络体系结构中。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/265a5e5a7df2443a908cf626f02e9492IsPfid.png"
+                      alt="265a5e5a7df2443a908cf626f02e9492"
+                ></p>
+<h2 id="2-3-传输方式"><a href="#2-3-传输方式" class="headerlink" title="2.3 传输方式"></a>2.3 传输方式</h2><h3 id="2-3-1-串行传输和并行传输"><a href="#2-3-1-串行传输和并行传输" class="headerlink" title="2.3.1 串行传输和并行传输"></a>2.3.1 串行传输和并行传输</h3><p>串行传输是一个比特一个比特传输，因此发送端和传输端之间只需要一条数据传输线路即可。<br>并行传输是指一次性传输多个比特，而不是一个比特。接发收端有 n 条传输线路。成本高。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/d19039b883de4cc8bfdfa294bb199979QOeh8h.png"
+                      alt="d19039b883de4cc8bfdfa294bb199979"
+                ></p>
+<p>远距离传输是串行传输，计算机内部传输是并行传输，常见的数据总线宽度有 8 位，16位，32 位和 64 位。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/ad5ea3fed80c44bf805eda0fcb676c1dff8GXt.png"
+                      alt="ad5ea3fed80c44bf805eda0fcb676c1d"
+                ></p>
+<h3 id="2-3-2-同步传输和异步传输"><a href="#2-3-2-同步传输和异步传输" class="headerlink" title="2.3.2 同步传输和异步传输"></a>2.3.2 同步传输和异步传输</h3><p>同步传输：发送端发送连续不间断的信号，接收端按照时钟频率进行接收，因为发送端和接收端频率不同步，所以会产生一定的时钟误差，会导致接收端对比特信号的判别错位，那么要需要一些方式来使时钟保持同步。</p>
+<ul>
+<li>外同步：两条信号线，一条接收数据信号，一条接收时钟频率信号。</li>
+<li>内同步：发送端将时钟同步信号编码和发送数据一同发送（曼彻斯特编码）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/7e0ba718d0444575ba52209b21bed6dfG09LNX.png"
+                      alt="7e0ba718d0444575ba52209b21bed6df"
+                ></p>
+<p>异步传输：发送数据是有间隔不联系的，接收端仅在每个字节的起始处对字节内的比特实现同步。为此，通常要在每个字节前后分别加上起始位和结束位。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/3dbc7c58b6ed4b418c1f21e9ff109e11NR1byw.png"
+                      alt="3dbc7c58b6ed4b418c1f21e9ff109e11"
+                ></p>
+<h3 id="2-3-3-单向通信、双向交替通信和双向同时通信"><a href="#2-3-3-单向通信、双向交替通信和双向同时通信" class="headerlink" title="2.3.3 单向通信、双向交替通信和双向同时通信"></a>2.3.3 单向通信、双向交替通信和双向同时通信</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/8eccf7c419b64bcd96cea3b2b7cf4769zoG0Rc.png"
+                      alt="8eccf7c419b64bcd96cea3b2b7cf4769"
+                ></p>
+]]></content>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
 </search>
