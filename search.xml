@@ -9533,11 +9533,384 @@ Third paragraph of definition 2.
 <li>时间复杂度: push为O(n)，其他为O(1)</li>
 <li>空间复杂度: O(n)</li>
 </ul>
+<h1 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20. 有效的括号"></a>20. 有效的括号</h1><p><a class="link" href="https://leetcode.cn/problems/valid-parentheses/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<ul>
+<li>左括号必须用相同类型的右括号闭合。</li>
+<li>左括号必须以正确的顺序闭合。</li>
+<li>注意空字符串可被认为是有效字符串。</li>
+</ul>
+<p>示例 1:</p>
+<ul>
+<li>输入: “()”  </li>
+<li>输出: true     </li>
+</ul>
+<p>示例 2:</p>
+<ul>
+<li>输入: “()[]{}”    </li>
+<li>输出: true     </li>
+</ul>
+<p>示例 3:</p>
+<ul>
+<li>输入: “(]”   </li>
+<li>输出: false    </li>
+</ul>
+<p>示例 4:</p>
+<ul>
+<li>输入: “([)]”   </li>
+<li>输出: false </li>
+</ul>
+<p>示例 5:</p>
+<ul>
+<li>输入: “{[]}”</li>
+<li>输出: true</li>
+</ul>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p><strong>括号匹配是使用栈解决的经典问题。</strong>在编译原理中，编译器在词法分析的过程中处理括号、花括号等这个符号的逻辑，也是使用了栈这种数据结构。在linux系统中，cd这个进入目录的命令，<code>cd a/b/c/../../</code>，这个命令最后进入a目录，系统是如何知道进入了a目录呢 ，这就是栈的应用（其实可以出一道相应的面试题了）。</p>
+<p>由于栈结构的特殊性，非常适合做对称匹配类的题目。首先要弄清楚，字符串里的括号不匹配有几种情况。</p>
+<ol>
+<li>第一种情况，字符串里左方向的括号多余</li>
+</ol>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/2020080915505387.png" alt="括号匹配1"></p>
+<ol>
+<li>第二种情况，括号没有多余，但是括号的类型没有匹配上。</li>
+</ol>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20200809155107397.png" alt="括号匹配2"></p>
+<ol>
+<li>第三种情况，字符串里右方向的括号多余了，所以不匹配。</li>
+</ol>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20200809155115779.png" alt="括号匹配3"></p>
+<p>我们的代码只要覆盖了这三种不匹配的情况，就不会出问题，可以看出 动手之前分析好题目的重要性。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/20.有效括号.gif" alt="20.有效括号"></p>
+<p>第一种情况：已经遍历完了字符串，但是栈不为空，说明有相应的左括号没有右括号来匹配，所以return false</p>
+<p>第二种情况：遍历字符串匹配的过程中，发现栈里没有要匹配的字符。所以return false</p>
+<p>第三种情况：遍历字符串匹配的过程中，栈已经为空了，没有匹配的字符了，说明右括号没有找到对应的左括号return false</p>
+<p>那么什么时候说明左括号和右括号全都匹配了呢，就是字符串遍历完之后，栈是空的，就说明全都匹配了。</p>
+<p>分析完之后，代码其实就比较好写了，</p>
+<p>但还有一些技巧，在匹配左括号的时候，右括号先入栈，就只需要比较当前元素和栈顶相不相等就可以了，比左括号先入栈代码实现要简单的多了！</p>
+<h2 id="C-代码-2"><a href="#C-代码-2" class="headerlink" title="C++代码"></a>C++代码</h2><ul>
+<li>时间复杂度: <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></li>
+<li>空间复杂度: <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(string s)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() % <span class="number">2</span> != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 如果s的长度围奇数，一定不符合条件</span></span><br><span class="line">        stack&lt;<span class="type">char</span>&gt; stk;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : s) {</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="string">'{'</span>) stk.<span class="built_in">push</span>(<span class="string">'}'</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'['</span>) stk.<span class="built_in">push</span>(<span class="string">']'</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'('</span>) stk.<span class="built_in">push</span>(<span class="string">')'</span>);</span><br><span class="line">            <span class="comment">// 匹配的过程中发现栈空了或者和左边不匹配</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (stk.<span class="built_in">empty</span>() || stk.<span class="built_in">top</span>() != c) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">else</span> stk.<span class="built_in">pop</span>();</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 若最后栈内有剩余元素</span></span><br><span class="line">        <span class="comment">// if (!stk.empty()) return false;</span></span><br><span class="line">        <span class="keyword">return</span> stk.<span class="built_in">empty</span>();</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h1 id="1047-删除字符串中的所有相邻重复项"><a href="#1047-删除字符串中的所有相邻重复项" class="headerlink" title="1047. 删除字符串中的所有相邻重复项"></a>1047. 删除字符串中的所有相邻重复项</h1><p><a class="link" href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给出由小写字母组成的字符串 S，重复项删除操作会选择两个相邻且相同的字母，并删除它们。</p>
+<p>在 S 上反复执行重复项删除操作，直到无法继续删除。</p>
+<p>在完成所有重复项删除操作后返回最终的字符串。答案保证唯一。</p>
+<p>示例：</p>
+<ul>
+<li>输入：”abbaca”</li>
+<li>输出：”ca”</li>
+<li>解释：例如，在 “abbaca” 中，我们可以删除 “bb” 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 “aaca”，其中又只有 “aa” 可以执行重复项删除操作，所以最后的字符串为 “ca”。</li>
+</ul>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= S.length &lt;= 20000</li>
+<li>S 仅由小写英文字母组成。</li>
+</ul>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/1047.删除字符串中的所有相邻重复项.gif" alt="1047.删除字符串中的所有相邻重复项"></p>
+<h2 id="C-代码-3"><a href="#C-代码-3" class="headerlink" title="C++代码"></a>C++代码</h2><ul>
+<li>时间复杂度: <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></li>
+<li>空间复杂度: <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">removeDuplicates</span><span class="params">(string s)</span> </span>{</span><br><span class="line">        stack&lt;<span class="type">char</span>&gt; stk;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : s) {</span><br><span class="line">            <span class="comment">// 若栈不为空，并且栈顶元素和将要进来的元素相等时，直接弹出</span></span><br><span class="line">            <span class="keyword">if</span> (!stk.<span class="built_in">empty</span>() &amp;&amp; c == stk.<span class="built_in">top</span>()) {</span><br><span class="line">                stk.<span class="built_in">pop</span>();</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                stk.<span class="built_in">push</span>(c);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        string res = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>()) {</span><br><span class="line">            res += stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();  <span class="comment">// 记得要弹出已经添加的元素</span></span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">reverse</span>(res.<span class="built_in">begin</span>(), res.<span class="built_in">end</span>()); <span class="comment">// 最后反转字符串</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>这道题目就像是我们玩过的游戏对对碰，如果相同的元素挨在一起就要消除。</p>
+<p>可能我们在玩游戏的时候感觉理所当然应该消除，但程序又怎么知道该如何消除呢，特别是消除之后又有新的元素可能挨在一起。</p>
+<p>此时游戏的后端逻辑就可以用一个栈来实现（我没有实际考察对对碰或者爱消除游戏的代码实现，仅从原理上进行推断）。</p>
+<p>游戏开发可能使用栈结构，编程语言的一些功能实现也会使用栈结构，实现函数递归调用就需要栈，但不是每种编程语言都支持递归，例如：</p>
+<p><strong>递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中</strong>，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。</p>
+<p>相信大家应该遇到过一种错误就是栈溢出，系统输出的异常是<code>Segmentation fault</code>（当然不是所有的<code>Segmentation fault</code> 都是栈溢出导致的） ，如果你使用了递归，就要想一想是不是无限递归了，那么系统调用栈就会溢出。</p>
+<p>而且<strong>在企业项目开发中，尽量不要使用递归</strong>！在项目比较大的时候，由于参数多，全局变量等等，使用递归很容易判断不充分return的条件，非常容易无限递归（或者递归层级过深），<strong>造成栈溢出错误（这种问题还不好排查！）</strong></p>
+<h1 id="150-逆波兰表达式求值"><a href="#150-逆波兰表达式求值" class="headerlink" title="150. 逆波兰表达式求值"></a>150. 逆波兰表达式求值</h1><p><a class="link" href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>根据 逆波兰表示法，求表达式的值。</p>
+<p>有效的运算符包括 + ,  - ,  *  ,  / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。</p>
+<p>说明：</p>
+<p>整数除法只保留整数部分。<br>给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。</p>
+<p>示例 1：</p>
+<ul>
+<li>输入: [“2”, “1”, “+”, “3”, “ * “]</li>
+<li>输出: 9</li>
+<li>解释: 该算式转化为常见的中缀算术表达式为：((2 + 1) * 3) = 9</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入: [“4”, “13”, “5”, “/“, “+”]</li>
+<li>输出: 6</li>
+<li>解释: 该算式转化为常见的中缀算术表达式为：(4 + (13 / 5)) = 6</li>
+</ul>
+<p>示例 3：</p>
+<ul>
+<li><p>输入: [“10”, “6”, “9”, “3”, “+”, “-11”, “ <em> “, “/“, “ </em> “, “17”, “+”, “5”, “+”]</p>
+</li>
+<li><p>输出: 22</p>
+</li>
+<li><p>解释:该算式转化为常见的中缀算术表达式为：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">((10 * (6 / ((9 + 3) * -11))) + 17) + 5       </span><br><span class="line">= ((10 * (6 / (12 * -11))) + 17) + 5       </span><br><span class="line">= ((10 * (6 / -132)) + 17) + 5     </span><br><span class="line">= ((10 * 0) + 17) + 5     </span><br><span class="line">= (0 + 17) + 5    </span><br><span class="line">= 17 + 5    </span><br><span class="line">= 22    </span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<p>逆波兰表达式：是一种后缀表达式，所谓后缀就是指运算符写在后面。</p>
+<p>平常使用的算式则是一种中缀表达式，如 ( 1 + 2 ) * ( 3 + 4 ) 。</p>
+<p>该算式的逆波兰表达式写法为 ( ( 1 2 + ) ( 3 4 + ) * ) 。</p>
+<p>逆波兰表达式主要有以下两个优点：</p>
+<ul>
+<li><p>去掉括号后表达式无歧义，上式即便写成 1 2 + 3 4 + * 也可以依据次序计算出正确结果。</p>
+</li>
+<li><p>适合用栈操作运算：遇到数字则入栈；遇到运算符则取出栈顶两个数字进行计算，并将结果压入栈中。</p>
+</li>
+</ul>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/150.逆波兰表达式求值.gif" alt="150.逆波兰表达式求值"></p>
+<h2 id="C-代码-4"><a href="#C-代码-4" class="headerlink" title="C++代码"></a>C++代码</h2><ul>
+<li>时间复杂度：<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></li>
+<li>空间复杂度：<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">evalRPN</span><span class="params">(vector&lt;string&gt;&amp; tokens)</span> </span>{</span><br><span class="line">        stack&lt;<span class="type">int</span>&gt; stk;</span><br><span class="line">        <span class="keyword">for</span> (string s : tokens) {</span><br><span class="line">            <span class="comment">// 若出现符号，则计算并加入栈</span></span><br><span class="line">            <span class="keyword">if</span> (s == <span class="string">"+"</span> || s == <span class="string">"-"</span> || s == <span class="string">"*"</span> || s == <span class="string">"/"</span>){</span><br><span class="line">                <span class="comment">// 得到栈顶的前两个元素</span></span><br><span class="line">                <span class="type">long</span> <span class="type">long</span> num1 = stk.<span class="built_in">top</span>();</span><br><span class="line">                stk.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="type">long</span> <span class="type">long</span> num2 = stk.<span class="built_in">top</span>();</span><br><span class="line">                stk.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span> (s == <span class="string">"+"</span>) stk.<span class="built_in">push</span>(num2 + num1);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (s == <span class="string">"-"</span>) stk.<span class="built_in">push</span>(num2 - num1);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (s == <span class="string">"*"</span>) stk.<span class="built_in">push</span>(num2 * num1);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (s == <span class="string">"/"</span>) stk.<span class="built_in">push</span>(num2 / num1);</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                stk.<span class="built_in">push</span>(<span class="built_in">stoll</span>(s)); <span class="comment">// string to long long </span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> stk.<span class="built_in">top</span>();</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="题外话-1"><a href="#题外话-1" class="headerlink" title="题外话"></a>题外话</h2><p>我们习惯看到的表达式都是<strong>中缀表达式</strong>，因为符合我们的习惯，但是中缀表达式<strong>对于计算机就很不友好了</strong>。</p>
+<p>例如：4 + 13 / 5，这就是中缀表达式，计算机从左到右去扫描的话，扫到13，还要判断13后面是什么运算符，还要比较一下优先级，然后13还和后面的5做运算，做完运算之后，还要向前回退到 4 的位置，继续做加法，你说麻不麻烦！</p>
+<p>那么将中缀表达式，转化为<strong>后缀表达式</strong>之后：[“4”, “13”, “5”, “/“, “+”] ，就不一样了，计算机可以利用<strong>栈</strong>来顺序处理，不需要考虑优先级了。也不用回退了， <strong>所以后缀表达式对计算机来说是非常友好的。</strong></p>
+<p>可以说本题不仅仅是一道好题，也<strong>展现出计算机的思考方式</strong>。</p>
+<p>在1970年代和1980年代，惠普在其所有台式和手持式计算器中都使用了RPN（后缀表达式），直到2020年代仍在某些模型中使用了RPN。</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
         <tag>栈</tag>
         <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《深入浅出计算机网络》第三章 数据链路层</title>
+    <url>/2023/08/07/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</url>
+    <content><![CDATA[<h2 id="3-1-数据链路层概述"><a href="#3-1-数据链路层概述" class="headerlink" title="3.1 数据链路层概述"></a>3.1 数据链路层概述</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/290a66fc1fa246a0827c40904c734c7bV3s5eP.png"
+                      alt="290a66fc1fa246a0827c40904c734c7b"
+                ></p>
+<p>在讨论链路层传输过程时，不考虑解封问题，只看成水平层传输的过程。及局域网1中的主机 H1 经过路由器 R1，广域网，以及路由器 R2 连接到局域网2中的主机 H2。不同的数据链路层可能采取不同的数据链路层协议。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/bcfc710c63d94cef87d141ec4be49389uonNTF.png"
+                      alt="bcfc710c63d94cef87d141ec4be49389"
+                ></p>
+<p><strong>链路</strong>（Link）是指从一个节点到相邻节点的一段物理线路（有线或无线），而中间没有任何其他的交换节点。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/a290ea2b5d494649a9c4776dd40537e7GTppOA.png"
+                      alt="a290ea2b5d494649a9c4776dd40537e7"
+                ></p>
+<p><strong>数据链路</strong>（Data Link）是基于链路的。当在一条链路上传送数据时，除需要链路本身，还需要一些必要的通信协议来控制这些数据的传输，把实现这些协议的硬件和软件加到链路上，就构成了数据链路。<br>计算机中的网络适配器（俗称网卡）和其相应的软件驱动程序就实现了这些协议。一般的网络适配器都包含了物理层和数据链路层这两层的功能。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/4b950da775644401b4db0d97eb5b12aclK6mNo.png"
+                      alt="4b950da775644401b4db0d97eb5b12ac"
+                ></p>
+<p><strong>帧</strong>（Frame）是数据链路层对等实体之间在水平方向进行逻辑通信的协议数据单元PDU。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/bb31aade5b014e5b891718f96621961d580ZwN.png"
+                      alt="bb31aade5b014e5b891718f96621961d"
+                ></p>
+<h2 id="3-2-数据链路层三个重要问题"><a href="#3-2-数据链路层三个重要问题" class="headerlink" title="3.2 数据链路层三个重要问题"></a>3.2 数据链路层三个重要问题</h2><h3 id="3-2-1-封装成帧和透明传输"><a href="#3-2-1-封装成帧和透明传输" class="headerlink" title="3.2.1 封装成帧和透明传输"></a>3.2.1 封装成帧和透明传输</h3><p><strong>封装成帧</strong>是指数据链路层给上层交付下来的协议数据单元PDU添加一个首部和一个尾部，使之成为帧。</p>
+<p><strong>透明传输</strong>是指数据链路层对上层交付下来的协议数据单元PDU没有任何限制，就好像数据链路层不存在一样。</p>
+<ul>
+<li>面向字节的物理链路使用字节填充的方法实现透明传输。</li>
+<li>面向比特的物理链路使用比特填充的方法实现透明传输。</li>
+<li>帧的首部和尾部中包含有一些重要的控制信息。</li>
+<li>帧首部和尾部的作用之一就是帧定界。并不是每一种数据链路层协议的帧都包含有帧定界标志。</li>
+</ul>
+<p>在传输过程中，如果帧定界和网络协议数据单元的数据发生重合，那还能鉴定出帧定界符么？<br>答案是否定的。解决这个问题时，可以在发送帧之前，对帧的数据部分进行扫描，每出现一个帧定界符，就在其前面插入一个转义字符。接收方数据链路层在物理层交付的比特流中提取帧，遇到第一个帧定界符时，认为这是帧的开始。当遇到转义字符时就知道，其后面的 1 字节内容虽然与帧定界符相同，但它是数据而不是定界符，剔除转义字符后，将其后面的内容作为数据继续提取。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/ef1b0be3512c480a9192d27aa253517dDaUnBZ.png"
+                      alt="ef1b0be3512c480a9192d27aa253517d"
+                ></p>
+<p>要是在传输过程中遇到既包含帧定界符，又包含了转义字符，应该怎么处理？<br>方法依旧是对帧的数据部分进行扫描，每出现一个帧定界符或转义字符，就在其前面插入一个转义字符。转义字符是一个特殊的字符，其长度为1个字节，十进制为27，而并不是E、S、C这三个字符。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/a9c1489e471b46febbe7d979a9ed6110sBBqFv.png"
+                      alt="a9c1489e471b46febbe7d979a9ed6110"
+                ></p>
+<p><strong>MAC 帧</strong>不需要帧尾，用的是帧间间隔。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/92069985a93841da8b24219112492c6cAltxNx.png"
+                      alt="92069985a93841da8b24219112492c6c"
+                ></p>
+<h3 id="3-2-2-差错检测"><a href="#3-2-2-差错检测" class="headerlink" title="3.2.2 差错检测"></a>3.2.2 差错检测</h3><ul>
+<li>实际的通信链路都不是理想的，比特在传输过程中可能会<strong>产生差错</strong>（称为比特差错）：比特1可能变成比特0，比特0可能变成比特1。</li>
+<li>在一段时间内，传输错误的比特数量占所传输比特总数的比率称为<strong>误率</strong>（Bit Error Rate，BER）。</li>
+<li>提高链路的<strong>信噪比</strong>，可以降低误码率。但在实际的通信链路上，不可能使误码率下降为零。</li>
+<li>使用<strong>差错检测技术</strong>来检测数据在传输过程中是否产生了比特差错，是数据链路层所要解决的重要问题之一。</li>
+</ul>
+<h4 id="1-奇偶校验"><a href="#1-奇偶校验" class="headerlink" title="1. 奇偶校验"></a>1. 奇偶校验</h4><ul>
+<li>奇校验是在待发送的数据后面添加1个校验位，使得添加该校验位后的整个数据中比特1的个数为奇数。</li>
+<li>偶校验是在待发送的数据后面添加1个校验位，使得添加该校验位后的整个数据中比特1的个数为偶数。</li>
+<li>在所传输的数据中，若有<strong>奇</strong>数个位发生误码，则所包含比特1的数量的奇偶性会发生改变，可以检测出误码。</li>
+<li>在所传输的数据中，若有<strong>偶</strong>数个位发生误码，则所包含比特1的数量的奇偶性不会发生改变，无法检测出误码（漏检）。</li>
+<li>在实际使用时，奇偶校验又可分为垂直奇偶校验、水平奇偶校验以及水平垂直奇偶校验。</li>
+</ul>
+<h4 id="2-循环冗余校验CRC"><a href="#2-循环冗余校验CRC" class="headerlink" title="2. 循环冗余校验CRC"></a>2. 循环冗余校验CRC</h4><p>数据链路层广泛使用漏检率极低的循环冗余校验（Cyclic Redundancy Check，CRC）检错技术。<br>循环冗余校验CRC的基本思想：</p>
+<ul>
+<li>收发双方约定好一个生成多项式G(X)。</li>
+<li>发送方基于待发送的数据和生成多项式G(X)，计算出差错检测码（冗余码），将冗余码添加到待发送数据的后面一起传输。</li>
+<li>接收方收到数据和冗余码后，通过生成多项式G(X)来计算收到的数据和冗余码是否产生了误码。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/f5672ff519a34539ab864cd7de04b01dVNhnej.png"
+                      alt="f5672ff519a34539ab864cd7de04b01d"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/85dcfe7717eb458d8be38c426187c966rsX9Az.png"
+                      alt="85dcfe7717eb458d8be38c426187c966"
+                ></p>
+<h3 id="3-2-3-可靠传输"><a href="#3-2-3-可靠传输" class="headerlink" title="3.2.3 可靠传输"></a>3.2.3 可靠传输</h3><h4 id="1-可靠传输的相关基本概念"><a href="#1-可靠传输的相关基本概念" class="headerlink" title="1. 可靠传输的相关基本概念"></a>1. 可靠传输的相关基本概念</h4><p>使用差错检测技术（例如循环冗余校验CRC），接收方的数据链路层就可检测出帧在传输过程中是否产生了误码（比特差错）。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/f16aa6a3a7d34285bfc908e93907a93dE3zjb3ipzZdV.png"
+                      alt="f16aa6a3a7d34285bfc908e93907a93d"
+                ></p>
+<p>数据链路层向其上层提供的服务类型：</p>
+<ul>
+<li>不可靠传输服务：仅仅丢弃有误码的帧，其他什么也不做；</li>
+<li>可靠传输服务：通过某种机制实现发送方发送什么，接收方最终就能收到什么。</li>
+</ul>
+<blockquote>
+<p> 一般情况下，有线链路的误码率比较低。为了减小开销，并不要求数据链路层向其上层提供可靠传输服务。即使出现了误码，可靠传输的问题由其上层处理。</p>
+<p>无线链路易受干扰，误码率比较高，因此要求数据链路层必须向其上层提供可靠传输服务。</p>
+</blockquote>
+<ul>
+<li>可靠传输服务并不局限于数据链路层，其他各层均可选择实现可靠传输。</li>
+<li>可靠传输的实现比较复杂，开销比较大，是否使用可靠传输取决于应用需求。</li>
+</ul>
+<h4 id="2-停止-等待协议的实现原理"><a href="#2-停止-等待协议的实现原理" class="headerlink" title="2. 停止-等待协议的实现原理"></a>2. 停止-等待协议的实现原理</h4><h5 id="确认、否认和重传"><a href="#确认、否认和重传" class="headerlink" title="确认、否认和重传"></a>确认、否认和重传</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/7d0ccf0c3ecb42a587b52b65fbe94e081EAIxF.png"
+                      alt="7d0ccf0c3ecb42a587b52b65fbe94e08"
+                ></p>
+<h5 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/3e826e8177f04986b7ad955b7049813emNHTZz.png"
+                      alt="3e826e8177f04986b7ad955b7049813e"
+                ></p>
+<h5 id="确认丢失"><a href="#确认丢失" class="headerlink" title="确认丢失"></a>确认丢失</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/8c6ce97cb2464418a89dfa5a3b278b0eNdcsL6.png"
+                      alt="8c6ce97cb2464418a89dfa5a3b278b0e"
+                ></p>
+<h5 id="确认迟到"><a href="#确认迟到" class="headerlink" title="确认迟到"></a>确认迟到</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/5971b7f249a44e65b8f2aa117bd3f3d6MFK1Hd.png"
+                      alt="5971b7f249a44e65b8f2aa117bd3f3d6"
+                ></p>
+<p>请注意‍‍该数据分组与之前序号为0的数据分组，不是同一个数据分组，我们用给确认分组编号的方法，‍‍解决了确认迟到所导致的重复确认的问题。需要说明的是‍‍对于数据链路层的点对点信道，往返时间比较固定，不会出现确认迟到的情况。‍‍因此‍‍如果只在数据链路层实现停止等待协议，可以不用给确认分组编号。</p>
+<h5 id="信道利用率"><a href="#信道利用率" class="headerlink" title="信道利用率"></a>信道利用率</h5><p>TD：发送方发送数据分组所耗费的发送时延<br>RTT：收发双方之间的往返时间<br>TA：接收方发送确认分组‍‍所耗费的发送时延<br>途中忽略了接收方对数据分组的处理时延，‍‍以及发送方对确认分组的处理时延</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/2d1491fae5c24b66b4a2aef87b1377ae0qrZcL.png"
+                      alt="2d1491fae5c24b66b4a2aef87b1377ae"
+                ></p>
+<ul>
+<li>若出现超时重传，对于传送有用的数据信息来说，信道利用率还要降低。</li>
+<li>在往返时间RTT相对较大的情况下，为了提高信道利用率，收发双方不适合采用停止-等待协议，而可以选择使用回退N帧（GBN）协议或选择重传（SR）协议。</li>
+</ul>
+<h4 id="3-回退N帧协议"><a href="#3-回退N帧协议" class="headerlink" title="3. 回退N帧协议"></a>3. 回退N帧协议</h4><p>回退N帧协议采用流水线传输方式，并利用发送窗口来显示发送方连续发送数据分组的数据，这属于连续ARQ协议。</p>
+<h5 id="流水线传输"><a href="#流水线传输" class="headerlink" title="流水线传输"></a>流水线传输</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171702288jIw1It.png"
+                      alt="image-20230807171702288"
+                ></p>
+<h5 id="发送窗口"><a href="#发送窗口" class="headerlink" title="发送窗口"></a>发送窗口</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171800939poYWtJ.png"
+                      alt="image-20230807171800939"
+                ></p>
+<h5 id="接收窗口"><a href="#接收窗口" class="headerlink" title="接收窗口"></a>接收窗口</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171813940WAjvyv.png"
+                      alt="image-20230807171813940"
+                ></p>
+<ul>
+<li>接收方每正确收到一个序号落入接收窗口的数据分组，就将接收窗口向前滑动一个位置，这样就有一个新的序号落入接收窗口。与此同时，接收方还要给发送方发送针对该数据分组的确认分组。</li>
+<li>发送方每收到一个按序确认的确认分组，就将发送窗口向前滑动一个位置，这样就有一个新的序号落入发送窗口，序号落入发送窗口内的数据分组可继续被发送。</li>
+<li>在回退N帧协议的工作过程中，发送方的发送窗口和接收方的接收窗口按上述规则不断向前滑动。因此，这类协议又称为滑动窗口协议。</li>
+</ul>
+<h5 id="回退N帧含义"><a href="#回退N帧含义" class="headerlink" title="回退N帧含义"></a>回退N帧含义</h5><p>若序号落入发送窗口内的已发送数据分组出现超时，则该数据分组及其后续已发送的数据分组被重传，这就是回退N帧名称的由来，即一旦出错就需要退回去重传已发送过的N个数据分组。</p>
+<h5 id="累计确认"><a href="#累计确认" class="headerlink" title="累计确认"></a>累计确认</h5><ol>
+<li>回退N帧协议采用累计确认方式<ul>
+<li>接收方不必对收到的每一个数据分组都发送一个确认分组，而是可以在收到几个序号连续的数据分组后，对按序到达的最后一个数据分组发送确认分组。</li>
+<li>接收方何时发送累积确认分组，由具体实现决定。</li>
+<li>确认分组ACKn表名序号为n及之前的所有数据分组都已正确接收。</li>
+</ul>
+</li>
+<li>优缺点<ul>
+<li>优点：<ul>
+<li>减少向网络中注入确认分组的数量。</li>
+<li>即使确认分组丢失，也可能不必重传数据分组。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>不能向发送方及时准确地放映出接收方已正确接受的所有数据分组的数量。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="发送窗口的尺寸超越上限"><a href="#发送窗口的尺寸超越上限" class="headerlink" title="发送窗口的尺寸超越上限"></a>发送窗口的尺寸超越上限</h5><p>将出现接收方无法分辨新旧数据分组的情况</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807172944684YJriqL.png"
+                      alt="image-20230807172944684"
+                ></p>
+<h5 id="信道利用率-1"><a href="#信道利用率-1" class="headerlink" title="信道利用率"></a>信道利用率</h5><ol>
+<li><p>无差错的情况</p>
+<p>信道利用率比停止-等待协议高不少</p>
+</li>
+<li><p>有差错的情况</p>
+<p>一个数据分组的差错就可能引起大量数据分组的重传，而这些重传的数据分组原本已经正确到达接收方，但由于序号未落入接收窗口内而被接收方丢弃。显然，这些数据分组的重传是对通信资源的严重浪费。</p>
+</li>
+</ol>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/9bbf0e1633e64310a8fd49be1da77eadPc1Y6A.png"
+                      alt="9bbf0e1633e64310a8fd49be1da77ead"
+                ></p>
+<h4 id="4-选择重传协议"><a href="#4-选择重传协议" class="headerlink" title="4. 选择重传协议"></a>4. 选择重传协议</h4><p>为了进一步提高信道利用率，可以设法只穿出现差错的数据分组，这就需要接受窗口尺寸要大于1，以便先收下时序但正确到接收方且序号落入接收窗口内的数据分组，等到所缺数据分组收齐后再一并送交上层。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/78e687324a8e4813be191fbf6bd2a756IolHEg.png"
+                      alt="78e687324a8e4813be191fbf6bd2a756"
+                ></p>
+<h5 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/3306958d03f7471e90fd6abfafe498eeeW0xIa.png"
+                      alt="3306958d03f7471e90fd6abfafe498ee"
+                ></p>
+]]></content>
+      <tags>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
 </search>
