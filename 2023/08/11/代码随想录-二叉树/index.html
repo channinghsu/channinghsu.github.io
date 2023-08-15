@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E8%BF%AD%E4%BB%A3%EF%BC%88%E7%BB%9F%E4%B8%80%E5%86%99%E6%B3%95%EF%BC%89.gif">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/102%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.gif">
 <meta property="article:published_time" content="2023-08-11T07:20:10.000Z">
-<meta property="article:modified_time" content="2023-08-12T08:03:25.834Z">
+<meta property="article:modified_time" content="2023-08-15T03:52:36.476Z">
 <meta property="article:author" content="Channing Hsu">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="二叉树">
@@ -451,8 +451,8 @@ mjx-container[display="true"] + br {
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-08-12 16:03:25</span>
-            <span class="mobile">2023-08-12 16:03:25</span>
+            <span class="desktop">2023-08-15 11:52:36</span>
+            <span class="mobile">2023-08-15 11:52:36</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -482,12 +482,12 @@ mjx-container[display="true"] + br {
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>4.6k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>4.7k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>17 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>18 分钟</span>
         </span>
     
     
@@ -678,7 +678,7 @@ mjx-container[display="true"] + br {
 <p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/102%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.gif" alt="102二叉树的层序遍历"></p>
 <p>这样就实现了层序从左到右遍历二叉树。</p>
 <p>代码如下：<strong>这份代码也可以作为二叉树层序遍历的模板，打十个就靠它了</strong>。</p>
-<h2 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">levelOrder</span>(TreeNode* root) {</span><br><span class="line">        queue&lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="keyword">while</span> (!que.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line">            <span class="comment">// 这里一定要使用固定大小size，不要使用que.size()，因为que.size是不断变化的</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++) {</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                vec.<span class="built_in">push_back</span>(node-&gt;val);</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            }</span><br><span class="line">            result.<span class="built_in">push_back</span>(vec);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">levelOrder</span>(TreeNode* root) {</span><br><span class="line">        queue&lt;TreeNode*&gt; que;   <span class="comment">// 创建一个队列用于层序遍历</span></span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">nullptr</span>) que.<span class="built_in">push</span>(root); <span class="comment">// 将根节点入队</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res; <span class="comment">// 存储层序遍历结果的二维向量</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!que.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>(); <span class="comment">// 当前层的节点个数</span></span><br><span class="line">            vector&lt;<span class="type">int</span>&gt; vec;       <span class="comment">// 存储当前层节点值的向量</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++) {</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>(); <span class="comment">// 从队列中取出一个节点</span></span><br><span class="line">                que.<span class="built_in">pop</span>();                    <span class="comment">// 出队</span></span><br><span class="line"></span><br><span class="line">                vec.<span class="built_in">push_back</span>(node-&gt;val);     <span class="comment">// 将节点值添加到当前层的向量中</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);   <span class="comment">// 如果左子节点存在，将左子节点入队</span></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right); <span class="comment">// 如果右子节点存在，将右子节点入队</span></span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            res.<span class="built_in">push_back</span>(vec); <span class="comment">// 将当前层的向量添加到结果二维向量中</span></span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res; <span class="comment">// 返回层序遍历的结果</span></span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 递归法</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">order</span><span class="params">(TreeNode* cur, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; result, <span class="type">int</span> depth)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (result.<span class="built_in">size</span>() == depth) result.<span class="built_in">push_back</span>(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">        result[depth].<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">        <span class="built_in">order</span>(cur-&gt;left, result, depth + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">order</span>(cur-&gt;right, result, depth + <span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">levelOrder</span>(TreeNode* root) {</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="type">int</span> depth = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">order</span>(root, result, depth);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 
         </div>
@@ -707,6 +707,21 @@ mjx-container[display="true"] + br {
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/08/14/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">代码随想录-二叉树的属性</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
