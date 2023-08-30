@@ -10749,4 +10749,91 @@ Third paragraph of definition 2.
         <tag>计算机网络</tag>
       </tags>
   </entry>
+  <entry>
+    <title>代码随想录-二叉树的修改与构造</title>
+    <url>/2023/08/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%BF%AE%E6%94%B9%E4%B8%8E%E6%9E%84%E9%80%A0/</url>
+    <content><![CDATA[<h1 id="226-翻转二叉树"><a href="#226-翻转二叉树" class="headerlink" title="226.翻转二叉树"></a>226.翻转二叉树</h1><p><a class="link" href="https://leetcode.cn/problems/invert-binary-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>翻转一棵二叉树。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210203192644329.png" alt="226.翻转二叉树"></p>
+<p>这道题目背后有一个让程序员心酸的故事，听说 Homebrew的作者Max Howell，就是因为没在白板上写出翻转二叉树，最后被Google拒绝了。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们之前介绍的都是各种方式遍历二叉树，这次要翻转了，感觉还是有点懵逼。</p>
+<p>这得怎么翻转呢？</p>
+<p>如果要从整个树来看，翻转还真的挺复杂，整个树以中间分割线进行翻转，如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210203192724351.png" alt="226.翻转二叉树1"></p>
+<p>可以发现想要翻转它，其实就把每一个节点的左右孩子交换一下就可以了。</p>
+<p>关键在于遍历顺序，前中后序应该选哪一种遍历顺序？ （一些同学这道题都过了，但是不知道自己用的是什么顺序）</p>
+<p>遍历的过程中去翻转每一个节点的左右孩子就可以达到整体翻转的效果。</p>
+<p><strong>注意只要把每一个节点的左右孩子翻转一下，就可以达到整体翻转的效果</strong></p>
+<p><strong>这道题目使用前序遍历和后序遍历都可以，唯独中序遍历不方便，因为中序遍历会把某些节点的左右孩子翻转了两次！建议拿纸画一画，就理解了</strong></p>
+<p>那么层序遍历可以不可以呢？<strong>依然可以的！只要把每一个节点的左右孩子翻转一下的遍历方式都是可以的！</strong></p>
+<h3 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h3><p>对于二叉树的递归法的前中后序遍历，已经在<a class="link" href="https://programmercarl.com/二叉树的递归遍历.html">二叉树：前中后序递归遍历 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>详细讲解了。</p>
+<p>我们下文以前序遍历为例，通过动画来看一下翻转的过程:</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91.gif" alt="翻转二叉树"></p>
+<p>我们来看一下递归三部曲：</p>
+<ol>
+<li>确定递归函数的参数和返回值</li>
+</ol>
+<p>参数就是要传入节点的指针，不需要其他参数了，通常此时定下来主要参数，如果在写递归的逻辑中发现还需要其他参数的时候，随时补充。</p>
+<p>返回值的话其实也不需要，但是题目中给出的要返回root节点的指针，可以直接使用题目定义好的函数，所以就函数的返回类型为<code>TreeNode*</code>。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span></span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>确定终止条件</li>
+</ol>
+<p>当前节点为空的时候，就返回</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>确定单层递归的逻辑</li>
+</ol>
+<p>因为是先前序遍历，所以先进行交换左右孩子节点，然后反转左子树，反转右子树。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">swap</span>(root-&gt;left, root-&gt;right);</span><br><span class="line"><span class="built_in">invertTree</span>(root-&gt;left);</span><br><span class="line"><span class="built_in">invertTree</span>(root-&gt;right);</span><br></pre></td></tr></table></figure></div>
+<p>基于这递归三步法，代码基本写完，C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="built_in">swap</span>(root-&gt;left, root-&gt;right);  <span class="comment">// 中</span></span><br><span class="line">        <span class="built_in">invertTree</span>(root-&gt;left);         <span class="comment">// 左</span></span><br><span class="line">        <span class="built_in">invertTree</span>(root-&gt;right);        <span class="comment">// 右</span></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><h4 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h4><p><a class="link" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：听说递归能做的，栈也能做！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中给出了前中后序迭代方式的写法，所以本题可以很轻松的写出如下迭代法的代码：</p>
+<p>C++代码迭代法（前序遍历）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        st.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!st.<span class="built_in">empty</span>()) {</span><br><span class="line">            TreeNode* node = st.<span class="built_in">top</span>();              <span class="comment">// 中</span></span><br><span class="line">            st.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="built_in">swap</span>(node-&gt;left, node-&gt;right);</span><br><span class="line">            <span class="keyword">if</span>(node-&gt;right) st.<span class="built_in">push</span>(node-&gt;right);   <span class="comment">// 右</span></span><br><span class="line">            <span class="keyword">if</span>(node-&gt;left) st.<span class="built_in">push</span>(node-&gt;left);     <span class="comment">// 左</span></span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>如果这个代码看不懂的话可以再回顾一下<a class="link" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：听说递归能做的，栈也能做！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p>我们在<a class="link" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序迭代方式的统一写法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中介绍了统一的写法，所以，本题也只需将文中的代码少做修改便可。</p>
+<p>C++代码如下迭代法（前序遍历）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">NULL</span>) st.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span> (!st.<span class="built_in">empty</span>()) {</span><br><span class="line">            TreeNode* node = st.<span class="built_in">top</span>();</span><br><span class="line">            <span class="keyword">if</span> (node != <span class="literal">NULL</span>) {</span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right) st.<span class="built_in">push</span>(node-&gt;right);  <span class="comment">// 右</span></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left) st.<span class="built_in">push</span>(node-&gt;left);    <span class="comment">// 左</span></span><br><span class="line">                st.<span class="built_in">push</span>(node);                          <span class="comment">// 中</span></span><br><span class="line">                st.<span class="built_in">push</span>(<span class="literal">NULL</span>);</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                node = st.<span class="built_in">top</span>();</span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="built_in">swap</span>(node-&gt;left, node-&gt;right);          <span class="comment">// 节点处理逻辑</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>如果上面这个代码看不懂，回顾一下文章<a class="link" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序迭代方式的统一写法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<h4 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h4><p>也就是层序遍历，层数遍历也是可以翻转这棵树的，因为层序遍历也可以把每个节点的左右孩子都翻转一遍，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        queue&lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span> (!que.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++) {</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="built_in">swap</span>(node-&gt;left, node-&gt;right); <span class="comment">// 节点处理</span></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>如果对以上代码不理解，或者不清楚二叉树的层序遍历，可以看这篇<a class="link" href="https://programmercarl.com/0102.二叉树的层序遍历.html">二叉树：层序遍历登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1 id="106-从中序与后序遍历序列构造二叉树"><a href="#106-从中序与后序遍历序列构造二叉树" class="headerlink" title="106.从中序与后序遍历序列构造二叉树"></a>106.从中序与后序遍历序列构造二叉树</h1><p><a class="link" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>根据一棵树的中序遍历与后序遍历构造二叉树。</p>
+<p>注意:<br>你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<ul>
+<li>中序遍历 inorder = [9,3,15,20,7]</li>
+<li>后序遍历 postorder = [9,15,7,20,3]<br>返回如下的二叉树：</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230828095015089LI0Jeup2FJGV.png" alt=""></p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>首先回忆一下如何根据两个顺序构造一个唯一的二叉树，相信理论知识大家应该都清楚，就是以 后序数组的最后一个元素为切割点，先切中序数组，根据中序数组，反过来再切后序数组。一层一层切下去，每次后序数组最后一个元素就是节点元素。</p>
+<p>如果让我们肉眼看两个序列，画一棵二叉树的话，应该分分钟都可以画出来。</p>
+<p>流程如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210203154249860.png" alt="106.从中序与后序遍历序列构造二叉树"></p>
+<p>那么代码应该怎么写呢？</p>
+<p>说到一层一层切割，就应该想到了递归。</p>
+<p>说到一层一层切割，就应该想到了递归。</p>
+<p>来看一下一共分几步：</p>
+<ul>
+<li><p>第一步：如果数组大小为零的话，说明是空节点了。</p>
+</li>
+<li><p>第二步：如果不为空，那么取后序数组最后一个元素作为节点元素。</p>
+</li>
+<li><p>第三步：找到后序数组最后一个元素在中序数组的位置，作为切割点</p>
+</li>
+<li><p>第四步：切割中序数组，切成中序左数组和中序右数组 （顺序别搞反了，一定是先切中序数组）</p>
+</li>
+<li><p>第五步：切割后序数组，切成后序左数组和后序右数组</p>
+</li>
+<li><p>第六步：递归处理左区间和右区间</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
 </search>
