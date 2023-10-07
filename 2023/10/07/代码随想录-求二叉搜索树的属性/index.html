@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://cdn.staticfile.org" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/10/07/代码随想录-求二叉搜索树的属性/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录-求二叉搜索树的属性">
+<meta property="og:url" content="https://channinghsu.github.io/2023/10/07/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E6%B1%82%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155522476.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20200812190213280.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000750.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000824.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014223400123.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204153247458.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014221532206.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204152758889.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201023160751832.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204153440666.png">
+<meta property="article:published_time" content="2023-10-07T14:34:15.000Z">
+<meta property="article:modified_time" content="2023-10-07T15:03:26.954Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="二叉树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155522476.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            代码随想录-求二叉搜索树的属性 -
+        
+        Channing&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/fonts/fonts.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/fonts/Satoshi/satoshi.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/fonts/Chillax/chillax.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[],"icon":"fa-solid fa-bookmark"}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/about"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/about"  >
+                             
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">代码随想录-求二叉搜索树的属性</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header flex flex-row gap-2 items-center">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-10-07 22:34:15</span>
+        <span class="mobile">2023-10-07 22:34:15</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-07 23:03:26</span>
+            <span class="mobile">2023-10-07 23:03:26</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>7.4k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>29 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="700-二叉搜索树中的搜索"><a href="#700-二叉搜索树中的搜索" class="headerlink" title="700.二叉搜索树中的搜索"></a>700.二叉搜索树中的搜索</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/">力扣题目地址 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定二叉搜索树（BST）的根节点和一个值。 你需要在BST中找到节点值等于给定值的节点。 返回以该节点为根的子树。 如果节点不存在，则返回 NULL。</p>
+<p>例如，</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155522476.png" alt="700.二叉搜索树中的搜索"></p>
+<p>在上述示例中，如果要找的值是 5，但因为没有节点值为 5，我们应该返回 NULL。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>之前我们讲的都是普通二叉树，那么接下来看看二叉搜索树。</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树理论基础.html">关于二叉树，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，我们已经讲过了二叉搜索树。</p>
+<p>二叉搜索树是一个有序树：</p>
+<ul>
+<li>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>它的左、右子树也分别为二叉搜索树</li>
+</ul>
+<p>这就决定了，二叉搜索树，递归遍历和迭代遍历和普通二叉树都不一样。</p>
+<p>本题，其实就是在二叉搜索树中搜索一个节点。那么我们来看看应该如何遍历。</p>
+<h3 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h3><ol>
+<li>确定递归函数的参数和返回值</li>
+</ol>
+<p>递归函数的参数传入的就是根节点和要搜索的数值，返回的就是以这个搜索数值所在的节点。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">searchBST</span><span class="params">(TreeNode* root, <span class="type">int</span> val)</span></span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>确定终止条件</li>
+</ol>
+<p>如果root为空，或者找到这个数值了，就返回root节点。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (root == <span class="literal">NULL</span> || root-&gt;val == val) <span class="keyword">return</span> root;</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>确定单层递归的逻辑</li>
+</ol>
+<p>看看二叉搜索树的单层递归逻辑有何不同。</p>
+<p>因为二叉搜索树的节点是有序的，所以可以有方向的去搜索。</p>
+<p>如果root-&gt;val &gt; val，搜索左子树，如果root-&gt;val &lt; val，就搜索右子树，最后如果都没有搜索到，就返回NULL。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TreeNode* result = <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">if</span> (root-&gt;val &gt; val) result = <span class="built_in">searchBST</span>(root-&gt;left, val);</span><br><span class="line"><span class="keyword">if</span> (root-&gt;val &lt; val) result = <span class="built_in">searchBST</span>(root-&gt;right, val);</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure></div>
+<p>很多录友写递归函数的时候 习惯直接写 <code>searchBST(root-&gt;left, val)</code>，却忘了 递归函数还有返回值。 </p>
+<p>递归函数的返回值是什么?  是 左子树如果搜索到了val，要将该节点返回。 如果不用一个变量将其接住，那么返回值不就没了。</p>
+<p>所以要  <code>result = searchBST(root-&gt;left, val)</code>。 </p>
+<p>整体代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">searchBST</span><span class="params">(TreeNode* root, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span> || root-&gt;val == val) <span class="keyword">return</span> root;</span><br><span class="line">        TreeNode* result = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; val) result = <span class="built_in">searchBST</span>(root-&gt;left, val);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &lt; val) result = <span class="built_in">searchBST</span>(root-&gt;right, val);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>或者我们也可以这么写 </p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">searchBST</span><span class="params">(TreeNode* root, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span> || root-&gt;val == val) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; val) <span class="keyword">return</span> <span class="built_in">searchBST</span>(root-&gt;left, val);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &lt; val) <span class="keyword">return</span> <span class="built_in">searchBST</span>(root-&gt;right, val);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><p>一提到二叉树遍历的迭代法，可能立刻想起使用栈来模拟深度遍历，使用队列来模拟广度遍历。</p>
+<p>对于二叉搜索树可就不一样了，因为二叉搜索树的特殊性，也就是节点的有序性，可以不使用辅助栈或者队列就可以写出迭代法。</p>
+<p>对于一般二叉树，递归过程中还有回溯的过程，例如走一个左方向的分支走到头了，那么要调头，在走右分支。</p>
+<p>而<strong>对于二叉搜索树，不需要回溯的过程，因为节点的有序性就帮我们确定了搜索的方向。</strong></p>
+<p>例如要搜索元素为3的节点，<strong>我们不需要搜索其他节点，也不需要做回溯，查找的路径已经规划好了。</strong></p>
+<p>中间节点如果大于3就向左走，如果小于3就向右走，如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20200812190213280.png" alt="二叉搜索树"></p>
+<p>所以迭代法代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">searchBST</span><span class="params">(TreeNode* root, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        <span class="keyword">while</span> (root != <span class="literal">NULL</span>) {</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;val &gt; val) root = root-&gt;left;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;val &lt; val) root = root-&gt;right;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> root;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本篇我们介绍了二叉搜索树的遍历方式，因为二叉搜索树的有序性，遍历的时候要比普通二叉树简单很多。</p>
+<p>但是一些同学很容易忽略二叉搜索树的特性，所以写出遍历的代码就未必真的简单了。</p>
+<p>所以针对二叉搜索树的题目，一样要利用其特性。</p>
+<p>文中我依然给出递归和迭代两种方式，可以看出写法都非常简单，就是利用了二叉搜索树有序的特点。</p>
+<p>98.验证二叉搜索树</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。</p>
+<p>假设一个二叉搜索树具有如下特征：</p>
+<ul>
+<li>节点的左子树只包含小于当前节点的数。</li>
+<li>节点的右子树只包含大于当前节点的数。</li>
+<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000750.png" alt="98.验证二叉搜索树"></p>
+<h2 id="算法公开课"><a href="#算法公开课" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18P411n7Q4">你对二叉搜索树了解的还不够！ | LeetCode：98.验证二叉搜索树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>要知道中序遍历下，输出的二叉搜索树节点的数值是有序序列。</p>
+<p>有了这个特性，<strong>验证二叉搜索树，就相当于变成了判断一个序列是不是递增的了。</strong></p>
+<h3 id="递归法-1"><a href="#递归法-1" class="headerlink" title="递归法"></a>递归法</h3><p>可以递归中序遍历将二叉搜索树转变成一个数组，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">traversal</span>(root-&gt;left);</span><br><span class="line">    vec.<span class="built_in">push_back</span>(root-&gt;val); <span class="comment">// 将二叉搜索树转换为有序数组</span></span><br><span class="line">    <span class="built_in">traversal</span>(root-&gt;right);</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>然后只要比较一下，这个数组是否是有序的，<strong>注意二叉搜索树中不能有重复元素</strong>。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">traversal</span>(root);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; vec.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    <span class="comment">// 注意要小于等于，搜索树里不能有相同元素</span></span><br><span class="line">    <span class="keyword">if</span> (vec[i] &lt;= vec[i - <span class="number">1</span>]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></div>
+<p>整体代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">traversal</span>(root-&gt;left);</span><br><span class="line">        vec.<span class="built_in">push_back</span>(root-&gt;val); <span class="comment">// 将二叉搜索树转换为有序数组</span></span><br><span class="line">        <span class="built_in">traversal</span>(root-&gt;right);</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        vec.<span class="built_in">clear</span>(); <span class="comment">// 不加这句在leetcode上也可以过，但最好加上</span></span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; vec.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="comment">// 注意要小于等于，搜索树里不能有相同元素</span></span><br><span class="line">            <span class="keyword">if</span> (vec[i] &lt;= vec[i - <span class="number">1</span>]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>以上代码中，我们把二叉树转变为数组来判断，是最直观的，但其实不用转变成数组，可以在递归遍历的过程中直接判断是否有序。</p>
+<p>这道题目比较容易陷入两个陷阱：</p>
+<ul>
+<li>陷阱1</li>
+</ul>
+<p><strong>不能单纯的比较左节点小于中间节点，右节点大于中间节点就完事了</strong>。</p>
+<p>写出了类似这样的代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (root-&gt;val &gt; root-&gt;left-&gt;val &amp;&amp; root-&gt;val &lt; root-&gt;right-&gt;val) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">} <span class="keyword">else</span> {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>我们要比较的是 左子树所有节点小于中间节点，右子树所有节点大于中间节点</strong>。所以以上代码的判断逻辑是错误的。</p>
+<p>例如： [10,5,15,null,null,6,20] 这个case：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000824.png" alt="二叉搜索树"></p>
+<p>节点10大于左节点5，小于右节点15，但右子树里出现了一个6 这就不符合了！</p>
+<ul>
+<li>陷阱2</li>
+</ul>
+<p>样例中最小节点 可能是int的最小值，如果这样使用最小的int来比较也是不行的。</p>
+<p>此时可以初始化比较元素为longlong的最小值。</p>
+<p>问题可以进一步演进：如果样例中根节点的val 可能是longlong的最小值 又要怎么办呢？文中会解答。</p>
+<p>了解这些陷阱之后我们来看一下代码应该怎么写：</p>
+<p>递归三部曲：</p>
+<ul>
+<li>确定递归函数，返回值以及参数</li>
+</ul>
+<p>要定义一个longlong的全局变量，用来比较遍历的节点是否有序，因为后台测试数据中有int最小值，所以定义为longlong的类型，初始化为longlong最小值。</p>
+<p>注意递归函数要有bool类型的返回值， 我们在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0112.路径总和.html">二叉树：递归函数究竟什么时候需要返回值，什么时候不要返回值？ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 中讲了，只有寻找某一条边（或者一个节点）的时候，递归函数会有bool类型的返回值。</p>
+<p>其实本题是同样的道理，我们在寻找一个不符合条件的节点，如果没有找到这个节点就遍历了整个树，如果找到不符合的节点了，立刻返回。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="type">long</span> maxVal = LONG_MIN; <span class="comment">// 因为后台测试数据中有int最小值</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span></span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>如果是空节点 是不是二叉搜索树呢？</p>
+<p>是的，二叉搜索树也可以为空！</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定单层递归的逻辑</li>
+</ul>
+<p>中序遍历，一直更新maxVal，一旦发现maxVal &gt;= root-&gt;val，就返回false，注意元素相同时候也要返回false。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> left = <span class="built_in">isValidBST</span>(root-&gt;left);         <span class="comment">// 左</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 中序遍历，验证遍历的元素是不是从小到大</span></span><br><span class="line"><span class="keyword">if</span> (maxVal &lt; root-&gt;val) maxVal = root-&gt;val; <span class="comment">// 中</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> right = <span class="built_in">isValidBST</span>(root-&gt;right);       <span class="comment">// 右</span></span><br><span class="line"><span class="keyword">return</span> left &amp;&amp; right;</span><br></pre></td></tr></table></figure></div>
+<p>整体代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> maxVal = LONG_MIN; <span class="comment">// 因为后台测试数据中有int最小值</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">bool</span> left = <span class="built_in">isValidBST</span>(root-&gt;left);</span><br><span class="line">        <span class="comment">// 中序遍历，验证遍历的元素是不是从小到大</span></span><br><span class="line">        <span class="keyword">if</span> (maxVal &lt; root-&gt;val) maxVal = root-&gt;val;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">bool</span> right = <span class="built_in">isValidBST</span>(root-&gt;right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>以上代码是因为后台数据有int最小值测试用例，所以都把maxVal改成了longlong最小值。</p>
+<p>如果测试数据中有 longlong的最小值，怎么办？</p>
+<p>不可能在初始化一个更小的值了吧。 建议避免 初始化最小值，如下方法取到最左面节点的数值来比较。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode* pre = <span class="literal">NULL</span>; <span class="comment">// 用来记录前一个节点</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">bool</span> left = <span class="built_in">isValidBST</span>(root-&gt;left);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pre != <span class="literal">NULL</span> &amp;&amp; pre-&gt;val &gt;= root-&gt;val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        pre = root; <span class="comment">// 记录前一个节点</span></span><br><span class="line"></span><br><span class="line">        <span class="type">bool</span> right = <span class="built_in">isValidBST</span>(root-&gt;right);</span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>最后这份代码看上去整洁一些，思路也清晰。</p>
+<h3 id="迭代法-1"><a href="#迭代法-1" class="headerlink" title="迭代法"></a>迭代法</h3><p>可以用迭代法模拟二叉树中序遍历，对前中后序迭代法生疏的同学可以看这两篇<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：听说递归能做的，栈也能做！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序迭代方式统一写法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>迭代法中序遍历稍加改动就可以了，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        TreeNode* pre = <span class="literal">NULL</span>; <span class="comment">// 记录前一个节点</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span> || !st.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="keyword">if</span> (cur != <span class="literal">NULL</span>) {</span><br><span class="line">                st.<span class="built_in">push</span>(cur);</span><br><span class="line">                cur = cur-&gt;left;                <span class="comment">// 左</span></span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                cur = st.<span class="built_in">top</span>();                 <span class="comment">// 中</span></span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span> (pre != <span class="literal">NULL</span> &amp;&amp; cur-&gt;val &lt;= pre-&gt;val)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                pre = cur; <span class="comment">//保存前一个访问的结点</span></span><br><span class="line"></span><br><span class="line">                cur = cur-&gt;right;               <span class="comment">// 右</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0700.二叉搜索树中的搜索.html">二叉树：二叉搜索树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们分明写出了痛哭流涕的简洁迭代法，怎么在这里不行了呢，因为本题是要验证二叉搜索树啊。</p>
+<h1 id="530-二叉搜索树的最小绝对差"><a href="#530-二叉搜索树的最小绝对差" class="headerlink" title="530.二叉搜索树的最小绝对差"></a>530.二叉搜索树的最小绝对差</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值。</p>
+<p>示例：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014223400123.png" alt="530二叉搜索树的最小绝对差"></p>
+<p>提示：树中至少有 2 个节点。</p>
+<h2 id="算法公开课-1"><a href="#算法公开课-1" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DD4y11779">二叉搜索树中，需要掌握如何双指针遍历！| LeetCode：530.二叉搜索树的最小绝对差 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>题目中要求在二叉搜索树上任意两节点的差的绝对值的最小值。</p>
+<p><strong>注意是二叉搜索树</strong>，二叉搜索树可是有序的。</p>
+<p>遇到在二叉搜索树上求什么最值啊，差值之类的，就把它想成在一个有序数组上求最值，求差值，这样就简单多了。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>那么二叉搜索树采用中序遍历，其实就是一个有序数组。</p>
+<p><strong>在一个有序数组上求两个数最小差值，这是不是就是一道送分题了。</strong></p>
+<p>最直观的想法，就是把二叉搜索树转换成有序数组，然后遍历一遍数组，就统计出来最小差值了。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">traversal</span>(root-&gt;left);</span><br><span class="line">    vec.<span class="built_in">push_back</span>(root-&gt;val); <span class="comment">// 将二叉搜索树转换为有序数组</span></span><br><span class="line">    <span class="built_in">traversal</span>(root-&gt;right);</span><br><span class="line">}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getMinimumDifference</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        vec.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">if</span> (vec.<span class="built_in">size</span>() &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> result = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; vec.<span class="built_in">size</span>(); i++) { <span class="comment">// 统计有序数组的最小差值</span></span><br><span class="line">            result = <span class="built_in">min</span>(result, vec[i] - vec[i<span class="number">-1</span>]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>以上代码是把二叉搜索树转化为有序数组了，其实在二叉搜素树中序遍历的过程中，我们就可以直接计算了。</p>
+<p>需要用一个pre节点记录一下cur节点的前一个节点。</p>
+<p>如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204153247458.png" alt="530.二叉搜索树的最小绝对差"></p>
+<p>一些同学不知道在递归中如何记录前一个节点的指针，其实实现起来是很简单的，大家只要看过一次，写过一次，就掌握了。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="type">int</span> result = INT_MAX;</span><br><span class="line">TreeNode* pre = <span class="literal">NULL</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* cur)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">traversal</span>(cur-&gt;left);   <span class="comment">// 左</span></span><br><span class="line">    <span class="keyword">if</span> (pre != <span class="literal">NULL</span>){       <span class="comment">// 中</span></span><br><span class="line">        result = <span class="built_in">min</span>(result, cur-&gt;val - pre-&gt;val);</span><br><span class="line">    }</span><br><span class="line">    pre = cur; <span class="comment">// 记录前一个</span></span><br><span class="line">    <span class="built_in">traversal</span>(cur-&gt;right);  <span class="comment">// 右</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getMinimumDifference</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>是不是看上去也并不复杂！</p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>看过这两篇<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：听说递归能做的，栈也能做！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序迭代方式的写法就不能统一一下么？ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>文章之后，不难写出两种中序遍历的迭代法。</p>
+<p>下面我给出其中的一种中序遍历的迭代法，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getMinimumDifference</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        TreeNode* pre = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="type">int</span> result = INT_MAX;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span> || !st.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="keyword">if</span> (cur != <span class="literal">NULL</span>) { <span class="comment">// 指针来访问节点，访问到最底层</span></span><br><span class="line">                st.<span class="built_in">push</span>(cur); <span class="comment">// 将访问的节点放进栈</span></span><br><span class="line">                cur = cur-&gt;left;                <span class="comment">// 左</span></span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                cur = st.<span class="built_in">top</span>();</span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span> (pre != <span class="literal">NULL</span>) {              <span class="comment">// 中</span></span><br><span class="line">                    result = <span class="built_in">min</span>(result, cur-&gt;val - pre-&gt;val);</span><br><span class="line">                }</span><br><span class="line">                pre = cur;</span><br><span class="line">                cur = cur-&gt;right;               <span class="comment">// 右</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p><strong>遇到在二叉搜索树上求什么最值，求差值之类的，都要思考一下二叉搜索树可是有序的，要利用好这一特点。</strong></p>
+<p>同时要学会在递归遍历的过程中如何记录前后两个指针，这也是一个小技巧，学会了还是很受用的。</p>
+<p>后面我将继续介绍一系列利用二叉搜索树特性的题目。</p>
+<h1 id="501-二叉搜索树中的众数"><a href="#501-二叉搜索树中的众数" class="headerlink" title="501.二叉搜索树中的众数"></a>501.二叉搜索树中的众数</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-mode-in-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。</p>
+<p>假定 BST 有如下定义：</p>
+<ul>
+<li>结点左子树中所含结点的值小于等于当前结点的值</li>
+<li>结点右子树中所含结点的值大于等于当前结点的值</li>
+<li>左子树和右子树都是二叉搜索树</li>
+</ul>
+<p>例如：</p>
+<p>给定 BST [1,null,2,2],</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014221532206.png" alt="501. 二叉搜索树中的众数"></p>
+<p>返回[2].</p>
+<p>提示：如果众数超过1个，不需考虑输出顺序</p>
+<p>进阶：你可以不使用额外的空间吗？（假设由递归产生的隐式调用栈的开销不被计算在内）</p>
+<h2 id="算法公开课-2"><a href="#算法公开课-2" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fD4y117gp">不仅双指针，还有代码技巧可以惊艳到你！ | LeetCode：501.二叉搜索树中的众数 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>这道题目呢，递归法我从两个维度来讲。</p>
+<p>首先如果不是二叉搜索树的话，应该怎么解题，是二叉搜索树，又应该如何解题，两种方式做一个比较，可以加深大家对二叉树的理解。</p>
+<h3 id="递归法-2"><a href="#递归法-2" class="headerlink" title="递归法"></a>递归法</h3><h4 id="如果不是二叉搜索树"><a href="#如果不是二叉搜索树" class="headerlink" title="如果不是二叉搜索树"></a>如果不是二叉搜索树</h4><p>如果不是二叉搜索树，最直观的方法一定是把这个树都遍历了，用map统计频率，把频率排个序，最后取前面高频的元素的集合。</p>
+<p>具体步骤如下：</p>
+<ol>
+<li>这个树都遍历了，用map统计频率</li>
+</ol>
+<p>至于用前中后序哪种遍历也不重要，因为就是要全遍历一遍，怎么个遍历法都行，层序遍历都没毛病！</p>
+<p>这里采用前序遍历，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map&lt;int, int&gt; key:元素，value:出现频率</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">searchBST</span><span class="params">(TreeNode* cur, unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; map)</span> </span>{ <span class="comment">// 前序遍历</span></span><br><span class="line">    <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span> ;</span><br><span class="line">    map[cur-&gt;val]++; <span class="comment">// 统计元素频率</span></span><br><span class="line">    <span class="built_in">searchBST</span>(cur-&gt;left, map);</span><br><span class="line">    <span class="built_in">searchBST</span>(cur-&gt;right, map);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>把统计的出来的出现频率（即map中的value）排个序</li>
+</ol>
+<p>有的同学可能可以想直接对map中的value排序，还真做不到，C++中如果使用std::map或者std::multimap可以对key排序，但不能对value排序。</p>
+<p>所以要把map转化数组即vector，再进行排序，当然vector里面放的也是<code>pair&lt;int, int&gt;</code>类型的数据，第一个int为元素，第二个int为出现频率。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="type">static</span> <span class="title">cmp</span> <span class="params">(<span class="type">const</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; a, <span class="type">const</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; b)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> a.second &gt; b.second; <span class="comment">// 按照频率从大到小排序</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&gt; <span class="built_in">vec</span>(map.<span class="built_in">begin</span>(), map.<span class="built_in">end</span>());</span><br><span class="line"><span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), cmp); <span class="comment">// 给频率排个序</span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>取前面高频的元素</li>
+</ol>
+<p>此时数组vector中已经是存放着按照频率排好序的pair，那么把前面高频的元素取出来就可以了。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">result.<span class="built_in">push_back</span>(vec[<span class="number">0</span>].first);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; vec.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    <span class="comment">// 取最高的放到result数组中</span></span><br><span class="line">    <span class="keyword">if</span> (vec[i].second == vec[<span class="number">0</span>].second) result.<span class="built_in">push_back</span>(vec[i].first);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure></div>
+<p>整体C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">searchBST</span><span class="params">(TreeNode* cur, unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; map)</span> </span>{ <span class="comment">// 前序遍历</span></span><br><span class="line">    <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span> ;</span><br><span class="line">    map[cur-&gt;val]++; <span class="comment">// 统计元素频率</span></span><br><span class="line">    <span class="built_in">searchBST</span>(cur-&gt;left, map);</span><br><span class="line">    <span class="built_in">searchBST</span>(cur-&gt;right, map);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="type">static</span> <span class="title">cmp</span> <span class="params">(<span class="type">const</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; a, <span class="type">const</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; b)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> a.second &gt; b.second;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findMode</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; map; <span class="comment">// key:元素，value:出现频率</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> result;</span><br><span class="line">        <span class="built_in">searchBST</span>(root, map);</span><br><span class="line">        vector&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&gt; <span class="built_in">vec</span>(map.<span class="built_in">begin</span>(), map.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), cmp); <span class="comment">// 给频率排个序</span></span><br><span class="line">        result.<span class="built_in">push_back</span>(vec[<span class="number">0</span>].first);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; vec.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="comment">// 取最高的放到result数组中</span></span><br><span class="line">            <span class="keyword">if</span> (vec[i].second == vec[<span class="number">0</span>].second) result.<span class="built_in">push_back</span>(vec[i].first);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p><strong>所以如果本题没有说是二叉搜索树的话，那么就按照上面的思路写！</strong></p>
+<h4 id="是二叉搜索树"><a href="#是二叉搜索树" class="headerlink" title="是二叉搜索树"></a>是二叉搜索树</h4><p><strong>既然是搜索树，它中序遍历就是有序的</strong>。</p>
+<p>如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204152758889.png" alt="501.二叉搜索树中的众数1"></p>
+<p>中序遍历代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">searchBST</span><span class="params">(TreeNode* cur)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="built_in">searchBST</span>(cur-&gt;left);       <span class="comment">// 左</span></span><br><span class="line">    （处理节点）                <span class="comment">// 中</span></span><br><span class="line">    <span class="built_in">searchBST</span>(cur-&gt;right);      <span class="comment">// 右</span></span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>遍历有序数组的元素出现频率，从头遍历，那么一定是相邻两个元素作比较，然后就把出现频率最高的元素输出就可以了。</p>
+<p>关键是在有序数组上的话，好搞，在树上怎么搞呢？</p>
+<p>这就考察对树的操作了。</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0530.二叉搜索树的最小绝对差.html">二叉树：搜索树的最小绝对差 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们就使用了pre指针和cur指针的技巧，这次又用上了。</p>
+<p>弄一个指针指向前一个节点，这样每次cur（当前节点）才能和pre（前一个节点）作比较。</p>
+<p>而且初始化的时候pre = NULL，这样当pre为NULL时候，我们就知道这是比较的第一个元素。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (pre == <span class="literal">NULL</span>) { <span class="comment">// 第一个节点</span></span><br><span class="line">    count = <span class="number">1</span>; <span class="comment">// 频率为1</span></span><br><span class="line">} <span class="keyword">else</span> <span class="keyword">if</span> (pre-&gt;val == cur-&gt;val) { <span class="comment">// 与前一个节点数值相同</span></span><br><span class="line">    count++;</span><br><span class="line">} <span class="keyword">else</span> { <span class="comment">// 与前一个节点数值不同</span></span><br><span class="line">    count = <span class="number">1</span>;</span><br><span class="line">}</span><br><span class="line">pre = cur; <span class="comment">// 更新上一个节点</span></span><br></pre></td></tr></table></figure></div>
+<p>此时又有问题了，因为要求最大频率的元素集合（注意是集合，不是一个元素，可以有多个众数），如果是数组上大家一般怎么办？</p>
+<p>应该是先遍历一遍数组，找出最大频率（maxCount），然后再重新遍历一遍数组把出现频率为maxCount的元素放进集合。（因为众数有多个）</p>
+<p>这种方式遍历了两遍数组。</p>
+<p>那么我们遍历两遍二叉搜索树，把众数集合算出来也是可以的。</p>
+<p>但这里其实只需要遍历一次就可以找到所有的众数。</p>
+<p>那么如何只遍历一遍呢？</p>
+<p>如果 频率count 等于 maxCount（最大频率），当然要把这个元素加入到结果集中（以下代码为result数组），代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (count == maxCount) { <span class="comment">// 如果和最大值相同，放进result中</span></span><br><span class="line">    result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>是不是感觉这里有问题，result怎么能轻易就把元素放进去了呢，万一，这个maxCount此时还不是真正最大频率呢。</p>
+<p>所以下面要做如下操作：</p>
+<p>频率count 大于 maxCount的时候，不仅要更新maxCount，而且要清空结果集（以下代码为result数组），因为结果集之前的元素都失效了。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (count &gt; maxCount) { <span class="comment">// 如果计数大于最大值</span></span><br><span class="line">    maxCount = count;   <span class="comment">// 更新最大频率</span></span><br><span class="line">    result.<span class="built_in">clear</span>();     <span class="comment">// 很关键的一步，不要忘记清空result，之前result里的元素都失效了</span></span><br><span class="line">    result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>关键代码都讲完了，完整代码如下：（<strong>只需要遍历一遍二叉搜索树，就求出了众数的集合</strong>）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> maxCount = <span class="number">0</span>; <span class="comment">// 最大频率</span></span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// 统计频率</span></span><br><span class="line">    TreeNode* pre = <span class="literal">NULL</span>;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; result;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">searchBST</span><span class="params">(TreeNode* cur)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span> ;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">searchBST</span>(cur-&gt;left);       <span class="comment">// 左</span></span><br><span class="line">                                    <span class="comment">// 中</span></span><br><span class="line">        <span class="keyword">if</span> (pre == <span class="literal">NULL</span>) { <span class="comment">// 第一个节点</span></span><br><span class="line">            count = <span class="number">1</span>;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (pre-&gt;val == cur-&gt;val) { <span class="comment">// 与前一个节点数值相同</span></span><br><span class="line">            count++;</span><br><span class="line">        } <span class="keyword">else</span> { <span class="comment">// 与前一个节点数值不同</span></span><br><span class="line">            count = <span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">        pre = cur; <span class="comment">// 更新上一个节点</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count == maxCount) { <span class="comment">// 如果和最大值相同，放进result中</span></span><br><span class="line">            result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &gt; maxCount) { <span class="comment">// 如果计数大于最大值频率</span></span><br><span class="line">            maxCount = count;   <span class="comment">// 更新最大频率</span></span><br><span class="line">            result.<span class="built_in">clear</span>();     <span class="comment">// 很关键的一步，不要忘记清空result，之前result里的元素都失效了</span></span><br><span class="line">            result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="built_in">searchBST</span>(cur-&gt;right);      <span class="comment">// 右</span></span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findMode</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line">        maxCount = <span class="number">0</span>;</span><br><span class="line">        pre = <span class="literal">NULL</span>; <span class="comment">// 记录前一个节点</span></span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">searchBST</span>(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="迭代法-2"><a href="#迭代法-2" class="headerlink" title="迭代法"></a>迭代法</h3><p>只要把中序遍历转成迭代，中间节点的处理逻辑完全一样。</p>
+<p>二叉树前中后序转迭代，传送门：</p>
+<ul>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：前中后序迭代法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序统一风格的迭代方式 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<p>下面我给出其中的一种中序遍历的迭代法，其中间处理逻辑一点都没有变（我从递归法直接粘过来的代码，连注释都没改）</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findMode</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        TreeNode* pre = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="type">int</span> maxCount = <span class="number">0</span>; <span class="comment">// 最大频率</span></span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// 统计频率</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span> || !st.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="keyword">if</span> (cur != <span class="literal">NULL</span>) { <span class="comment">// 指针来访问节点，访问到最底层</span></span><br><span class="line">                st.<span class="built_in">push</span>(cur); <span class="comment">// 将访问的节点放进栈</span></span><br><span class="line">                cur = cur-&gt;left;                <span class="comment">// 左</span></span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                cur = st.<span class="built_in">top</span>();</span><br><span class="line">                st.<span class="built_in">pop</span>();                       <span class="comment">// 中</span></span><br><span class="line">                <span class="keyword">if</span> (pre == <span class="literal">NULL</span>) { <span class="comment">// 第一个节点</span></span><br><span class="line">                    count = <span class="number">1</span>;</span><br><span class="line">                } <span class="keyword">else</span> <span class="keyword">if</span> (pre-&gt;val == cur-&gt;val) { <span class="comment">// 与前一个节点数值相同</span></span><br><span class="line">                    count++;</span><br><span class="line">                } <span class="keyword">else</span> { <span class="comment">// 与前一个节点数值不同</span></span><br><span class="line">                    count = <span class="number">1</span>;</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">if</span> (count == maxCount) { <span class="comment">// 如果和最大值相同，放进result中</span></span><br><span class="line">                    result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">                }</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (count &gt; maxCount) { <span class="comment">// 如果计数大于最大值频率</span></span><br><span class="line">                    maxCount = count;   <span class="comment">// 更新最大频率</span></span><br><span class="line">                    result.<span class="built_in">clear</span>();     <span class="comment">// 很关键的一步，不要忘记清空result，之前result里的元素都失效了</span></span><br><span class="line">                    result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">                }</span><br><span class="line">                pre = cur;</span><br><span class="line">                cur = cur-&gt;right;               <span class="comment">// 右</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>本题在递归法中，我给出了如果是普通二叉树，应该怎么求众数。</p>
+<p>知道了普通二叉树的做法时候，我再进一步给出二叉搜索树又应该怎么求众数，这样鲜明的对比，相信会对二叉树又有更深层次的理解了。</p>
+<p>在递归遍历二叉搜索树的过程中，我还介绍了一个统计最高出现频率元素集合的技巧， 要不然就要遍历两次二叉搜索树才能把这个最高出现频率元素的集合求出来。</p>
+<p><strong>为什么没有这个技巧一定要遍历两次呢？ 因为要求的是集合，会有多个众数，如果规定只有一个众数，那么就遍历一次稳稳的了。</strong></p>
+<p>最后我依然给出对应的迭代法，其实就是迭代法中序遍历的模板加上递归法中中间节点的处理逻辑，分分钟就可以写出来，中间逻辑的代码我都是从递归法中直接粘过来的。</p>
+<p><strong>求二叉搜索树中的众数其实是一道简单题，但大家可以发现我写了这么一大篇幅的文章来讲解，主要是为了尽量从各个角度对本题进剖析，帮助大家更快更深入理解二叉树</strong>。</p>
+<blockquote>
+<p><strong>需要强调的是 leetcode上的耗时统计是非常不准确的，看个大概就行，一样的代码耗时可以差百分之50以上</strong>，所以leetcode的耗时统计别太当回事，知道理论上的效率优劣就行了。</p>
+</blockquote>
+<h1 id="538-把二叉搜索树转换为累加树"><a href="#538-把二叉搜索树转换为累加树" class="headerlink" title="538.把二叉搜索树转换为累加树"></a>538.把二叉搜索树转换为累加树</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-bst-to-greater-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给出二叉 搜索 树的根节点，该树的节点值各不相同，请你将其转换为累加树（Greater Sum Tree），使每个节点 node 的新值等于原树中大于或等于 node.val 的值之和。</p>
+<p>提醒一下，二叉搜索树满足下列约束条件：</p>
+<p>节点的左子树仅包含键 小于 节点键的节点。<br>节点的右子树仅包含键 大于 节点键的节点。<br>左右子树也必须是二叉搜索树。</p>
+<p>示例 1：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201023160751832.png" alt="538.把二叉搜索树转换为累加树"></p>
+<ul>
+<li>输入：[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]</li>
+<li>输出：[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入：root = [0,null,1]</li>
+<li>输出：[1,null,1]</li>
+</ul>
+<p>示例 3：</p>
+<ul>
+<li>输入：root = [1,0,2]</li>
+<li>输出：[3,3,2]</li>
+</ul>
+<p>示例 4：</p>
+<ul>
+<li>输入：root = [3,2,4,1]</li>
+<li>输出：[7,9,4,10]</li>
+</ul>
+<p>提示：</p>
+<ul>
+<li>树中的节点数介于 0 和 104 之间。</li>
+<li>每个节点的值介于 -104 和 104 之间。</li>
+<li>树中的所有值 互不相同 。</li>
+<li>给定的树为二叉搜索树。</li>
+</ul>
+<h2 id="算法公开课-3"><a href="#算法公开课-3" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1d44y1f7wP?share_source=copy_web">普大喜奔！二叉树章节已全部更完啦！| LeetCode：538.把二叉搜索树转换为累加树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p>一看到累加树，相信很多小伙伴都会疑惑：如何累加？遇到一个节点，然后再遍历其他节点累加？怎么一想这么麻烦呢。</p>
+<p>然后再发现这是一棵二叉搜索树，二叉搜索树啊，这是有序的啊。</p>
+<p>那么有序的元素如何求累加呢？</p>
+<p><strong>其实这就是一棵树，大家可能看起来有点别扭，换一个角度来看，这就是一个有序数组[2, 5, 13]，求从后到前的累加数组，也就是[20, 18, 13]，是不是感觉这就简单了。</strong></p>
+<p>为什么变成数组就是感觉简单了呢？</p>
+<p>因为数组大家都知道怎么遍历啊，从后向前，挨个累加就完事了，这换成了二叉搜索树，看起来就别扭了一些是不是。</p>
+<p>那么知道如何遍历这个二叉树，也就迎刃而解了，<strong>从树中可以看出累加的顺序是右中左，所以我们需要反中序遍历这个二叉树，然后顺序累加就可以了</strong>。</p>
+<h3 id="递归-1"><a href="#递归-1" class="headerlink" title="递归"></a>递归</h3><p>遍历顺序如图所示：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204153440666.png" alt="538.把二叉搜索树转换为累加树"></p>
+<p>本题依然需要一个pre指针记录当前遍历节点cur的前一个节点，这样才方便做累加。</p>
+<p>pre指针的使用技巧，我们在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0530.二叉搜索树的最小绝对差.html">二叉树：搜索树的最小绝对差 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0501.二叉搜索树中的众数.html">二叉树：我的众数是多少？ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>都提到了，这是常用的操作手段。</p>
+<ul>
+<li>递归函数参数以及返回值</li>
+</ul>
+<p>这里很明确了，不需要递归函数的返回值做什么操作了，要遍历整棵树。</p>
+<p>同时需要定义一个全局变量pre，用来保存cur节点的前一个节点的数值，定义为int型就可以了。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int pre = 0; // 记录前一个节点的数值</span><br><span class="line">void traversal(TreeNode* cur)</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>遇空就终止。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (cur == NULL) return;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定单层递归的逻辑</li>
+</ul>
+<p>注意<strong>要右中左来遍历二叉树</strong>， 中节点的处理逻辑就是让cur的数值加上前一个节点的数值。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">traversal(cur-&gt;right);  // 右</span><br><span class="line">cur-&gt;val += pre;        // 中</span><br><span class="line">pre = cur-&gt;val;</span><br><span class="line">traversal(cur-&gt;left);   // 左</span><br></pre></td></tr></table></figure></div>
+<p>递归法整体代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> pre = <span class="number">0</span>; <span class="comment">// 记录前一个节点的数值</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* cur)</span> </span>{ <span class="comment">// 右中左遍历</span></span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">traversal</span>(cur-&gt;right);</span><br><span class="line">        cur-&gt;val += pre;</span><br><span class="line">        pre = cur-&gt;val;</span><br><span class="line">        <span class="built_in">traversal</span>(cur-&gt;left);</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        pre = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="迭代法-3"><a href="#迭代法-3" class="headerlink" title="迭代法"></a>迭代法</h3><p>迭代法其实就是中序模板题了，在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：前中后序迭代法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序统一方式迭代法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>可以选一种自己习惯的写法。</p>
+<p>这里我给出其中的一种，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> pre; <span class="comment">// 记录前一个节点的数值</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span> || !st.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="keyword">if</span> (cur != <span class="literal">NULL</span>) {</span><br><span class="line">                st.<span class="built_in">push</span>(cur);</span><br><span class="line">                cur = cur-&gt;right;   <span class="comment">// 右</span></span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                cur = st.<span class="built_in">top</span>();     <span class="comment">// 中</span></span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                cur-&gt;val += pre;</span><br><span class="line">                pre = cur-&gt;val;</span><br><span class="line">                cur = cur-&gt;left;    <span class="comment">// 左</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        pre = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">#二叉树</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/08/28/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%BF%AE%E6%94%B9%E4%B8%8E%E6%9E%84%E9%80%A0/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">代码随想录-二叉树的修改与构造</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">代码随想录-求二叉搜索树的属性</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#700-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2"><span class="nav-text">700.二叉搜索树中的搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E6%B3%95"><span class="nav-text">递归法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%B3%95"><span class="nav-text">迭代法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E6%B3%95-1"><span class="nav-text">递归法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%B3%95-1"><span class="nav-text">迭代法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#530-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE"><span class="nav-text">530.二叉搜索树的最小绝对差</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE-1"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3"><span class="nav-text">迭代</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#501-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0"><span class="nav-text">501.二叉搜索树中的众数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE-2"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E6%B3%95-2"><span class="nav-text">递归法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%B3%95-2"><span class="nav-text">迭代法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-2"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#538-%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91"><span class="nav-text">538.把二叉搜索树转换为累加树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE-3"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92-1"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%B3%95-3"><span class="nav-text">迭代法</span></a></li></ol></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.0</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/Swup.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/SwupSlideTheme.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/SwupProgressPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/SwupScrollPlugin.min.js"></script><script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/tools/imageViewer.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/utils.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/main.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/layouts/navbarShrink.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/tools/scrollTopBottom.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/tools/runtime.js"></script>
+    <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//cdn.staticfile.org/hexo-theme-redefine/2.5.0/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/plugins/typed.js"></script>
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/libs/anime.min.js"></script>
+        <script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/tools/tocToggle.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/layouts/toc.js"></script><script type="module" src="https://cdn.staticfile.org/hexo-theme-redefine/2.5.0/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
