@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/10/08/代码随想录-二叉搜索树的修改与改造/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录-二叉搜索树的修改与改造">
+<meta property="og:url" content="https://channinghsu.github.io/2023/10/08/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E4%BF%AE%E6%94%B9%E4%B8%8E%E6%94%B9%E9%80%A0/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201019173259554.png">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/701.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C.gif">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201020171048265.png">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/450.%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.gif">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014173115788.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014173219142.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155302751.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155327203.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155327203-20230310120126738.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201022164420763.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20220930173553.png">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/108.%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.png">
+<meta property="article:published_time" content="2023-10-08T06:16:34.000Z">
+<meta property="article:modified_time" content="2023-10-08T06:18:23.681Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="二叉树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201019173259554.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            代码随想录-二叉搜索树的修改与改造 -
+        
+        Channing&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/fonts/fonts.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/fonts/Satoshi/satoshi.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/fonts/Chillax/chillax.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[],"icon":"fa-solid fa-bookmark"}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/about"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/tags"  >
+                             
+                                
+                                    <i class="fa-regular fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/about"  >
+                             
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">代码随想录-二叉搜索树的修改与改造</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header flex flex-row gap-2 items-center">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-10-08 14:16:34</span>
+        <span class="mobile">2023-10-08 14:16:34</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-08 14:18:23</span>
+            <span class="mobile">2023-10-08 14:18:23</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>7.8k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>30 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="701-二叉搜索树中的插入操作"><a href="#701-二叉搜索树中的插入操作" class="headerlink" title="701.二叉搜索树中的插入操作"></a>701.二叉搜索树中的插入操作</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定二叉搜索树（BST）的根节点和要插入树中的值，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。 输入数据保证，新值和原始二叉搜索树中的任意节点值都不同。</p>
+<p>注意，可能存在多种有效的插入方式，只要树在插入后仍保持为二叉搜索树即可。 你可以返回任意有效的结果。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201019173259554.png" alt="701.二叉搜索树中的插入操作"></p>
+<p>提示：</p>
+<ul>
+<li>给定的树上的节点数介于 0 和 10^4 之间</li>
+<li>每个节点都有一个唯一整数值，取值范围从 0 到 10^8</li>
+<li>-10^8 &lt;= val &lt;= 10^8</li>
+<li>新值和原始二叉搜索树中的任意节点值都不同</li>
+</ul>
+<h2 id="算法公开课"><a href="#算法公开课" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Et4y1c78Y?share_source=copy_web">原来这么简单？ | LeetCode：701.二叉搜索树中的插入操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题目其实是一道简单题目，<strong>但是题目中的提示：有多种有效的插入方式，还可以重构二叉搜索树，一下子吓退了不少人</strong>，瞬间感觉题目复杂了很多。</p>
+<p>其实<strong>可以不考虑题目中提示所说的改变树的结构的插入方式。</strong></p>
+<p>如下演示视频中可以看出：只要按照二叉搜索树的规则去遍历，遇到空节点就插入节点就可以了。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/701.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C.gif" alt="701.二叉搜索树中的插入操作"></p>
+<p>例如插入元素10 ，需要找到末尾节点插入便可，一样的道理来插入元素15，插入元素0，插入元素6，<strong>需要调整二叉树的结构么？ 并不需要。</strong>。</p>
+<p>只要遍历二叉搜索树，找到空节点 插入元素就可以了，那么这道题其实就简单了。</p>
+<p>接下来就是遍历二叉搜索树的过程了。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>递归三部曲：</p>
+<ul>
+<li>确定递归函数参数以及返回值</li>
+</ul>
+<p>参数就是根节点指针，以及要插入元素，这里递归函数要不要有返回值呢？</p>
+<p>可以有，也可以没有，但递归函数如果没有返回值的话，实现是比较麻烦的，下面也会给出其具体实现代码。</p>
+<p><strong>有返回值的话，可以利用返回值完成新加入的节点与其父节点的赋值操作</strong>。（下面会进一步解释）</p>
+<p>递归函数的返回类型为节点类型TreeNode * 。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeNode* insertIntoBST(TreeNode* root, int val)</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>终止条件就是找到遍历的节点为null的时候，就是要插入节点的位置了，并把插入的节点返回。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (root == NULL) {</span><br><span class="line">    TreeNode* node = new TreeNode(val);</span><br><span class="line">    return node;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>这里把添加的节点返回给上一层，就完成了父子节点的赋值操作了，详细再往下看。</p>
+<ul>
+<li>确定单层递归的逻辑</li>
+</ul>
+<p>此时要明确，需要遍历整棵树么？</p>
+<p>别忘了这是搜索树，遍历整棵搜索树简直是对搜索树的侮辱。</p>
+<p>搜索树是有方向了，可以根据插入元素的数值，决定递归方向。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (root-&gt;val &gt; val) root-&gt;left = insertIntoBST(root-&gt;left, val);</span><br><span class="line">if (root-&gt;val &lt; val) root-&gt;right = insertIntoBST(root-&gt;right, val);</span><br><span class="line">return root;</span><br></pre></td></tr></table></figure></div>
+<p><strong>到这里，大家应该能感受到，如何通过递归函数返回值完成了新加入节点的父子关系赋值操作了，下一层将加入节点返回，本层用root-&gt;left或者root-&gt;right将其接住</strong>。</p>
+<p>整体代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">insertIntoBST</span><span class="params">(TreeNode* root, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) {</span><br><span class="line">            TreeNode* node = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(val);</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; val) root-&gt;left = <span class="built_in">insertIntoBST</span>(root-&gt;left, val);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &lt; val) root-&gt;right = <span class="built_in">insertIntoBST</span>(root-&gt;right, val);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>可以看出代码并不复杂。</p>
+<p>刚刚说了递归函数不用返回值也可以，找到插入的节点位置，直接让其父节点指向插入节点，结束递归，也是可以的。</p>
+<p>那么递归函数定义如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TreeNode* parent; // 记录遍历节点的父节点</span><br><span class="line">void traversal(TreeNode* cur, int val)</span><br></pre></td></tr></table></figure></div>
+<p>没有返回值，需要记录上一个节点（parent），遇到空节点了，就让parent左孩子或者右孩子指向新插入的节点。然后结束递归。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    TreeNode* parent;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* cur, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) {</span><br><span class="line">            TreeNode* node = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(val);</span><br><span class="line">            <span class="keyword">if</span> (val &gt; parent-&gt;val) parent-&gt;right = node;</span><br><span class="line">            <span class="keyword">else</span> parent-&gt;left = node;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        parent = cur;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val &gt; val) <span class="built_in">traversal</span>(cur-&gt;left, val);</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val &lt; val) <span class="built_in">traversal</span>(cur-&gt;right, val);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">insertIntoBST</span><span class="params">(TreeNode* root, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        parent = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) {</span><br><span class="line">            root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(val);</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">traversal</span>(root, val);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>可以看出还是麻烦一些的。</p>
+<p>我之所以举这个例子，是想说明通过递归函数的返回值完成父子节点的赋值是可以带来便利的。</p>
+<p><strong>网上千篇一律的代码，可能会误导大家认为通过递归函数返回节点 这样的写法是天经地义，其实这里是有优化的！</strong></p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>再来看看迭代法，对二叉搜索树迭代写法不熟悉，可以看这篇：<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0700.二叉搜索树中的搜索.html">二叉树：二叉搜索树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>在迭代法遍历的过程中，需要记录一下当前遍历的节点的父节点，这样才能做插入节点的操作。</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0530.二叉搜索树的最小绝对差.html">二叉树：搜索树的最小绝对差 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0501.二叉搜索树中的众数.html">二叉树：我的众数是多少？ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，都是用了记录pre和cur两个指针的技巧，本题也是一样的。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">insertIntoBST</span><span class="params">(TreeNode* root, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) {</span><br><span class="line">            TreeNode* node = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(val);</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        }</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        TreeNode* parent = root; <span class="comment">// 这个很重要，需要记录上一个节点，否则无法赋值新节点</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span>) {</span><br><span class="line">            parent = cur;</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;val &gt; val) cur = cur-&gt;left;</span><br><span class="line">            <span class="keyword">else</span> cur = cur-&gt;right;</span><br><span class="line">        }</span><br><span class="line">        TreeNode* node = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(val);</span><br><span class="line">        <span class="keyword">if</span> (val &lt; parent-&gt;val) parent-&gt;left = node;<span class="comment">// 此时是用parent节点的进行赋值</span></span><br><span class="line">        <span class="keyword">else</span> parent-&gt;right = node;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先在二叉搜索树中的插入操作，大家不用恐惧其重构搜索树，其实根本不用重构。</p>
+<p>然后在递归中，我们重点讲了如何通过递归函数的返回值完成新加入节点和其父节点的赋值操作，并强调了搜索树的有序性。</p>
+<p>最后依然给出了迭代的方法，迭代的方法就需要记录当前遍历节点的父节点了，这个和没有返回值的递归函数实现的代码逻辑是一样的。</p>
+<h1 id="450-删除二叉搜索树中的节点"><a href="#450-删除二叉搜索树中的节点" class="headerlink" title="450.删除二叉搜索树中的节点"></a>450.删除二叉搜索树中的节点</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-node-in-a-bst/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。</p>
+<p>一般来说，删除节点可分为两个步骤：</p>
+<p>首先找到需要删除的节点；<br>如果找到了，删除它。<br>说明： 要求算法时间复杂度为 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.79ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2117 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="210E" d="M137 683Q138 683 209 688T282 694Q294 694 294 685Q294 674 258 534Q220 386 220 383Q220 381 227 388Q288 442 357 442Q411 442 444 415T478 336Q478 285 440 178T402 50Q403 36 407 31T422 26Q450 26 474 56T513 138Q516 149 519 151T535 153Q555 153 555 145Q555 144 551 130Q535 71 500 33Q466 -10 419 -10H414Q367 -10 346 17T325 74Q325 90 361 192T398 345Q398 404 354 404H349Q266 404 205 306L198 293L164 158Q132 28 127 16Q114 -11 83 -11Q69 -11 59 -2T48 16Q48 30 121 320L195 616Q195 629 188 632T149 637H128Q122 643 122 645T124 664Q129 683 137 683Z"></path></g><g data-mml-node="mo" transform="translate(1728,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>，h 为树的高度。</p>
+<p>示例:</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201020171048265.png" alt="450.删除二叉搜索树中的节点"></p>
+<h2 id="算法公开课-1"><a href="#算法公开课-1" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tP41177us?share_source=copy_web">调整二叉树的结构最难！| LeetCode：450.删除二叉搜索树中的节点 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>搜索树的节点删除要比节点增加复杂的多，有很多情况需要考虑，做好心理准备。</p>
+<h3 id="递归-1"><a href="#递归-1" class="headerlink" title="递归"></a>递归</h3><p>递归三部曲：</p>
+<ul>
+<li>确定递归函数参数以及返回值</li>
+</ul>
+<p>说到递归函数的返回值，在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0701.二叉搜索树中的插入操作.html">二叉树：搜索树中的插入操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中通过递归返回值来加入新节点， 这里也可以通过递归返回值删除节点。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeNode* deleteNode(TreeNode* root, int key)</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>遇到空返回，其实这也说明没找到删除的节点，遍历到空节点直接返回了</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (root == nullptr) return root;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定单层递归的逻辑</li>
+</ul>
+<p>这里就把二叉搜索树中删除节点遇到的情况都搞清楚。</p>
+<p>有以下五种情况：</p>
+<ul>
+<li>第一种情况：没找到删除的节点，遍历到空节点直接返回了</li>
+<li>找到删除的节点<ul>
+<li>第二种情况：左右孩子都为空（叶子节点），直接删除节点， 返回NULL为根节点</li>
+<li>第三种情况：删除节点的左孩子为空，右孩子不为空，删除节点，右孩子补位，返回右孩子为根节点</li>
+<li>第四种情况：删除节点的右孩子为空，左孩子不为空，删除节点，左孩子补位，返回左孩子为根节点</li>
+<li>第五种情况：左右孩子节点都不为空，则将删除节点的左子树头结点（左孩子）放到删除节点的右子树的最左面节点的左孩子上，返回删除节点右孩子为新的根节点。</li>
+</ul>
+</li>
+</ul>
+<p>第五种情况有点难以理解，看下面动画：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/gifs/450.%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.gif" alt="450.删除二叉搜索树中的节点"></p>
+<p>动画中的二叉搜索树中，删除元素7， 那么删除节点（元素7）的左孩子就是5，删除节点（元素7）的右子树的最左面节点是元素8。</p>
+<p>将删除节点（元素7）的左孩子放到删除节点（元素7）的右子树的最左面节点（元素8）的左孩子上，就是把5为根节点的子树移到了8的左孩子的位置。</p>
+<p>要删除的节点（元素7）的右孩子（元素9）为新的根节点。.</p>
+<p>这样就完成删除元素7的逻辑，最好动手画一个图，尝试删除一个节点试试。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (root-&gt;val == key) {</span><br><span class="line">    <span class="comment">// 第二种情况：左右孩子都为空（叶子节点），直接删除节点， 返回NULL为根节点</span></span><br><span class="line">    <span class="comment">// 第三种情况：其左孩子为空，右孩子不为空，删除节点，右孩子补位 ，返回右孩子为根节点</span></span><br><span class="line">    <span class="keyword">if</span> (root-&gt;left == <span class="literal">nullptr</span>) <span class="keyword">return</span> root-&gt;right;</span><br><span class="line">    <span class="comment">// 第四种情况：其右孩子为空，左孩子不为空，删除节点，左孩子补位，返回左孩子为根节点</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span>) <span class="keyword">return</span> root-&gt;left;</span><br><span class="line">    <span class="comment">// 第五种情况：左右孩子节点都不为空，则将删除节点的左子树放到删除节点的右子树的最左面节点的左孩子的位置</span></span><br><span class="line">    <span class="comment">// 并返回删除节点右孩子为新的根节点。</span></span><br><span class="line">    <span class="keyword">else</span> {</span><br><span class="line">        TreeNode* cur = root-&gt;right; <span class="comment">// 找右子树最左面的节点</span></span><br><span class="line">        <span class="keyword">while</span>(cur-&gt;left != <span class="literal">nullptr</span>) {</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        }</span><br><span class="line">        cur-&gt;left = root-&gt;left; <span class="comment">// 把要删除的节点（root）左子树放在cur的左孩子的位置</span></span><br><span class="line">        TreeNode* tmp = root;   <span class="comment">// 把root节点保存一下，下面来删除</span></span><br><span class="line">        root = root-&gt;right;     <span class="comment">// 返回旧root的右孩子作为新root</span></span><br><span class="line">        <span class="keyword">delete</span> tmp;             <span class="comment">// 释放节点内存（这里不写也可以，但C++最好手动释放一下吧）</span></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>这里相当于把新的节点返回给上一层，上一层就要用 root-&gt;left 或者 root-&gt;right接住，代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (root-&gt;val &gt; key) root-&gt;left = deleteNode(root-&gt;left, key);</span><br><span class="line">if (root-&gt;val &lt; key) root-&gt;right = deleteNode(root-&gt;right, key);</span><br><span class="line">return root;</span><br></pre></td></tr></table></figure></div>
+<p><strong>整体代码如下：（注释中：情况1，2，3，4，5和上面分析严格对应）</strong></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteNode</span><span class="params">(TreeNode* root, <span class="type">int</span> key)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root; <span class="comment">// 第一种情况：没找到删除的节点，遍历到空节点直接返回了</span></span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == key) {</span><br><span class="line">            <span class="comment">// 第二种情况：左右孩子都为空（叶子节点），直接删除节点， 返回NULL为根节点</span></span><br><span class="line">            <span class="keyword">if</span> (root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) {</span><br><span class="line">                <span class="comment">///! 内存释放</span></span><br><span class="line">                <span class="keyword">delete</span> root;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">// 第三种情况：其左孩子为空，右孩子不为空，删除节点，右孩子补位 ，返回右孩子为根节点</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;left == <span class="literal">nullptr</span>) {</span><br><span class="line">                <span class="keyword">auto</span> retNode = root-&gt;right;</span><br><span class="line">                <span class="comment">///! 内存释放</span></span><br><span class="line">                <span class="keyword">delete</span> root;</span><br><span class="line">                <span class="keyword">return</span> retNode;</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">// 第四种情况：其右孩子为空，左孩子不为空，删除节点，左孩子补位，返回左孩子为根节点</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span>) {</span><br><span class="line">                <span class="keyword">auto</span> retNode = root-&gt;left;</span><br><span class="line">                <span class="comment">///! 内存释放</span></span><br><span class="line">                <span class="keyword">delete</span> root;</span><br><span class="line">                <span class="keyword">return</span> retNode;</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">// 第五种情况：左右孩子节点都不为空，则将删除节点的左子树放到删除节点的右子树的最左面节点的左孩子的位置</span></span><br><span class="line">            <span class="comment">// 并返回删除节点右孩子为新的根节点。</span></span><br><span class="line">            <span class="keyword">else</span> {</span><br><span class="line">                TreeNode* cur = root-&gt;right; <span class="comment">// 找右子树最左面的节点</span></span><br><span class="line">                <span class="keyword">while</span>(cur-&gt;left != <span class="literal">nullptr</span>) {</span><br><span class="line">                    cur = cur-&gt;left;</span><br><span class="line">                }</span><br><span class="line">                cur-&gt;left = root-&gt;left; <span class="comment">// 把要删除的节点（root）左子树放在cur的左孩子的位置</span></span><br><span class="line">                TreeNode* tmp = root;   <span class="comment">// 把root节点保存一下，下面来删除</span></span><br><span class="line">                root = root-&gt;right;     <span class="comment">// 返回旧root的右孩子作为新root</span></span><br><span class="line">                <span class="keyword">delete</span> tmp;             <span class="comment">// 释放节点内存（这里不写也可以，但C++最好手动释放一下吧）</span></span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; key) root-&gt;left = <span class="built_in">deleteNode</span>(root-&gt;left, key);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &lt; key) root-&gt;right = <span class="built_in">deleteNode</span>(root-&gt;right, key);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="普通二叉树的删除方式"><a href="#普通二叉树的删除方式" class="headerlink" title="普通二叉树的删除方式"></a>普通二叉树的删除方式</h3><p>这里我在介绍一种通用的删除，普通二叉树的删除方式（没有使用搜索树的特性，遍历整棵树），用交换值的操作来删除目标节点。</p>
+<p>代码中目标节点（要删除的节点）被操作了两次：</p>
+<ul>
+<li>第一次是和目标节点的右子树最左面节点交换。</li>
+<li>第二次直接被NULL覆盖了。</li>
+</ul>
+<p>思路有点绕，感兴趣的同学可以画图自己理解一下。</p>
+<p>代码如下：（关键部分已经注释）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteNode</span><span class="params">(TreeNode* root, <span class="type">int</span> key)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == key) {</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span>) { <span class="comment">// 这里第二次操作目标值：最终删除的作用</span></span><br><span class="line">                <span class="keyword">return</span> root-&gt;left;</span><br><span class="line">            }</span><br><span class="line">            TreeNode *cur = root-&gt;right;</span><br><span class="line">            <span class="keyword">while</span> (cur-&gt;left) {</span><br><span class="line">                cur = cur-&gt;left;</span><br><span class="line">            }</span><br><span class="line">            <span class="built_in">swap</span>(root-&gt;val, cur-&gt;val); <span class="comment">// 这里第一次操作目标值：交换目标值其右子树最左面节点。</span></span><br><span class="line">        }</span><br><span class="line">        root-&gt;left = <span class="built_in">deleteNode</span>(root-&gt;left, key);</span><br><span class="line">        root-&gt;right = <span class="built_in">deleteNode</span>(root-&gt;right, key);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>这个代码是简短一些，思路也巧妙，但是不太好想，实操性不强，推荐第一种写法！</p>
+<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><p>删除节点的迭代法还是复杂一些的，但其本质我在递归法里都介绍了，最关键就是删除节点的操作（动画模拟的过程）</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 将目标节点（删除节点）的左子树放到 目标节点的右子树的最左面节点的左孩子位置上</span></span><br><span class="line">    <span class="comment">// 并返回目标节点右孩子为新的根节点</span></span><br><span class="line">    <span class="comment">// 是动画里模拟的过程</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteOneNode</span><span class="params">(TreeNode* target)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (target == <span class="literal">nullptr</span>) <span class="keyword">return</span> target;</span><br><span class="line">        <span class="keyword">if</span> (target-&gt;right == <span class="literal">nullptr</span>) <span class="keyword">return</span> target-&gt;left;</span><br><span class="line">        TreeNode* cur = target-&gt;right;</span><br><span class="line">        <span class="keyword">while</span> (cur-&gt;left) {</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        }</span><br><span class="line">        cur-&gt;left = target-&gt;left;</span><br><span class="line">        <span class="keyword">return</span> target-&gt;right;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteNode</span><span class="params">(TreeNode* root, <span class="type">int</span> key)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        TreeNode* pre = <span class="literal">nullptr</span>; <span class="comment">// 记录cur的父节点，用来删除cur</span></span><br><span class="line">        <span class="keyword">while</span> (cur) {</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;val == key) <span class="keyword">break</span>;</span><br><span class="line">            pre = cur;</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;val &gt; key) cur = cur-&gt;left;</span><br><span class="line">            <span class="keyword">else</span> cur = cur-&gt;right;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (pre == <span class="literal">nullptr</span>) { <span class="comment">// 如果搜索树只有头结点</span></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// pre 要知道是删左孩子还是右孩子</span></span><br><span class="line">        <span class="keyword">if</span> (pre-&gt;left &amp;&amp; pre-&gt;left-&gt;val == key) {</span><br><span class="line">            pre-&gt;left = <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (pre-&gt;right &amp;&amp; pre-&gt;right-&gt;val == key) {</span><br><span class="line">            pre-&gt;right = <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>读完本篇，大家会发现二叉搜索树删除节点比增加节点复杂的多。</p>
+<p><strong>因为二叉搜索树添加节点只需要在叶子上添加就可以的，不涉及到结构的调整，而删除节点操作涉及到结构的调整</strong>。</p>
+<p>这里我们依然使用递归函数的返回值来完成把节点从二叉树中移除的操作。</p>
+<p><strong>这里最关键的逻辑就是第五种情况（删除一个左右孩子都不为空的节点），这种情况一定要想清楚</strong>。</p>
+<p>而且就算想清楚了，对应的代码也未必可以写出来，所以<strong>这道题目既考察思维逻辑，也考察代码能力</strong>。</p>
+<p>递归中我给出了两种写法，推荐大家学会第一种（利用搜索树的特性）就可以了，第二种递归写法其实是比较绕的。</p>
+<p>最后我也给出了相应的迭代法，就是模拟递归法中的逻辑来删除节点，但需要一个pre记录cur的父节点，方便做删除操作。</p>
+<p>迭代法其实不太容易写出来，所以如果是初学者的话，彻底掌握第一种递归写法就够了。</p>
+<h1 id="669-修剪二叉搜索树"><a href="#669-修剪二叉搜索树" class="headerlink" title="669. 修剪二叉搜索树"></a>669. 修剪二叉搜索树</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/trim-a-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个二叉搜索树，同时给定最小边界L 和最大边界 R。通过修剪二叉搜索树，使得所有节点的值在[L, R]中 (R&gt;=L) 。你可能需要改变树的根节点，所以结果应当返回修剪好的二叉搜索树的新的根节点。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014173115788.png" alt="669.修剪二叉搜索树"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014173219142.png" alt="669.修剪二叉搜索树1"></p>
+<h2 id="算法公开课-2"><a href="#算法公开课-2" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17P41177ud?share_source=copy_web">你修剪的方式不对，我来给你纠正一下！| LeetCode：669. 修剪二叉搜索树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>相信看到这道题目大家都感觉是一道简单题（事实上leetcode上也标明是简单）。</p>
+<p>但还真的不简单！</p>
+<h3 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h3><p>直接想法就是：递归处理，然后遇到 <code>root-&gt;val &lt; low || root-&gt;val &gt; high</code> 的时候直接return NULL，一波修改，赶紧利落。</p>
+<p>不难写出如下代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">trimBST</span><span class="params">(TreeNode* root, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span> || root-&gt;val &lt; low || root-&gt;val &gt; high) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        root-&gt;left = <span class="built_in">trimBST</span>(root-&gt;left, low, high);</span><br><span class="line">        root-&gt;right = <span class="built_in">trimBST</span>(root-&gt;right, low, high);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p><strong>然而[1, 3]区间在二叉搜索树的中可不是单纯的节点3和左孩子节点0就决定的，还要考虑节点0的右子树</strong>。</p>
+<p>我们在重新关注一下第二个示例，如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155302751.png" alt="669.修剪二叉搜索树"></p>
+<p><strong>所以以上的代码是不可行的！</strong></p>
+<p>从图中可以看出需要重构二叉树，想想是不是本题就有点复杂了。</p>
+<p>其实不用重构那么复杂。</p>
+<p>在上图中我们发现节点0并不符合区间要求，那么将节点0的右孩子 节点2 直接赋给 节点3的左孩子就可以了（就是把节点0从二叉树中移除），如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155327203.png" alt="669.修剪二叉搜索树1"></p>
+<p>理解了最关键部分了我们再递归三部曲：</p>
+<ul>
+<li>确定递归函数的参数以及返回值</li>
+</ul>
+<p>这里我们为什么需要返回值呢？</p>
+<p>因为是要遍历整棵树，做修改，其实不需要返回值也可以，我们也可以完成修剪（其实就是从二叉树中移除节点）的操作。</p>
+<p>但是有返回值，更方便，可以通过递归函数的返回值来移除节点。</p>
+<p>这样的做法在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0701.二叉搜索树中的插入操作.html">二叉树：搜索树中的插入操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0450.删除二叉搜索树中的节点.html">二叉树：搜索树中的删除操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中大家已经了解过了。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeNode* trimBST(TreeNode* root, int low, int high)</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>修剪的操作并不是在终止条件上进行的，所以就是遇到空节点返回就可以了。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (root == nullptr ) return nullptr;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定单层递归的逻辑</li>
+</ul>
+<p>如果root（当前节点）的元素小于low的数值，那么应该递归右子树，并返回右子树符合条件的头结点。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (root-&gt;val &lt; low) {</span><br><span class="line">    TreeNode* right = trimBST(root-&gt;right, low, high); // 寻找符合区间[low, high]的节点</span><br><span class="line">    return right;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>如果root(当前节点)的元素大于high的，那么应该递归左子树，并返回左子树符合条件的头结点。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (root-&gt;val &gt; high) {</span><br><span class="line">    TreeNode* left = trimBST(root-&gt;left, low, high); // 寻找符合区间[low, high]的节点</span><br><span class="line">    return left;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>接下来要将下一层处理完左子树的结果赋给root-&gt;left，处理完右子树的结果赋给root-&gt;right。</p>
+<p>最后返回root节点，代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root-&gt;left = trimBST(root-&gt;left, low, high); // root-&gt;left接入符合条件的左孩子</span><br><span class="line">root-&gt;right = trimBST(root-&gt;right, low, high); // root-&gt;right接入符合条件的右孩子</span><br><span class="line">return root;</span><br></pre></td></tr></table></figure></div>
+<p>此时大家是不是还没发现这多余的节点究竟是如何从二叉树中移除的呢？</p>
+<p>在回顾一下上面的代码，针对下图中二叉树的情况：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204155327203-20230310120126738.png" alt="669.修剪二叉搜索树1"></p>
+<p>如下代码相当于把节点0的右孩子（节点2）返回给上一层，</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (root-&gt;val &lt; low) {</span><br><span class="line">    TreeNode* right = trimBST(root-&gt;right, low, high); // 寻找符合区间[low, high]的节点</span><br><span class="line">    return right;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>然后如下代码相当于用节点3的左孩子 把下一层返回的 节点0的右孩子（节点2） 接住。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root-&gt;left = trimBST(root-&gt;left, low, high);</span><br></pre></td></tr></table></figure></div>
+<p>此时节点3的左孩子就变成了节点2，将节点0从二叉树中移除了。</p>
+<p>最后整体代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">trimBST</span><span class="params">(TreeNode* root, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span> ) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &lt; low) {</span><br><span class="line">            TreeNode* right = <span class="built_in">trimBST</span>(root-&gt;right, low, high); <span class="comment">// 寻找符合区间[low, high]的节点</span></span><br><span class="line">            <span class="keyword">return</span> right;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; high) {</span><br><span class="line">            TreeNode* left = <span class="built_in">trimBST</span>(root-&gt;left, low, high); <span class="comment">// 寻找符合区间[low, high]的节点</span></span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line">        }</span><br><span class="line">        root-&gt;left = <span class="built_in">trimBST</span>(root-&gt;left, low, high); <span class="comment">// root-&gt;left接入符合条件的左孩子</span></span><br><span class="line">        root-&gt;right = <span class="built_in">trimBST</span>(root-&gt;right, low, high); <span class="comment">// root-&gt;right接入符合条件的右孩子</span></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>精简之后代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">trimBST</span><span class="params">(TreeNode* root, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &lt; low) <span class="keyword">return</span> <span class="built_in">trimBST</span>(root-&gt;right, low, high);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; high) <span class="keyword">return</span> <span class="built_in">trimBST</span>(root-&gt;left, low, high);</span><br><span class="line">        root-&gt;left = <span class="built_in">trimBST</span>(root-&gt;left, low, high);</span><br><span class="line">        root-&gt;right = <span class="built_in">trimBST</span>(root-&gt;right, low, high);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>只看代码，其实不太好理解节点是如何移除的，这一块大家可以自己再模拟模拟！</p>
+<h3 id="迭代法-1"><a href="#迭代法-1" class="headerlink" title="迭代法"></a>迭代法</h3><p>因为二叉搜索树的有序性，不需要使用栈模拟递归的过程。</p>
+<p>在剪枝的时候，可以分为三步：</p>
+<ul>
+<li>将root移动到[L, R] 范围内，注意是左闭右闭区间</li>
+<li>剪枝左子树</li>
+<li>剪枝右子树</li>
+</ul>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">trimBST</span><span class="params">(TreeNode* root, <span class="type">int</span> L, <span class="type">int</span> R)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理头结点，让root移动到[L, R] 范围内，注意是左闭右闭</span></span><br><span class="line">        <span class="keyword">while</span> (root != <span class="literal">nullptr</span> &amp;&amp; (root-&gt;val &lt; L || root-&gt;val &gt; R)) {</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;val &lt; L) root = root-&gt;right; <span class="comment">// 小于L往右走</span></span><br><span class="line">            <span class="keyword">else</span> root = root-&gt;left; <span class="comment">// 大于R往左走</span></span><br><span class="line">        }</span><br><span class="line">        TreeNode *cur = root;</span><br><span class="line">        <span class="comment">// 此时root已经在[L, R] 范围内，处理左孩子元素小于L的情况</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">nullptr</span>) {</span><br><span class="line">            <span class="keyword">while</span> (cur-&gt;left &amp;&amp; cur-&gt;left-&gt;val &lt; L) {</span><br><span class="line">                cur-&gt;left = cur-&gt;left-&gt;right;</span><br><span class="line">            }</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        }</span><br><span class="line">        cur = root;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 此时root已经在[L, R] 范围内，处理右孩子大于R的情况</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">nullptr</span>) {</span><br><span class="line">            <span class="keyword">while</span> (cur-&gt;right &amp;&amp; cur-&gt;right-&gt;val &gt; R) {</span><br><span class="line">                cur-&gt;right = cur-&gt;right-&gt;left;</span><br><span class="line">            }</span><br><span class="line">            cur = cur-&gt;right;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>修剪二叉搜索树其实并不难，但在递归法中大家可看出我费了很大的功夫来讲解如何删除节点的，这个思路其实是比较绕的。</p>
+<p>最终的代码倒是很简洁。</p>
+<p><strong>如果不对递归有深刻的理解，这道题目还是有难度的！</strong></p>
+<p>本题我依然给出递归法和迭代法，初学者掌握递归就可以了，如果想进一步学习，就把迭代法也写一写。</p>
+<h1 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108.将有序数组转换为二叉搜索树"></a>108.将有序数组转换为二叉搜索树</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<p>示例:</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201022164420763.png" alt="108.将有序数组转换为二叉搜索树"></p>
+<h2 id="算法公开课-3"><a href="#算法公开课-3" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1uR4y1X7qL?share_source=copy_web">构造平衡二叉搜索树！| LeetCode：108.将有序数组转换为二叉搜索树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>做这道题目之前大家可以了解一下这几道：</p>
+<ul>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0106.从中序与后序遍历序列构造二叉树.html">106.从中序与后序遍历序列构造二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0654.最大二叉树.html">654.最大二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中其实已经讲过了，如果根据数组构造一棵二叉树。</li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0701.二叉搜索树中的插入操作.html">701.二叉搜索树中的插入操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0450.删除二叉搜索树中的节点.html">450.删除二叉搜索树中的节点 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<p>进入正题：</p>
+<p>题目中说要转换为一棵高度平衡二叉搜索树。为什么强调要平衡呢？ </p>
+<p>因为只要给我们一个有序数组，如果强调平衡，都可以以线性结构来构造二叉搜索树。 </p>
+<p>例如 有序数组[-10，-3，0，5，9] 就可以构造成这样的二叉搜索树，如图。 </p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220930173553.png" alt=""></p>
+<p>上图中，是符合二叉搜索树的特性吧，如果要这么做的话，是不是本题意义就不大了，所以才强调是平衡二叉搜索树。</p>
+<p>其实数组构造二叉树，构成平衡树是自然而然的事情，因为大家默认都是从数组中间位置取值作为节点元素，一般不会随机取。<strong>所以想构成不平衡的二叉树是自找麻烦</strong>。</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0106.从中序与后序遍历序列构造二叉树.html">二叉树：构造二叉树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0654.最大二叉树.html">二叉树：构造一棵最大的二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中其实已经讲过了，如果根据数组构造一棵二叉树。</p>
+<p><strong>本质就是寻找分割点，分割点作为当前节点，然后递归左区间和右区间</strong>。</p>
+<p>本题其实要比<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0106.从中序与后序遍历序列构造二叉树.html">二叉树：构造二叉树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 和 <a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0654.最大二叉树.html">二叉树：构造一棵最大的二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>简单一些，因为有序数组构造二叉搜索树，寻找分割点就比较容易了。</p>
+<p>分割点就是数组中间位置的节点。</p>
+<p>那么为问题来了，如果数组长度为偶数，中间节点有两个，取哪一个？</p>
+<p>取哪一个都可以，只不过构成了不同的平衡二叉搜索树。</p>
+<p>例如：输入：[-10,-3,0,5,9]</p>
+<p>如下两棵树，都是这个数组的平衡二叉搜索树：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/108.将有序数组转换为二叉搜索树.png" alt="108.将有序数组转换为二叉搜索树"></p>
+<p>如果要分割的数组长度为偶数的时候，中间元素为两个，是取左边元素  就是树1，取右边元素就是树2。</p>
+<p><strong>这也是题目中强调答案不是唯一的原因。 理解这一点，这道题目算是理解到位了</strong>。</p>
+<h3 id="递归-2"><a href="#递归-2" class="headerlink" title="递归"></a>递归</h3><p>递归三部曲：</p>
+<ul>
+<li>确定递归函数返回值及其参数</li>
+</ul>
+<p>删除二叉树节点，增加二叉树节点，都是用递归函数的返回值来完成，这样是比较方便的。</p>
+<p>相信大家如果仔细看了<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0701.二叉搜索树中的插入操作.html">二叉树：搜索树中的插入操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0450.删除二叉搜索树中的节点.html">二叉树：搜索树中的删除操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，一定会对递归函数返回值的作用深有感触。</p>
+<p>那么本题要构造二叉树，依然用递归函数的返回值来构造中节点的左右孩子。</p>
+<p>再来看参数，首先是传入数组，然后就是左下标left和右下标right，我们在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0106.从中序与后序遍历序列构造二叉树.html">二叉树：构造二叉树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中提过，在构造二叉树的时候尽量不要重新定义左右区间数组，而是用下标来操作原数组。</p>
+<p>所以代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 左闭右闭区间[left, right]</span><br><span class="line">TreeNode* traversal(vector&lt;int&gt;&amp; nums, int left, int right)</span><br></pre></td></tr></table></figure></div>
+<p>这里注意，<strong>我这里定义的是左闭右闭区间，在不断分割的过程中，也会坚持左闭右闭的区间，这又涉及到我们讲过的循环不变量</strong>。</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0106.从中序与后序遍历序列构造二叉树.html">二叉树：构造二叉树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0035.搜索插入位置.html">35.搜索插入位置 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0059.螺旋矩阵II.html">59.螺旋矩阵II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>都详细讲过循环不变量。</p>
+<ul>
+<li>确定递归终止条件</li>
+</ul>
+<p>这里定义的是左闭右闭的区间，所以当区间 left &gt; right的时候，就是空节点了。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (left &gt; right) return nullptr;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定单层递归的逻辑</li>
+</ul>
+<p>首先取数组中间元素的位置，不难写出<code>int mid = (left + right) / 2;</code>，<strong>这么写其实有一个问题，就是数值越界，例如left和right都是最大int，这么操作就越界了，在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0035.搜索插入位置.html">二分法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中尤其需要注意！</strong></p>
+<p>所以可以这么写：<code>int mid = left + ((right - left) / 2);</code></p>
+<p>但本题leetcode的测试数据并不会越界，所以怎么写都可以。但需要有这个意识！</p>
+<p>取了中间位置，就开始以中间位置的元素构造节点，代码：<code>TreeNode* root = new TreeNode(nums[mid]);</code>。</p>
+<p>接着划分区间，root的左孩子接住下一层左区间的构造节点，右孩子接住下一层右区间构造的节点。</p>
+<p>最后返回root节点，单层递归整体代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int mid = left + ((right - left) / 2);</span><br><span class="line">TreeNode* root = new TreeNode(nums[mid]);</span><br><span class="line">root-&gt;left = traversal(nums, left, mid - 1);</span><br><span class="line">root-&gt;right = traversal(nums, mid + 1, right);</span><br><span class="line">return root;</span><br></pre></td></tr></table></figure></div>
+<p>这里<code>int mid = left + ((right - left) / 2);</code>的写法相当于是如果数组长度为偶数，中间位置有两个元素，取靠左边的。</p>
+<ul>
+<li>递归整体代码如下：</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">traversal</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> left, <span class="type">int</span> right)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="type">int</span> mid = left + ((right - left) / <span class="number">2</span>);</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);</span><br><span class="line">        root-&gt;left = <span class="built_in">traversal</span>(nums, left, mid - <span class="number">1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">traversal</span>(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>{</span><br><span class="line">        TreeNode* root = <span class="built_in">traversal</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p><strong>注意：在调用traversal的时候传入的left和right为什么是0和nums.size() - 1，因为定义的区间为左闭右闭</strong>。</p>
+<h3 id="迭代法-2"><a href="#迭代法-2" class="headerlink" title="迭代法"></a>迭代法</h3><p>迭代法可以通过三个队列来模拟，一个队列放遍历的节点，一个队列放左区间下标，一个队列放右区间下标。</p>
+<p>模拟的就是不断分割的过程，C++代码如下：（我已经详细注释）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(<span class="number">0</span>);   <span class="comment">// 初始根节点</span></span><br><span class="line">        queue&lt;TreeNode*&gt; nodeQue;           <span class="comment">// 放遍历的节点</span></span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; leftQue;                 <span class="comment">// 保存左区间下标</span></span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; rightQue;                <span class="comment">// 保存右区间下标</span></span><br><span class="line">        nodeQue.<span class="built_in">push</span>(root);                 <span class="comment">// 根节点入队列</span></span><br><span class="line">        leftQue.<span class="built_in">push</span>(<span class="number">0</span>);                    <span class="comment">// 0为左区间下标初始位置</span></span><br><span class="line">        rightQue.<span class="built_in">push</span>(nums.<span class="built_in">size</span>() - <span class="number">1</span>);     <span class="comment">// nums.size() - 1为右区间下标初始位置</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!nodeQue.<span class="built_in">empty</span>()) {</span><br><span class="line">            TreeNode* curNode = nodeQue.<span class="built_in">front</span>();</span><br><span class="line">            nodeQue.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="type">int</span> left = leftQue.<span class="built_in">front</span>(); leftQue.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="type">int</span> right = rightQue.<span class="built_in">front</span>(); rightQue.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="type">int</span> mid = left + ((right - left) / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">            curNode-&gt;val = nums[mid];       <span class="comment">// 将mid对应的元素给中间节点</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (left &lt;= mid - <span class="number">1</span>) {          <span class="comment">// 处理左区间</span></span><br><span class="line">                curNode-&gt;left = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(<span class="number">0</span>);</span><br><span class="line">                nodeQue.<span class="built_in">push</span>(curNode-&gt;left);</span><br><span class="line">                leftQue.<span class="built_in">push</span>(left);</span><br><span class="line">                rightQue.<span class="built_in">push</span>(mid - <span class="number">1</span>);</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (right &gt;= mid + <span class="number">1</span>) {         <span class="comment">// 处理右区间</span></span><br><span class="line">                curNode-&gt;right = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(<span class="number">0</span>);</span><br><span class="line">                nodeQue.<span class="built_in">push</span>(curNode-&gt;right);</span><br><span class="line">                leftQue.<span class="built_in">push</span>(mid + <span class="number">1</span>);</span><br><span class="line">                rightQue.<span class="built_in">push</span>(right);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><p><strong>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0106.从中序与后序遍历序列构造二叉树.html">二叉树：构造二叉树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 和 <a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0654.最大二叉树.html">二叉树：构造一棵最大的二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后，我们顺理成章的应该构造一下二叉搜索树了，一不小心还是一棵平衡二叉搜索树</strong>。</p>
+<p>其实思路也是一样的，不断中间分割，然后递归处理左区间，右区间，也可以说是分治。</p>
+<p>此时相信大家应该对通过递归函数的返回值来增删二叉树很熟悉了，这也是常规操作。</p>
+<p>在定义区间的过程中我们又一次强调了循环不变量的重要性。</p>
+<p>最后依然给出迭代的方法，其实就是模拟取中间元素，然后不断分割去构造二叉树的过程。</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">#二叉树</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/10/08/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%E9%97%AE%E9%A2%98/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">代码随想录-二叉树的公共祖先问题</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">代码随想录-二叉搜索树的修改与改造</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#701-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-text">701.二叉搜索树中的插入操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3"><span class="nav-text">迭代</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#450-%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-text">450.删除二叉搜索树中的节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE-1"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92-1"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%88%A0%E9%99%A4%E6%96%B9%E5%BC%8F"><span class="nav-text">普通二叉树的删除方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%B3%95"><span class="nav-text">迭代法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#669-%E4%BF%AE%E5%89%AA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-text">669. 修剪二叉搜索树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE-2"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E6%B3%95"><span class="nav-text">递归法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%B3%95-1"><span class="nav-text">迭代法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-2"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#108-%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-text">108.将有序数组转换为二叉搜索树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE-3"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92-2"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%B3%95-2"><span class="nav-text">迭代法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-3"><span class="nav-text">总结</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.0</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/libs/anime.min.js"></script>
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.5.0/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
