@@ -11023,8 +11023,7 @@ Third paragraph of definition 2.
 <p>但是一些同学很容易忽略二叉搜索树的特性，所以写出遍历的代码就未必真的简单了。</p>
 <p>所以针对二叉搜索树的题目，一样要利用其特性。</p>
 <p>文中我依然给出递归和迭代两种方式，可以看出写法都非常简单，就是利用了二叉搜索树有序的特点。</p>
-<p>98.验证二叉搜索树</p>
-<p><a class="link" href="https://leetcode.cn/problems/validate-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98.验证二叉搜索树"></a>98.验证二叉搜索树</h1><p><a class="link" href="https://leetcode.cn/problems/validate-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。</p>
 <p>假设一个二叉搜索树具有如下特征：</p>
 <ul>
@@ -11044,57 +11043,35 @@ Third paragraph of definition 2.
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">traversal</span>(root-&gt;left);</span><br><span class="line">        vec.<span class="built_in">push_back</span>(root-&gt;val); <span class="comment">// 将二叉搜索树转换为有序数组</span></span><br><span class="line">        <span class="built_in">traversal</span>(root-&gt;right);</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        vec.<span class="built_in">clear</span>(); <span class="comment">// 不加这句在leetcode上也可以过，但最好加上</span></span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; vec.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="comment">// 注意要小于等于，搜索树里不能有相同元素</span></span><br><span class="line">            <span class="keyword">if</span> (vec[i] &lt;= vec[i - <span class="number">1</span>]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <p>以上代码中，我们把二叉树转变为数组来判断，是最直观的，但其实不用转变成数组，可以在递归遍历的过程中直接判断是否有序。</p>
 <p>这道题目比较容易陷入两个陷阱：</p>
-<ul>
-<li>陷阱1</li>
-</ul>
-<p><strong>不能单纯的比较左节点小于中间节点，右节点大于中间节点就完事了</strong>。</p>
+<h4 id="陷阱1"><a href="#陷阱1" class="headerlink" title="陷阱1"></a>陷阱1</h4><p><strong>不能单纯的比较左节点小于中间节点，右节点大于中间节点就完事了</strong>。</p>
 <p>写出了类似这样的代码：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (root-&gt;val &gt; root-&gt;left-&gt;val &amp;&amp; root-&gt;val &lt; root-&gt;right-&gt;val) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">} <span class="keyword">else</span> {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
 <p><strong>我们要比较的是 左子树所有节点小于中间节点，右子树所有节点大于中间节点</strong>。所以以上代码的判断逻辑是错误的。</p>
 <p>例如： [10,5,15,null,null,6,20] 这个case：</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000824.png" alt="二叉搜索树"></p>
 <p>节点10大于左节点5，小于右节点15，但右子树里出现了一个6 这就不符合了！</p>
-<ul>
-<li>陷阱2</li>
-</ul>
-<p>样例中最小节点 可能是int的最小值，如果这样使用最小的int来比较也是不行的。</p>
+<h4 id="陷阱2"><a href="#陷阱2" class="headerlink" title="陷阱2"></a>陷阱2</h4><p>样例中最小节点 可能是int的最小值，如果这样使用最小的int来比较也是不行的。</p>
 <p>此时可以初始化比较元素为longlong的最小值。</p>
 <p>问题可以进一步演进：如果样例中根节点的val 可能是longlong的最小值 又要怎么办呢？文中会解答。</p>
 <p>了解这些陷阱之后我们来看一下代码应该怎么写：</p>
-<p>递归三部曲：</p>
-<ul>
-<li>确定递归函数，返回值以及参数</li>
-</ul>
-<p>要定义一个longlong的全局变量，用来比较遍历的节点是否有序，因为后台测试数据中有int最小值，所以定义为longlong的类型，初始化为longlong最小值。</p>
+<h4 id="递归三部曲："><a href="#递归三部曲：" class="headerlink" title="递归三部曲："></a>递归三部曲：</h4><h5 id="1-确定递归函数，返回值以及参数"><a href="#1-确定递归函数，返回值以及参数" class="headerlink" title="1. 确定递归函数，返回值以及参数"></a>1. 确定递归函数，返回值以及参数</h5><p>要定义一个longlong的全局变量，用来比较遍历的节点是否有序，因为后台测试数据中有int最小值，所以定义为longlong的类型，初始化为longlong最小值。</p>
 <p>注意递归函数要有bool类型的返回值， 我们在<a class="link" href="https://programmercarl.com/0112.路径总和.html">二叉树：递归函数究竟什么时候需要返回值，什么时候不要返回值？ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 中讲了，只有寻找某一条边（或者一个节点）的时候，递归函数会有bool类型的返回值。</p>
 <p>其实本题是同样的道理，我们在寻找一个不符合条件的节点，如果没有找到这个节点就遍历了整个树，如果找到不符合的节点了，立刻返回。</p>
 <p>代码如下：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="type">long</span> maxVal = LONG_MIN; <span class="comment">// 因为后台测试数据中有int最小值</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span></span></span><br></pre></td></tr></table></figure></div>
-<ul>
-<li>确定终止条件</li>
-</ul>
-<p>如果是空节点 是不是二叉搜索树呢？</p>
+<h5 id="2-确定终止条件"><a href="#2-确定终止条件" class="headerlink" title="2. 确定终止条件"></a>2. 确定终止条件</h5><p>如果是空节点 是不是二叉搜索树呢？</p>
 <p>是的，二叉搜索树也可以为空！</p>
 <p>代码如下：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></div>
-<ul>
-<li>确定单层递归的逻辑</li>
-</ul>
-<p>中序遍历，一直更新maxVal，一旦发现maxVal &gt;= root-&gt;val，就返回false，注意元素相同时候也要返回false。</p>
+<h5 id="3-确定单层递归的逻辑"><a href="#3-确定单层递归的逻辑" class="headerlink" title="3.确定单层递归的逻辑"></a>3.确定单层递归的逻辑</h5><p>中序遍历，一直更新maxVal，一旦发现maxVal &gt;= root-&gt;val，就返回false，注意元素相同时候也要返回false。</p>
 <p>代码如下：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">bool</span> left = <span class="built_in">isValidBST</span>(root-&gt;left);         <span class="comment">// 左</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 中序遍历，验证遍历的元素是不是从小到大</span></span><br><span class="line"><span class="keyword">if</span> (maxVal &lt; root-&gt;val) maxVal = root-&gt;val; <span class="comment">// 中</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> right = <span class="built_in">isValidBST</span>(root-&gt;right);       <span class="comment">// 右</span></span><br><span class="line"><span class="keyword">return</span> left &amp;&amp; right;</span><br></pre></td></tr></table></figure></div>
-<p>整体代码如下：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> maxVal = LONG_MIN; <span class="comment">// 因为后台测试数据中有int最小值</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">bool</span> left = <span class="built_in">isValidBST</span>(root-&gt;left);</span><br><span class="line">        <span class="comment">// 中序遍历，验证遍历的元素是不是从小到大</span></span><br><span class="line">        <span class="keyword">if</span> (maxVal &lt; root-&gt;val) maxVal = root-&gt;val;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">bool</span> right = <span class="built_in">isValidBST</span>(root-&gt;right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h5 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h5><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> maxVal = LONG_MIN; <span class="comment">// 因为后台测试数据中有int最小值</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">bool</span> left = <span class="built_in">isValidBST</span>(root-&gt;left);</span><br><span class="line">        <span class="comment">// 中序遍历，验证遍历的元素是不是从小到大</span></span><br><span class="line">        <span class="keyword">if</span> (maxVal &lt; root-&gt;val) maxVal = root-&gt;val;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">bool</span> right = <span class="built_in">isValidBST</span>(root-&gt;right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <p>以上代码是因为后台数据有int最小值测试用例，所以都把maxVal改成了longlong最小值。</p>
 <p>如果测试数据中有 longlong的最小值，怎么办？</p>
 <p>不可能在初始化一个更小的值了吧。 建议避免 初始化最小值，如下方法取到最左面节点的数值来比较。</p>
 <p>代码如下：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode* pre = <span class="literal">NULL</span>; <span class="comment">// 用来记录前一个节点</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">bool</span> left = <span class="built_in">isValidBST</span>(root-&gt;left);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pre != <span class="literal">NULL</span> &amp;&amp; pre-&gt;val &gt;= root-&gt;val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        pre = root; <span class="comment">// 记录前一个节点</span></span><br><span class="line"></span><br><span class="line">        <span class="type">bool</span> right = <span class="built_in">isValidBST</span>(root-&gt;right);</span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
-<p>最后这份代码看上去整洁一些，思路也清晰。</p>
-<h3 id="迭代法-1"><a href="#迭代法-1" class="headerlink" title="迭代法"></a>迭代法</h3><p>可以用迭代法模拟二叉树中序遍历，对前中后序迭代法生疏的同学可以看这两篇<a class="link" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：听说递归能做的，栈也能做！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序迭代方式统一写法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>迭代法中序遍历稍加改动就可以了，代码如下：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        TreeNode* pre = <span class="literal">NULL</span>; <span class="comment">// 记录前一个节点</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span> || !st.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="keyword">if</span> (cur != <span class="literal">NULL</span>) {</span><br><span class="line">                st.<span class="built_in">push</span>(cur);</span><br><span class="line">                cur = cur-&gt;left;                <span class="comment">// 左</span></span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                cur = st.<span class="built_in">top</span>();                 <span class="comment">// 中</span></span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span> (pre != <span class="literal">NULL</span> &amp;&amp; cur-&gt;val &lt;= pre-&gt;val)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                pre = cur; <span class="comment">//保存前一个访问的结点</span></span><br><span class="line"></span><br><span class="line">                cur = cur-&gt;right;               <span class="comment">// 右</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
-<p>在<a class="link" href="https://programmercarl.com/0700.二叉搜索树中的搜索.html">二叉树：二叉搜索树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们分明写出了痛哭流涕的简洁迭代法，怎么在这里不行了呢，因为本题是要验证二叉搜索树啊。</p>
 <h1 id="530-二叉搜索树的最小绝对差"><a href="#530-二叉搜索树的最小绝对差" class="headerlink" title="530.二叉搜索树的最小绝对差"></a>530.二叉搜索树的最小绝对差</h1><p><a class="link" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值。</p>
 <p>示例：</p>
@@ -11191,7 +11168,7 @@ Third paragraph of definition 2.
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (count &gt; maxCount) { <span class="comment">// 如果计数大于最大值</span></span><br><span class="line">    maxCount = count;   <span class="comment">// 更新最大频率</span></span><br><span class="line">    result.<span class="built_in">clear</span>();     <span class="comment">// 很关键的一步，不要忘记清空result，之前result里的元素都失效了</span></span><br><span class="line">    result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
 <p>关键代码都讲完了，完整代码如下：（<strong>只需要遍历一遍二叉搜索树，就求出了众数的集合</strong>）</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> maxCount = <span class="number">0</span>; <span class="comment">// 最大频率</span></span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// 统计频率</span></span><br><span class="line">    TreeNode* pre = <span class="literal">NULL</span>;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; result;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">searchBST</span><span class="params">(TreeNode* cur)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span> ;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">searchBST</span>(cur-&gt;left);       <span class="comment">// 左</span></span><br><span class="line">                                    <span class="comment">// 中</span></span><br><span class="line">        <span class="keyword">if</span> (pre == <span class="literal">NULL</span>) { <span class="comment">// 第一个节点</span></span><br><span class="line">            count = <span class="number">1</span>;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (pre-&gt;val == cur-&gt;val) { <span class="comment">// 与前一个节点数值相同</span></span><br><span class="line">            count++;</span><br><span class="line">        } <span class="keyword">else</span> { <span class="comment">// 与前一个节点数值不同</span></span><br><span class="line">            count = <span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">        pre = cur; <span class="comment">// 更新上一个节点</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count == maxCount) { <span class="comment">// 如果和最大值相同，放进result中</span></span><br><span class="line">            result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &gt; maxCount) { <span class="comment">// 如果计数大于最大值频率</span></span><br><span class="line">            maxCount = count;   <span class="comment">// 更新最大频率</span></span><br><span class="line">            result.<span class="built_in">clear</span>();     <span class="comment">// 很关键的一步，不要忘记清空result，之前result里的元素都失效了</span></span><br><span class="line">            result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="built_in">searchBST</span>(cur-&gt;right);      <span class="comment">// 右</span></span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findMode</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line">        maxCount = <span class="number">0</span>;</span><br><span class="line">        pre = <span class="literal">NULL</span>; <span class="comment">// 记录前一个节点</span></span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">searchBST</span>(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
-<h3 id="迭代法-2"><a href="#迭代法-2" class="headerlink" title="迭代法"></a>迭代法</h3><p>只要把中序遍历转成迭代，中间节点的处理逻辑完全一样。</p>
+<h3 id="迭代法-1"><a href="#迭代法-1" class="headerlink" title="迭代法"></a>迭代法</h3><p>只要把中序遍历转成迭代，中间节点的处理逻辑完全一样。</p>
 <p>二叉树前中后序转迭代，传送门：</p>
 <ul>
 <li><a class="link" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：前中后序迭代法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
@@ -11273,9 +11250,195 @@ Third paragraph of definition 2.
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">traversal(cur-&gt;right);  // 右</span><br><span class="line">cur-&gt;val += pre;        // 中</span><br><span class="line">pre = cur-&gt;val;</span><br><span class="line">traversal(cur-&gt;left);   // 左</span><br></pre></td></tr></table></figure></div>
 <p>递归法整体代码如下：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> pre = <span class="number">0</span>; <span class="comment">// 记录前一个节点的数值</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* cur)</span> </span>{ <span class="comment">// 右中左遍历</span></span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">traversal</span>(cur-&gt;right);</span><br><span class="line">        cur-&gt;val += pre;</span><br><span class="line">        pre = cur-&gt;val;</span><br><span class="line">        <span class="built_in">traversal</span>(cur-&gt;left);</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        pre = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
-<h3 id="迭代法-3"><a href="#迭代法-3" class="headerlink" title="迭代法"></a>迭代法</h3><p>迭代法其实就是中序模板题了，在<a class="link" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：前中后序迭代法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序统一方式迭代法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>可以选一种自己习惯的写法。</p>
+<h3 id="迭代法-2"><a href="#迭代法-2" class="headerlink" title="迭代法"></a>迭代法</h3><p>迭代法其实就是中序模板题了，在<a class="link" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：前中后序迭代法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序统一方式迭代法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>可以选一种自己习惯的写法。</p>
 <p>这里我给出其中的一种，代码如下：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> pre; <span class="comment">// 记录前一个节点的数值</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span> || !st.<span class="built_in">empty</span>()) {</span><br><span class="line">            <span class="keyword">if</span> (cur != <span class="literal">NULL</span>) {</span><br><span class="line">                st.<span class="built_in">push</span>(cur);</span><br><span class="line">                cur = cur-&gt;right;   <span class="comment">// 右</span></span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                cur = st.<span class="built_in">top</span>();     <span class="comment">// 中</span></span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                cur-&gt;val += pre;</span><br><span class="line">                pre = cur-&gt;val;</span><br><span class="line">                cur = cur-&gt;left;    <span class="comment">// 左</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>{</span><br><span class="line">        pre = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码随想录-二叉树的公共祖先问题</title>
+    <url>/2023/10/08/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236. 二叉树的最近公共祖先"></a>236. 二叉树的最近公共祖先</h1><p><a class="link" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201016173414722.png" alt="236. 二叉树的最近公共祖先"></p>
+<p>示例 1:<br>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br>输出: 3<br>解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</p>
+<p>示例 2:<br>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4<br>输出: 5<br>解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</p>
+<p>说明:</p>
+<ul>
+<li>所有节点的值都是唯一的。</li>
+<li>p、q 为不同节点且均存在于给定的二叉树中。</li>
+</ul>
+<h2 id="算法公开课"><a href="#算法公开课" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" href="https://www.bilibili.com/video/BV1jd4y1B7E2">自底向上查找，有点难度！ | LeetCode：236. 二叉树的最近公共祖先 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遇到这个题目首先想的是要是能自底向上查找就好了，这样就可以找到公共祖先了。</p>
+<p>那么二叉树如何可以自底向上查找呢？</p>
+<p>回溯啊，二叉树回溯的过程就是从低到上。</p>
+<p>后序遍历（左右中）就是天然的回溯过程，可以根据左右子树的返回值，来处理中节点的逻辑。 </p>
+<p>接下来就看如何判断一个节点是节点q和节点p的公共祖先呢。</p>
+<p><strong>首先最容易想到的一个情况：如果找到一个节点，发现左子树出现结点p，右子树出现节点q，或者 左子树出现结点q，右子树出现节点p，那么该节点就是节点p和q的最近公共祖先。</strong> 即情况一： </p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220922173502.png" alt=""></p>
+<p>判断逻辑是 如果递归遍历遇到q，就将q返回，遇到p 就将p返回，那么如果 左右子树的返回值都不为空，说明此时的中节点，一定是q 和p 的最近祖先。 </p>
+<p>那么有录友可能疑惑，会不会左子树 遇到q 返回，右子树也遇到q返回，这样并没有找到 q 和p的最近祖先。</p>
+<p>这么想的录友，要审题了，题目强调：<strong>二叉树节点数值是不重复的，而且一定存在 q 和 p</strong>。</p>
+<p><strong>但是很多人容易忽略一个情况，就是节点本身p(q)，它拥有一个子孙节点q(p)。</strong> 情况二： </p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220922173530.png" alt=""></p>
+<p>其实情况一 和 情况二 代码实现过程都是一样的，也可以说，实现情况一的逻辑，顺便包含了情况二。 </p>
+<p>因为遇到 q 或者 p 就返回，这样也包含了 q 或者 p 本身就是 公共祖先的情况。</p>
+<p>这一点是很多录友容易忽略的，在下面的代码讲解中，可以再去体会。 </p>
+<p>递归三部曲：</p>
+<ul>
+<li>确定递归函数返回值以及参数</li>
+</ul>
+<p>需要递归函数返回值，来告诉我们是否找到节点q或者p，那么返回值为bool类型就可以了。</p>
+<p>但我们还要返回最近公共节点，可以利用上题目中返回值是TreeNode * ，那么如果遇到p或者q，就把q或者p返回，返回值不为空，就说明找到了q或者p。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span></span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>遇到空的话，因为树都是空了，所以返回空。</p>
+<p>那么我们来说一说，如果 root == q，或者 root == p，说明找到  q p ，则将其返回，这个返回值，后面在中节点的处理过程中会用到，那么中节点的处理逻辑，下面讲解。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (root == q || root == p || root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定单层递归逻辑</li>
+</ul>
+<p>值得注意的是 本题函数有返回值，是因为回溯的过程需要递归函数的返回值做判断，但本题我们依然要遍历树的所有节点。</p>
+<p>我们在<a class="link" href="https://programmercarl.com/0112.路径总和.html">二叉树：递归函数究竟什么时候需要返回值，什么时候不要返回值？ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中说了 递归函数有返回值就是要遍历某一条边，但有返回值也要看如何处理返回值！</p>
+<p>如果递归函数有返回值，如何区分要搜索一条边，还是搜索整个树呢？</p>
+<p>搜索一条边的写法：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (递归函数(root-&gt;left)) <span class="keyword">return</span> ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (递归函数(root-&gt;right)) <span class="keyword">return</span> ;</span><br></pre></td></tr></table></figure></div>
+<p>搜索整个树写法：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">left = 递归函数(root-&gt;left);  <span class="comment">// 左</span></span><br><span class="line">right = 递归函数(root-&gt;right); <span class="comment">// 右</span></span><br><span class="line">left与right的逻辑处理;         <span class="comment">// 中 </span></span><br></pre></td></tr></table></figure></div>
+<p>看出区别了没？</p>
+<p><strong>在递归函数有返回值的情况下：如果要搜索一条边，递归函数返回值不为空的时候，立刻返回，如果搜索整个树，直接用一个变量left、right接住返回值，这个left、right后序还有逻辑处理的需要，也就是后序遍历中处理中间节点的逻辑（也是回溯）</strong>。</p>
+<p>那么为什么要遍历整棵树呢？直观上来看，找到最近公共祖先，直接一路返回就可以了。</p>
+<p>如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/2021020415105872.png" alt="236.二叉树的最近公共祖先"></p>
+<p>就像图中一样直接返回7。</p>
+<p>但事实上还要遍历根节点右子树（即使此时已经找到了目标节点了），也就是图中的节点4、15、20。</p>
+<p>因为在如下代码的后序遍历中，如果想利用left和right做逻辑处理， 不能立刻返回，而是要等left与right逻辑处理完之后才能返回。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">left = 递归函数(root-&gt;left);  <span class="comment">// 左</span></span><br><span class="line">right = 递归函数(root-&gt;right); <span class="comment">// 右</span></span><br><span class="line">left与right的逻辑处理;         <span class="comment">// 中 </span></span><br></pre></td></tr></table></figure></div>
+<p>所以此时大家要知道我们要遍历整棵树。知道这一点，对本题就有一定深度的理解了。</p>
+<p>那么先用left和right接住左子树和右子树的返回值，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">TreeNode* left = <span class="built_in">lowestCommonAncestor</span>(root-&gt;left, p, q);</span><br><span class="line">TreeNode* right = <span class="built_in">lowestCommonAncestor</span>(root-&gt;right, p, q);</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>如果left 和 right都不为空，说明此时root就是最近公共节点。这个比较好理解</strong></p>
+<p><strong>如果left为空，right不为空，就返回right，说明目标节点是通过right返回的，反之依然</strong>。</p>
+<p>这里有的同学就理解不了了，为什么left为空，right不为空，目标节点通过right返回呢？</p>
+<p>如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210204151125844.png" alt="236.二叉树的最近公共祖先1"></p>
+<p>图中节点10的左子树返回null，右子树返回目标值7，那么此时节点10的处理逻辑就是把右子树的返回值（最近公共祖先7）返回上去！</p>
+<p>这里也很重要，可能刷过这道题目的同学，都不清楚结果究竟是如何从底层一层一层传到头结点的。</p>
+<p>那么如果left和right都为空，则返回left或者right都是可以的，也就是返回空。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (left == <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>) <span class="keyword">return</span> right;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right == <span class="literal">NULL</span>) <span class="keyword">return</span> left;</span><br><span class="line"><span class="keyword">else</span>  { <span class="comment">//  (left == NULL &amp;&amp; right == NULL)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>那么寻找最小公共祖先，完整流程图如下：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/202102041512582.png" alt="236.二叉树的最近公共祖先2"></p>
+<p><strong>从图中，大家可以看到，我们是如何回溯遍历整棵二叉树，将结果返回给头结点的！</strong></p>
+<p>整体代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == q || root == p || root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line">        TreeNode* left = <span class="built_in">lowestCommonAncestor</span>(root-&gt;left, p, q);</span><br><span class="line">        TreeNode* right = <span class="built_in">lowestCommonAncestor</span>(root-&gt;right, p, q);</span><br><span class="line">        <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left == <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>) <span class="keyword">return</span> right;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right == <span class="literal">NULL</span>) <span class="keyword">return</span> left;</span><br><span class="line">        <span class="keyword">else</span>  { <span class="comment">//  (left == NULL &amp;&amp; right == NULL)</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>稍加精简，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == q || root == p || root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line">        TreeNode* left = <span class="built_in">lowestCommonAncestor</span>(root-&gt;left, p, q);</span><br><span class="line">        TreeNode* right = <span class="built_in">lowestCommonAncestor</span>(root-&gt;right, p, q);</span><br><span class="line">        <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">if</span> (left == <span class="literal">NULL</span>) <span class="keyword">return</span> right;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这道题目刷过的同学未必真正了解这里面回溯的过程，以及结果是如何一层一层传上去的。</p>
+<p><strong>那么我给大家归纳如下三点</strong>：</p>
+<ol>
+<li><p>求最小公共祖先，需要从底向上遍历，那么二叉树，只能通过后序遍历（即：回溯）实现从底向上的遍历方式。</p>
+</li>
+<li><p>在回溯的过程中，必然要遍历整棵二叉树，即使已经找到结果了，依然要把其他节点遍历完，因为要使用递归函数的返回值（也就是代码中的left和right）做逻辑判断。</p>
+</li>
+<li><p>要理解如果返回值left为空，right不为空为什么要返回right，为什么可以用返回right传给上一层结果。</p>
+</li>
+</ol>
+<p>可以说这里每一步，都是有难度的，都需要对二叉树，递归和回溯有一定的理解。</p>
+<p>本题没有给出迭代法，因为迭代法不适合模拟回溯的过程。理解递归的解法就够了。</p>
+<h1 id="235-二叉搜索树的最近公共祖先"><a href="#235-二叉搜索树的最近公共祖先" class="headerlink" title="235. 二叉搜索树的最近公共祖先"></a>235. 二叉搜索树的最近公共祖先</h1><p><a class="link" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201018172243602.png" alt="235. 二叉搜索树的最近公共祖先"></p>
+<p>示例 1:</p>
+<ul>
+<li>输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8</li>
+<li>输出: 6</li>
+<li>解释: 节点 2 和节点 8 的最近公共祖先是 6。</li>
+</ul>
+<p>示例 2:</p>
+<ul>
+<li>输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4</li>
+<li>输出: 2</li>
+<li>解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。</li>
+</ul>
+<p>说明:</p>
+<ul>
+<li>所有节点的值都是唯一的。</li>
+<li>p、q 为不同节点且均存在于给定的二叉搜索树中。</li>
+</ul>
+<h2 id="算法公开课-1"><a href="#算法公开课-1" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" href="https://www.bilibili.com/video/BV1Zt4y1F7ww?share_source=copy_web">二叉搜索树找祖先就有点不一样了！| 235. 二叉搜索树的最近公共祖先 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>做过<a class="link" href="https://programmercarl.com/0236.二叉树的最近公共祖先.html">二叉树：公共祖先问题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>题目的同学应该知道，利用回溯从底向上搜索，遇到一个节点的左子树里有p，右子树里有q，那么当前节点就是最近公共祖先。</p>
+<p>那么本题是二叉搜索树，二叉搜索树是有序的，那得好好利用一下这个特点。</p>
+<p>在有序树里，如果判断一个节点的左子树里有p，右子树里有q呢？</p>
+<p>因为是有序树，所有 如果 中间节点是 q 和 p 的公共祖先，那么 中节点的数组 一定是在 [p, q]区间的。即 中节点 &gt; p &amp;&amp; 中节点 &lt; q   或者 中节点 &gt; q &amp;&amp; 中节点 &lt; p。 </p>
+<p>那么只要从上到下去遍历，遇到 cur节点是数值在[p, q]区间中则一定可以说明该节点cur就是p 和 q的公共祖先。 那问题来了，<strong>一定是最近公共祖先吗</strong>？</p>
+<p>如图，我们从根节点搜索，第一次遇到 cur节点是数值在[q, p]区间中，即 节点5，此时可以说明 q 和 p 一定分别存在于 节点 5的左子树，和右子树中。 </p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220926164214.png" alt="235.二叉搜索树的最近公共祖先"></p>
+<p>此时节点5是不是最近公共祖先？ 如果 从节点5继续向左遍历，那么将错过成为p的祖先， 如果从节点5继续向右遍历则错过成为q的祖先。 </p>
+<p>所以当我们从上向下去递归遍历，第一次遇到 cur节点是数值在[q, p]区间中，那么cur就是 q和p的最近公共祖先。</p>
+<p>理解这一点，本题就很好解了。</p>
+<p>而递归遍历顺序，本题就不涉及到 前中后序了（这里没有中节点的处理逻辑，遍历顺序无所谓了）。</p>
+<p>如图所示：p为节点6，q为节点9</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220926165141.png" alt="235.二叉搜索树的最近公共祖先2"></p>
+<p>可以看出直接按照指定的方向，就可以找到节点8，为最近公共祖先，而且不需要遍历整棵树，找到结果直接返回！</p>
+<h3 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h3><p>递归三部曲如下：</p>
+<ul>
+<li>确定递归函数返回值以及参数</li>
+</ul>
+<p>参数就是当前节点，以及两个结点 p、q。</p>
+<p>返回值是要返回最近公共祖先，所以是TreeNode *  。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">TreeNode* traversal(TreeNode* cur, TreeNode* p, TreeNode* q)</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>遇到空返回就可以了，代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (cur == NULL) return cur;</span><br></pre></td></tr></table></figure></div>
+<p>其实都不需要这个终止条件，因为题目中说了p、q 为不同节点且均存在于给定的二叉搜索树中。也就是说一定会找到公共祖先的，所以并不存在遇到空的情况。</p>
+<ul>
+<li>确定单层递归的逻辑</li>
+</ul>
+<p>在遍历二叉搜索树的时候就是寻找区间[p-&gt;val, q-&gt;val]（注意这里是左闭又闭）</p>
+<p>那么如果 cur-&gt;val 大于 p-&gt;val，同时 cur-&gt;val 大于q-&gt;val，那么就应该向左遍历（说明目标区间在左子树上）。</p>
+<p><strong>需要注意的是此时不知道p和q谁大，所以两个都要判断</strong></p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (cur-&gt;val &gt; p-&gt;val &amp;&amp; cur-&gt;val &gt; q-&gt;val) {</span><br><span class="line">    TreeNode* left = <span class="built_in">traversal</span>(cur-&gt;left, p, q);</span><br><span class="line">    <span class="keyword">if</span> (left != <span class="literal">NULL</span>) {</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>细心的同学会发现，在这里调用递归函数的地方，把递归函数的返回值left，直接return</strong>。</p>
+<p>在<a class="link" href="https://programmercarl.com/0236.二叉树的最近公共祖先.html">二叉树：公共祖先问题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，如果递归函数有返回值，如何区分要搜索一条边，还是搜索整个树。</p>
+<p>搜索一条边的写法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (递归函数(root-&gt;left)) return ;</span><br><span class="line">if (递归函数(root-&gt;right)) return ;</span><br></pre></td></tr></table></figure></div>
+<p>搜索整个树写法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">left = 递归函数(root-&gt;left);</span><br><span class="line">right = 递归函数(root-&gt;right);</span><br><span class="line">left与right的逻辑处理;</span><br></pre></td></tr></table></figure></div>
+<p>本题就是标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空，立刻返回。</p>
+<p>如果 cur-&gt;val 小于 p-&gt;val，同时 cur-&gt;val 小于 q-&gt;val，那么就应该向右遍历（目标区间在右子树）。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (cur-&gt;val &lt; p-&gt;val &amp;&amp; cur-&gt;val &lt; q-&gt;val) {</span><br><span class="line">    TreeNode* right = <span class="built_in">traversal</span>(cur-&gt;right, p, q);</span><br><span class="line">    <span class="keyword">if</span> (right != <span class="literal">NULL</span>) {</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>剩下的情况，就是cur节点在区间（p-&gt;val &lt;=  cur-&gt;val &amp;&amp; cur-&gt;val &lt;= q-&gt;val）或者 （q-&gt;val &lt;=  cur-&gt;val &amp;&amp; cur-&gt;val &lt;= p-&gt;val）中，那么cur就是最近公共祖先了，直接返回cur。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">return cur;</span><br></pre></td></tr></table></figure></div>
+<p>那么整体递归代码如下:</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">traversal</span><span class="params">(TreeNode* cur, TreeNode* p, TreeNode* q)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span> cur;</span><br><span class="line">                                                        <span class="comment">// 中</span></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val &gt; p-&gt;val &amp;&amp; cur-&gt;val &gt; q-&gt;val) {   <span class="comment">// 左</span></span><br><span class="line">            TreeNode* left = <span class="built_in">traversal</span>(cur-&gt;left, p, q);</span><br><span class="line">            <span class="keyword">if</span> (left != <span class="literal">NULL</span>) {</span><br><span class="line">                <span class="keyword">return</span> left;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val &lt; p-&gt;val &amp;&amp; cur-&gt;val &lt; q-&gt;val) {   <span class="comment">// 右</span></span><br><span class="line">            TreeNode* right = <span class="built_in">traversal</span>(cur-&gt;right, p, q);</span><br><span class="line">            <span class="keyword">if</span> (right != <span class="literal">NULL</span>) {</span><br><span class="line">                <span class="keyword">return</span> right;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(root, p, q);</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>精简后代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; p-&gt;val &amp;&amp; root-&gt;val &gt; q-&gt;val) {</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">lowestCommonAncestor</span>(root-&gt;left, p, q);</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;val &lt; p-&gt;val &amp;&amp; root-&gt;val &lt; q-&gt;val) {</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">lowestCommonAncestor</span>(root-&gt;right, p, q);</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><p>对于二叉搜索树的迭代法，大家应该在<a class="link" href="https://programmercarl.com/0700.二叉搜索树中的搜索.html">二叉树：二叉搜索树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>就了解了。</p>
+<p>利用其有序性，迭代的方式还是比较简单的，解题思路在递归中已经分析了。</p>
+<p>迭代代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>{</span><br><span class="line">        <span class="keyword">while</span>(root) {</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;val &gt; p-&gt;val &amp;&amp; root-&gt;val &gt; q-&gt;val) {</span><br><span class="line">                root = root-&gt;left;</span><br><span class="line">            } <span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;val &lt; p-&gt;val &amp;&amp; root-&gt;val &lt; q-&gt;val) {</span><br><span class="line">                root = root-&gt;right;</span><br><span class="line">            } <span class="keyword">else</span> <span class="keyword">return</span> root;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>灵魂拷问：是不是又被简单的迭代法感动到痛哭流涕？</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>对于二叉搜索树的最近祖先问题，其实要比<a class="link" href="https://programmercarl.com/0236.二叉树的最近公共祖先.html">普通二叉树公共祖先问题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>简单的多。</p>
+<p>不用使用回溯，二叉搜索树自带方向性，可以方便的从上向下查找目标区间，遇到目标区间内的节点，直接返回。</p>
+<p>最后给出了对应的迭代法，二叉搜索树的迭代法甚至比递归更容易理解，也是因为其有序性（自带方向性），按照目标区间找就行了。</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
