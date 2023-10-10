@@ -11582,17 +11582,11 @@ Third paragraph of definition 2.
 <p>代码如下：（关键部分已经注释）</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteNode</span><span class="params">(TreeNode* root, <span class="type">int</span> key)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == key) {</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span>) { <span class="comment">// 这里第二次操作目标值：最终删除的作用</span></span><br><span class="line">                <span class="keyword">return</span> root-&gt;left;</span><br><span class="line">            }</span><br><span class="line">            TreeNode *cur = root-&gt;right;</span><br><span class="line">            <span class="keyword">while</span> (cur-&gt;left) {</span><br><span class="line">                cur = cur-&gt;left;</span><br><span class="line">            }</span><br><span class="line">            <span class="built_in">swap</span>(root-&gt;val, cur-&gt;val); <span class="comment">// 这里第一次操作目标值：交换目标值其右子树最左面节点。</span></span><br><span class="line">        }</span><br><span class="line">        root-&gt;left = <span class="built_in">deleteNode</span>(root-&gt;left, key);</span><br><span class="line">        root-&gt;right = <span class="built_in">deleteNode</span>(root-&gt;right, key);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <p>这个代码是简短一些，思路也巧妙，但是不太好想，实操性不强，推荐第一种写法！</p>
-<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><p>删除节点的迭代法还是复杂一些的，但其本质我在递归法里都介绍了，最关键就是删除节点的操作（动画模拟的过程）</p>
-<p>代码如下：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 将目标节点（删除节点）的左子树放到 目标节点的右子树的最左面节点的左孩子位置上</span></span><br><span class="line">    <span class="comment">// 并返回目标节点右孩子为新的根节点</span></span><br><span class="line">    <span class="comment">// 是动画里模拟的过程</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteOneNode</span><span class="params">(TreeNode* target)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (target == <span class="literal">nullptr</span>) <span class="keyword">return</span> target;</span><br><span class="line">        <span class="keyword">if</span> (target-&gt;right == <span class="literal">nullptr</span>) <span class="keyword">return</span> target-&gt;left;</span><br><span class="line">        TreeNode* cur = target-&gt;right;</span><br><span class="line">        <span class="keyword">while</span> (cur-&gt;left) {</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        }</span><br><span class="line">        cur-&gt;left = target-&gt;left;</span><br><span class="line">        <span class="keyword">return</span> target-&gt;right;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteNode</span><span class="params">(TreeNode* root, <span class="type">int</span> key)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        TreeNode* pre = <span class="literal">nullptr</span>; <span class="comment">// 记录cur的父节点，用来删除cur</span></span><br><span class="line">        <span class="keyword">while</span> (cur) {</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;val == key) <span class="keyword">break</span>;</span><br><span class="line">            pre = cur;</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;val &gt; key) cur = cur-&gt;left;</span><br><span class="line">            <span class="keyword">else</span> cur = cur-&gt;right;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (pre == <span class="literal">nullptr</span>) { <span class="comment">// 如果搜索树只有头结点</span></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// pre 要知道是删左孩子还是右孩子</span></span><br><span class="line">        <span class="keyword">if</span> (pre-&gt;left &amp;&amp; pre-&gt;left-&gt;val == key) {</span><br><span class="line">            pre-&gt;left = <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (pre-&gt;right &amp;&amp; pre-&gt;right-&gt;val == key) {</span><br><span class="line">            pre-&gt;right = <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>读完本篇，大家会发现二叉搜索树删除节点比增加节点复杂的多。</p>
 <p><strong>因为二叉搜索树添加节点只需要在叶子上添加就可以的，不涉及到结构的调整，而删除节点操作涉及到结构的调整</strong>。</p>
 <p>这里我们依然使用递归函数的返回值来完成把节点从二叉树中移除的操作。</p>
 <p><strong>这里最关键的逻辑就是第五种情况（删除一个左右孩子都不为空的节点），这种情况一定要想清楚</strong>。</p>
 <p>而且就算想清楚了，对应的代码也未必可以写出来，所以<strong>这道题目既考察思维逻辑，也考察代码能力</strong>。</p>
-<p>递归中我给出了两种写法，推荐大家学会第一种（利用搜索树的特性）就可以了，第二种递归写法其实是比较绕的。</p>
-<p>最后我也给出了相应的迭代法，就是模拟递归法中的逻辑来删除节点，但需要一个pre记录cur的父节点，方便做删除操作。</p>
-<p>迭代法其实不太容易写出来，所以如果是初学者的话，彻底掌握第一种递归写法就够了。</p>
 <h1 id="669-修剪二叉搜索树"><a href="#669-修剪二叉搜索树" class="headerlink" title="669. 修剪二叉搜索树"></a>669. 修剪二叉搜索树</h1><p><a class="link" href="https://leetcode.cn/problems/trim-a-binary-search-tree/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>给定一个二叉搜索树，同时给定最小边界L 和最大边界 R。通过修剪二叉搜索树，使得所有节点的值在[L, R]中 (R&gt;=L) 。你可能需要改变树的根节点，所以结果应当返回修剪好的二叉搜索树的新的根节点。</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201014173115788.png" alt="669.修剪二叉搜索树"></p>
@@ -11651,7 +11645,7 @@ Third paragraph of definition 2.
 <p>精简之后代码如下：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">trimBST</span><span class="params">(TreeNode* root, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &lt; low) <span class="keyword">return</span> <span class="built_in">trimBST</span>(root-&gt;right, low, high);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; high) <span class="keyword">return</span> <span class="built_in">trimBST</span>(root-&gt;left, low, high);</span><br><span class="line">        root-&gt;left = <span class="built_in">trimBST</span>(root-&gt;left, low, high);</span><br><span class="line">        root-&gt;right = <span class="built_in">trimBST</span>(root-&gt;right, low, high);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <p>只看代码，其实不太好理解节点是如何移除的，这一块大家可以自己再模拟模拟！</p>
-<h3 id="迭代法-1"><a href="#迭代法-1" class="headerlink" title="迭代法"></a>迭代法</h3><p>因为二叉搜索树的有序性，不需要使用栈模拟递归的过程。</p>
+<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><p>因为二叉搜索树的有序性，不需要使用栈模拟递归的过程。</p>
 <p>在剪枝的时候，可以分为三步：</p>
 <ul>
 <li>将root移动到[L, R] 范围内，注意是左闭右闭区间</li>
@@ -11678,7 +11672,7 @@ Third paragraph of definition 2.
 <li><a class="link" href="https://programmercarl.com/0450.删除二叉搜索树中的节点.html">450.删除二叉搜索树中的节点 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ul>
 <p>进入正题：</p>
-<p>题目中说要转换为一棵高度平衡二叉搜索树。为什么强调要平衡呢？ </p>
+<p>​    </p>
 <p>因为只要给我们一个有序数组，如果强调平衡，都可以以线性结构来构造二叉搜索树。 </p>
 <p>例如 有序数组[-10，-3，0，5，9] 就可以构造成这样的二叉搜索树，如图。 </p>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220930173553.png" alt=""></p>
@@ -11729,7 +11723,7 @@ Third paragraph of definition 2.
 </ul>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">traversal</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> left, <span class="type">int</span> right)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="type">int</span> mid = left + ((right - left) / <span class="number">2</span>);</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);</span><br><span class="line">        root-&gt;left = <span class="built_in">traversal</span>(nums, left, mid - <span class="number">1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">traversal</span>(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>{</span><br><span class="line">        TreeNode* root = <span class="built_in">traversal</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <p><strong>注意：在调用traversal的时候传入的left和right为什么是0和nums.size() - 1，因为定义的区间为左闭右闭</strong>。</p>
-<h3 id="迭代法-2"><a href="#迭代法-2" class="headerlink" title="迭代法"></a>迭代法</h3><p>迭代法可以通过三个队列来模拟，一个队列放遍历的节点，一个队列放左区间下标，一个队列放右区间下标。</p>
+<h3 id="迭代法-1"><a href="#迭代法-1" class="headerlink" title="迭代法"></a>迭代法</h3><p>迭代法可以通过三个队列来模拟，一个队列放遍历的节点，一个队列放左区间下标，一个队列放右区间下标。</p>
 <p>模拟的就是不断分割的过程，C++代码如下：（我已经详细注释）</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(<span class="number">0</span>);   <span class="comment">// 初始根节点</span></span><br><span class="line">        queue&lt;TreeNode*&gt; nodeQue;           <span class="comment">// 放遍历的节点</span></span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; leftQue;                 <span class="comment">// 保存左区间下标</span></span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; rightQue;                <span class="comment">// 保存右区间下标</span></span><br><span class="line">        nodeQue.<span class="built_in">push</span>(root);                 <span class="comment">// 根节点入队列</span></span><br><span class="line">        leftQue.<span class="built_in">push</span>(<span class="number">0</span>);                    <span class="comment">// 0为左区间下标初始位置</span></span><br><span class="line">        rightQue.<span class="built_in">push</span>(nums.<span class="built_in">size</span>() - <span class="number">1</span>);     <span class="comment">// nums.size() - 1为右区间下标初始位置</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!nodeQue.<span class="built_in">empty</span>()) {</span><br><span class="line">            TreeNode* curNode = nodeQue.<span class="built_in">front</span>();</span><br><span class="line">            nodeQue.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="type">int</span> left = leftQue.<span class="built_in">front</span>(); leftQue.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="type">int</span> right = rightQue.<span class="built_in">front</span>(); rightQue.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="type">int</span> mid = left + ((right - left) / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">            curNode-&gt;val = nums[mid];       <span class="comment">// 将mid对应的元素给中间节点</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (left &lt;= mid - <span class="number">1</span>) {          <span class="comment">// 处理左区间</span></span><br><span class="line">                curNode-&gt;left = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(<span class="number">0</span>);</span><br><span class="line">                nodeQue.<span class="built_in">push</span>(curNode-&gt;left);</span><br><span class="line">                leftQue.<span class="built_in">push</span>(left);</span><br><span class="line">                rightQue.<span class="built_in">push</span>(mid - <span class="number">1</span>);</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (right &gt;= mid + <span class="number">1</span>) {         <span class="comment">// 处理右区间</span></span><br><span class="line">                curNode-&gt;right = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(<span class="number">0</span>);</span><br><span class="line">                nodeQue.<span class="built_in">push</span>(curNode-&gt;right);</span><br><span class="line">                leftQue.<span class="built_in">push</span>(mid + <span class="number">1</span>);</span><br><span class="line">                rightQue.<span class="built_in">push</span>(right);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><p><strong>在<a class="link" href="https://programmercarl.com/0106.从中序与后序遍历序列构造二叉树.html">二叉树：构造二叉树登场！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 和 <a class="link" href="https://programmercarl.com/0654.最大二叉树.html">二叉树：构造一棵最大的二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后，我们顺理成章的应该构造一下二叉搜索树了，一不小心还是一棵平衡二叉搜索树</strong>。</p>
@@ -11737,6 +11731,191 @@ Third paragraph of definition 2.
 <p>此时相信大家应该对通过递归函数的返回值来增删二叉树很熟悉了，这也是常规操作。</p>
 <p>在定义区间的过程中我们又一次强调了循环不变量的重要性。</p>
 <p>最后依然给出迭代的方法，其实就是模拟取中间元素，然后不断分割去构造二叉树的过程。</p>
+]]></content>
+      <categories>
+        <category>二叉树</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码随想录-二叉树总结</title>
+    <url>/2023/10/10/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>在每一道二叉树的题目中，都使用了<strong>递归三部曲</strong>来分析题目，相信大家以后看到二叉树，看到递归，都会想：返回值、参数是什么？终止条件是什么？单层逻辑是什么？</p>
+<p>下面Carl把分析过的题目分门别类，可以帮助新录友循序渐进学习二叉树，也方便老录友面试前快速复习，看到一个标题，就回想一下对应的解题思路，这样很快就可以系统性的复习一遍二叉树了。</p>
+<h2 id="二叉树的理论基础"><a href="#二叉树的理论基础" class="headerlink" title="二叉树的理论基础"></a>二叉树的理论基础</h2><ul>
+<li><a class="link" href="https://programmercarl.com/二叉树理论基础.html">关于二叉树，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：二叉树的种类、存储方式、遍历方式、定义方式</li>
+</ul>
+<h2 id="二叉树的遍历方式"><a href="#二叉树的遍历方式" class="headerlink" title="二叉树的遍历方式"></a>二叉树的遍历方式</h2><ul>
+<li>深度优先遍历<ul>
+<li><a class="link" href="https://programmercarl.com/二叉树的递归遍历.html">二叉树：前中后序递归法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：递归三部曲初次亮相</li>
+<li><a class="link" href="https://programmercarl.com/二叉树的迭代遍历.html">二叉树：前中后序迭代法（一） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：通过栈模拟递归</li>
+<li><a class="link" href="https://programmercarl.com/二叉树的统一迭代法.html">二叉树：前中后序迭代法（二）统一风格 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+</li>
+<li>广度优先遍历<ul>
+<li><a class="link" href="https://programmercarl.com/0102.二叉树的层序遍历.html">二叉树的层序遍历 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：通过队列模拟</li>
+</ul>
+</li>
+</ul>
+<h2 id="求二叉树的属性"><a href="#求二叉树的属性" class="headerlink" title="求二叉树的属性"></a>求二叉树的属性</h2><ul>
+<li><a class="link" href="https://programmercarl.com/0101.对称二叉树.html">二叉树：是否对称 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：后序，比较的是根节点的左子树与右子树是不是相互翻转</li>
+<li>迭代：使用队列/栈将两个节点顺序放入容器中进行比较</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0104.二叉树的最大深度.html">二叉树：求最大深度 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：后序，求根节点最大高度就是最大深度，通过递归函数的返回值做计算树的高度</li>
+<li>迭代：层序遍历</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0111.二叉树的最小深度.html">二叉树：求最小深度 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：后序，求根节点最小高度就是最小深度，注意最小深度的定义</li>
+<li>迭代：层序遍历</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0222.完全二叉树的节点个数.html">二叉树：求有多少个节点 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：后序，通过递归函数的返回值计算节点数量</li>
+<li>迭代：层序遍历</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0110.平衡二叉树.html">二叉树：是否平衡 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：后序，注意后序求高度和前序求深度，递归过程判断高度差</li>
+<li>迭代：效率很低，不推荐</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0257.二叉树的所有路径.html">二叉树：找所有路径 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：前序，方便让父节点指向子节点，涉及回溯处理根节点到叶子的所有路径</li>
+<li>迭代：一个栈模拟递归，一个栈来存放对应的遍历路径</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/二叉树中递归带着回溯.html">二叉树：递归中如何隐藏着回溯 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>详解<a class="link" href="https://programmercarl.com/0257.二叉树的所有路径.html">二叉树：找所有路径 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中递归如何隐藏着回溯</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0404.左叶子之和.html">二叉树：求左叶子之和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：后序，必须三层约束条件，才能判断是否是左叶子。</li>
+<li>迭代：直接模拟后序遍历</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0513.找树左下角的值.html">二叉树：求左下角的值 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：顺序无所谓，优先左孩子搜索，同时找深度最大的叶子节点。</li>
+<li>迭代：层序遍历找最后一行最左边</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0112.路径总和.html">二叉树：求路径总和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：顺序无所谓，递归函数返回值为bool类型是为了搜索一条边，没有返回值是搜索整棵树。</li>
+<li>迭代：栈里元素不仅要记录节点指针，还要记录从头结点到该节点的路径数值总和</li>
+</ul>
+</li>
+</ul>
+<h2 id="二叉树的修改与构造"><a href="#二叉树的修改与构造" class="headerlink" title="二叉树的修改与构造"></a>二叉树的修改与构造</h2><ul>
+<li><a class="link" href="https://programmercarl.com/0226.翻转二叉树.html">翻转二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：前序，交换左右孩子</li>
+<li>迭代：直接模拟前序遍历</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0106.从中序与后序遍历序列构造二叉树.html">构造二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：前序，重点在于找分割点，分左右区间构造</li>
+<li>迭代：比较复杂，意义不大</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0654.最大二叉树.html">构造最大的二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：前序，分割点为数组最大值，分左右区间构造</li>
+<li>迭代：比较复杂，意义不大</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0617.合并二叉树.html">合并两个二叉树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：前序，同时操作两个树的节点，注意合并的规则</li>
+<li>迭代：使用队列，类似层序遍历</li>
+</ul>
+</li>
+</ul>
+<h2 id="求二叉搜索树的属性"><a href="#求二叉搜索树的属性" class="headerlink" title="求二叉搜索树的属性"></a>求二叉搜索树的属性</h2><ul>
+<li><a class="link" href="https://programmercarl.com/0700.二叉搜索树中的搜索.html">二叉搜索树中的搜索 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：二叉搜索树的递归是有方向的</li>
+<li>迭代：因为有方向，所以迭代法很简单</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0098.验证二叉搜索树.html">是不是二叉搜索树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：中序，相当于变成了判断一个序列是不是递增的</li>
+<li>迭代：模拟中序，逻辑相同</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0530.二叉搜索树的最小绝对差.html">求二叉搜索树的最小绝对差 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：中序，双指针操作</li>
+<li>迭代：模拟中序，逻辑相同</li>
+</ul>
+</li>
+<li><p><a class="link" href="https://programmercarl.com/0501.二叉搜索树中的众数.html">求二叉搜索树的众数 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<ul>
+<li>递归：中序，清空结果集的技巧，遍历一遍便可求众数集合</li>
+<li><p><a class="link" href="https://programmercarl.com/0538.把二叉搜索树转换为累加树.html">二叉搜索树转成累加树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</li>
+<li><p>递归：中序，双指针操作累加</p>
+</li>
+<li>迭代：模拟中序，逻辑相同</li>
+</ul>
+</li>
+</ul>
+<h2 id="二叉树公共祖先问题"><a href="#二叉树公共祖先问题" class="headerlink" title="二叉树公共祖先问题"></a>二叉树公共祖先问题</h2><ul>
+<li><a class="link" href="https://programmercarl.com/0236.二叉树的最近公共祖先.html">二叉树的公共祖先问题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：后序，回溯，找到左子树出现目标值，右子树节点目标值的节点。</li>
+<li>迭代：不适合模拟回溯</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0235.二叉搜索树的最近公共祖先.html">二叉搜索树的公共祖先问题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：顺序无所谓，如果节点的数值在目标区间就是最近公共祖先</li>
+<li>迭代：按序遍历</li>
+</ul>
+</li>
+</ul>
+<h2 id="二叉搜索树的修改与构造"><a href="#二叉搜索树的修改与构造" class="headerlink" title="二叉搜索树的修改与构造"></a>二叉搜索树的修改与构造</h2><ul>
+<li><a class="link" href="https://programmercarl.com/0701.二叉搜索树中的插入操作.html">二叉搜索树中的插入操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：顺序无所谓，通过递归函数返回值添加节点</li>
+<li>迭代：按序遍历，需要记录插入父节点，这样才能做插入操作</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0450.删除二叉搜索树中的节点.html">二叉搜索树中的删除操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：前序，想清楚删除非叶子节点的情况</li>
+<li>迭代：有序遍历，较复杂</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0669.修剪二叉搜索树.html">修剪二叉搜索树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：前序，通过递归函数返回值删除节点</li>
+<li>迭代：有序遍历，较复杂</li>
+</ul>
+</li>
+<li><a class="link" href="https://programmercarl.com/0108.将有序数组转换为二叉搜索树.html">构造二叉搜索树 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><ul>
+<li>递归：前序，数组中间节点分割</li>
+<li>迭代：较复杂，通过三个队列来模拟</li>
+</ul>
+</li>
+</ul>
+<h2 id="阶段总结"><a href="#阶段总结" class="headerlink" title="阶段总结"></a>阶段总结</h2><p>大家以上题目都做过了，也一定要看如下阶段小结。</p>
+<ul>
+<li><a class="link" href="https://programmercarl.com/周总结/20200927二叉树周末总结.html">本周小结！（二叉树系列一） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/周总结/20201003二叉树周末总结.html">本周小结！（二叉树系列二） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/周总结/20201010二叉树周末总结.html">本周小结！（二叉树系列三） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/周总结/20201017二叉树周末总结.html">本周小结！（二叉树系列四） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<h2 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h2><p><strong>在二叉树题目选择什么遍历顺序是不少同学头疼的事情，我们做了这么多二叉树的题目了，Carl给大家大体分分类</strong>。</p>
+<ul>
+<li><p>涉及到二叉树的构造，无论普通二叉树还是二叉搜索树一定前序，都是先构造中节点。</p>
+</li>
+<li><p>求普通二叉树的属性，一般是后序，一般要通过递归函数的返回值做计算。</p>
+</li>
+<li><p>求二叉搜索树的属性，一定是中序了，要不白瞎了有序性了。</p>
+</li>
+</ul>
+<p>注意在普通二叉树的属性中，我用的是一般为后序，例如单纯求深度就用前序，<a class="link" href="https://programmercarl.com/0257.二叉树的所有路径.html">二叉树：找所有路径 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>也用了前序，这是为了方便让父节点指向子节点。</p>
+<p>所以求普通二叉树的属性还是要具体问题具体分析。</p>
+<p>二叉树专题汇聚为一张图： </p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20211030125421.png" alt=""></p>
+<p>这个图是 <a class="link" href="https://programmercarl.com/other/kstar.html">代码随想录知识星球 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 成员：<a class="link" href="https://wx.zsxq.com/dweb2/index/footprint/185251215558842">青 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，所画，总结的非常好，分享给大家。</p>
+<p><strong>最后，二叉树系列就这么完美结束了，估计这应该是最长的系列了，感谢大家33天的坚持与陪伴，接下来我们又要开始新的系列了「回溯算法」！</strong></p>
 ]]></content>
       <categories>
         <category>二叉树</category>
