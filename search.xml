@@ -12047,7 +12047,6 @@ Third paragraph of definition 2.
     <content><![CDATA[<h1 id="77-组合"><a href="#77-组合" class="headerlink" title="77. 组合"></a>77. 组合</h1><p><a class="link" href="https://leetcode.cn/problems/combinations/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</p>
 <p>示例:<br>输入: n = 4, k = 2<br>输出:<br>[<br>  [2,4],<br>  [3,4],<br>  [2,3],<br>  [1,2],<br>  [1,3],<br>  [1,4],<br>]</p>
-<h2 id="算法公开课"><a href="#算法公开课" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" href="https://www.bilibili.com/video/BV1ti4y1L7cv">带你学透回溯算法-组合问题（对应力扣题目：77.组合） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" href="https://www.bilibili.com/video/BV1wi4y157er">组合问题的剪枝操作 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本题是回溯法的经典题目。</p>
 <p>直接的解法当然是使用for循环，例如示例中k为2，很容易想到 用两个for循环，这样就可以输出 和示例中一样的结果。</p>
 <p>代码如下：</p>
@@ -12066,7 +12065,7 @@ Third paragraph of definition 2.
 <p>如果脑洞模拟回溯搜索的过程，绝对可以让人窒息，所以需要抽象图形结构来进一步理解。</p>
 <p><strong>我们在<a class="link" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中说到回溯法解决的问题都可以抽象为树形结构（N叉树），用树形结构来理解回溯就容易多了</strong>。</p>
 <p>那么我把组合问题抽象为如下树形结构：</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195223940.png" alt="77.组合"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195223940.png" alt=""></p>
 <p>可以看出这棵树，一开始集合是 1，2，3，4， 从左向右取数，取过的数，不再重复取。</p>
 <p>第一次取1，集合变为2，3，4 ，因为k为2，我们只需要再取一个数就可以了，分别取2，3，4，得到集合[1,2] [1,3] [1,4]，以此类推。</p>
 <p><strong>每次从集合中选取元素，可选择的范围随着选择的进行而收缩，调整可选择的范围</strong>。</p>
@@ -12122,10 +12121,6 @@ Third paragraph of definition 2.
 <p>如下：</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">void backtracking(参数) {</span><br><span class="line">    if (终止条件) {</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
 <p><strong>对比一下本题的代码，是不是发现有点像！</strong> 所以有了这个模板，就有解题的大体方向，不至于毫无头绪。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>组合问题是回溯法解决的经典问题，我们开始的时候给大家列举一个很形象的例子，就是n为100，k为50的话，直接想法就需要50层for循环。</p>
-<p>从而引出了回溯法就是解决这种k层for循环嵌套的问题。</p>
-<p>然后进一步把回溯法的搜索过程抽象为树形结构，可以直观的看出搜索的过程。</p>
-<p>接着用回溯法三部曲，逐步分析了函数参数、终止条件和单层搜索的过程。</p>
 <h2 id="剪枝优化"><a href="#剪枝优化" class="headerlink" title="剪枝优化"></a>剪枝优化</h2><p>我们说过，回溯法虽然是暴力搜索，但也有时候可以有点剪枝优化一下的。</p>
 <p>在遍历的过程中有如下代码：</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= n; i++) {</span><br><span class="line">    path.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="built_in">backtracking</span>(n, k, i + <span class="number">1</span>);</span><br><span class="line">    path.<span class="built_in">pop_back</span>();</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
@@ -12137,18 +12132,18 @@ Third paragraph of definition 2.
 <p><strong>所以，可以剪枝的地方就在递归中每一层的for循环所选择的起始位置</strong>。</p>
 <p><strong>如果for循环选择的起始位置之后的元素个数 已经不足 我们需要的元素个数了，那么就没有必要搜索了</strong>。</p>
 <p>注意代码中i，就是for循环里选择的起始位置。</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">for (int i = startIndex; i &lt;= n; i++) {</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= n; i++) {</span><br></pre></td></tr></table></figure></div>
 <p>接下来看一下优化过程如下：</p>
 <ol>
-<li><p>已经选择的元素个数：path.size();</p>
+<li><p>已经选择的元素个数：<code>path.size()</code>;</p>
 </li>
-<li><p>还需要的元素个数为: k - path.size();</p>
+<li><p>还需要的元素个数为: <code>k - path.size()</code>;</p>
 </li>
-<li><p>在集合n中至多要从该起始位置 : n - (k - path.size()) + 1，开始遍历</p>
+<li><p>在集合n中至多要从该起始位置 : <code>n - (k - path.size()) + 1</code>，开始遍历</p>
 </li>
 </ol>
 <p>为什么有个+1呢，因为包括起始位置，我们要是一个左闭的集合。</p>
-<p>举个例子，n = 4，k = 3， 目前已经选取的元素为0（path.size为0），n - (k - 0) + 1 即 4 - ( 3 - 0) + 1 = 2。</p>
+<p>举个例子，<code>n = 4，k = 3</code>， 目前已经选取的元素为0（path.size为0），n - (k - 0) + 1 即 4 - ( 3 - 0) + 1 = 2。</p>
 <p>从2开始搜索都是合理的，可以是组合[2, 3, 4]。</p>
 <p>这里大家想不懂的话，建议也举一个例子，就知道是不是要+1了。</p>
 <p>所以优化之后的for循环是：</p>
@@ -12157,51 +12152,504 @@ Third paragraph of definition 2.
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> k, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() == k) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= n - (k - path.<span class="built_in">size</span>()) + <span class="number">1</span>; i++) { <span class="comment">// 优化的地方</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(i); <span class="comment">// 处理节点</span></span><br><span class="line">            <span class="built_in">backtracking</span>(n, k, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯，撤销处理的节点</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combine</span>(<span class="type">int</span> n, <span class="type">int</span> k) {</span><br><span class="line">        <span class="built_in">backtracking</span>(n, k, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <h2 id="剪枝总结"><a href="#剪枝总结" class="headerlink" title="剪枝总结"></a>剪枝总结</h2><p>本篇我们准对求组合问题的回溯法代码做了剪枝优化，这个优化如果不画图的话，其实不好理解，也不好讲清楚。</p>
 <p>所以我依然是把整个回溯过程抽象为一棵树形结构，然后可以直观的看出，剪枝究竟是剪的哪里。</p>
-<h2 id="组合优化"><a href="#组合优化" class="headerlink" title="组合优化"></a>组合优化</h2><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>在<a class="link" href="https://programmercarl.com/0077.组合.html">回溯算法：求组合问题！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，我们通过回溯搜索法，解决了n个数中求k个数的组合问题。</p>
-<p>文中的回溯法是可以剪枝优化的，本篇我们继续来看一下题目77. 组合。</p>
-<p>链接：<a class="link" href="https://leetcode.cn/problems/combinations/">https://leetcode.cn/problems/combinations/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><strong>看本篇之前，需要先看<a class="link" href="https://programmercarl.com/0077.组合.html">回溯算法：求组合问题！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></strong>。</p>
-<p>大家先回忆一下[77. 组合]给出的回溯法的代码：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result; <span class="comment">// 存放符合条件结果的集合</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path; <span class="comment">// 用来存放符合条件结果</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> k, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() == k) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= n; i++) {</span><br><span class="line">            path.<span class="built_in">push_back</span>(i); <span class="comment">// 处理节点</span></span><br><span class="line">            <span class="built_in">backtracking</span>(n, k, i + <span class="number">1</span>); <span class="comment">// 递归</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯，撤销处理的节点</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combine</span>(<span class="type">int</span> n, <span class="type">int</span> k) {</span><br><span class="line">        result.<span class="built_in">clear</span>(); <span class="comment">// 可以不写</span></span><br><span class="line">        path.<span class="built_in">clear</span>();   <span class="comment">// 可以不写</span></span><br><span class="line">        <span class="built_in">backtracking</span>(n, k, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
-<h2 id="剪枝优化-1"><a href="#剪枝优化-1" class="headerlink" title="剪枝优化"></a>剪枝优化</h2><p>我们说过，回溯法虽然是暴力搜索，但也有时候可以有点剪枝优化一下的。</p>
-<p>在遍历的过程中有如下代码：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= n; i++) {</span><br><span class="line">    path.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="built_in">backtracking</span>(n, k, i + <span class="number">1</span>);</span><br><span class="line">    path.<span class="built_in">pop_back</span>();</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
-<p>这个遍历的范围是可以剪枝优化的，怎么优化呢？</p>
-<p>来举一个例子，n = 4，k = 4的话，那么第一层for循环的时候，从元素2开始的遍历都没有意义了。 在第二层for循环，从元素3开始的遍历都没有意义了。</p>
-<p>这么说有点抽象，如图所示：</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130194335207.png" alt="77.组合4"></p>
-<p>图中每一个节点（图中为矩形），就代表本层的一个for循环，那么每一层的for循环从第二个数开始遍历的话，都没有意义，都是无效遍历。</p>
-<p><strong>所以，可以剪枝的地方就在递归中每一层的for循环所选择的起始位置</strong>。</p>
-<p><strong>如果for循环选择的起始位置之后的元素个数 已经不足 我们需要的元素个数了，那么就没有必要搜索了</strong>。</p>
-<p>注意代码中i，就是for循环里选择的起始位置。</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= n; i++) {</span><br></pre></td></tr></table></figure></div>
-<p>接下来看一下优化过程如下：</p>
-<ol>
-<li><p>已经选择的元素个数：path.size();</p>
-</li>
-<li><p>所需需要的元素个数为: k - path.size();</p>
-</li>
-<li><p>列表中剩余元素（n-i） &gt;= 所需需要的元素个数（k - path.size()）</p>
-</li>
-<li><p>在集合n中至多要从该起始位置 : i &lt;= n - (k - path.size()) + 1，开始遍历</p>
-</li>
-</ol>
-<p>为什么有个+1呢，因为包括起始位置，我们要是一个左闭的集合。</p>
-<p>举个例子，n = 4，k = 3， 目前已经选取的元素为0（path.size为0），n - (k - 0) + 1 即 4 - ( 3 - 0) + 1 = 2。</p>
-<p>从2开始搜索都是合理的，可以是组合[2, 3, 4]。</p>
-<p>这里大家想不懂的话，建议也举一个例子，就知道是不是要+1了。</p>
-<p>所以优化之后的for循环是：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= n - (k - path.<span class="built_in">size</span>()) + <span class="number">1</span>; i++) <span class="comment">// i为本次搜索的起始位置</span></span><br></pre></td></tr></table></figure></div>
-<p>优化后整体代码如下：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> k, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() == k) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= n - (k - path.<span class="built_in">size</span>()) + <span class="number">1</span>; i++) { <span class="comment">// 优化的地方</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(i); <span class="comment">// 处理节点</span></span><br><span class="line">            <span class="built_in">backtracking</span>(n, k, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯，撤销处理的节点</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combine</span>(<span class="type">int</span> n, <span class="type">int</span> k) {</span><br><span class="line">        <span class="built_in">backtracking</span>(n, k, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h1 id="216-组合总和III"><a href="#216-组合总和III" class="headerlink" title="216.组合总和III"></a>216.组合总和III</h1><p><a class="link" href="https://leetcode.cn/problems/combination-sum-iii/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。</p>
+<p>说明：</p>
+<ul>
+<li>所有数字都是正整数。</li>
+<li>解集不能包含重复的组合。</li>
+</ul>
+<p>示例 1:<br>输入: k = 3, n = 7<br>输出: [[1,2,4]]</p>
+<p>示例 2:<br>输入: k = 3, n = 9<br>输出: [[1,2,6], [1,3,5], [2,3,4]]</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>本题就是在[1,2,3,4,5,6,7,8,9]这个集合中找到和为n的k个数的组合。</p>
+<p>相对于<a class="link" href="https://programmercarl.com/0077.组合.html">77. 组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，无非就是多了一个限制，本题是要找到和为n的k个数的组合，而整个集合已经是固定的了[1,…,9]。</p>
+<p>想到这一点了，做过<a class="link" href="https://programmercarl.com/0077.组合.html">77. 组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后，本题是简单一些了。</p>
+<p>本题k相当于树的深度，9（因为整个集合就是9个数）就是树的宽度。</p>
+<p>例如 k = 2，n = 4的话，就是在集合[1,2,3,4,5,6,7,8,9]中求 k（个数） = 2, n（和） = 4的组合。</p>
+<p>选取过程如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195717975.png" alt="216.组合总和III"></p>
+<p>图中，可以看出，只有最后取到集合（1，3）和为4 符合条件。</p>
+<h3 id="回溯三部曲"><a href="#回溯三部曲" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li><strong>确定递归函数参数</strong></li>
+</ul>
+<p>和<a class="link" href="https://programmercarl.com/0077.组合.html">77. 组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>一样，依然需要一维数组path来存放符合条件的结果，二维数组result来存放结果集。</p>
+<p>这里我依然定义path 和 result为全局变量。</p>
+<p>至于为什么取名为path？从上面树形结构中，可以看出，结果其实就是一条根节点到叶子节点的路径。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result; <span class="comment">// 存放结果集</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; path; <span class="comment">// 符合条件的结果</span></span><br></pre></td></tr></table></figure></div>
+<p>接下来还需要如下参数：</p>
+<ul>
+<li>targetSum（int）目标和，也就是题目中的n。</li>
+<li>k（int）就是题目中要求k个数的集合。</li>
+<li>sum（int）为已经收集的元素的总和，也就是path里元素的总和。</li>
+<li>startIndex（int）为下一层for循环搜索的起始位置。</li>
+</ul>
+<p>所以代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> targetSum, <span class="type">int</span> k, <span class="type">int</span> sum, <span class="type">int</span> startIndex)</span></span></span><br></pre></td></tr></table></figure></div>
+<p>其实这里sum这个参数也可以省略，每次targetSum减去选取的元素数值，然后判断如果targetSum为0了，说明收集到符合条件的结果了，我这里为了直观便于理解，还是加一个sum参数。</p>
+<p>还要强调一下，回溯法中递归函数参数很难一次性确定下来，一般先写逻辑，需要啥参数了，填什么参数。</p>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>什么时候终止呢？</p>
+<p>在上面已经说了，k其实就已经限制树的深度，因为就取k个元素，树再往下深了没有意义。</p>
+<p>所以如果path.size() 和 k相等了，就终止。</p>
+<p>如果此时path里收集到的元素和（sum） 和targetSum（就是题目描述的n）相同了，就用result收集当前的结果。</p>
+<p>所以 终止代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (path.<span class="built_in">size</span>() == k) {</span><br><span class="line">    <span class="keyword">if</span> (sum == targetSum) result.<span class="built_in">push_back</span>(path);</span><br><span class="line">    <span class="keyword">return</span>; <span class="comment">// 如果path.size() == k 但sum != targetSum 直接返回</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><strong>单层搜索过程</strong></li>
+</ul>
+<p>本题和<a class="link" href="https://programmercarl.com/0077.组合.html">77. 组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>区别之一就是集合固定的就是9个数[1,…,9]，所以for循环固定i&lt;=9</p>
+<p>如图：<br><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195717975-20230310113546003.png" alt="216.组合总和III"></p>
+<p>处理过程就是 path收集每次选取的元素，相当于树型结构里的边，sum来统计path里元素的总和。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= <span class="number">9</span>; i++) {</span><br><span class="line">    sum += i;</span><br><span class="line">    path.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="built_in">backtracking</span>(targetSum, k, sum, i + <span class="number">1</span>); <span class="comment">// 注意i+1调整startIndex</span></span><br><span class="line">    sum -= i; <span class="comment">// 回溯</span></span><br><span class="line">    path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>别忘了处理过程 和 回溯过程是一一对应的，处理有加，回溯就要有减！</strong></p>
+<p>参照<a class="link" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中的模板，不难写出如下C++代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result; <span class="comment">// 存放结果集</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path; <span class="comment">// 符合条件的结果</span></span><br><span class="line">    <span class="comment">// targetSum：目标和，也就是题目中的n。</span></span><br><span class="line">    <span class="comment">// k：题目中要求k个数的集合。</span></span><br><span class="line">    <span class="comment">// sum：已经收集的元素的总和，也就是path里元素的总和。</span></span><br><span class="line">    <span class="comment">// startIndex：下一层for循环搜索的起始位置。</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> targetSum, <span class="type">int</span> k, <span class="type">int</span> sum, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() == k) {</span><br><span class="line">            <span class="keyword">if</span> (sum == targetSum) result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>; <span class="comment">// 如果path.size() == k 但sum != targetSum 直接返回</span></span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= <span class="number">9</span>; i++) {</span><br><span class="line">            sum += i; <span class="comment">// 处理</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(i); <span class="comment">// 处理</span></span><br><span class="line">            <span class="built_in">backtracking</span>(targetSum, k, sum, i + <span class="number">1</span>); <span class="comment">// 注意i+1调整startIndex</span></span><br><span class="line">            sum -= i; <span class="comment">// 回溯</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combinationSum3</span>(<span class="type">int</span> k, <span class="type">int</span> n) {</span><br><span class="line">        result.<span class="built_in">clear</span>(); <span class="comment">// 可以不加</span></span><br><span class="line">        path.<span class="built_in">clear</span>();   <span class="comment">// 可以不加</span></span><br><span class="line">        <span class="built_in">backtracking</span>(n, k, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><p>这道题目，剪枝操作其实是很容易想到了，想必大家看上面的树形图的时候已经想到了。</p>
+<p>如图：<br><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/2020112319580476.png" alt="216.组合总和III1"></p>
+<p>已选元素总和如果已经大于n（图中数值为4）了，那么往后遍历就没有意义了，直接剪掉。</p>
+<p>那么剪枝的地方可以放在递归函数开始的地方，剪枝代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (sum &gt; targetSum) { <span class="comment">// 剪枝操作</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>当然这个剪枝也可以放在 调用递归之前，即放在这里，只不过要记得 要回溯操作给做了。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= <span class="number">9</span> - (k - path.<span class="built_in">size</span>()) + <span class="number">1</span>; i++) { <span class="comment">// 剪枝</span></span><br><span class="line">    sum += i; <span class="comment">// 处理</span></span><br><span class="line">    path.<span class="built_in">push_back</span>(i); <span class="comment">// 处理</span></span><br><span class="line">    <span class="keyword">if</span> (sum &gt; targetSum) { <span class="comment">// 剪枝操作</span></span><br><span class="line">        sum -= i; <span class="comment">// 剪枝之前先把回溯做了</span></span><br><span class="line">        path.<span class="built_in">pop_back</span>(); <span class="comment">// 剪枝之前先把回溯做了</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">backtracking</span>(targetSum, k, sum, i + <span class="number">1</span>); <span class="comment">// 注意i+1调整startIndex</span></span><br><span class="line">    sum -= i; <span class="comment">// 回溯</span></span><br><span class="line">    path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>和<a class="link" href="https://programmercarl.com/0077.组合优化.html">回溯算法：组合问题再剪剪枝 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 一样，for循环的范围也可以剪枝，i &lt;= 9 - (k - path.size()) + 1就可以了。</p>
+<p>最后C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result; <span class="comment">// 存放结果集</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path; <span class="comment">// 符合条件的结果</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> targetSum, <span class="type">int</span> k, <span class="type">int</span> sum, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (sum &gt; targetSum) { <span class="comment">// 剪枝操作</span></span><br><span class="line">            <span class="keyword">return</span>; </span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() == k) {</span><br><span class="line">            <span class="keyword">if</span> (sum == targetSum) result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>; <span class="comment">// 如果path.size() == k 但sum != targetSum 直接返回</span></span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt;= <span class="number">9</span> - (k - path.<span class="built_in">size</span>()) + <span class="number">1</span>; i++) { <span class="comment">// 剪枝</span></span><br><span class="line">            sum += i; <span class="comment">// 处理</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(i); <span class="comment">// 处理</span></span><br><span class="line">            <span class="built_in">backtracking</span>(targetSum, k, sum, i + <span class="number">1</span>); <span class="comment">// 注意i+1调整startIndex</span></span><br><span class="line">            sum -= i; <span class="comment">// 回溯</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combinationSum3</span>(<span class="type">int</span> k, <span class="type">int</span> n) {</span><br><span class="line">        result.<span class="built_in">clear</span>(); <span class="comment">// 可以不加</span></span><br><span class="line">        path.<span class="built_in">clear</span>();   <span class="comment">// 可以不加</span></span><br><span class="line">        <span class="built_in">backtracking</span>(n, k, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
 <ul>
 <li>时间复杂度: O(n * 2^n)</li>
 <li>空间复杂度: O(n)</li>
 </ul>
-<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>本篇我们针对求组合问题的回溯法代码做了剪枝优化，这个优化如果不画图的话，其实不好理解，也不好讲清楚。</p>
-<p>所以我依然是把整个回溯过程抽象为一棵树形结构，然后可以直观的看出，剪枝究竟是剪的哪里。</p>
-<p><strong>就酱，学到了就帮Carl转发一下吧，让更多的同学知道这里！</strong></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>开篇就介绍了本题与<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的区别，相对来说加了元素总和的限制，如果做完<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>再做本题在合适不过。</p>
+<p>分析完区别，依然把问题抽象为树形结构，按照回溯三部曲进行讲解，最后给出剪枝的优化。</p>
+<p>相信做完本题，大家对组合问题应该有初步了解了。</p>
+<h1 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17.电话号码的字母组合"></a>17.电话号码的字母组合</h1><p><a class="link" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/2020102916424043.png" alt="17.电话号码的字母组合"></p>
+<p>示例:</p>
+<ul>
+<li>输入：”23”</li>
+<li>输出：[“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”].</li>
+</ul>
+<p>说明：尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。</p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>从示例上来说，输入”23”，最直接的想法就是两层for循环遍历了吧，正好把组合的情况都输出了。</p>
+<p>如果输入”233”呢，那么就三层for循环，如果”2333”呢，就四层for循环…….</p>
+<p>大家应该感觉出和<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>遇到的一样的问题，就是这for循环的层数如何写出来，此时又是回溯法登场的时候了。</p>
+<p>理解本题后，要解决如下三个问题：</p>
+<ol>
+<li>数字和字母如何映射</li>
+<li>两个字母就两个for循环，三个字符我就三个for循环，以此类推，然后发现代码根本写不出来</li>
+<li>输入1 * #按键等等异常情况</li>
+</ol>
+<h3 id="数字和字母如何映射"><a href="#数字和字母如何映射" class="headerlink" title="数字和字母如何映射"></a>数字和字母如何映射</h3><p>可以使用map或者定义一个二维数组，例如：string letterMap[10]，来做映射，我这里定义一个二维数组，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> string letterMap[<span class="number">10</span>] = {</span><br><span class="line">    <span class="string">""</span>, <span class="comment">// 0</span></span><br><span class="line">    <span class="string">""</span>, <span class="comment">// 1</span></span><br><span class="line">    <span class="string">"abc"</span>, <span class="comment">// 2</span></span><br><span class="line">    <span class="string">"def"</span>, <span class="comment">// 3</span></span><br><span class="line">    <span class="string">"ghi"</span>, <span class="comment">// 4</span></span><br><span class="line">    <span class="string">"jkl"</span>, <span class="comment">// 5</span></span><br><span class="line">    <span class="string">"mno"</span>, <span class="comment">// 6</span></span><br><span class="line">    <span class="string">"pqrs"</span>, <span class="comment">// 7</span></span><br><span class="line">    <span class="string">"tuv"</span>, <span class="comment">// 8</span></span><br><span class="line">    <span class="string">"wxyz"</span>, <span class="comment">// 9</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="回溯法来解决n个for循环的问题"><a href="#回溯法来解决n个for循环的问题" class="headerlink" title="回溯法来解决n个for循环的问题"></a>回溯法来解决n个for循环的问题</h3><p>对于回溯法还不了解的同学看这篇：<a class="link" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>例如：输入：”23”，抽象为树形结构，如图所示：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123200304469.png" alt="17. 电话号码的字母组合"></p>
+<p>图中可以看出遍历的深度，就是输入”23”的长度，而叶子节点就是我们要收集的结果，输出[“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”]。</p>
+<p>回溯三部曲：</p>
+<ul>
+<li>确定回溯函数参数</li>
+</ul>
+<p>首先需要一个字符串s来收集叶子节点的结果，然后用一个字符串数组result保存起来，这两个变量我依然定义为全局。</p>
+<p>再来看参数，参数指定是有题目中给的string digits，然后还要有一个参数就是int型的index。</p>
+<p>注意这个index可不是 <a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中的startIndex了。</p>
+<p>这个index是记录遍历第几个数字了，就是用来遍历digits的（题目中给出数字字符串），同时index也表示树的深度。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; result;</span><br><span class="line">string s;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">const</span> string&amp; digits, <span class="type">int</span> index)</span></span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定终止条件</li>
+</ul>
+<p>例如输入用例”23”，两个数字，那么根节点往下递归两层就可以了，叶子节点就是要收集的结果集。</p>
+<p>那么终止条件就是如果index 等于 输入的数字个数（digits.size）了（本来index就是用来遍历digits的）。</p>
+<p>然后收集结果，结束本层递归。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (index == digits.<span class="built_in">size</span>()) {</span><br><span class="line">    result.<span class="built_in">push_back</span>(s);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>确定单层遍历逻辑</li>
+</ul>
+<p>首先要取index指向的数字，并找到对应的字符集（手机键盘的字符集）。</p>
+<p>然后for循环来处理这个字符集，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> digit = digits[index] - <span class="string">'0'</span>;        <span class="comment">// 将index指向的数字转为int</span></span><br><span class="line">string letters = letterMap[digit];      <span class="comment">// 取数字对应的字符集</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; letters.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    s.<span class="built_in">push_back</span>(letters[i]);            <span class="comment">// 处理</span></span><br><span class="line">    <span class="built_in">backtracking</span>(digits, index + <span class="number">1</span>);    <span class="comment">// 递归，注意index+1，一下层要处理下一个数字了</span></span><br><span class="line">    s.<span class="built_in">pop_back</span>();                       <span class="comment">// 回溯</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>注意这里for循环，可不像是在<a class="link" href="https://programmercarl.com/0077.组合.html">回溯算法：求组合问题！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" href="https://programmercarl.com/0216.组合总和III.html">回溯算法：求组合总和！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中从startIndex开始遍历的</strong>。</p>
+<p><strong>因为本题每一个数字代表的是不同集合，也就是求不同集合之间的组合，而<a class="link" href="https://programmercarl.com/0077.组合.html">77. 组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>都是求同一个集合中的组合！</strong></p>
+<p>注意：输入1 * #按键等等异常情况</p>
+<p>代码中最好考虑这些异常情况，但题目的测试数据中应该没有异常情况的数据，所以我就没有加了。</p>
+<p><strong>但是要知道会有这些异常，如果是现场面试中，一定要考虑到！</strong></p>
+<p>关键地方都讲完了，按照<a class="link" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中的回溯法模板，不难写出如下C++代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 版本一</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">const</span> string letterMap[<span class="number">10</span>] = {</span><br><span class="line">        <span class="string">""</span>, <span class="comment">// 0</span></span><br><span class="line">        <span class="string">""</span>, <span class="comment">// 1</span></span><br><span class="line">        <span class="string">"abc"</span>, <span class="comment">// 2</span></span><br><span class="line">        <span class="string">"def"</span>, <span class="comment">// 3</span></span><br><span class="line">        <span class="string">"ghi"</span>, <span class="comment">// 4</span></span><br><span class="line">        <span class="string">"jkl"</span>, <span class="comment">// 5</span></span><br><span class="line">        <span class="string">"mno"</span>, <span class="comment">// 6</span></span><br><span class="line">        <span class="string">"pqrs"</span>, <span class="comment">// 7</span></span><br><span class="line">        <span class="string">"tuv"</span>, <span class="comment">// 8</span></span><br><span class="line">        <span class="string">"wxyz"</span>, <span class="comment">// 9</span></span><br><span class="line">    };</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;string&gt; result;</span><br><span class="line">    string s;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">const</span> string&amp; digits, <span class="type">int</span> index)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (index == digits.<span class="built_in">size</span>()) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(s);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> digit = digits[index] - <span class="string">'0'</span>;        <span class="comment">// 将index指向的数字转为int</span></span><br><span class="line">        string letters = letterMap[digit];      <span class="comment">// 取数字对应的字符集</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; letters.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            s.<span class="built_in">push_back</span>(letters[i]);            <span class="comment">// 处理</span></span><br><span class="line">            <span class="built_in">backtracking</span>(digits, index + <span class="number">1</span>);    <span class="comment">// 递归，注意index+1，一下层要处理下一个数字了</span></span><br><span class="line">            s.<span class="built_in">pop_back</span>();                       <span class="comment">// 回溯</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">letterCombinations</span><span class="params">(string digits)</span> </span>{</span><br><span class="line">        s.<span class="built_in">clear</span>();</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (digits.<span class="built_in">size</span>() == <span class="number">0</span>) {</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">backtracking</span>(digits, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(3^m * 4^n)，其中 m 是对应四个字母的数字个数，n 是对应三个字母的数字个数</li>
+<li>空间复杂度: O(3^m * 4^n)</li>
+</ul>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>本篇将题目的三个要点一一列出，并重点强调了和前面讲解过的<a class="link" href="https://programmercarl.com/0077.组合.html">77. 组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的区别，本题是多个集合求组合，所以在回溯的搜索过程中，都有一些细节需要注意的。</p>
+<p>其实本题不算难，但也处处是细节，大家还要自己亲自动手写一写。</p>
+<h1 id="39-组合总和"><a href="#39-组合总和" class="headerlink" title="39. 组合总和"></a>39. 组合总和</h1><p><a class="link" href="https://leetcode.cn/problems/combination-sum/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<p>说明：</p>
+<ul>
+<li>所有数字（包括 target）都是正整数。</li>
+<li>解集不能包含重复的组合。</li>
+</ul>
+<p>示例 1：</p>
+<ul>
+<li>输入：candidates = [2,3,6,7], target = 7,</li>
+<li>所求解集为：<br>[<br>[7],<br>[2,2,3]<br>]</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入：candidates = [2,3,5], target = 8,</li>
+<li>所求解集为：<br>[<br>[2,2,2,2],<br>[2,3,3],<br>[3,5]<br>]</li>
+</ul>
+<h2 id="算法公开课"><a href="#算法公开课" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" href="https://www.bilibili.com/video/BV1KT4y1M7HJ">Leetcode:39. 组合总和讲解 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频再看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>题目中的<strong>无限制重复被选取，吓得我赶紧想想 出现0 可咋办</strong>，然后看到下面提示：1 &lt;= candidates[i] &lt;= 200，我就放心了。</p>
+<p>本题和<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的区别是：本题没有数量要求，可以无限重复，但是有总和的限制，所以间接的也是有个数的限制。</p>
+<p>本题搜索的过程抽象成树形结构如下：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201223170730367.png" alt="39.组合总和"><br>注意图中叶子节点的返回条件，因为本题没有组合数量要求，仅仅是总和的限制，所以递归没有层数的限制，只要选取的元素总和超过target，就返回！</p>
+<p>而在<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 中都可以知道要递归K层，因为要取k个元素的组合。</p>
+<h3 id="回溯三部曲-1"><a href="#回溯三部曲-1" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归函数参数</li>
+</ul>
+<p>这里依然是定义两个全局变量，二维数组result存放结果集，数组path存放符合条件的结果。（这两个变量可以作为函数参数传入）</p>
+<p>首先是题目中给出的参数，集合candidates, 和目标值target。</p>
+<p>此外我还定义了int型的sum变量来统计单一结果path里的总和，其实这个sum也可以不用，用target做相应的减法就可以了，最后如何target==0就说明找到符合的结果了，但为了代码逻辑清晰，我依然用了sum。</p>
+<p><strong>本题还需要startIndex来控制for循环的起始位置，对于组合问题，什么时候需要startIndex呢？</strong></p>
+<p>我举过例子，如果是一个集合来求组合的话，就需要startIndex，例如：<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，<a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p>如果是多个集合取组合，各个集合之间相互不影响，那么就不用startIndex，例如：<a class="link" href="https://programmercarl.com/0017.电话号码的字母组合.html">17.电话号码的字母组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><strong>注意以上我只是说求组合的情况，如果是排列问题，又是另一套分析的套路，后面我在讲解排列的时候会重点介绍</strong>。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target, <span class="type">int</span> sum, <span class="type">int</span> startIndex)</span></span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>递归终止条件</li>
+</ul>
+<p>在如下树形结构中：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201223170730367-20230310135337214.png" alt="39.组合总和"></p>
+<p>从叶子节点可以清晰看到，终止只有两种情况，sum大于target和sum等于target。</p>
+<p>sum等于target的时候，需要收集结果，代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (sum &gt; target) {</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">if</span> (sum == target) {</span><br><span class="line">    result.<span class="built_in">push_back</span>(path);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单层搜索的逻辑</li>
+</ul>
+<p>单层for循环依然是从startIndex开始，搜索candidates集合。</p>
+<p><strong>注意本题和<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>、<a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的一个区别是：本题元素为可重复选取的</strong>。</p>
+<p>如何重复选取呢，看代码，注释部分：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; candidates.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    sum += candidates[i];</span><br><span class="line">    path.<span class="built_in">push_back</span>(candidates[i]);</span><br><span class="line">    <span class="built_in">backtracking</span>(candidates, target, sum, i); <span class="comment">// 关键点:不用i+1了，表示可以重复读取当前的数</span></span><br><span class="line">    sum -= candidates[i];   <span class="comment">// 回溯</span></span><br><span class="line">    path.<span class="built_in">pop_back</span>();        <span class="comment">// 回溯</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>按照<a class="link" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中给出的模板，不难写出如下C++完整代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 版本一</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target, <span class="type">int</span> sum, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (sum &gt; target) {</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (sum == target) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; candidates.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            sum += candidates[i];</span><br><span class="line">            path.<span class="built_in">push_back</span>(candidates[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(candidates, target, sum, i); <span class="comment">// 不用i+1了，表示可以重复读取当前的数</span></span><br><span class="line">            sum -= candidates[i];</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combinationSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(candidates, target, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="剪枝优化-1"><a href="#剪枝优化-1" class="headerlink" title="剪枝优化"></a>剪枝优化</h3><p>在这个树形结构中：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201223170730367-20230310135342472.png" alt="39.组合总和"></p>
+<p>以及上面的版本一的代码大家可以看到，对于sum已经大于target的情况，其实是依然进入了下一层递归，只是下一层递归结束判断的时候，会判断sum &gt; target的话就返回。</p>
+<p>其实如果已经知道下一层的sum会大于target，就没有必要进入下一层递归了。</p>
+<p>那么可以在for循环的搜索范围上做做文章了。</p>
+<p><strong>对总集合排序之后，如果下一层的sum（就是本层的 sum + candidates[i]）已经大于target，就可以结束本轮for循环的遍历</strong>。</p>
+<p>如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201223170809182.png" alt="39.组合总和1"></p>
+<p>for循环剪枝代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">for (int i = startIndex; i &lt; candidates.size() &amp;&amp; sum + candidates[i] &lt;= target; i++)</span><br></pre></td></tr></table></figure></div>
+<p>整体代码如下：（注意注释的部分）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target, <span class="type">int</span> sum, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (sum == target) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果 sum + candidates[i] &gt; target 就终止遍历</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; candidates.<span class="built_in">size</span>() &amp;&amp; sum + candidates[i] &lt;= target; i++) {</span><br><span class="line">            sum += candidates[i];</span><br><span class="line">            path.<span class="built_in">push_back</span>(candidates[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(candidates, target, sum, i);</span><br><span class="line">            sum -= candidates[i];</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combinationSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">sort</span>(candidates.<span class="built_in">begin</span>(), candidates.<span class="built_in">end</span>()); <span class="comment">// 需要排序</span></span><br><span class="line">        <span class="built_in">backtracking</span>(candidates, target, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)，注意这只是复杂度的上界，因为剪枝的存在，真实的时间复杂度远小于此</li>
+<li>空间复杂度: O(target)</li>
+</ul>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>本题和我们之前讲过的<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>、<a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>有两点不同：</p>
+<ul>
+<li>组合没有数量要求</li>
+<li>元素可无限重复选取</li>
+</ul>
+<p>针对这两个问题，我都做了详细的分析。</p>
+<p>并且给出了对于组合问题，什么时候用startIndex，什么时候不用，并用<a class="link" href="https://programmercarl.com/0017.电话号码的字母组合.html">17.电话号码的字母组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>做了对比。</p>
+<p>最后还给出了本题的剪枝优化，这个优化如果是初学者的话并不容易想到。</p>
+<p><strong>在求和问题中，排序之后加剪枝是常见的套路！</strong></p>
+<p>可以看出我写的文章都会大量引用之前的文章，就是要不断作对比，分析其差异，然后给出代码解决的方法，这样才能彻底理解题目的本质与难点。</p>
 ]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>回溯</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码随想录-回溯法分割与子集</title>
+    <url>/2023/10/21/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-%E5%9B%9E%E6%BA%AF%E6%B3%95%E5%88%86%E5%89%B2%E4%B8%8E%E5%AD%90%E9%9B%86/</url>
+    <content><![CDATA[<h1 id="131-分割回文串"><a href="#131-分割回文串" class="headerlink" title="131.分割回文串"></a>131.分割回文串</h1><p><a class="link" href="https://leetcode.cn/problems/palindrome-partitioning/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。</p>
+<p>返回 s 所有可能的分割方案。</p>
+<p>示例:<br>输入: “aab”<br>输出:<br>[<br>  [“aa”,”b”],<br>  [“a”,”a”,”b”]<br>]</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本题这涉及到两个关键问题：</p>
+<ol>
+<li>切割问题，有不同的切割方式</li>
+<li>判断回文</li>
+</ol>
+<p>相信这里不同的切割方式可以搞懵很多同学了。</p>
+<p>这种题目，想用for循环暴力解法，可能都不那么容易写出来，所以要换一种暴力的方式，就是回溯。</p>
+<p>一些同学可能想不清楚 回溯究竟是如何切割字符串呢？</p>
+<p>我们来分析一下切割，<strong>其实切割问题类似组合问题</strong>。</p>
+<p>例如对于字符串abcdef：</p>
+<ul>
+<li>组合问题：选取一个a之后，在bcdef中再去选取第二个，选取b之后在cdef中再选取第三个…..。</li>
+<li>切割问题：切割一个a之后，在bcdef中再去切割第二段，切割b之后在cdef中再切割第三段…..。</li>
+</ul>
+<p>感受出来了不？</p>
+<p>所以切割问题，也可以抽象为一棵树形结构，如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg" alt="131.分割回文串"></p>
+<p>递归用来纵向遍历，for循环用来横向遍历，切割线（就是图中的红线）切割到字符串的结尾位置，说明找到了一个切割方法。</p>
+<p>此时可以发现，切割问题的回溯搜索的过程和组合问题的回溯搜索的过程是差不多的。</p>
+<h3 id="回溯三部曲"><a href="#回溯三部曲" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归函数参数</li>
+</ul>
+<p>全局变量数组path存放切割后回文的子串，二维数组result存放结果集。 （这两个参数可以放到函数参数里）</p>
+<p>本题递归函数参数还需要startIndex，因为切割过的地方，不能重复切割，和组合问题也是保持一致的。</p>
+<p>在<a class="link" href="https://programmercarl.com/0039.组合总和.html">回溯算法：求组合总和（二） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们深入探讨了组合问题什么时候需要startIndex，什么时候不需要startIndex。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">vector&lt;string&gt; path; <span class="comment">// 放已经回文的子串</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span> <span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> startIndex)</span> </span>{</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>递归函数终止条件</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg" alt="131.分割回文串"></p>
+<p>从树形结构的图中可以看出：切割线切到了字符串最后面，说明找到了一种切割方法，此时就是本层递归的终止条件。</p>
+<p><strong>那么在代码里什么是切割线呢？</strong></p>
+<p>在处理组合问题的时候，递归参数需要传入startIndex，表示下一轮递归遍历的起始位置，这个startIndex就是切割线。</p>
+<p>所以终止条件代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span> <span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">    <span class="comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span></span><br><span class="line">    <span class="keyword">if</span> (startIndex &gt;= s.<span class="built_in">size</span>()) {</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单层搜索的逻辑</li>
+</ul>
+<p><strong>来看看在递归循环中如何截取子串呢？</strong></p>
+<p>在<code>for (int i = startIndex; i &lt; s.size(); i++)</code>循环中，我们 定义了起始位置startIndex，那么 [startIndex, i] 就是要截取的子串。</p>
+<p>首先判断这个子串是不是回文，如果是回文，就加入在<code>vector&lt;string&gt; path</code>中，path用来记录切割过的回文子串。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isPalindrome</span>(s, startIndex, i)) { <span class="comment">// 是回文子串</span></span><br><span class="line">        <span class="comment">// 获取[startIndex,i]在s中的子串</span></span><br><span class="line">        string str = s.<span class="built_in">substr</span>(startIndex, i - startIndex + <span class="number">1</span>);</span><br><span class="line">        path.<span class="built_in">push_back</span>(str);</span><br><span class="line">    } <span class="keyword">else</span> {                <span class="comment">// 如果不是则直接跳过</span></span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">backtracking</span>(s, i + <span class="number">1</span>); <span class="comment">// 寻找i+1为起始位置的子串</span></span><br><span class="line">    path.<span class="built_in">pop_back</span>();        <span class="comment">// 回溯过程，弹出本次已经添加的子串</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>注意切割过的位置，不能重复切割，所以，backtracking(s, i + 1); 传入下一层的起始位置为i + 1</strong>。</p>
+<h3 id="判断回文子串"><a href="#判断回文子串" class="headerlink" title="判断回文子串"></a>判断回文子串</h3><p>最后我们看一下回文子串要如何判断了，判断一个字符串是否是回文。</p>
+<p>可以使用双指针法，一个指针从前向后，一个指针从后向前，如果前后指针所指向的元素是相等的，就是回文字符串了。</p>
+<p>那么判断回文的C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>{</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--) {</span><br><span class="line">        <span class="keyword">if</span> (s[i] != s[j]) {</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>如果大家对双指针法有生疏了，传送门：<a class="link" href="https://programmercarl.com/双指针总结.html">双指针法：总结篇！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>此时关键代码已经讲解完毕，整体代码如下（详细注释了）</p>
+<p>根据Carl给出的回溯算法模板：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(参数)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (终止条件) {</span><br><span class="line">        存放结果;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {</span><br><span class="line">        处理节点;</span><br><span class="line">        <span class="built_in">backtracking</span>(路径，选择列表); <span class="comment">// 递归</span></span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>不难写出如下代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">    vector&lt;string&gt; path; <span class="comment">// 放已经回文的子串</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span> <span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span></span><br><span class="line">        <span class="keyword">if</span> (startIndex &gt;= s.<span class="built_in">size</span>()) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isPalindrome</span>(s, startIndex, i)) {   <span class="comment">// 是回文子串</span></span><br><span class="line">                <span class="comment">// 获取[startIndex,i]在s中的子串</span></span><br><span class="line">                string str = s.<span class="built_in">substr</span>(startIndex, i - startIndex + <span class="number">1</span>);</span><br><span class="line">                path.<span class="built_in">push_back</span>(str);</span><br><span class="line">            } <span class="keyword">else</span> {                                <span class="comment">// 不是回文，跳过</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="built_in">backtracking</span>(s, i + <span class="number">1</span>); <span class="comment">// 寻找i+1为起始位置的子串</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯过程，弹出本次已经添加的子串</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--) {</span><br><span class="line">            <span class="keyword">if</span> (s[i] != s[j]) {</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">partition</span>(string s) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(s, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)</li>
+<li>空间复杂度: O(n^2)</li>
+</ul>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>上面的代码还存在一定的优化空间, 在于如何更高效的计算一个子字符串是否是回文字串。上述代码<code>isPalindrome</code>函数运用双指针的方法来判定对于一个字符串<code>s</code>, 给定起始下标和终止下标, 截取出的子字符串是否是回文字串。但是其中有一定的重复计算存在:</p>
+<p>例如给定字符串<code>"abcde"</code>, 在已知<code>"bcd"</code>不是回文字串时, 不再需要去双指针操作<code>"abcde"</code>而可以直接判定它一定不是回文字串。</p>
+<p>具体来说, 给定一个字符串<code>s</code>, 长度为<code>n</code>, 它成为回文字串的充分必要条件是<code>s[0] == s[n-1]</code>且<code>s[1:n-1]</code>是回文字串。</p>
+<p>大家如果熟悉动态规划这种算法的话, 我们可以高效地事先一次性计算出, 针对一个字符串<code>s</code>, 它的任何子串是否是回文字串, 然后在我们的回溯函数中直接查询即可, 省去了双指针移动判定这一步骤.</p>
+<p>具体参考代码如下:</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">    vector&lt;string&gt; path; <span class="comment">// 放已经回文的子串</span></span><br><span class="line">    vector&lt;vector&lt;<span class="type">bool</span>&gt;&gt; isPalindrome; <span class="comment">// 放事先计算好的是否回文子串的结果</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span> <span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span></span><br><span class="line">        <span class="keyword">if</span> (startIndex &gt;= s.<span class="built_in">size</span>()) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (isPalindrome[startIndex][i]) {   <span class="comment">// 是回文子串</span></span><br><span class="line">                <span class="comment">// 获取[startIndex,i]在s中的子串</span></span><br><span class="line">                string str = s.<span class="built_in">substr</span>(startIndex, i - startIndex + <span class="number">1</span>);</span><br><span class="line">                path.<span class="built_in">push_back</span>(str);</span><br><span class="line">            } <span class="keyword">else</span> {                                <span class="comment">// 不是回文，跳过</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="built_in">backtracking</span>(s, i + <span class="number">1</span>); <span class="comment">// 寻找i+1为起始位置的子串</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯过程，弹出本次已经添加的子串</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">computePalindrome</span><span class="params">(<span class="type">const</span> string&amp; s)</span> </span>{</span><br><span class="line">        <span class="comment">// isPalindrome[i][j] 代表 s[i:j](双边包括)是否是回文字串 </span></span><br><span class="line">        isPalindrome.<span class="built_in">resize</span>(s.<span class="built_in">size</span>(), <span class="built_in">vector</span>&lt;<span class="type">bool</span>&gt;(s.<span class="built_in">size</span>(), <span class="literal">false</span>)); <span class="comment">// 根据字符串s, 刷新布尔矩阵的大小</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = s.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) { </span><br><span class="line">            <span class="comment">// 需要倒序计算, 保证在i行时, i+1行已经计算好了</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; s.<span class="built_in">size</span>(); j++) {</span><br><span class="line">                <span class="keyword">if</span> (j == i) {isPalindrome[i][j] = <span class="literal">true</span>;}</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (j - i == <span class="number">1</span>) {isPalindrome[i][j] = (s[i] == s[j]);}</span><br><span class="line">                <span class="keyword">else</span> {isPalindrome[i][j] = (s[i] == s[j] &amp;&amp; isPalindrome[i+<span class="number">1</span>][j<span class="number">-1</span>]);}</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">partition</span>(string s) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">computePalindrome</span>(s);</span><br><span class="line">        <span class="built_in">backtracking</span>(s, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这道题目在leetcode上是中等，但可以说是hard的题目了，但是代码其实就是按照模板的样子来的。</p>
+<p>那么难究竟难在什么地方呢？</p>
+<p><strong>我列出如下几个难点：</strong></p>
+<ul>
+<li>切割问题可以抽象为组合问题</li>
+<li>如何模拟那些切割线</li>
+<li>切割问题中递归如何终止</li>
+<li>在递归循环中如何截取子串</li>
+<li>如何判断回文</li>
+</ul>
+<p><strong>我们平时在做难题的时候，总结出来难究竟难在哪里也是一种需要锻炼的能力</strong>。</p>
+<p>一些同学可能遇到题目比较难，但是不知道题目难在哪里，反正就是很难。其实这样还是思维不够清晰，这种总结的能力需要多接触多锻炼。</p>
+<p><strong>本题我相信很多同学主要卡在了第一个难点上：就是不知道如何切割，甚至知道要用回溯法，也不知道如何用。也就是没有体会到按照求组合问题的套路就可以解决切割</strong>。</p>
+<p>如果意识到这一点，算是重大突破了。接下来就可以对着模板照葫芦画瓢。</p>
+<p><strong>但接下来如何模拟切割线，如何终止，如何截取子串，其实都不好想，最后判断回文算是最简单的了</strong>。</p>
+<p>关于模拟切割线，其实就是index是上一层已经确定了的分割线，i是这一层试图寻找的新分割线</p>
+<p>除了这些难点，<strong>本题还有细节，例如：切割过的地方不能重复切割所以递归函数需要传入i + 1</strong>。</p>
+<p>所以本题应该是一道hard题目了。</p>
+<p><strong>可能刷过这道题目的录友都没感受到自己原来克服了这么多难点，就把这道题目AC了</strong>，这应该叫做无招胜有招，人码合一。</p>
+<h1 id="93-复原IP地址"><a href="#93-复原IP地址" class="headerlink" title="93.复原IP地址"></a>93.复原IP地址</h1><p><a class="link" href="https://leetcode.cn/problems/restore-ip-addresses/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。</p>
+<p>有效的 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 ‘.’ 分隔。</p>
+<p>例如：”0.1.2.201” 和 “192.168.1.1” 是 有效的 IP 地址，但是 “0.011.255.245”、”192.168.1.312” 和 “192.168@1.1” 是 无效的 IP 地址。</p>
+<p>示例 1：</p>
+<ul>
+<li>输入：s = “25525511135”</li>
+<li>输出：[“255.255.11.135”,”255.255.111.35”]</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入：s = “0000”</li>
+<li>输出：[“0.0.0.0”]</li>
+</ul>
+<p>示例 3：</p>
+<ul>
+<li>输入：s = “1111”</li>
+<li>输出：[“1.1.1.1”]</li>
+</ul>
+<p>示例 4：</p>
+<ul>
+<li>输入：s = “010010”</li>
+<li>输出：[“0.10.0.10”,”0.100.1.0”]</li>
+</ul>
+<p>示例 5：</p>
+<ul>
+<li>输入：s = “101023”</li>
+<li>输出：[“1.0.10.23”,”1.0.102.3”,”10.1.0.23”,”10.10.2.3”,”101.0.2.3”]</li>
+</ul>
+<p>提示：</p>
+<ul>
+<li>0 &lt;= s.length &lt;= 3000</li>
+<li>s 仅由数字组成</li>
+</ul>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>做这道题目之前，最好先把<a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>这个做了。</p>
+<p>这道题目相信大家刚看的时候，应该会一脸茫然。</p>
+<p>其实只要意识到这是切割问题，<strong>切割问题就可以使用回溯搜索法把所有可能性搜出来</strong>，和刚做过的<a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>就十分类似了。</p>
+<p>切割问题可以抽象为树型结构，如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123203735933.png" alt="93.复原IP地址"></p>
+<h3 id="回溯三部曲-1"><a href="#回溯三部曲-1" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归参数</li>
+</ul>
+<p>在<a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们就提到切割问题类似组合问题。</p>
+<p>startIndex一定是需要的，因为不能重复分割，记录下一层递归分割的起始位置。</p>
+<p>本题我们还需要一个变量pointNum，记录添加逗点的数量。</p>
+<p>所以代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; result;<span class="comment">// 记录结果</span></span><br><span class="line"><span class="comment">// startIndex: 搜索的起始位置，pointNum:添加逗点的数量</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(string&amp; s, <span class="type">int</span> startIndex, <span class="type">int</span> pointNum)</span> </span>{</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>递归终止条件</li>
+</ul>
+<p>终止条件和<a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>情况就不同了，本题明确要求只会分成4段，所以不能用切割线切到最后作为终止条件，而是分割的段数作为终止条件。</p>
+<p>pointNum表示逗点数量，pointNum为3说明字符串分成了4段了。</p>
+<p>然后验证一下第四段是否合法，如果合法就加入到结果集里</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (pointNum == <span class="number">3</span>) { <span class="comment">// 逗点数量为3时，分隔结束</span></span><br><span class="line">    <span class="comment">// 判断第四段子字符串是否合法，如果合法就放进result中</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isValid</span>(s, startIndex, s.<span class="built_in">size</span>() - <span class="number">1</span>)) {</span><br><span class="line">        result.<span class="built_in">push_back</span>(s);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单层搜索的逻辑</li>
+</ul>
+<p>在<a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中已经讲过在循环遍历中如何截取子串。</p>
+<p>在<code>for (int i = startIndex; i &lt; s.size(); i++)</code>循环中 [startIndex, i] 这个区间就是截取的子串，需要判断这个子串是否合法。</p>
+<p>如果合法就在字符串后面加上符号<code>.</code>表示已经分割。</p>
+<p>如果不合法就结束本层循环，如图中剪掉的分支：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123203735933-20230310132314109.png" alt="93.复原IP地址"></p>
+<p>然后就是递归和回溯的过程：</p>
+<p>递归调用时，下一层递归的startIndex要从i+2开始（因为需要在字符串中加入了分隔符<code>.</code>），同时记录分割符的数量pointNum 要 +1。</p>
+<p>回溯的时候，就将刚刚加入的分隔符<code>.</code> 删掉就可以了，pointNum也要-1。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isValid</span>(s, startIndex, i)) { <span class="comment">// 判断 [startIndex,i] 这个区间的子串是否合法</span></span><br><span class="line">        s.<span class="built_in">insert</span>(s.<span class="built_in">begin</span>() + i + <span class="number">1</span> , <span class="string">'.'</span>);  <span class="comment">// 在i的后面插入一个逗点</span></span><br><span class="line">        pointNum++;</span><br><span class="line">        <span class="built_in">backtracking</span>(s, i + <span class="number">2</span>, pointNum);   <span class="comment">// 插入逗点之后下一个子串的起始位置为i+2</span></span><br><span class="line">        pointNum--;                         <span class="comment">// 回溯</span></span><br><span class="line">        s.<span class="built_in">erase</span>(s.<span class="built_in">begin</span>() + i + <span class="number">1</span>);         <span class="comment">// 回溯删掉逗点</span></span><br><span class="line">    } <span class="keyword">else</span> <span class="keyword">break</span>; <span class="comment">// 不合法，直接结束本层循环</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<h3 id="判断子串是否合法"><a href="#判断子串是否合法" class="headerlink" title="判断子串是否合法"></a>判断子串是否合法</h3><p>最后就是在写一个判断段位是否是有效段位了。</p>
+<p>主要考虑到如下三点：</p>
+<ul>
+<li>段位以0为开头的数字不合法</li>
+<li>段位里有非正整数字符不合法</li>
+<li>段位如果大于255了不合法</li>
+</ul>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断字符串s在左闭又闭区间[start, end]所组成的数字是否合法</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (start &gt; end) {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (s[start] == <span class="string">'0'</span> &amp;&amp; start != end) { <span class="comment">// 0开头的数字不合法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) {</span><br><span class="line">        <span class="keyword">if</span> (s[i] &gt; <span class="string">'9'</span> || s[i] &lt; <span class="string">'0'</span>) { <span class="comment">// 遇到非数字字符不合法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        num = num * <span class="number">10</span> + (s[i] - <span class="string">'0'</span>);</span><br><span class="line">        <span class="keyword">if</span> (num &gt; <span class="number">255</span>) { <span class="comment">// 如果大于255了不合法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>根据<a class="link" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>给出的回溯算法模板：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">void backtracking(参数) {</span><br><span class="line">    if (终止条件) {</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>可以写出如下回溯算法C++代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;string&gt; result;<span class="comment">// 记录结果</span></span><br><span class="line">    <span class="comment">// startIndex: 搜索的起始位置，pointNum:添加逗点的数量</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(string&amp; s, <span class="type">int</span> startIndex, <span class="type">int</span> pointNum)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (pointNum == <span class="number">3</span>) { <span class="comment">// 逗点数量为3时，分隔结束</span></span><br><span class="line">            <span class="comment">// 判断第四段子字符串是否合法，如果合法就放进result中</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isValid</span>(s, startIndex, s.<span class="built_in">size</span>() - <span class="number">1</span>)) {</span><br><span class="line">                result.<span class="built_in">push_back</span>(s);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isValid</span>(s, startIndex, i)) { <span class="comment">// 判断 [startIndex,i] 这个区间的子串是否合法</span></span><br><span class="line">                s.<span class="built_in">insert</span>(s.<span class="built_in">begin</span>() + i + <span class="number">1</span> , <span class="string">'.'</span>);  <span class="comment">// 在i的后面插入一个逗点</span></span><br><span class="line">                pointNum++;</span><br><span class="line">                <span class="built_in">backtracking</span>(s, i + <span class="number">2</span>, pointNum);   <span class="comment">// 插入逗点之后下一个子串的起始位置为i+2</span></span><br><span class="line">                pointNum--;                         <span class="comment">// 回溯</span></span><br><span class="line">                s.<span class="built_in">erase</span>(s.<span class="built_in">begin</span>() + i + <span class="number">1</span>);         <span class="comment">// 回溯删掉逗点</span></span><br><span class="line">            } <span class="keyword">else</span> <span class="keyword">break</span>; <span class="comment">// 不合法，直接结束本层循环</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 判断字符串s在左闭又闭区间[start, end]所组成的数字是否合法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) {</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (s[start] == <span class="string">'0'</span> &amp;&amp; start != end) { <span class="comment">// 0开头的数字不合法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) {</span><br><span class="line">            <span class="keyword">if</span> (s[i] &gt; <span class="string">'9'</span> || s[i] &lt; <span class="string">'0'</span>) { <span class="comment">// 遇到非数字字符不合法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">            num = num * <span class="number">10</span> + (s[i] - <span class="string">'0'</span>);</span><br><span class="line">            <span class="keyword">if</span> (num &gt; <span class="number">255</span>) { <span class="comment">// 如果大于255了不合法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">restoreIpAddresses</span><span class="params">(string s)</span> </span>{</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() &lt; <span class="number">4</span> || s.<span class="built_in">size</span>() &gt; <span class="number">12</span>) <span class="keyword">return</span> result; <span class="comment">// 算是剪枝了</span></span><br><span class="line">        <span class="built_in">backtracking</span>(s, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(3^4)，IP地址最多包含4个数字，每个数字最多有3种可能的分割方式，则搜索树的最大深度为4，每个节点最多有3个子节点。</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>在<a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我列举的分割字符串的难点，本题都覆盖了。</p>
+<p>而且本题还需要操作字符串添加逗号作为分隔符，并验证区间的合法性。</p>
+<p>可以说是<a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的加强版。</p>
+<p>在本文的树形结构图中，我已经把详细的分析思路都画了出来，相信大家看了之后一定会思路清晰不少！</p>
+<h1 id="78-子集"><a href="#78-子集" class="headerlink" title="78.子集"></a>78.子集</h1><p><a class="link" href="https://leetcode.cn/problems/subsets/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<p>示例:<br>输入: nums = [1,2,3]<br>输出:<br>[<br>  [3],<br>  [1],<br>  [2],<br>  [1,2,3],<br>  [1,3],<br>  [2,3],<br>  [1,2],<br>  []<br>]</p>
+<h2 id="算法公开课"><a href="#算法公开课" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" href="https://www.bilibili.com/video/BV1U84y1q7Ci">回溯算法解决子集问题，树上节点都是目标集和！ | LeetCode：78.子集 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频再看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>求子集问题和<a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>又不一样了。</p>
+<p>如果把 子集问题、组合问题、分割问题都抽象为一棵树的话，<strong>那么组合问题和分割问题都是收集树的叶子节点，而子集问题是找树的所有节点！</strong></p>
+<p>其实子集也是一种组合问题，因为它的集合是无序的，子集{1,2} 和 子集{2,1}是一样的。</p>
+<p><strong>那么既然是无序，取过的元素不会重复取，写回溯算法的时候，for就要从startIndex开始，而不是从0开始！</strong></p>
+<p>有同学问了，什么时候for可以从0开始呢？</p>
+<p>求排列问题的时候，就要从0开始，因为集合是有序的，{1, 2} 和{2, 1}是两个集合，排列问题我们后续的文章就会讲到的。</p>
+<p>以示例中nums = [1,2,3]为例把求子集抽象为树型结构，如下：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/78.%E5%AD%90%E9%9B%86.png" alt="78.子集"></p>
+<p>从图中红线部分，可以看出<strong>遍历这个树的时候，把所有节点都记录下来，就是要求的子集集合</strong>。</p>
+<h3 id="回溯三部曲-2"><a href="#回溯三部曲-2" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归函数参数</li>
+</ul>
+<p>全局变量数组path为子集收集元素，二维数组result存放子集组合。（也可以放到递归函数参数里）</p>
+<p>递归函数参数在上面讲到了，需要startIndex。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br></pre></td></tr></table></figure></div>
+<p>递归终止条件</p>
+<p>从图中可以看出：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/78.%E5%AD%90%E9%9B%86.png" alt="78.子集"></p>
+<p>剩余集合为空的时候，就是叶子节点。</p>
+<p>那么什么时候剩余集合为空呢？</p>
+<p>就是startIndex已经大于数组的长度了，就终止了，因为没有元素可取了，代码如下:</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (startIndex &gt;= nums.<span class="built_in">size</span>()) {</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>其实可以不需要加终止条件，因为startIndex &gt;= nums.size()，本层for循环本来也结束了</strong>。</p>
+<ul>
+<li>单层搜索逻辑</li>
+</ul>
+<p><strong>求取子集问题，不需要任何剪枝！因为子集就是要遍历整棵树</strong>。</p>
+<p>那么单层递归逻辑代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">for (int i = startIndex; i &lt; nums.size(); i++) {</span><br><span class="line">    path.push_back(nums[i]);    // 子集收集元素</span><br><span class="line">    backtracking(nums, i + 1);  // 注意从i+1开始，元素不重复取</span><br><span class="line">    path.pop_back();            // 回溯</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>根据<a class="link" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>给出的回溯算法模板：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">void backtracking(参数) {</span><br><span class="line">    if (终止条件) {</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>可以写出如下回溯算法C++代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        result.<span class="built_in">push_back</span>(path); <span class="comment">// 收集子集，要放在终止添加的上面，否则会漏掉自己</span></span><br><span class="line">        <span class="keyword">if</span> (startIndex &gt;= nums.<span class="built_in">size</span>()) { <span class="comment">// 终止条件可以不加</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsets</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<p>在注释中，可以发现可以不写终止条件，因为本来我们就要遍历整棵树。</p>
+<p>有的同学可能担心不写终止条件会不会无限递归？</p>
+<p>并不会，因为每次递归的下一层就是从i+1开始的。</p>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>相信大家经过了</p>
+<ul>
+<li>组合问题：<ul>
+<li><a class="link" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/0077.组合优化.html">回溯算法：组合问题再剪剪枝 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/0017.电话号码的字母组合.html">17.电话号码的字母组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/0039.组合总和.html">39.组合总和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/0040.组合总和II.html">40.组合总和II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+</li>
+<li>分割问题：<ul>
+<li><a class="link" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://programmercarl.com/0093.复原IP地址.html">93.复原IP地址 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+</li>
+</ul>
+<p>洗礼之后，发现子集问题还真的有点简单了，其实这就是一道标准的模板题。</p>
+<p>但是要清楚子集问题和组合问题、分割问题的的区别，<strong>子集是收集树形结构中树的所有节点的结果</strong>。</p>
+<p><strong>而组合问题、分割问题是收集树形结构中叶子节点的结果</strong>。</p>
+<h1 id="90-子集II"><a href="#90-子集II" class="headerlink" title="90.子集II"></a>90.子集II</h1><p><a class="link" href="https://leetcode.cn/problems/subsets-ii/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<p>示例:</p>
+<ul>
+<li>输入: [1,2,2]</li>
+<li>输出:<br>[<br>[2],<br>[1],<br>[1,2,2],<br>[2,2],<br>[1,2],<br>[]<br>]</li>
+</ul>
+<h2 id="算法公开课-1"><a href="#算法公开课-1" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" href="https://www.bilibili.com/video/BV1vm4y1F71J/">回溯算法解决子集问题，如何去重？| LeetCode：90.子集II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频再看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>做本题之前一定要先做<a class="link" href="https://programmercarl.com/0078.子集.html">78.子集 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p>这道题目和<a class="link" href="https://programmercarl.com/0078.子集.html">78.子集 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>区别就是集合里有重复元素了，而且求取的子集要去重。</p>
+<p>那么关于回溯算法中的去重问题，<strong>在<a class="link" href="https://programmercarl.com/0040.组合总和II.html">40.组合总和II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中已经详细讲解过了，和本题是一个套路</strong>。</p>
+<p><strong>剧透一下，后期要讲解的排列问题里去重也是这个套路，所以理解“树层去重”和“树枝去重”非常重要</strong>。</p>
+<p>用示例中的[1, 2, 2] 来举例，如图所示： （<strong>注意去重需要先对集合排序</strong>）</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124195411977.png" alt="90.子集II"></p>
+<p>从图中可以看出，同一树层上重复取2 就要过滤掉，同一树枝上就可以重复取2，因为同一树枝上元素的集合才是唯一子集！</p>
+<p>本题就是其实就是<a class="link" href="https://programmercarl.com/0078.子集.html">回溯算法：求子集问题！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的基础上加上了去重，去重我们在<a class="link" href="https://programmercarl.com/0040.组合总和II.html">回溯算法：求组合总和（三） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>也讲过了，所以我就直接给出代码了：</p>
+<p>C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex, vector&lt;<span class="type">bool</span>&gt;&amp; used)</span> </span>{</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="comment">// used[i - 1] == true，说明同一树枝candidates[i - 1]使用过</span></span><br><span class="line">            <span class="comment">// used[i - 1] == false，说明同一树层candidates[i - 1]使用过</span></span><br><span class="line">            <span class="comment">// 而我们要对同一树层使用过的元素进行跳过</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] &amp;&amp; used[i - <span class="number">1</span>] == <span class="literal">false</span>) {</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            used[i] = <span class="literal">true</span>;</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>, used);</span><br><span class="line">            used[i] = <span class="literal">false</span>;</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsetsWithDup</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">used</span><span class="params">(nums.size(), <span class="literal">false</span>)</span></span>;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>()); <span class="comment">// 去重需要排序</span></span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>, used);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<p>使用set去重的版本。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; uset;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (uset.<span class="built_in">find</span>(nums[i]) != uset.<span class="built_in">end</span>()) {</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            uset.<span class="built_in">insert</span>(nums[i]);</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsetsWithDup</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>()); <span class="comment">// 去重需要排序</span></span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>本题也可以不使用used数组来去重，因为递归的时候下一个startIndex是i+1而不是0。</p>
+<p>如果要是全排列的话，每次要从0开始遍历，为了跳过已入栈的元素，需要使用used。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="comment">// 而我们要对同一树层使用过的元素进行跳过</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt; startIndex &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] ) { <span class="comment">// 注意这里使用i &gt; startIndex</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsetsWithDup</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>()); <span class="comment">// 去重需要排序</span></span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><p>其实这道题目的知识点，我们之前都讲过了，如果之前讲过的子集问题和去重问题都掌握的好，这道题目应该分分钟AC。</p>
+<p>当然本题去重的逻辑，也可以这么写</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (i &gt; startIndex &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] ) {</span><br><span class="line">	<span class="keyword">continue</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1>]]></content>
       <tags>
         <tag>算法</tag>
         <tag>回溯</tag>
