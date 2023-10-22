@@ -12649,7 +12649,67 @@ Third paragraph of definition 2.
 <h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><p>其实这道题目的知识点，我们之前都讲过了，如果之前讲过的子集问题和去重问题都掌握的好，这道题目应该分分钟AC。</p>
 <p>当然本题去重的逻辑，也可以这么写</p>
 <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (i &gt; startIndex &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] ) {</span><br><span class="line">	<span class="keyword">continue</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
-<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1>]]></content>
+<h1 id="491-递增子序列"><a href="#491-递增子序列" class="headerlink" title="491.递增子序列"></a>491.递增子序列</h1><p><a class="link" href="https://leetcode.cn/problems/non-decreasing-subsequences/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个整型数组, 你的任务是找到所有该数组的递增子序列，递增子序列的长度至少是2。</p>
+<p>示例:</p>
+<ul>
+<li>输入: [4, 6, 7, 7]</li>
+<li>输出: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7], [7,7], [4,7,7]]</li>
+</ul>
+<p>说明:</p>
+<ul>
+<li>给定数组的长度不会超过15。</li>
+<li>数组中的整数范围是 [-100,100]。</li>
+<li>给定数组中可能包含重复数字，相等的数字应该被视为递增的一种情况。</li>
+</ul>
+<h2 id="算法公开课-2"><a href="#算法公开课-2" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" href="https://www.bilibili.com/video/BV1EG4y1h78v/">回溯算法精讲，树层去重与树枝去重 | LeetCode：491.递增子序列 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频再看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p>这个递增子序列比较像是取有序的子集。而且本题也要求不能有相同的递增子序列。</p>
+<p>这又是子集，又是去重，是不是不由自主的想起了刚刚讲过的<a class="link" href="https://programmercarl.com/0090.子集II.html">90.子集II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p>就是因为太像了，更要注意差别所在，要不就掉坑里了！</p>
+<p>在<a class="link" href="https://programmercarl.com/0090.子集II.html">90.子集II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们是通过排序，再加一个标记数组来达到去重的目的。</p>
+<p>而本题求自增子序列，是不能对原数组进行排序的，排完序的数组都是自增子序列了。</p>
+<p><strong>所以不能使用之前的去重逻辑！</strong></p>
+<p>本题给出的示例，还是一个有序数组 [4, 6, 7, 7]，这更容易误导大家按照排序的思路去做了。</p>
+<p>为了有鲜明的对比，我用[4, 7, 6, 7]这个数组来举例，抽象为树形结构如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124200229824.png" alt="491. 递增子序列1"></p>
+<h3 id="回溯三部曲-3"><a href="#回溯三部曲-3" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归函数参数</li>
+</ul>
+<p>本题求子序列，很明显一个元素不能重复使用，所以需要startIndex，调整下一层递归的起始位置。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span></span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>终止条件</li>
+</ul>
+<p>本题其实类似求子集问题，也是要遍历树形结构找每一个节点，所以和<a class="link" href="https://programmercarl.com/0078.子集.html">回溯算法：求子集问题！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>一样，可以不加终止条件，startIndex每次都会加1，并不会无限递归。</p>
+<p>但本题收集结果有所不同，题目要求递增子序列大小至少为2，所以代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (path.<span class="built_in">size</span>() &gt; <span class="number">1</span>) {</span><br><span class="line">    result.<span class="built_in">push_back</span>(path);</span><br><span class="line">    <span class="comment">// 注意这里不要加return，因为要取树上的所有节点</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单层搜索逻辑</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124200229824-20230310131640070.png" alt="491. 递增子序列1"><br>在图中可以看出，<strong>同一父节点下的同层上使用过的元素就不能再使用了</strong></p>
+<p>那么单层搜索代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">unordered_set&lt;<span class="type">int</span>&gt; uset; <span class="comment">// 使用set来对本层元素进行去重</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    <span class="keyword">if</span> ((!path.<span class="built_in">empty</span>() &amp;&amp; nums[i] &lt; path.<span class="built_in">back</span>())</span><br><span class="line">            || uset.<span class="built_in">find</span>(nums[i]) != uset.<span class="built_in">end</span>()) {</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">    }</span><br><span class="line">    uset.<span class="built_in">insert</span>(nums[i]); <span class="comment">// 记录这个元素在本层用过了，本层后面不能再用了</span></span><br><span class="line">    path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">    <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">    path.<span class="built_in">pop_back</span>();</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>对于已经习惯写回溯的同学，看到递归函数上面的<code>uset.insert(nums[i]);</code>，下面却没有对应的pop之类的操作，应该很不习惯吧</strong></p>
+<p><strong>这也是需要注意的点，<code>unordered_set&lt;int&gt; uset;</code> 是记录本层元素是否重复使用，新的一层uset都会重新定义（清空），所以要知道uset只负责本层！</strong></p>
+<p>最后整体C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 版本一</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() &gt; <span class="number">1</span>) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="comment">// 注意这里不要加return，要取树上的节点</span></span><br><span class="line">        }</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; uset; <span class="comment">// 使用set对本层元素进行去重</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> ((!path.<span class="built_in">empty</span>() &amp;&amp; nums[i] &lt; path.<span class="built_in">back</span>())</span><br><span class="line">                    || uset.<span class="built_in">find</span>(nums[i]) != uset.<span class="built_in">end</span>()) {</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            uset.<span class="built_in">insert</span>(nums[i]); <span class="comment">// 记录这个元素在本层用过了，本层后面不能再用了</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">findSubsequences</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<h2 id="优化-1"><a href="#优化-1" class="headerlink" title="优化"></a>优化</h2><p>以上代码用我用了<code>unordered_set&lt;int&gt;</code>来记录本层元素是否重复使用。</p>
+<p><strong>其实用数组来做哈希，效率就高了很多</strong>。</p>
+<p>注意题目中说了，数值范围[-100,100]，所以完全可以用数组来做哈希。</p>
+<p>程序运行的时候对unordered_set 频繁的insert，unordered_set需要做哈希映射（也就是把key通过hash function映射为唯一的哈希值）相对费时间，而且每次重新定义set，insert的时候其底层的符号表也要做相应的扩充，也是费事的。</p>
+<p>那么优化后的代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 版本二</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() &gt; <span class="number">1</span>) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> used[<span class="number">201</span>] = {<span class="number">0</span>}; <span class="comment">// 这里使用数组来进行去重操作，题目说数值范围[-100, 100]</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> ((!path.<span class="built_in">empty</span>() &amp;&amp; nums[i] &lt; path.<span class="built_in">back</span>())</span><br><span class="line">                    || used[nums[i] + <span class="number">100</span>] == <span class="number">1</span>) {</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            used[nums[i] + <span class="number">100</span>] = <span class="number">1</span>; <span class="comment">// 记录这个元素在本层用过了，本层后面不能再用了</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">findSubsequences</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>这份代码在leetcode上提交，要比版本一耗时要好的多。</p>
+<p><strong>所以正如在<a class="link" href="https://programmercarl.com/哈希表总结.html">哈希表：总结篇！（每逢总结必经典） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中说的那样，数组，set，map都可以做哈希表，而且数组干的活，map和set都能干，但如果数值范围小的话能用数组尽量用数组</strong>。</p>
+<h2 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h2><p>本题题解清一色都说是深度优先搜索，但我更倾向于说它用回溯法，而且本题我也是完全使用回溯法的逻辑来分析的。</p>
+<p>相信大家在本题中处处都能看到是<a class="link" href="https://programmercarl.com/0090.子集II.html">回溯算法：求子集问题（二） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的身影，但处处又都是陷阱。</p>
+<p><strong>对于养成思维定式或者套模板套嗨了的同学，这道题起到了很好的警醒作用。更重要的是拓展了大家的思路！</strong></p>
+]]></content>
       <tags>
         <tag>算法</tag>
         <tag>回溯</tag>
