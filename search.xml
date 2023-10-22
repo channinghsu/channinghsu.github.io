@@ -9088,7 +9088,7 @@ Third paragraph of definition 2.
 <h3 id="混用解引用和递增运算符"><a href="#混用解引用和递增运算符" class="headerlink" title="混用解引用和递增运算符"></a>混用解引用和递增运算符</h3><p><code>*iter++</code>等价于<code>*(iter++)</code>，递增优先级较高</p>
 <div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> iter = vi.<span class="built_in">begin</span>();</span><br><span class="line"><span class="keyword">while</span> (iter!=vi.<span class="built_in">end</span>()&amp;&amp;*iter&gt;=<span class="number">0</span>)</span><br><span class="line">	cout&lt;&lt;*iter++&lt;&lt;endl;	<span class="comment">// 输出当前值，指针向前移1</span></span><br></pre></td></tr></table></figure></div>
 <blockquote>
-<p><strong>简介是一种美德</strong>，追求简洁能降低程序出错可能性</p>
+<p><strong>简洁是一种美德</strong>，追求简洁能降低程序出错可能性</p>
 </blockquote>
 <h2 id="成员访问运算符"><a href="#成员访问运算符" class="headerlink" title="成员访问运算符"></a>成员访问运算符</h2><p><code>ptr-&gt;mem</code>等价于<code>(*ptr).mem</code></p>
 <p>注意<code>.</code>运算符优先级大于<code>*</code>，所以记得加括号</p>
@@ -9096,14 +9096,21 @@ Third paragraph of definition 2.
 <li><p>条件运算符（<code>?:</code>）允许我们把简单的<code>if-else</code>逻辑嵌入到单个表达式中去，按照如下形式：<code>cond? expr1: expr2</code></p>
 </li>
 <li><p>可以嵌套使用，<strong>右结合律</strong>，从右向左顺序组合</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">finalgrade = (grade &gt; <span class="number">90</span>) ? <span class="string">&quot;high pass&quot;</span></span><br><span class="line">    : (grade &lt; <span class="number">60</span>) ? <span class="string">&quot;fail&quot;</span> : <span class="string">&quot;pass&quot;</span>;</span><br><span class="line"><span class="comment">//等价于</span></span><br><span class="line">finalgrade = (grade &gt; <span class="number">90</span>) ? <span class="string">&quot;high pass&quot;</span></span><br><span class="line">    : （(grade &lt; <span class="number">60</span>) ? <span class="string">&quot;fail&quot;</span> : <span class="string">&quot;pass&quot;</span>）;</span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
 <ul>
-<li>```c++<br>finalgrade = (grade &gt; 90) ? “high pass”<pre><code>: (grade &lt; 60) ? &quot;fail&quot; : &quot;pass&quot;;
-</code></pre>//等价于<br>finalgrade = (grade &gt; 90) ? “high pass”<pre><code>: （(grade &lt; 60) ? &quot;fail&quot; : &quot;pass&quot;）;
-</code></pre><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 输出表达式使用条件运算符记得加括号，条件运算符优先级太低。</span><br><span class="line"></span><br><span class="line">## 位运算符</span><br><span class="line"></span><br><span class="line">用于检查和设置二进制位的功能。</span><br><span class="line"></span><br><span class="line">- 位运算符是作用于**整数类型**的运算对象。</span><br><span class="line">- 二进制位向左移（`&lt;&lt;`）或者向右移（`&gt;&gt;`），移出边界外的位就被舍弃掉了。</span><br><span class="line">- 位取反（`~`）（逐位求反）、与（`&amp;`）、或（`|`）、异或（`^`）</span><br><span class="line"></span><br><span class="line">有符号数负值可能移位后变号，所以强烈建议**位运算符仅用于无符号数**。</span><br><span class="line"></span><br><span class="line">应用：</span><br><span class="line"></span><br><span class="line">```c++</span><br><span class="line">unsigned long quiz1 = 0;    // 每一位代表一个学生是否通过考试</span><br><span class="line">1UL &lt;&lt; 12;  // 代表第12个学生通过</span><br><span class="line">quiz1 |= (1UL &lt;&lt; 12);   // 将第12个学生置为已通过</span><br><span class="line">quiz1 &amp;= ~(1UL &lt;&lt; 12);  // 将第12个学生修改为未通过</span><br><span class="line">bool stu12 = quiz1 &amp; (1UL &lt;&lt; 12);   // 判断第12个学生是否通过</span><br></pre></td></tr></table></figure></div>
-</li>
+<li>输出表达式使用条件运算符记得加括号，条件运算符优先级太低。</li>
 </ul>
-</li>
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><p>用于检查和设置二进制位的功能。</p>
+<ul>
+<li>位运算符是作用于<strong>整数类型</strong>的运算对象。</li>
+<li>二进制位向左移（<code>&lt;&lt;</code>）或者向右移（<code>&gt;&gt;</code>），移出边界外的位就被舍弃掉了。</li>
+<li>位取反（<code>~</code>）（逐位求反）、与（<code>&amp;</code>）、或（<code>|</code>）、异或（<code>^</code>）</li>
 </ul>
+<p>有符号数负值可能移位后变号，所以强烈建议<strong>位运算符仅用于无符号数</strong>。</p>
+<p>应用：</p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">long</span> quiz1 = <span class="number">0</span>;    <span class="comment">// 每一位代表一个学生是否通过考试</span></span><br><span class="line"><span class="number">1UL</span> &lt;&lt; <span class="number">12</span>;  <span class="comment">// 代表第12个学生通过</span></span><br><span class="line">quiz1 |= (<span class="number">1UL</span> &lt;&lt; <span class="number">12</span>);   <span class="comment">// 将第12个学生置为已通过</span></span><br><span class="line">quiz1 &amp;= ~(<span class="number">1UL</span> &lt;&lt; <span class="number">12</span>);  <span class="comment">// 将第12个学生修改为未通过</span></span><br><span class="line"><span class="type">bool</span> stu12 = quiz1 &amp; (<span class="number">1UL</span> &lt;&lt; <span class="number">12</span>);   <span class="comment">// 判断第12个学生是否通过</span></span><br></pre></td></tr></table></figure></div>
 <blockquote>
 <p>位运算符使用较少，但是重载cout、cin大家都用过</p>
 </blockquote>
