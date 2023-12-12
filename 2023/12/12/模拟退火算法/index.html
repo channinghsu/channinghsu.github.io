@@ -24,13 +24,13 @@
     
         <meta name="description" content="false">
 <meta property="og:type" content="article">
-<meta property="og:title" content="模拟退火算法">
+<meta property="og:title" content="模拟退火算法及其在BKT中的应用">
 <meta property="og:url" content="https://channinghsu.github.io/2023/12/12/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Channing Blog">
 <meta property="og:description" content="false">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-12T06:25:18.000Z">
-<meta property="article:modified_time" content="2023-12-12T07:09:19.980Z">
+<meta property="article:modified_time" content="2023-12-12T07:32:04.005Z">
 <meta property="article:author" content="Channing Hsu">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -45,7 +45,7 @@
     
     <title>
         
-            模拟退火算法 -
+            模拟退火算法及其在BKT中的应用 -
         
         Channing&#39;s Blog
     </title>
@@ -221,7 +221,7 @@
     
     <script id="hexo-configurations">
     window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left"},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left"},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -486,7 +486,7 @@
         <div class="article-title relative w-full">
             
                 <div class="w-full flex items-center pt-6 justify-start">
-                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">模拟退火算法</h1>
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">模拟退火算法及其在BKT中的应用</h1>
                 </div>
             
             </div>
@@ -512,8 +512,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-12 15:09:19</span>
-            <span class="mobile">2023-12-12 15:09:19</span>
+            <span class="desktop">2023-12-12 15:32:04</span>
+            <span class="mobile">2023-12-12 15:32:04</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -559,7 +559,7 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <h1 id="模拟退火算法及其在BKT中的应用"><a href="#模拟退火算法及其在BKT中的应用" class="headerlink" title="模拟退火算法及其在BKT中的应用"></a>模拟退火算法及其在BKT中的应用</h1><h2 id="1-模拟退火算法基本思想"><a href="#1-模拟退火算法基本思想" class="headerlink" title="1. 模拟退火算法基本思想"></a>1. 模拟退火算法基本思想</h2><p>模拟退火算法（Simulated Annealing）是一种全局优化算法，通常用于在大规模搜索空间中找到问题的全局最优解。该算法的灵感来自固体退火过程中的原子结晶行为。在热力学上，退火（annealing）现象指物体逐渐降温的物理现象，温度愈低，物体的能量状态会低；够低后，液体开始冷凝与结晶，在结晶状态时，系统的能量状态最低。大自然在缓慢降温（亦即，退火）时，可“找到”最低能量状态：结晶。但是，如果过程过急过快，快速降温（亦称「淬炼」，quenching）时，会导致不是最低能态的非晶形。模拟退火算法通过在搜索过程中引入随机性和接受劣质解的策略，以避免陷入局部最优解。</p>
+            <h2 id="1-模拟退火算法基本思想"><a href="#1-模拟退火算法基本思想" class="headerlink" title="1. 模拟退火算法基本思想"></a>1. 模拟退火算法基本思想</h2><p>模拟退火算法（Simulated Annealing）是一种全局优化算法，通常用于在大规模搜索空间中找到问题的全局最优解。该算法的灵感来自固体退火过程中的原子结晶行为。在热力学上，退火（annealing）现象指物体逐渐降温的物理现象，温度愈低，物体的能量状态会低；够低后，液体开始冷凝与结晶，在结晶状态时，系统的能量状态最低。大自然在缓慢降温（亦即，退火）时，可“找到”最低能量状态：结晶。但是，如果过程过急过快，快速降温（亦称「淬炼」，quenching）时，会导致不是最低能态的非晶形。模拟退火算法通过在搜索过程中引入随机性和接受劣质解的策略，以避免陷入局部最优解。</p>
 <p>在模拟退火算法中，这一退火过程被模拟为在搜索空间中随机寻找解的过程。其基本思想包括：</p>
 <ul>
 <li><p><strong>初始解生成：</strong> 随机生成一个初始解或者根据问题特性提供一个初始解。</p>
@@ -685,8 +685,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">模拟退火算法</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E5%9C%A8BKT%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">模拟退火算法及其在BKT中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-text">1. 模拟退火算法基本思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E5%9C%A8BKT%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">2. 模拟退火在BKT中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-BKTParams-%E7%B1%BB"><span class="nav-text">2.1 BKTParams 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E4%B8%BB%E5%BE%AA%E7%8E%AF"><span class="nav-text">2.2 模拟退火主循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BB%93%E8%AE%BA"><span class="nav-text">3. 结论</span></a></li></ol></li></ol>
+        <div class="page-title">模拟退火算法及其在BKT中的应用</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-text">1. 模拟退火算法基本思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E5%9C%A8BKT%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">2. 模拟退火在BKT中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-BKTParams-%E7%B1%BB"><span class="nav-text">2.1 BKTParams 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E4%B8%BB%E5%BE%AA%E7%8E%AF"><span class="nav-text">2.2 模拟退火主循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BB%93%E8%AE%BA"><span class="nav-text">3. 结论</span></a></li></ol>
 
     </div>
 </div>
