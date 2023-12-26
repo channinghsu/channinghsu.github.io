@@ -2320,7 +2320,7 @@ Third paragraph of definition 2.
 <h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/87ba5454bb484f11b6791069468622c5XxpvRg.png"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/dd659788bc1541b6ae0ef95c89efb4f8grQGwL.png"
                       alt="在这里插入图片描述"
                 ></p>
 <h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p><img  
@@ -12973,6 +12973,204 @@ Third paragraph of definition 2.
       <tags>
         <tag>编程</tag>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++复习</title>
+    <url>/2023/12/26/C-%E5%A4%8D%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="C-基础"><a href="#C-基础" class="headerlink" title="C++基础"></a>C++基础</h1><h2 id="访问权限："><a href="#访问权限：" class="headerlink" title="访问权限："></a>访问权限：</h2><p>C++通过public、protected、private三个关键字来控制成员变量和成员函数的访问权限。</p>
+<h3 id="1-public-访问权限："><a href="#1-public-访问权限：" class="headerlink" title="1. public 访问权限："></a>1. <code>public</code> 访问权限：</h3><ul>
+<li>在类的内部和外部都可以访问。</li>
+<li>对外提供接口，表示该成员对外可见。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Example</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> publicVar;  <span class="comment">// 公有成员变量</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">publicFunction</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="comment">// 公有成员函数</span></span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="2-protected-访问权限："><a href="#2-protected-访问权限：" class="headerlink" title="2. protected 访问权限："></a>2. <code>protected</code> 访问权限：</h3><ul>
+<li>在类的内部可以访问，派生类中也可以访问，但在类的外部不能访问。</li>
+<li>主要用于继承关系，表示该成员对派生类可见。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Example</span> {</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="type">int</span> protectedVar;  <span class="comment">// 受保护成员变量</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">protectedFunction</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="comment">// 受保护成员函数</span></span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="3-private-访问权限："><a href="#3-private-访问权限：" class="headerlink" title="3. private 访问权限："></a>3. <code>private</code> 访问权限：</h3><ul>
+<li>只有在类的内部可以访问，外部不能访问，包括派生类中也不能直接访问。</li>
+<li>主要用于隐藏实现细节，表示该成员对外不可见。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Example</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> privateVar;  <span class="comment">// 私有成员变量</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">privateFunction</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="comment">// 私有成员函数</span></span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h3 id="访问权限与继承："><a href="#访问权限与继承：" class="headerlink" title="访问权限与继承："></a>访问权限与继承：</h3><ul>
+<li><p><strong>公有继承（public inheritance）：</strong> 基类中的公有成员和保护成员都是派生类可见的，私有成员在派生类中不可见。</p>
+  <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> publicVar;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="type">int</span> protectedVar;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> privateVar;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base {</span><br><span class="line">    <span class="comment">// Derived 类中可以访问 publicVar 和 protectedVar，但不能访问 privateVar</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>私有继承（private inheritance）：</strong> 基类中的公有成员和保护成员都成为派生类的私有成员，不可见。</p>
+  <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> publicVar;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="type">int</span> protectedVar;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> privateVar;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">private</span> Base {</span><br><span class="line">    <span class="comment">// Derived 类中无法直接访问 Base 的任何成员</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>受保护继承（protected inheritance）：</strong> 基类中的公有成员和保护成员都成为派生类的保护成员，不可见。</p>
+  <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> publicVar;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="type">int</span> protectedVar;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> privateVar;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">protected</span> Base {</span><br><span class="line">    <span class="comment">// Derived 类中可以访问 publicVar 和 protectedVar，但不能访问 privateVar</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<h2 id="C-三大特性"><a href="#C-三大特性" class="headerlink" title="C++ 三大特性"></a>C++ 三大特性</h2><h3 id="1-继承："><a href="#1-继承：" class="headerlink" title="1. 继承："></a>1. <strong>继承：</strong></h3><ul>
+<li><strong>定义：</strong> 继承是一种面向对象编程的机制，允许一个类（子类/派生类）基于另一个类（父类/基类）的定义构建。子类继承了父类的属性和方法，并可以在不重新编写原来的类的情况下扩展或修改这些功能。</li>
+<li><strong>功能：</strong> <ul>
+<li><strong>实现继承：</strong> 子类获得基类的属性和方法的能力，无需额外编码。</li>
+<li><strong>接口继承：</strong> 子类使用属性和方法的名称，但必须提供实现。</li>
+<li><strong>可视继承：</strong> 子类使用基类的外观和实现代码的能力。</li>
+</ul>
+</li>
+<li><strong>示例：</strong>  <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 基类 - 人</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">eat</span><span class="params">()</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; name &lt;&lt; <span class="string">" is eating."</span> &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">sleep</span><span class="params">()</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; name &lt;&lt; <span class="string">" is sleeping."</span> &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 派生类 - 学生</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> : <span class="keyword">public</span> Person {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">study</span><span class="params">()</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; name &lt;&lt; <span class="string">" is studying."</span> &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<h3 id="2-封装："><a href="#2-封装：" class="headerlink" title="2. 封装："></a>2. <strong>封装：</strong></h3><ul>
+<li><strong>定义：</strong> 封装是将数据和代码捆绑在一起，避免外界直接访问和修改对象的内部状态。通过将数据成员声明为私有的，通过公共方法提供对数据的访问和修改。</li>
+<li><strong>功能：</strong> 封装提供了信息隐藏的机制，使得对象的内部实现对外部不可见，提高了程序的安全性和可维护性。</li>
+<li><strong>示例：</strong>  <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 封装示例</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BankAccount</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">double</span> balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 公共方法提供对私有成员的访问</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">deposit</span><span class="params">(<span class="type">double</span> amount)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (amount &gt; <span class="number">0</span>) {</span><br><span class="line">            balance += amount;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">getBalance</span><span class="params">()</span> <span class="type">const</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> balance;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<h3 id="3-多态："><a href="#3-多态：" class="headerlink" title="3. 多态："></a>3. <strong>多态：</strong></h3><ul>
+<li><strong>定义：</strong> 多态性允许对象在运行时表现出不同的行为。在C++中，多态性通过<strong>虚函数</strong>和<strong>继承</strong>实现。可以在基类中声明虚函数，在派生类中重新定义该虚函数，以便在运行时调用正确的函数。</li>
+<li><strong>功能：</strong> 多态性提供了一种机制，可以根据对象的实际类型来选择调用相应的方法，而不是在编译时确定。</li>
+<li><strong>实现方式：</strong><ul>
+<li><strong>覆盖（Override）：</strong> 子类重新定义基类的虚函数。</li>
+<li><strong>重载（Overload）：</strong> 允许存在多个同名函数，但参数表不同。</li>
+</ul>
+</li>
+<li><strong>示例：</strong>  <div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 基类 - 动物</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">makeSound</span><span class="params">()</span> <span class="type">const</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"Animal makes a sound."</span> &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 派生类 - 狗</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> : <span class="keyword">public</span> Animal {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">makeSound</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"Dog barks."</span> &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 派生类 - 猫</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> : <span class="keyword">public</span> Animal {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">makeSound</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"Cat meows."</span> &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<p>这些概念一起构成了面向对象编程的三大特征：继承、封装和多态。它们帮助提高代码的可维护性、可扩展性和重用性。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整型数据类型"><a href="#整型数据类型" class="headerlink" title="整型数据类型"></a>整型数据类型</h3><h4 id="short、int、long-和-long-long"><a href="#short、int、long-和-long-long" class="headerlink" title="short、int、long 和 long long"></a><code>short</code>、<code>int</code>、<code>long</code> 和 <code>long long</code></h4><ul>
+<li><strong>short：</strong> 至少16位。通常为2字节。</li>
+<li><strong>int：</strong> 至少与 <code>short</code> 一样长。通常为4字节。</li>
+<li><strong>long：</strong> 至少32位，且至少与 <code>int</code> 一样长。通常为4字节。</li>
+<li><strong>long long：</strong> 至少64位，且至少与 <code>long</code> 一样长。通常为8字节。</li>
+</ul>
+<h3 id="C-整型数据长度标准"><a href="#C-整型数据长度标准" class="headerlink" title="C++ 整型数据长度标准"></a>C++ 整型数据长度标准</h3><ul>
+<li><p><strong>1 byte = 8 bit：</strong> 在大多数系统中，1字节等于8位。</p>
+</li>
+<li><p><strong>系统最小长度：</strong> 很多系统使用最小长度，例如：</p>
+<ul>
+<li><code>short</code> 通常为16位（2字节）。</li>
+<li><code>long</code> 通常为32位（4字节）。</li>
+<li><code>long long</code> 通常为64位（8字节）。</li>
+<li><code>int</code> 长度较为灵活，通常被认为为4字节，与 <code>long</code> 等长。</li>
+</ul>
+</li>
+</ul>
+<h3 id="sizeof-运算符"><a href="#sizeof-运算符" class="headerlink" title="sizeof 运算符"></a><code>sizeof</code> 运算符</h3><ul>
+<li><code>sizeof</code> 运算符用于获取数据类型或对象的大小（以字节为单位）。</li>
+<li>通过以下示例，可以显示不同数据类型的大小：<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">"int is "</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">int</span>) &lt;&lt; <span class="string">" bytes. \n"</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">"short is "</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">short</span>) &lt;&lt; <span class="string">" bytes. \n"</span>;</span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<h3 id="climits-头文件"><a href="#climits-头文件" class="headerlink" title="climits 头文件"></a><code>climits</code> 头文件</h3><ul>
+<li><code>climits</code> 头文件定义了一些整型数据类型的符号常量，如：<ul>
+<li><code>INT_MAX</code>：表示 <code>int</code> 的最大值。</li>
+<li><code>INT_MIN</code>：表示 <code>int</code> 的最小值。</li>
+</ul>
+</li>
+</ul>
+<h3 id="无符号类型"><a href="#无符号类型" class="headerlink" title="无符号类型"></a>无符号类型</h3><ul>
+<li>无符号整型 (<code>unsigned</code>) 不存储负数值，可以增大变量能够存储的最大值，但数据长度不变。</li>
+<li>例如，<code>unsigned int</code> 可以存储从0到<code>2^32 - 1</code>的非负整数。</li>
+</ul>
+<h3 id="选择数据类型"><a href="#选择数据类型" class="headerlink" title="选择数据类型"></a>选择数据类型</h3><ul>
+<li><code>int</code> 被设置为自然长度，即计算机处理效率最高的长度，因此在选择数据类型时，通常选择 <code>int</code> 类型。</li>
+</ul>
+<p>这些规定和概念有助于程序员理解和选择适当的整型数据类型，以满足其需求并保证代码的可移植性。</p>
+<h2 id="指针与引用"><a href="#指针与引用" class="headerlink" title="指针与引用"></a>指针与引用</h2><p>指针与引用是C++中两种不同的概念，它们分别用于处理内存地址和创建变量别名。</p>
+<h3 id="指针（Pointer）"><a href="#指针（Pointer）" class="headerlink" title="指针（Pointer）"></a>指针（Pointer）</h3><ol>
+<li><strong>存放对象地址：</strong> 指针是一个变量，其存放的是某个对象的内存地址。</li>
+<li><strong>可变性：</strong> 指针本身可以改变，即可以指向不同的内存地址。包括指向的地址的改变和指向的地址中所存放的数据的改变。</li>
+<li><strong>指向指针的指针：</strong> 指针本身也有地址，因此可以有指向指针的指针。</li>
+<li><strong>需要初始化：</strong> 在使用指针之前，需要先初始化，通常通过将其指向一个对象的地址来实现。</li>
+</ol>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> *ptr = &amp;x;  <span class="comment">// ptr是一个指向int类型的指针，存放x的地址</span></span><br><span class="line"><span class="type">int</span> **ptr_to_ptr = &amp;ptr;  <span class="comment">// 指向指针的指针</span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><code>int *ptr</code>: 定义了一个指向整数的指针。</li>
+<li><code>&amp;x</code>: 取地址运算符，返回变量<code>x</code>的地址。</li>
+</ul>
+<h3 id="引用（Reference）"><a href="#引用（Reference）" class="headerlink" title="引用（Reference）"></a>引用（Reference）</h3><ol>
+<li><strong>变量的别名：</strong> 引用是变量的别名，它引用（代表）了一个已存在的对象。</li>
+<li><strong>不可变性：</strong> 一旦引用被初始化，它将一直引用同一个对象，不可变。引用必须在初始化时指定引用的对象，之后不能更改。</li>
+<li><strong>不存在空引用：</strong> 引用不存在指向空值的情况，它必须引用一个已存在的对象。</li>
+</ol>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> &amp;ref = x;  <span class="comment">// ref 是 x 的引用</span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><code>int &amp;ref</code>: 定义了一个整数的引用。</li>
+<li><code>x</code>: 引用的是变量<code>x</code>。</li>
+</ul>
+<h3 id="解引用（Dereference）："><a href="#解引用（Dereference）：" class="headerlink" title="解引用（Dereference）："></a><strong>解引用（Dereference）：</strong></h3><p>解引用是通过指针或引用访问其指向的内存地址中存储的值。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">int x = 10;</span><br><span class="line">int *ptr = &amp;x;</span><br><span class="line">int y = *ptr;  // 解引用ptr，将x的值赋给y</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><code>*ptr</code>: 解引用指针<code>ptr</code>，得到存储在<code>ptr</code>指向的内存地址中的值。</li>
+</ul>
+<h3 id="取址符（Address-of-Operator）："><a href="#取址符（Address-of-Operator）：" class="headerlink" title="取址符（Address-of Operator）："></a><strong>取址符（Address-of Operator）：</strong></h3><p>取址符（<code>&amp;</code>）用于获取变量的内存地址。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">cppCopy code</span><br><span class="line">int x = 10;</span><br><span class="line">int *ptr = &amp;x;  // ptr存放x的地址</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><code>&amp;x</code>: 取得变量<code>x</code>的地址，将其赋给指针<code>ptr</code>。</li>
+</ul>
+<h3 id="指针与引用的比较"><a href="#指针与引用的比较" class="headerlink" title="指针与引用的比较"></a>指针与引用的比较</h3><ul>
+<li><strong>空值：</strong> 指针可以指向空值（nullptr），而引用必须引用一个已存在的对象。</li>
+<li><strong>语法：</strong> 使用指针需要通过 <code>*</code> 解引用，而引用直接使用变量名。</li>
+<li><strong>改变对象：</strong> 指针可以改变所指向的对象，引用则一直引用同一个对象，不可更改。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> *ptr = &amp;x;</span><br><span class="line"><span class="type">int</span> &amp;ref = x;</span><br><span class="line"></span><br><span class="line">*ptr = <span class="number">20</span>;  <span class="comment">// 修改 x 的值</span></span><br><span class="line"><span class="comment">// ref = 20;  // 此行会直接修改 x 的值</span></span><br></pre></td></tr></table></figure></div>
+<p>选择使用指针还是引用通常取决于具体的需求和使用场景。指针提供更多的灵活性，而引用提供了更简洁的语法和更安全的使用方式。</p>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="const-关键字"><a href="#const-关键字" class="headerlink" title="const 关键字"></a><strong>const 关键字</strong></h3><p><code>const</code> 是 C++ 中用于声明常量的关键字，它可以用于不同的上下文中，限定变量、指针、引用等的特性。</p>
+<p><strong>1. const 修饰变量（常量）：</strong></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> max_value = <span class="number">100</span>;  <span class="comment">// 定义一个常量 max_value</span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.14159</span>;  <span class="comment">// 定义一个常量 pi</span></span><br></pre></td></tr></table></figure></div>
+<p>在这里，<code>max_value</code> 和 <code>pi</code> 都是常量，它们的值不能被修改。</p>
+<p><strong>2. const 修饰指针：</strong></p>
+<ul>
+<li><p><strong>底层 const（常量指针）：</strong></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> temp = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* a = &amp;temp;</span><br></pre></td></tr></table></figure></div>
+<p>或者</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> temp = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> <span class="type">const</span>* a = &amp;temp;</span><br></pre></td></tr></table></figure></div>
+<p><code>a</code> 是一个常量指针，它指向一个只读的对象，不能通过 <code>a</code> 修改 <code>temp</code> 的值。</p>
+</li>
+<li><p><strong>顶层 const（指针常量）：</strong></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> temp = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> temp2 = <span class="number">20</span>;</span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p = &amp;temp;</span><br></pre></td></tr></table></figure></div>
+<p><code>p</code> 是一个指针常量，它的值只能在初始化时指向 <code>temp</code>，其他地方不能改变。即 <code>p</code> 本身不能指向其他地址。</p>
+</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>const</code> 关键字的位置决定是底层 const 还是顶层 const。</li>
+<li><code>const</code> 修饰指针时，要根据 <code>const</code> 的位置分清是底层 const 还是顶层 const。</li>
+</ul>
+<h3 id="Define-和-Typedef-、Inline的区别："><a href="#Define-和-Typedef-、Inline的区别：" class="headerlink" title="Define 和 Typedef 、Inline的区别："></a><strong>Define 和 Typedef 、Inline的区别：</strong></h3><p><strong>Define：</strong></p>
+<ul>
+<li><strong>定义方式：</strong> 使用 <code>#define</code> 关键字，将标识符与一个表达式或者语句进行关联。</li>
+<li><strong>类型检查：</strong> 无类型检查，仅进行简单的字符串替换。</li>
+<li><strong>作用范围：</strong> 在预处理阶段进行替换，是一种文本替换机制。</li>
+<li><strong>常用场景：</strong> 常用于定义宏，进行代码中的文本替换，如宏定义常量、条件编译等。</li>
+<li><strong>使用灵活性：</strong> 没有对应的数据类型，可以定义任何文本。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b) ((a) &gt; (b) ? (a) : (b))</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>Typedef：</strong></p>
+<ul>
+<li><strong>定义方式：</strong> 使用 <code>typedef</code> 关键字，为一个已有的数据类型取一个新的名字。</li>
+<li><strong>类型检查：</strong> 提供类型检查，用于定义新的类型别名。</li>
+<li><strong>作用范围：</strong> 在编译和运行时生效，具有对应数据类型。</li>
+<li><strong>常用场景：</strong> 用于提高代码的可读性，为复杂的类型起一个更简洁的名字。</li>
+<li><strong>使用灵活性：</strong> 可以对各种类型进行别名定义。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Integer; <span class="comment">// Integer 是 int 的别名</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*FunctionPointer)</span><span class="params">()</span></span>; <span class="comment">// FunctionPointer 是函数指针类型的别名</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>Inline：</strong></p>
+<p>inline是先将内联函数编译完成生成了函数体直接插入被调用的地方，减少了压栈，跳转和返回的操作。没有普通函数调用时的额外开销;</p>
+<ul>
+<li><strong>定义方式：</strong> 使用 <code>inline</code> 关键字，对函数进行内联展开。</li>
+<li><strong>类型检查：</strong> 提供类型检查，是真正的函数调用。</li>
+<li><strong>编译时机：</strong> 在编译时进行内联展开，替代函数调用。</li>
+<li><strong>常用场景：</strong> 适用于函数体简单、频繁调用的场景，提高执行效率。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">square</span><span class="params">(<span class="type">int</span> x)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> x * x;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>C++中inline编译限制:</p>
+<ol>
+<li>不能存在任何形式的循环语句</li>
+<li>不能存在过多的条件判断语句</li>
+<li>函数体不能过于庞大</li>
+<li>内联函数声明必须在调用语句之前</li>
+</ol>
+<p>总体而言，<code>typedef</code> 用于创建类型别名，提高代码的可读性和可维护性；<code>define</code> 用于进行简单的文本替换，例如宏定义；<code>inline</code> 用于函数的内联展开，提高执行效率。每个关键字在不同的场景下都有其独特的作用。</p>
+<h2 id="C-强制类型转换"><a href="#C-强制类型转换" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h2>]]></content>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
 </search>
