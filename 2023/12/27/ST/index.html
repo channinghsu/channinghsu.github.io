@@ -30,9 +30,9 @@
 <meta property="og:description" content="false">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-27T09:26:00.000Z">
-<meta property="article:modified_time" content="2023-12-27T10:25:20.515Z">
+<meta property="article:modified_time" content="2023-12-28T01:18:00.797Z">
 <meta property="article:author" content="Channing Hsu">
-<meta property="article:tag" content="C++">
+<meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
     
     
@@ -452,7 +452,7 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">19</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
@@ -460,7 +460,7 @@
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">57</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">60</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -512,8 +512,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-27 18:25:20</span>
-            <span class="mobile">2023-12-27 18:25:20</span>
+            <span class="desktop">2023-12-28 09:18</span>
+            <span class="mobile">2023-12-28 09:18</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -525,7 +525,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/C/">C++</a>&nbsp;
+                        <a href="/tags/C-C/">C/C++</a>&nbsp;
                     </li>
                 
             </ul>
@@ -535,12 +535,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>6.4k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>6.9k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>26 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>28 分钟</span>
         </span>
     
     
@@ -968,6 +968,13 @@
 <p><strong>例子：</strong><br><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::unordered_map&lt;<span class="type">int</span>, std::string&gt; myUnorderedMap;</span><br><span class="line"></span><br><span class="line">    myUnorderedMap[<span class="number">1</span>] = <span class="string">&quot;One&quot;</span>;</span><br><span class="line">    myUnorderedMap[<span class="number">3</span>] = <span class="string">&quot;Three&quot;</span>;</span><br><span class="line">    myUnorderedMap[<span class="number">2</span>] = <span class="string">&quot;Two&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; pair : myUnorderedMap) &#123;</span><br><span class="line">        std::cout &lt;&lt; pair.first &lt;&lt; <span class="string">&quot;: &quot;</span> &lt;&lt; pair.second &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></p>
 <h3 id="为什么-insert-后保存的-iterator-不会失效？"><a href="#为什么-insert-后保存的-iterator-不会失效？" class="headerlink" title="为什么 insert 后保存的 iterator 不会失效？"></a>为什么 insert 后保存的 iterator 不会失效？</h3><p>Map 和 Set 的插入操作不会导致已保存的 iterator 失效，这是因为插入过程中，红黑树会进行节点的重新平衡，但每个节点的地址不会发生变化。因此，原来指向某个节点的 iterator 仍然有效。</p>
 <h3 id="为何-Map-和-Set-的插入删除效率比其他序列容器高？"><a href="#为何-Map-和-Set-的插入删除效率比其他序列容器高？" class="headerlink" title="为何 Map 和 Set 的插入删除效率比其他序列容器高？"></a>为何 Map 和 Set 的插入删除效率比其他序列容器高？</h3><p>因为 Map 和 Set 底层使用红黑树实现，插入和删除的时间复杂度是 O(logn)，而向 vector 这样的序列容器插入和删除的时间复杂度是 O(N)，其中 N 是容器中的元素个数。红黑树的自平衡性质保证了高效的插入和删除操作。</p>
+<h2 id="C-泛型编程"><a href="#C-泛型编程" class="headerlink" title="C++ 泛型编程"></a>C++ 泛型编程</h2><p>泛型编程是一种在编程中使用泛型（参数化类型）来增强代码<strong>重用性、灵活性和类型安全性</strong>的编程范式。C++中的模板是泛型编程的关键机制，允许程序员编写通用的算法和数据结构，而不必事先指定具体的数据类型。</p>
+<h3 id="模板全特化和偏特化"><a href="#模板全特化和偏特化" class="headerlink" title="模板全特化和偏特化"></a>模板全特化和偏特化</h3><h4 id="1-函数模板全特化"><a href="#1-函数模板全特化" class="headerlink" title="1. 函数模板全特化"></a>1. 函数模板全特化</h4><p>函数模板全特化是指为模板参数提供具体的类型，使得模板可以对特定类型进行定制化实现。在例子中，<code>fun</code> 是一个接受两个模板参数 <code>T1</code> 和 <code>T2</code> 的函数模板，而 <code>fun&lt;int, char&gt;</code> 则是对 <code>fun</code> 的全特化。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(T1 a, T2 b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;模板函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="type">void</span> <span class="built_in">fun</span>&lt;<span class="type">int</span>, <span class="type">char</span>&gt;(<span class="type">int</span> a, <span class="type">char</span> b)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;全特化&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="2-类模板全特化和偏特化"><a href="#2-类模板全特化和偏特化" class="headerlink" title="2. 类模板全特化和偏特化"></a>2. 类模板全特化和偏特化</h4><p>类模板全特化和偏特化同样是为了对特定类型进行定制，使得模板可以根据不同类型做出不同的实现。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Test</span>(T1 i, T2 j) : <span class="built_in">a</span>(i), <span class="built_in">b</span>(j) &#123; cout &lt;&lt; <span class="string">&quot;模板类&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T1 a;</span><br><span class="line">    T2 b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>&lt;<span class="type">int</span>, <span class="type">char</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Test</span>(<span class="type">int</span> i, <span class="type">char</span> j) : <span class="built_in">a</span>(i), <span class="built_in">b</span>(j) &#123; cout &lt;&lt; <span class="string">&quot;全特化&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>&lt;<span class="type">char</span>, T2&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Test</span>(<span class="type">char</span> i, T2 j) : <span class="built_in">a</span>(i), <span class="built_in">b</span>(j) &#123; cout &lt;&lt; <span class="string">&quot;偏特化&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">char</span> a;</span><br><span class="line">    T2 b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+<p>在上述例子中，<code>Test</code> 是一个类模板，而 <code>Test&lt;int, char&gt;</code> 和 <code>Test&lt;char, T2&gt;</code> 分别是对 <code>Test</code> 的全特化和偏特化。</p>
+<p>总的来说，特化（全特化和偏特化）允许程序员为特定类型提供特殊的实现，以满足不同的需求。在使用特化时，你需要确保它对应的通用模板或者其他特化没有覆盖到。在特化中，编译器会选择最匹配的版本进行实例化。</p>
 
         </div>
 
@@ -977,7 +984,7 @@
             <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
                 
                     <li class="tag-item mx-0.5">
-                        <a href="/tags/C/">#C++</a>&nbsp;
+                        <a href="/tags/C-C/">#C/C++</a>&nbsp;
                     </li>
                 
             </ul>
@@ -988,14 +995,29 @@
         
             <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
                 
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/12/28/cpp%E6%96%B0%E7%89%B9%E6%80%A7/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">C++新特性</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
                 
                     <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
                         <a class="next"
                         rel="next"
-                        href="/2023/12/26/C-%E5%A4%8D%E4%B9%A0/"
+                        href="/2023/12/27/C++%20STL/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">C++复习</span>
+                                <span class="post-nav-title-item">C++ STL</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -1059,7 +1081,7 @@
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">C++ STL</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#STL%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0"><span class="nav-text">STL实现原理及其实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%B9%E5%99%A8%EF%BC%88Containers%EF%BC%89"><span class="nav-text">1. 容器（Containers）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%AE%97%E6%B3%95%EF%BC%88Algorithms%EF%BC%89"><span class="nav-text">2. 算法（Algorithms）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88Iterators%EF%BC%89"><span class="nav-text">3. 迭代器（Iterators）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BB%BF%E5%87%BD%E6%95%B0%EF%BC%88Functors%EF%BC%89"><span class="nav-text">4. 仿函数（Functors）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%80%82%E9%85%8D%E5%99%A8%EF%BC%88Adapters%EF%BC%89"><span class="nav-text">5. 适配器（Adapters）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%A9%BA%E9%97%B4%E9%85%8D%E7%BD%AE%E5%99%A8%EF%BC%88Allocators%EF%BC%89"><span class="nav-text">6. 空间配置器（Allocators）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STL%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-text">STL的优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pair%E5%AE%B9%E5%99%A8"><span class="nav-text">pair容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector%E5%AE%B9%E5%99%A8"><span class="nav-text">vector容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-%E9%93%BE%E8%A1%A8"><span class="nav-text">list(链表)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#std-list-%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9%EF%BC%9A"><span class="nav-text">std::list 设计要点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-list-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%EF%BC%9A"><span class="nav-text">std::list 实现细节：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-list-%E4%B8%8E-std-vector-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="nav-text">std::list 与 std::vector 的区别：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deque%EF%BC%88%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%EF%BC%89"><span class="nav-text">deque（双端队列）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">示例1：基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9A%E4%BD%BF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">示例2：使用迭代器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack-amp-amp-queue"><span class="nav-text">stack &amp;&amp; queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stack%EF%BC%88%E6%A0%88%EF%BC%89"><span class="nav-text">stack（栈）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue%EF%BC%88%E9%98%9F%E5%88%97%EF%BC%89"><span class="nav-text">queue（队列）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="nav-text">相关操作和特性：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#heap-amp-amp-priority-queue"><span class="nav-text">heap &amp;&amp; priority_queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%EF%BC%88Heap%EF%BC%89"><span class="nav-text">堆（Heap）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88Priority-Queue%EF%BC%89%EF%BC%9A"><span class="nav-text">优先队列（Priority Queue）：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-amp-amp-set"><span class="nav-text">map &amp;&amp; set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%88Red-Black-Tree%EF%BC%89%EF%BC%9A"><span class="nav-text">红黑树（Red-Black Tree）：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-amp-amp-unordered-map"><span class="nav-text">map &amp;&amp; unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-text">Map:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unordered-map"><span class="nav-text">Unordered_map:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-insert-%E5%90%8E%E4%BF%9D%E5%AD%98%E7%9A%84-iterator-%E4%B8%8D%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F"><span class="nav-text">为什么 insert 后保存的 iterator 不会失效？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95-Map-%E5%92%8C-Set-%E7%9A%84%E6%8F%92%E5%85%A5%E5%88%A0%E9%99%A4%E6%95%88%E7%8E%87%E6%AF%94%E5%85%B6%E4%BB%96%E5%BA%8F%E5%88%97%E5%AE%B9%E5%99%A8%E9%AB%98%EF%BC%9F"><span class="nav-text">为何 Map 和 Set 的插入删除效率比其他序列容器高？</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#STL%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0"><span class="nav-text">STL实现原理及其实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%B9%E5%99%A8%EF%BC%88Containers%EF%BC%89"><span class="nav-text">1. 容器（Containers）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%AE%97%E6%B3%95%EF%BC%88Algorithms%EF%BC%89"><span class="nav-text">2. 算法（Algorithms）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88Iterators%EF%BC%89"><span class="nav-text">3. 迭代器（Iterators）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BB%BF%E5%87%BD%E6%95%B0%EF%BC%88Functors%EF%BC%89"><span class="nav-text">4. 仿函数（Functors）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%80%82%E9%85%8D%E5%99%A8%EF%BC%88Adapters%EF%BC%89"><span class="nav-text">5. 适配器（Adapters）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%A9%BA%E9%97%B4%E9%85%8D%E7%BD%AE%E5%99%A8%EF%BC%88Allocators%EF%BC%89"><span class="nav-text">6. 空间配置器（Allocators）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STL%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-text">STL的优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pair%E5%AE%B9%E5%99%A8"><span class="nav-text">pair容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector%E5%AE%B9%E5%99%A8"><span class="nav-text">vector容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-%E9%93%BE%E8%A1%A8"><span class="nav-text">list(链表)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#std-list-%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9%EF%BC%9A"><span class="nav-text">std::list 设计要点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-list-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%EF%BC%9A"><span class="nav-text">std::list 实现细节：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-list-%E4%B8%8E-std-vector-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="nav-text">std::list 与 std::vector 的区别：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deque%EF%BC%88%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%EF%BC%89"><span class="nav-text">deque（双端队列）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">示例1：基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9A%E4%BD%BF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">示例2：使用迭代器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack-amp-amp-queue"><span class="nav-text">stack &amp;&amp; queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stack%EF%BC%88%E6%A0%88%EF%BC%89"><span class="nav-text">stack（栈）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue%EF%BC%88%E9%98%9F%E5%88%97%EF%BC%89"><span class="nav-text">queue（队列）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="nav-text">相关操作和特性：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#heap-amp-amp-priority-queue"><span class="nav-text">heap &amp;&amp; priority_queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%EF%BC%88Heap%EF%BC%89"><span class="nav-text">堆（Heap）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88Priority-Queue%EF%BC%89%EF%BC%9A"><span class="nav-text">优先队列（Priority Queue）：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-amp-amp-set"><span class="nav-text">map &amp;&amp; set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%88Red-Black-Tree%EF%BC%89%EF%BC%9A"><span class="nav-text">红黑树（Red-Black Tree）：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-amp-amp-unordered-map"><span class="nav-text">map &amp;&amp; unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-text">Map:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unordered-map"><span class="nav-text">Unordered_map:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-insert-%E5%90%8E%E4%BF%9D%E5%AD%98%E7%9A%84-iterator-%E4%B8%8D%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F"><span class="nav-text">为什么 insert 后保存的 iterator 不会失效？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95-Map-%E5%92%8C-Set-%E7%9A%84%E6%8F%92%E5%85%A5%E5%88%A0%E9%99%A4%E6%95%88%E7%8E%87%E6%AF%94%E5%85%B6%E4%BB%96%E5%BA%8F%E5%88%97%E5%AE%B9%E5%99%A8%E9%AB%98%EF%BC%9F"><span class="nav-text">为何 Map 和 Set 的插入删除效率比其他序列容器高？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B"><span class="nav-text">C++ 泛型编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%85%A8%E7%89%B9%E5%8C%96%E5%92%8C%E5%81%8F%E7%89%B9%E5%8C%96"><span class="nav-text">模板全特化和偏特化</span></a></li></ol></li></ol>
 
     </div>
 </div>
@@ -1087,7 +1109,7 @@
               <span>2023</span>
               -
             
-            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
         </div>
         
             <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
