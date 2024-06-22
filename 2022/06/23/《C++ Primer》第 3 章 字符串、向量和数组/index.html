@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2022/06/23/《c++ primer》第 3 章 字符串、向量和数组/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《C++ Primer》第三章 字符串、向量和数组">
+<meta property="og:url" content="https://channinghsu.github.io/2022/06/23/%E3%80%8AC++%20Primer%E3%80%8B%E7%AC%AC%203%20%E7%AB%A0%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-23T02:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-28T11:07:50.522Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            《C++ Primer》第三章 字符串、向量和数组 -
+        
+        Channing&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/anime.min.js"></script>
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Channing&#39;s Blog
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">61</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">《C++ Primer》第三章 字符串、向量和数组</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2022-06-23 10:00</span>
+        <span class="mobile">2022-06-23 10:00</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-03-28 19:07:50</span>
+            <span class="mobile">2023-03-28 19:07:50</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C-C/">C/C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>10 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h2 id="using声明"><a href="#using声明" class="headerlink" title="using声明"></a>using声明</h2><ul>
+<li>使用某个命名空间：例如 <code>using std::cin</code>表示使用命名空间<code>std</code>中的名字<code>cin</code>。</li>
+<li>头文件中不应该包含<code>using</code>声明。这样使用了该头文件的源码也会使用这个声明，会带来风险。</li>
+</ul>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><ul>
+<li>标准库类型<code>string</code>表示可变长的字符序列。</li>
+<li><code>#include &lt;string&gt;</code>，然后 <code>using std::string;</code></li>
+<li><strong>string对象</strong>：注意，不同于字符串字面值。</li>
+</ul>
+<h3 id="定义和初始化string对象"><a href="#定义和初始化string对象" class="headerlink" title="定义和初始化string对象"></a>定义和初始化string对象</h3><p>初始化<code>string</code>对象的方式：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string s1</code></td>
+<td>默认初始化，<code>s1</code>是个空字符串</td>
+</tr>
+<tr>
+<td><code>string s2(s1)</code></td>
+<td><code>s2</code>是<code>s1</code>的副本</td>
+</tr>
+<tr>
+<td><code>string s2 = s1</code></td>
+<td>等价于<code>s2(s1)</code>，<code>s2</code>是<code>s1</code>的副本</td>
+</tr>
+<tr>
+<td><code>string s3(&quot;value&quot;)</code></td>
+<td><code>s3</code>是字面值“value”的副本，除了字面值最后的那个空字符外</td>
+</tr>
+<tr>
+<td><code>string s3 = &quot;value&quot;</code></td>
+<td>等价于<code>s3(&quot;value&quot;)</code>，<code>s3</code>是字面值”value”的副本</td>
+</tr>
+<tr>
+<td><code>string s4(n, &#39;c&#39;)</code></td>
+<td>把<code>s4</code>初始化为由连续<code>n</code>个字符<code>c</code>组成的串</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>拷贝初始化（copy initialization）：使用等号<code>=</code>将一个已有的对象拷贝到正在创建的对象。</li>
+<li>直接初始化（direct initialization）：通过括号给对象赋值。</li>
+</ul>
+<h3 id="string对象上的操作"><a href="#string对象上的操作" class="headerlink" title="string对象上的操作"></a>string对象上的操作</h3><p><code>string</code>的操作：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>os &lt;&lt; s</code></td>
+<td>将<code>s</code>写到输出流<code>os</code>当中，返回<code>os</code></td>
+</tr>
+<tr>
+<td><code>is &gt;&gt; s</code></td>
+<td>从<code>is</code>中读取字符串赋给<code>s</code>，字符串以空白分割，返回<code>is</code></td>
+</tr>
+<tr>
+<td><code>getline(is, s)</code></td>
+<td>从<code>is</code>中读取一行赋给<code>s</code>，返回<code>is</code></td>
+</tr>
+<tr>
+<td><code>s.empty()</code></td>
+<td><code>s</code>为空返回<code>true</code>，否则返回<code>false</code></td>
+</tr>
+<tr>
+<td><code>s.size()</code></td>
+<td>返回<code>s</code>中字符的个数</td>
+</tr>
+<tr>
+<td><code>s[n]</code></td>
+<td>返回<code>s</code>中第<code>n</code>个字符的引用，位置<code>n</code>从0计起</td>
+</tr>
+<tr>
+<td><code>s1+s2</code></td>
+<td>返回<code>s1</code>和<code>s2</code>连接后的结果</td>
+</tr>
+<tr>
+<td><code>s1=s2</code></td>
+<td>用<code>s2</code>的副本代替<code>s1</code>中原来的字符</td>
+</tr>
+<tr>
+<td><code>s1==s2</code></td>
+<td>如果<code>s1</code>和<code>s2</code>中所含的字符完全一样，则它们相等；<code>string</code>对象的相等性判断对字母的大小写敏感</td>
+</tr>
+<tr>
+<td><code>s1!=s2</code></td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></td>
+<td>利用字符在字典中的顺序进行比较，且对字母的大小写敏感（对第一个不相同的位置进行比较）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>string io：<ul>
+<li>执行读操作<code>&gt;&gt;</code>：忽略掉开头的空白（包括空格、换行符和制表符），直到遇到下一处空白为止。</li>
+<li><code>getline</code>：读取一整行，<strong>包括空白符</strong>。</li>
+</ul>
+</li>
+<li><code>s.size()</code>返回的时<code>string::size_type</code>类型，记住是一个<strong>无符号</strong>类型的值，不要和<code>int</code>混用</li>
+<li><code>s1+s2</code>使用时，保证至少一侧是string类型。<code>string s1 = &quot;hello&quot; + &quot;world&quot; // 错误，两侧均为字符串字面值</code></li>
+<li><strong>字符串字面值和string是不同的类型。</strong></li>
+</ul>
+<h3 id="处理string对象中的字符"><a href="#处理string对象中的字符" class="headerlink" title="处理string对象中的字符"></a>处理string对象中的字符</h3><ul>
+<li><p><strong>ctype.h vs. cctype</strong>：C++修改了c的标准库，名称为去掉<code>.h</code>，前面加<code>c</code>。</p>
+<blockquote>
+<p>如c++版本为<code>cctype</code>，c版本为<code>ctype.h</code></p>
+</blockquote>
+<ul>
+<li><strong>尽量使用c++版本的头文件</strong>，即<code>cctype</code></li>
+</ul>
+</li>
+</ul>
+<p><code>cctype</code>头文件中定义了一组标准函数：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>isalnum(c)</code></td>
+<td>当<code>c</code>是字母或数字时为真</td>
+</tr>
+<tr>
+<td><code>isalpha(c)</code></td>
+<td>当<code>c</code>是字母时为真</td>
+</tr>
+<tr>
+<td><code>iscntrl(c)</code></td>
+<td>当<code>c</code>是控制字符时为真</td>
+</tr>
+<tr>
+<td><code>isdigit(c)</code></td>
+<td>当<code>c</code>是数字时为真</td>
+</tr>
+<tr>
+<td><code>isgraph(c)</code></td>
+<td>当<code>c</code>不是空格但可以打印时为真</td>
+</tr>
+<tr>
+<td><code>islower(c)</code></td>
+<td>当<code>c</code>是小写字母时为真</td>
+</tr>
+<tr>
+<td><code>isprint(c)</code></td>
+<td>当<code>c</code>是可打印字符时为真</td>
+</tr>
+<tr>
+<td><code>ispunct(c)</code></td>
+<td>当<code>c</code>是标点符号时为真</td>
+</tr>
+<tr>
+<td><code>isspace(c)</code></td>
+<td>当<code>c</code>是空白时为真（空格、横向制表符、纵向制表符、回车符、换行符、进纸符）</td>
+</tr>
+<tr>
+<td><code>isupper(c)</code></td>
+<td>当<code>c</code>是大写字母时为真</td>
+</tr>
+<tr>
+<td><code>isxdigit(c)</code></td>
+<td>当<code>c</code>是十六进制数字时为真</td>
+</tr>
+<tr>
+<td><code>tolower(c)</code></td>
+<td>当<code>c</code>是大写字母，输出对应的小写字母；否则原样输出<code>c</code></td>
+</tr>
+<tr>
+<td><code>toupper(c)</code></td>
+<td>当<code>c</code>是小写字母，输出对应的大写字母；否则原样输出<code>c</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>遍历字符串：使用<strong>范围for</strong>（range for）语句： <code>for (auto c: str)</code>，或者 <code>for (auto &amp;c: str)</code>使用引用直接改变字符串中的字符。 （C++11）</li>
+<li><code>str[x]</code>,[]输入参数为<code>string::size_type</code>类型，给出<code>int</code>整型也会自动转化为该类型</li>
+</ul>
+<h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><ul>
+<li>vector是一个<strong>容器</strong>，也是一个类模板；</li>
+<li><code>#include &lt;vector&gt;</code> 然后 <code>using std::vector;</code></li>
+<li>容器：包含其他对象。</li>
+<li>类模板：本身不是类，但可以<strong>实例化instantiation</strong>出一个类。 <code>vector</code>是一个模板， <code>vector&lt;int&gt;</code>是一个类型。</li>
+<li>通过将类型放在类模板名称后面的<strong>尖括号</strong>中来指定<strong>类型</strong>，如<code>vector&lt;int&gt; ivec</code>。</li>
+</ul>
+<h3 id="定义和初始化vector对象"><a href="#定义和初始化vector对象" class="headerlink" title="定义和初始化vector对象"></a>定义和初始化vector对象</h3><p>初始化<code>vector</code>对象的方法</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vector&lt;T&gt; v1</code></td>
+<td><code>v1</code>是一个空<code>vector</code>，它潜在的元素是<code>T</code>类型的，执行默认初始化</td>
+</tr>
+<tr>
+<td><code>vector&lt;T&gt; v2(v1)</code></td>
+<td><code>v2</code>中包含有<code>v1</code>所有元素的副本</td>
+</tr>
+<tr>
+<td><code>vector&lt;T&gt; v2 = v1</code></td>
+<td>等价于<code>v2(v1)</code>，<code>v2</code>中包含<code>v1</code>所有元素的副本</td>
+</tr>
+<tr>
+<td><code>vector&lt;T&gt; v3(n, val)</code></td>
+<td><code>v3</code>包含了n个重复的元素，每个元素的值都是<code>val</code></td>
+</tr>
+<tr>
+<td><code>vector&lt;T&gt; v4(n)</code></td>
+<td><code>v4</code>包含了n个重复地执行了值初始化的对象</td>
+</tr>
+<tr>
+<td><code>vector&lt;T&gt; v5&#123;a, b, c...&#125;</code></td>
+<td><code>v5</code>包含了初始值个数的元素，每个元素被赋予相应的初始值</td>
+</tr>
+<tr>
+<td><code>vector&lt;T&gt; v5=&#123;a, b, c...&#125;</code></td>
+<td>等价于<code>v5&#123;a, b, c...&#125;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>列表初始化： <code>vector&lt;string&gt; v&#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;</code> （C++11）</li>
+</ul>
+<h3 id="向vector对象中添加元素"><a href="#向vector对象中添加元素" class="headerlink" title="向vector对象中添加元素"></a>向vector对象中添加元素</h3><ul>
+<li><code>v.push_back(e)</code> 在尾部增加元素。</li>
+</ul>
+<h3 id="其他vector操作"><a href="#其他vector操作" class="headerlink" title="其他vector操作"></a>其他vector操作</h3><p><code>vector</code>支持的操作：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v.emtpy()</code></td>
+<td>如果<code>v</code>不含有任何元素，返回真；否则返回假</td>
+</tr>
+<tr>
+<td><code>v.size()</code></td>
+<td>返回<code>v</code>中元素的个数</td>
+</tr>
+<tr>
+<td><code>v.push_back(t)</code></td>
+<td>向<code>v</code>的尾端添加一个值为<code>t</code>的元素</td>
+</tr>
+<tr>
+<td><code>v[n]</code></td>
+<td>返回<code>v</code>中第<code>n</code>个位置上元素的<strong>引用</strong></td>
+</tr>
+<tr>
+<td><code>v1 = v2</code></td>
+<td>用<code>v2</code>中的元素拷贝替换<code>v1</code>中的元素</td>
+</tr>
+<tr>
+<td><code>v1 = &#123;a,b,c...&#125;</code></td>
+<td>用列表中元素的拷贝替换<code>v1</code>中的元素</td>
+</tr>
+<tr>
+<td><code>v1 == v2</code></td>
+<td><code>v1</code>和<code>v2</code>相等当且仅当它们的元素数量相同且对应位置的元素值都相同</td>
+</tr>
+<tr>
+<td><code>v1 != v2</code></td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>&lt;</code>,<code>&lt;=</code>,<code>&gt;</code>, <code>&gt;=</code></td>
+<td>以字典顺序进行比较</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>范围<code>for</code>语句内不应该改变其遍历序列的大小。</li>
+<li><code>vector</code>对象（以及<code>string</code>对象）的下标运算符，只能对确知已存在的元素执行下标操作，不能用于添加元素。</li>
+</ul>
+<h2 id="迭代器iterator"><a href="#迭代器iterator" class="headerlink" title="迭代器iterator"></a>迭代器iterator</h2><ul>
+<li>所有标准库容器都可以使用迭代器。</li>
+<li>类似于指针类型，迭代器也提供了对对象的间接访问。</li>
+</ul>
+<h3 id="使用迭代器"><a href="#使用迭代器" class="headerlink" title="使用迭代器"></a>使用迭代器</h3><ul>
+<li><code>vector&lt;int&gt;::iterator iter</code>。</li>
+<li><code>auto b = v.begin();</code>返回指向第一个元素的迭代器。</li>
+<li><code>auto e = v.end();</code>返回指向最后一个元素的下一个（哨兵，尾后,one past the end）的迭代器（off the end）。</li>
+<li>如果容器为空， <code>begin()</code>和 <code>end()</code>返回的是同一个迭代器，都是尾后迭代器。</li>
+<li>使用解引用符<code>*</code>访问迭代器指向的元素。</li>
+<li>养成使用迭代器和<code>!=</code>的习惯（泛型编程）。</li>
+<li><strong>容器</strong>：可以包含其他对象；但所有的对象必须类型相同。</li>
+<li><strong>迭代器（iterator）</strong>：每种标准容器都有自己的迭代器。<code>C++</code>倾向于用迭代器而不是下标遍历元素。</li>
+<li><strong>const_iterator</strong>：只能读取容器内元素不能改变。</li>
+<li><strong>箭头运算符</strong>： 解引用 + 成员访问，<code>it-&gt;mem</code>等价于 <code>(*it).mem</code></li>
+<li><strong>谨记</strong>：但凡是使用了<strong>迭代器</strong>的循环体，都<strong>不要</strong>向迭代器所属的容器<strong>添加元素</strong>。</li>
+</ul>
+<p>标准容器迭代器的运算符:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*iter</code></td>
+<td>返回迭代器<code>iter</code>所指向的<strong>元素的引用</strong></td>
+</tr>
+<tr>
+<td><code>iter-&gt;mem</code></td>
+<td>等价于<code>(*iter).mem</code></td>
+</tr>
+<tr>
+<td><code>++iter</code></td>
+<td>令<code>iter</code>指示容器中的下一个元素</td>
+</tr>
+<tr>
+<td><code>--iter</code></td>
+<td>令<code>iter</code>指示容器中的上一个元素</td>
+</tr>
+<tr>
+<td><code>iter1 == iter2</code></td>
+<td>判断两个迭代器是否相等</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="迭代器运算"><a href="#迭代器运算" class="headerlink" title="迭代器运算"></a>迭代器运算</h3><p><code>vector</code>和<code>string</code>迭代器支持的运算：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>iter + n</code></td>
+<td>迭代器加上一个整数值仍得到一个迭代器，迭代器指示的新位置和原来相比向前移动了若干个元素。结果迭代器或者指示容器内的一个元素，或者指示容器尾元素的下一位置。</td>
+</tr>
+<tr>
+<td><code>iter - n</code></td>
+<td>迭代器减去一个整数仍得到一个迭代器，迭代器指示的新位置比原来向后移动了若干个元素。结果迭代器或者指向容器内的一个元素，或者指示容器尾元素的下一位置。</td>
+</tr>
+<tr>
+<td><code>iter1 += n</code></td>
+<td>迭代器加法的复合赋值语句，将<code>iter1</code>加n的结果赋给<code>iter1</code></td>
+</tr>
+<tr>
+<td><code>iter1 -= n</code></td>
+<td>迭代器减法的复合赋值语句，将<code>iter2</code>减n的加过赋给<code>iter1</code></td>
+</tr>
+<tr>
+<td><code>iter1 - iter2</code></td>
+<td>两个迭代器相减的结果是它们之间的距离，也就是说，将运算符右侧的迭代器向前移动差值个元素后得到左侧的迭代器。参与运算的两个迭代器必须指向的是同一个容器中的元素或者尾元素的下一位置。</td>
+</tr>
+<tr>
+<td><code>&gt;</code>、<code>&gt;=</code>、<code>&lt;</code>、<code>&lt;=</code></td>
+<td>迭代器的关系运算符，如果某迭代器</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>difference_type</strong>：保证足够大以存储任何两个迭代器对象间的距离，可正可负。</li>
+</ul>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><ul>
+<li>相当于vector的低级版，<strong>长度固定</strong>。</li>
+</ul>
+<h3 id="定义和初始化内置数组"><a href="#定义和初始化内置数组" class="headerlink" title="定义和初始化内置数组"></a>定义和初始化内置数组</h3><ul>
+<li>初始化：<code>char input_buffer[buffer_size];</code>，长度必须是const表达式，或者不写，让编译器自己推断。</li>
+<li>数组不允许直接赋值给另一个数组。</li>
+</ul>
+<h3 id="访问数组元素"><a href="#访问数组元素" class="headerlink" title="访问数组元素"></a>访问数组元素</h3><ul>
+<li>数组下标的类型：<code>size_t</code> 。</li>
+<li>字符数组的特殊性：结尾处有一个空字符，如 <code>char a[] = &quot;hello&quot;;</code> 。</li>
+<li>用数组初始化 <code>vector</code>： <code>int a[] = &#123;1,2,3,4,5&#125;; vector&lt;int&gt; v(begin(a), end(a));</code> 。</li>
+</ul>
+<h3 id="数组和指针"><a href="#数组和指针" class="headerlink" title="数组和指针"></a>数组和指针</h3><ul>
+<li>使用数组时，编译器一般会把它转换成指针。</li>
+<li>标准库类型限定使用的下标必须是无符号类型，而内置的下标可以处理负值。 </li>
+<li><strong>指针访问数组</strong>：在表达式中使用数组名时，名字会自动转换成指向数组的第一个元素的指针。</li>
+</ul>
+<h2 id="C风格字符串"><a href="#C风格字符串" class="headerlink" title="C风格字符串"></a>C风格字符串</h2><ul>
+<li>从C继承来的字符串。</li>
+<li>用空字符结束（<code>\0</code>）。</li>
+<li>对大多数应用来说，使用标准库 <code>string</code>比使用C风格字符串更安全、更高效。</li>
+<li>获取 <code>string</code> 中的 <code>cstring</code> ： <code>const char *str = s.c_str();</code> 。</li>
+</ul>
+<p>C标准库String函数，定义在<code>&lt;cstring&gt;</code> 中：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>strlen(p)</code></td>
+<td>返回<code>p</code>的长度，空字符不计算在内</td>
+</tr>
+<tr>
+<td><code>strcmp(p1, p2)</code></td>
+<td>比较<code>p1</code>和<code>p2</code>的相等性。如果<code>p1==p2</code>，返回0；如果<code>p1&gt;p2</code>，返回一个正值；如果<code>p1&lt;p2</code>，返回一个负值。</td>
+</tr>
+<tr>
+<td><code>strcat(p1, p2)</code></td>
+<td>将<code>p2</code>附加到<code>p1</code>之后，返回<code>p1</code></td>
+</tr>
+<tr>
+<td><code>strcpy(p1, p2)</code></td>
+<td>将<code>p2</code>拷贝给<code>p1</code>，返回<code>p1</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> <strong>尽量使用vector和迭代器，少用数组</strong></p>
+<h2 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h2><ul>
+<li><strong>多维数组的初始化</strong>： `int ia[3][4] = </li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/C-C/">#C/C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2022/06/24/%E3%80%8AC++%20Primer%E3%80%8B%E7%AC%AC%204%20%E7%AB%A0%20%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">《C++ Primer》第四章 表达式</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2022/06/22/%E3%80%8AC++%20Primer%E3%80%8B%E7%AC%AC%202%20%E7%AB%A0%20%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">《C++ Primer》第二章 变量和基本类型</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">《C++ Primer》第三章 字符串、向量和数组</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#using%E5%A3%B0%E6%98%8E"><span class="nav-text">using声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96string%E5%AF%B9%E8%B1%A1"><span class="nav-text">定义和初始化string对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string%E5%AF%B9%E8%B1%A1%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-text">string对象上的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86string%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="nav-text">处理string对象中的字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector"><span class="nav-text">vector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96vector%E5%AF%B9%E8%B1%A1"><span class="nav-text">定义和初始化vector对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91vector%E5%AF%B9%E8%B1%A1%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-text">向vector对象中添加元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96vector%E6%93%8D%E4%BD%9C"><span class="nav-text">其他vector操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8iterator"><span class="nav-text">迭代器iterator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">使用迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%BF%90%E7%AE%97"><span class="nav-text">迭代器运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E5%86%85%E7%BD%AE%E6%95%B0%E7%BB%84"><span class="nav-text">定义和初始化内置数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0"><span class="nav-text">访问数组元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%92%8C%E6%8C%87%E9%92%88"><span class="nav-text">数组和指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">C风格字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-text">多维数组</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 61 篇文章
+                    </span>
+                    
+                        <span>
+                            共 218k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

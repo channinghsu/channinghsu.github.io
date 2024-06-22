@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/10/21/《代码随想录》回溯法分割与子集/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录-回溯法分割与子集">
+<meta property="og:url" content="https://channinghsu.github.io/2023/10/21/%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%9E%E6%BA%AF%E6%B3%95%E5%88%86%E5%89%B2%E4%B8%8E%E5%AD%90%E9%9B%86/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123203735933.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123203735933-20230310132314109.png">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/78.%E5%AD%90%E9%9B%86.png">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/78.%E5%AD%90%E9%9B%86.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124195411977.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124200229824.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124200229824-20230310131640070.png">
+<meta property="article:published_time" content="2023-10-21T07:15:51.000Z">
+<meta property="article:modified_time" content="2023-10-22T06:27:28.993Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="回溯">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            代码随想录-回溯法分割与子集 -
+        
+        Channing&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/anime.min.js"></script>
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Channing&#39;s Blog
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">61</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">代码随想录-回溯法分割与子集</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-10-21 15:15:51</span>
+        <span class="mobile">2023-10-21 15:15:51</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-22 14:27:28</span>
+            <span class="mobile">2023-10-22 14:27:28</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%9B%9E%E6%BA%AF/">回溯</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>7.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>31 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h1 id="131-分割回文串"><a href="#131-分割回文串" class="headerlink" title="131.分割回文串"></a>131.分割回文串</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。</p>
+<p>返回 s 所有可能的分割方案。</p>
+<p>示例:<br>输入: “aab”<br>输出:<br>[<br>  [“aa”,”b”],<br>  [“a”,”a”,”b”]<br>]</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本题这涉及到两个关键问题：</p>
+<ol>
+<li>切割问题，有不同的切割方式</li>
+<li>判断回文</li>
+</ol>
+<p>相信这里不同的切割方式可以搞懵很多同学了。</p>
+<p>这种题目，想用for循环暴力解法，可能都不那么容易写出来，所以要换一种暴力的方式，就是回溯。</p>
+<p>一些同学可能想不清楚 回溯究竟是如何切割字符串呢？</p>
+<p>我们来分析一下切割，<strong>其实切割问题类似组合问题</strong>。</p>
+<p>例如对于字符串abcdef：</p>
+<ul>
+<li>组合问题：选取一个a之后，在bcdef中再去选取第二个，选取b之后在cdef中再选取第三个…..。</li>
+<li>切割问题：切割一个a之后，在bcdef中再去切割第二段，切割b之后在cdef中再切割第三段…..。</li>
+</ul>
+<p>感受出来了不？</p>
+<p>所以切割问题，也可以抽象为一棵树形结构，如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg" alt="131.分割回文串"></p>
+<p>递归用来纵向遍历，for循环用来横向遍历，切割线（就是图中的红线）切割到字符串的结尾位置，说明找到了一个切割方法。</p>
+<p>此时可以发现，切割问题的回溯搜索的过程和组合问题的回溯搜索的过程是差不多的。</p>
+<h3 id="回溯三部曲"><a href="#回溯三部曲" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归函数参数</li>
+</ul>
+<p>全局变量数组path存放切割后回文的子串，二维数组result存放结果集。 （这两个参数可以放到函数参数里）</p>
+<p>本题递归函数参数还需要startIndex，因为切割过的地方，不能重复切割，和组合问题也是保持一致的。</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0039.组合总和.html">回溯算法：求组合总和（二） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们深入探讨了组合问题什么时候需要startIndex，什么时候不需要startIndex。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">vector&lt;string&gt; path; <span class="comment">// 放已经回文的子串</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span> <span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> startIndex)</span> </span>{</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>递归函数终止条件</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg" alt="131.分割回文串"></p>
+<p>从树形结构的图中可以看出：切割线切到了字符串最后面，说明找到了一种切割方法，此时就是本层递归的终止条件。</p>
+<p><strong>那么在代码里什么是切割线呢？</strong></p>
+<p>在处理组合问题的时候，递归参数需要传入startIndex，表示下一轮递归遍历的起始位置，这个startIndex就是切割线。</p>
+<p>所以终止条件代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span> <span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">    <span class="comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span></span><br><span class="line">    <span class="keyword">if</span> (startIndex &gt;= s.<span class="built_in">size</span>()) {</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单层搜索的逻辑</li>
+</ul>
+<p><strong>来看看在递归循环中如何截取子串呢？</strong></p>
+<p>在<code>for (int i = startIndex; i &lt; s.size(); i++)</code>循环中，我们 定义了起始位置startIndex，那么 [startIndex, i] 就是要截取的子串。</p>
+<p>首先判断这个子串是不是回文，如果是回文，就加入在<code>vector&lt;string&gt; path</code>中，path用来记录切割过的回文子串。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isPalindrome</span>(s, startIndex, i)) { <span class="comment">// 是回文子串</span></span><br><span class="line">        <span class="comment">// 获取[startIndex,i]在s中的子串</span></span><br><span class="line">        string str = s.<span class="built_in">substr</span>(startIndex, i - startIndex + <span class="number">1</span>);</span><br><span class="line">        path.<span class="built_in">push_back</span>(str);</span><br><span class="line">    } <span class="keyword">else</span> {                <span class="comment">// 如果不是则直接跳过</span></span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">backtracking</span>(s, i + <span class="number">1</span>); <span class="comment">// 寻找i+1为起始位置的子串</span></span><br><span class="line">    path.<span class="built_in">pop_back</span>();        <span class="comment">// 回溯过程，弹出本次已经添加的子串</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>注意切割过的位置，不能重复切割，所以，backtracking(s, i + 1); 传入下一层的起始位置为i + 1</strong>。</p>
+<h3 id="判断回文子串"><a href="#判断回文子串" class="headerlink" title="判断回文子串"></a>判断回文子串</h3><p>最后我们看一下回文子串要如何判断了，判断一个字符串是否是回文。</p>
+<p>可以使用双指针法，一个指针从前向后，一个指针从后向前，如果前后指针所指向的元素是相等的，就是回文字符串了。</p>
+<p>那么判断回文的C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>{</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--) {</span><br><span class="line">        <span class="keyword">if</span> (s[i] != s[j]) {</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>如果大家对双指针法有生疏了，传送门：<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/双指针总结.html">双指针法：总结篇！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>此时关键代码已经讲解完毕，整体代码如下（详细注释了）</p>
+<p>根据Carl给出的回溯算法模板：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(参数)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (终止条件) {</span><br><span class="line">        存放结果;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {</span><br><span class="line">        处理节点;</span><br><span class="line">        <span class="built_in">backtracking</span>(路径，选择列表); <span class="comment">// 递归</span></span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>不难写出如下代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">    vector&lt;string&gt; path; <span class="comment">// 放已经回文的子串</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span> <span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span></span><br><span class="line">        <span class="keyword">if</span> (startIndex &gt;= s.<span class="built_in">size</span>()) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isPalindrome</span>(s, startIndex, i)) {   <span class="comment">// 是回文子串</span></span><br><span class="line">                <span class="comment">// 获取[startIndex,i]在s中的子串</span></span><br><span class="line">                string str = s.<span class="built_in">substr</span>(startIndex, i - startIndex + <span class="number">1</span>);</span><br><span class="line">                path.<span class="built_in">push_back</span>(str);</span><br><span class="line">            } <span class="keyword">else</span> {                                <span class="comment">// 不是回文，跳过</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="built_in">backtracking</span>(s, i + <span class="number">1</span>); <span class="comment">// 寻找i+1为起始位置的子串</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯过程，弹出本次已经添加的子串</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--) {</span><br><span class="line">            <span class="keyword">if</span> (s[i] != s[j]) {</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">partition</span>(string s) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(s, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)</li>
+<li>空间复杂度: O(n^2)</li>
+</ul>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>上面的代码还存在一定的优化空间, 在于如何更高效的计算一个子字符串是否是回文字串。上述代码<code>isPalindrome</code>函数运用双指针的方法来判定对于一个字符串<code>s</code>, 给定起始下标和终止下标, 截取出的子字符串是否是回文字串。但是其中有一定的重复计算存在:</p>
+<p>例如给定字符串<code>"abcde"</code>, 在已知<code>"bcd"</code>不是回文字串时, 不再需要去双指针操作<code>"abcde"</code>而可以直接判定它一定不是回文字串。</p>
+<p>具体来说, 给定一个字符串<code>s</code>, 长度为<code>n</code>, 它成为回文字串的充分必要条件是<code>s[0] == s[n-1]</code>且<code>s[1:n-1]</code>是回文字串。</p>
+<p>大家如果熟悉动态规划这种算法的话, 我们可以高效地事先一次性计算出, 针对一个字符串<code>s</code>, 它的任何子串是否是回文字串, 然后在我们的回溯函数中直接查询即可, 省去了双指针移动判定这一步骤.</p>
+<p>具体参考代码如下:</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">    vector&lt;string&gt; path; <span class="comment">// 放已经回文的子串</span></span><br><span class="line">    vector&lt;vector&lt;<span class="type">bool</span>&gt;&gt; isPalindrome; <span class="comment">// 放事先计算好的是否回文子串的结果</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span> <span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span></span><br><span class="line">        <span class="keyword">if</span> (startIndex &gt;= s.<span class="built_in">size</span>()) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (isPalindrome[startIndex][i]) {   <span class="comment">// 是回文子串</span></span><br><span class="line">                <span class="comment">// 获取[startIndex,i]在s中的子串</span></span><br><span class="line">                string str = s.<span class="built_in">substr</span>(startIndex, i - startIndex + <span class="number">1</span>);</span><br><span class="line">                path.<span class="built_in">push_back</span>(str);</span><br><span class="line">            } <span class="keyword">else</span> {                                <span class="comment">// 不是回文，跳过</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="built_in">backtracking</span>(s, i + <span class="number">1</span>); <span class="comment">// 寻找i+1为起始位置的子串</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯过程，弹出本次已经添加的子串</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">computePalindrome</span><span class="params">(<span class="type">const</span> string&amp; s)</span> </span>{</span><br><span class="line">        <span class="comment">// isPalindrome[i][j] 代表 s[i:j](双边包括)是否是回文字串 </span></span><br><span class="line">        isPalindrome.<span class="built_in">resize</span>(s.<span class="built_in">size</span>(), <span class="built_in">vector</span>&lt;<span class="type">bool</span>&gt;(s.<span class="built_in">size</span>(), <span class="literal">false</span>)); <span class="comment">// 根据字符串s, 刷新布尔矩阵的大小</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = s.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) { </span><br><span class="line">            <span class="comment">// 需要倒序计算, 保证在i行时, i+1行已经计算好了</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; s.<span class="built_in">size</span>(); j++) {</span><br><span class="line">                <span class="keyword">if</span> (j == i) {isPalindrome[i][j] = <span class="literal">true</span>;}</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (j - i == <span class="number">1</span>) {isPalindrome[i][j] = (s[i] == s[j]);}</span><br><span class="line">                <span class="keyword">else</span> {isPalindrome[i][j] = (s[i] == s[j] &amp;&amp; isPalindrome[i+<span class="number">1</span>][j<span class="number">-1</span>]);}</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">partition</span>(string s) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">computePalindrome</span>(s);</span><br><span class="line">        <span class="built_in">backtracking</span>(s, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这道题目在leetcode上是中等，但可以说是hard的题目了，但是代码其实就是按照模板的样子来的。</p>
+<p>那么难究竟难在什么地方呢？</p>
+<p><strong>我列出如下几个难点：</strong></p>
+<ul>
+<li>切割问题可以抽象为组合问题</li>
+<li>如何模拟那些切割线</li>
+<li>切割问题中递归如何终止</li>
+<li>在递归循环中如何截取子串</li>
+<li>如何判断回文</li>
+</ul>
+<p><strong>我们平时在做难题的时候，总结出来难究竟难在哪里也是一种需要锻炼的能力</strong>。</p>
+<p>一些同学可能遇到题目比较难，但是不知道题目难在哪里，反正就是很难。其实这样还是思维不够清晰，这种总结的能力需要多接触多锻炼。</p>
+<p><strong>本题我相信很多同学主要卡在了第一个难点上：就是不知道如何切割，甚至知道要用回溯法，也不知道如何用。也就是没有体会到按照求组合问题的套路就可以解决切割</strong>。</p>
+<p>如果意识到这一点，算是重大突破了。接下来就可以对着模板照葫芦画瓢。</p>
+<p><strong>但接下来如何模拟切割线，如何终止，如何截取子串，其实都不好想，最后判断回文算是最简单的了</strong>。</p>
+<p>关于模拟切割线，其实就是index是上一层已经确定了的分割线，i是这一层试图寻找的新分割线</p>
+<p>除了这些难点，<strong>本题还有细节，例如：切割过的地方不能重复切割所以递归函数需要传入i + 1</strong>。</p>
+<p>所以本题应该是一道hard题目了。</p>
+<p><strong>可能刷过这道题目的录友都没感受到自己原来克服了这么多难点，就把这道题目AC了</strong>，这应该叫做无招胜有招，人码合一。</p>
+<h1 id="93-复原IP地址"><a href="#93-复原IP地址" class="headerlink" title="93.复原IP地址"></a>93.复原IP地址</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。</p>
+<p>有效的 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 ‘.’ 分隔。</p>
+<p>例如：”0.1.2.201” 和 “192.168.1.1” 是 有效的 IP 地址，但是 “0.011.255.245”、”192.168.1.312” 和 “192.168@1.1” 是 无效的 IP 地址。</p>
+<p>示例 1：</p>
+<ul>
+<li>输入：s = “25525511135”</li>
+<li>输出：[“255.255.11.135”,”255.255.111.35”]</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入：s = “0000”</li>
+<li>输出：[“0.0.0.0”]</li>
+</ul>
+<p>示例 3：</p>
+<ul>
+<li>输入：s = “1111”</li>
+<li>输出：[“1.1.1.1”]</li>
+</ul>
+<p>示例 4：</p>
+<ul>
+<li>输入：s = “010010”</li>
+<li>输出：[“0.10.0.10”,”0.100.1.0”]</li>
+</ul>
+<p>示例 5：</p>
+<ul>
+<li>输入：s = “101023”</li>
+<li>输出：[“1.0.10.23”,”1.0.102.3”,”10.1.0.23”,”10.10.2.3”,”101.0.2.3”]</li>
+</ul>
+<p>提示：</p>
+<ul>
+<li>0 &lt;= s.length &lt;= 3000</li>
+<li>s 仅由数字组成</li>
+</ul>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>做这道题目之前，最好先把<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>这个做了。</p>
+<p>这道题目相信大家刚看的时候，应该会一脸茫然。</p>
+<p>其实只要意识到这是切割问题，<strong>切割问题就可以使用回溯搜索法把所有可能性搜出来</strong>，和刚做过的<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>就十分类似了。</p>
+<p>切割问题可以抽象为树型结构，如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123203735933.png" alt="93.复原IP地址"></p>
+<h3 id="回溯三部曲-1"><a href="#回溯三部曲-1" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归参数</li>
+</ul>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们就提到切割问题类似组合问题。</p>
+<p>startIndex一定是需要的，因为不能重复分割，记录下一层递归分割的起始位置。</p>
+<p>本题我们还需要一个变量pointNum，记录添加逗点的数量。</p>
+<p>所以代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;string&gt; result;<span class="comment">// 记录结果</span></span><br><span class="line"><span class="comment">// startIndex: 搜索的起始位置，pointNum:添加逗点的数量</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(string&amp; s, <span class="type">int</span> startIndex, <span class="type">int</span> pointNum)</span> </span>{</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>递归终止条件</li>
+</ul>
+<p>终止条件和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>情况就不同了，本题明确要求只会分成4段，所以不能用切割线切到最后作为终止条件，而是分割的段数作为终止条件。</p>
+<p>pointNum表示逗点数量，pointNum为3说明字符串分成了4段了。</p>
+<p>然后验证一下第四段是否合法，如果合法就加入到结果集里</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (pointNum == <span class="number">3</span>) { <span class="comment">// 逗点数量为3时，分隔结束</span></span><br><span class="line">    <span class="comment">// 判断第四段子字符串是否合法，如果合法就放进result中</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isValid</span>(s, startIndex, s.<span class="built_in">size</span>() - <span class="number">1</span>)) {</span><br><span class="line">        result.<span class="built_in">push_back</span>(s);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单层搜索的逻辑</li>
+</ul>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中已经讲过在循环遍历中如何截取子串。</p>
+<p>在<code>for (int i = startIndex; i &lt; s.size(); i++)</code>循环中 [startIndex, i] 这个区间就是截取的子串，需要判断这个子串是否合法。</p>
+<p>如果合法就在字符串后面加上符号<code>.</code>表示已经分割。</p>
+<p>如果不合法就结束本层循环，如图中剪掉的分支：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123203735933-20230310132314109.png" alt="93.复原IP地址"></p>
+<p>然后就是递归和回溯的过程：</p>
+<p>递归调用时，下一层递归的startIndex要从i+2开始（因为需要在字符串中加入了分隔符<code>.</code>），同时记录分割符的数量pointNum 要 +1。</p>
+<p>回溯的时候，就将刚刚加入的分隔符<code>.</code> 删掉就可以了，pointNum也要-1。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isValid</span>(s, startIndex, i)) { <span class="comment">// 判断 [startIndex,i] 这个区间的子串是否合法</span></span><br><span class="line">        s.<span class="built_in">insert</span>(s.<span class="built_in">begin</span>() + i + <span class="number">1</span> , <span class="string">'.'</span>);  <span class="comment">// 在i的后面插入一个逗点</span></span><br><span class="line">        pointNum++;</span><br><span class="line">        <span class="built_in">backtracking</span>(s, i + <span class="number">2</span>, pointNum);   <span class="comment">// 插入逗点之后下一个子串的起始位置为i+2</span></span><br><span class="line">        pointNum--;                         <span class="comment">// 回溯</span></span><br><span class="line">        s.<span class="built_in">erase</span>(s.<span class="built_in">begin</span>() + i + <span class="number">1</span>);         <span class="comment">// 回溯删掉逗点</span></span><br><span class="line">    } <span class="keyword">else</span> <span class="keyword">break</span>; <span class="comment">// 不合法，直接结束本层循环</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<h3 id="判断子串是否合法"><a href="#判断子串是否合法" class="headerlink" title="判断子串是否合法"></a>判断子串是否合法</h3><p>最后就是在写一个判断段位是否是有效段位了。</p>
+<p>主要考虑到如下三点：</p>
+<ul>
+<li>段位以0为开头的数字不合法</li>
+<li>段位里有非正整数字符不合法</li>
+<li>段位如果大于255了不合法</li>
+</ul>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断字符串s在左闭又闭区间[start, end]所组成的数字是否合法</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (start &gt; end) {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (s[start] == <span class="string">'0'</span> &amp;&amp; start != end) { <span class="comment">// 0开头的数字不合法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) {</span><br><span class="line">        <span class="keyword">if</span> (s[i] &gt; <span class="string">'9'</span> || s[i] &lt; <span class="string">'0'</span>) { <span class="comment">// 遇到非数字字符不合法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        num = num * <span class="number">10</span> + (s[i] - <span class="string">'0'</span>);</span><br><span class="line">        <span class="keyword">if</span> (num &gt; <span class="number">255</span>) { <span class="comment">// 如果大于255了不合法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>根据<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>给出的回溯算法模板：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void backtracking(参数) {</span><br><span class="line">    if (终止条件) {</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>可以写出如下回溯算法C++代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;string&gt; result;<span class="comment">// 记录结果</span></span><br><span class="line">    <span class="comment">// startIndex: 搜索的起始位置，pointNum:添加逗点的数量</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(string&amp; s, <span class="type">int</span> startIndex, <span class="type">int</span> pointNum)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (pointNum == <span class="number">3</span>) { <span class="comment">// 逗点数量为3时，分隔结束</span></span><br><span class="line">            <span class="comment">// 判断第四段子字符串是否合法，如果合法就放进result中</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isValid</span>(s, startIndex, s.<span class="built_in">size</span>() - <span class="number">1</span>)) {</span><br><span class="line">                result.<span class="built_in">push_back</span>(s);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; s.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isValid</span>(s, startIndex, i)) { <span class="comment">// 判断 [startIndex,i] 这个区间的子串是否合法</span></span><br><span class="line">                s.<span class="built_in">insert</span>(s.<span class="built_in">begin</span>() + i + <span class="number">1</span> , <span class="string">'.'</span>);  <span class="comment">// 在i的后面插入一个逗点</span></span><br><span class="line">                pointNum++;</span><br><span class="line">                <span class="built_in">backtracking</span>(s, i + <span class="number">2</span>, pointNum);   <span class="comment">// 插入逗点之后下一个子串的起始位置为i+2</span></span><br><span class="line">                pointNum--;                         <span class="comment">// 回溯</span></span><br><span class="line">                s.<span class="built_in">erase</span>(s.<span class="built_in">begin</span>() + i + <span class="number">1</span>);         <span class="comment">// 回溯删掉逗点</span></span><br><span class="line">            } <span class="keyword">else</span> <span class="keyword">break</span>; <span class="comment">// 不合法，直接结束本层循环</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 判断字符串s在左闭又闭区间[start, end]所组成的数字是否合法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) {</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (s[start] == <span class="string">'0'</span> &amp;&amp; start != end) { <span class="comment">// 0开头的数字不合法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) {</span><br><span class="line">            <span class="keyword">if</span> (s[i] &gt; <span class="string">'9'</span> || s[i] &lt; <span class="string">'0'</span>) { <span class="comment">// 遇到非数字字符不合法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">            num = num * <span class="number">10</span> + (s[i] - <span class="string">'0'</span>);</span><br><span class="line">            <span class="keyword">if</span> (num &gt; <span class="number">255</span>) { <span class="comment">// 如果大于255了不合法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">restoreIpAddresses</span><span class="params">(string s)</span> </span>{</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() &lt; <span class="number">4</span> || s.<span class="built_in">size</span>() &gt; <span class="number">12</span>) <span class="keyword">return</span> result; <span class="comment">// 算是剪枝了</span></span><br><span class="line">        <span class="built_in">backtracking</span>(s, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(3^4)，IP地址最多包含4个数字，每个数字最多有3种可能的分割方式，则搜索树的最大深度为4，每个节点最多有3个子节点。</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我列举的分割字符串的难点，本题都覆盖了。</p>
+<p>而且本题还需要操作字符串添加逗号作为分隔符，并验证区间的合法性。</p>
+<p>可以说是<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的加强版。</p>
+<p>在本文的树形结构图中，我已经把详细的分析思路都画了出来，相信大家看了之后一定会思路清晰不少！</p>
+<h1 id="78-子集"><a href="#78-子集" class="headerlink" title="78.子集"></a>78.子集</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<p>示例:<br>输入: nums = [1,2,3]<br>输出:<br>[<br>  [3],<br>  [1],<br>  [2],<br>  [1,2,3],<br>  [1,3],<br>  [2,3],<br>  [1,2],<br>  []<br>]</p>
+<h2 id="算法公开课"><a href="#算法公开课" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1U84y1q7Ci">回溯算法解决子集问题，树上节点都是目标集和！ | LeetCode：78.子集 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频再看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>求子集问题和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>又不一样了。</p>
+<p>如果把 子集问题、组合问题、分割问题都抽象为一棵树的话，<strong>那么组合问题和分割问题都是收集树的叶子节点，而子集问题是找树的所有节点！</strong></p>
+<p>其实子集也是一种组合问题，因为它的集合是无序的，子集{1,2} 和 子集{2,1}是一样的。</p>
+<p><strong>那么既然是无序，取过的元素不会重复取，写回溯算法的时候，for就要从startIndex开始，而不是从0开始！</strong></p>
+<p>有同学问了，什么时候for可以从0开始呢？</p>
+<p>求排列问题的时候，就要从0开始，因为集合是有序的，{1, 2} 和{2, 1}是两个集合，排列问题我们后续的文章就会讲到的。</p>
+<p>以示例中nums = [1,2,3]为例把求子集抽象为树型结构，如下：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/78.%E5%AD%90%E9%9B%86.png" alt="78.子集"></p>
+<p>从图中红线部分，可以看出<strong>遍历这个树的时候，把所有节点都记录下来，就是要求的子集集合</strong>。</p>
+<h3 id="回溯三部曲-2"><a href="#回溯三部曲-2" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归函数参数</li>
+</ul>
+<p>全局变量数组path为子集收集元素，二维数组result存放子集组合。（也可以放到递归函数参数里）</p>
+<p>递归函数参数在上面讲到了，需要startIndex。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br></pre></td></tr></table></figure></div>
+<p>递归终止条件</p>
+<p>从图中可以看出：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking.cdn.bcebos.com/pics/78.%E5%AD%90%E9%9B%86.png" alt="78.子集"></p>
+<p>剩余集合为空的时候，就是叶子节点。</p>
+<p>那么什么时候剩余集合为空呢？</p>
+<p>就是startIndex已经大于数组的长度了，就终止了，因为没有元素可取了，代码如下:</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (startIndex &gt;= nums.<span class="built_in">size</span>()) {</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>其实可以不需要加终止条件，因为startIndex &gt;= nums.size()，本层for循环本来也结束了</strong>。</p>
+<ul>
+<li>单层搜索逻辑</li>
+</ul>
+<p><strong>求取子集问题，不需要任何剪枝！因为子集就是要遍历整棵树</strong>。</p>
+<p>那么单层递归逻辑代码如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (int i = startIndex; i &lt; nums.size(); i++) {</span><br><span class="line">    path.push_back(nums[i]);    // 子集收集元素</span><br><span class="line">    backtracking(nums, i + 1);  // 注意从i+1开始，元素不重复取</span><br><span class="line">    path.pop_back();            // 回溯</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>根据<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/回溯算法理论基础.html">关于回溯算法，你该了解这些！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>给出的回溯算法模板：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void backtracking(参数) {</span><br><span class="line">    if (终止条件) {</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p>可以写出如下回溯算法C++代码：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        result.<span class="built_in">push_back</span>(path); <span class="comment">// 收集子集，要放在终止添加的上面，否则会漏掉自己</span></span><br><span class="line">        <span class="keyword">if</span> (startIndex &gt;= nums.<span class="built_in">size</span>()) { <span class="comment">// 终止条件可以不加</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsets</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<p>在注释中，可以发现可以不写终止条件，因为本来我们就要遍历整棵树。</p>
+<p>有的同学可能担心不写终止条件会不会无限递归？</p>
+<p>并不会，因为每次递归的下一层就是从i+1开始的。</p>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>相信大家经过了</p>
+<ul>
+<li>组合问题：<ul>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0077.组合.html">77.组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0077.组合优化.html">回溯算法：组合问题再剪剪枝 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0216.组合总和III.html">216.组合总和III <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0017.电话号码的字母组合.html">17.电话号码的字母组合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0039.组合总和.html">39.组合总和 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0040.组合总和II.html">40.组合总和II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+</li>
+<li>分割问题：<ul>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0131.分割回文串.html">131.分割回文串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0093.复原IP地址.html">93.复原IP地址 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+</li>
+</ul>
+<p>洗礼之后，发现子集问题还真的有点简单了，其实这就是一道标准的模板题。</p>
+<p>但是要清楚子集问题和组合问题、分割问题的的区别，<strong>子集是收集树形结构中树的所有节点的结果</strong>。</p>
+<p><strong>而组合问题、分割问题是收集树形结构中叶子节点的结果</strong>。</p>
+<h1 id="90-子集II"><a href="#90-子集II" class="headerlink" title="90.子集II"></a>90.子集II</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<p>示例:</p>
+<ul>
+<li>输入: [1,2,2]</li>
+<li>输出:<br>[<br>[2],<br>[1],<br>[1,2,2],<br>[2,2],<br>[1,2],<br>[]<br>]</li>
+</ul>
+<h2 id="算法公开课-1"><a href="#算法公开课-1" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vm4y1F71J/">回溯算法解决子集问题，如何去重？| LeetCode：90.子集II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频再看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>做本题之前一定要先做<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0078.子集.html">78.子集 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p>这道题目和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0078.子集.html">78.子集 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>区别就是集合里有重复元素了，而且求取的子集要去重。</p>
+<p>那么关于回溯算法中的去重问题，<strong>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0040.组合总和II.html">40.组合总和II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中已经详细讲解过了，和本题是一个套路</strong>。</p>
+<p><strong>剧透一下，后期要讲解的排列问题里去重也是这个套路，所以理解“树层去重”和“树枝去重”非常重要</strong>。</p>
+<p>用示例中的[1, 2, 2] 来举例，如图所示： （<strong>注意去重需要先对集合排序</strong>）</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124195411977.png" alt="90.子集II"></p>
+<p>从图中可以看出，同一树层上重复取2 就要过滤掉，同一树枝上就可以重复取2，因为同一树枝上元素的集合才是唯一子集！</p>
+<p>本题就是其实就是<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0078.子集.html">回溯算法：求子集问题！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的基础上加上了去重，去重我们在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0040.组合总和II.html">回溯算法：求组合总和（三） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>也讲过了，所以我就直接给出代码了：</p>
+<p>C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex, vector&lt;<span class="type">bool</span>&gt;&amp; used)</span> </span>{</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="comment">// used[i - 1] == true，说明同一树枝candidates[i - 1]使用过</span></span><br><span class="line">            <span class="comment">// used[i - 1] == false，说明同一树层candidates[i - 1]使用过</span></span><br><span class="line">            <span class="comment">// 而我们要对同一树层使用过的元素进行跳过</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] &amp;&amp; used[i - <span class="number">1</span>] == <span class="literal">false</span>) {</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            used[i] = <span class="literal">true</span>;</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>, used);</span><br><span class="line">            used[i] = <span class="literal">false</span>;</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsetsWithDup</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">used</span><span class="params">(nums.size(), <span class="literal">false</span>)</span></span>;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>()); <span class="comment">// 去重需要排序</span></span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>, used);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<p>使用set去重的版本。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; uset;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (uset.<span class="built_in">find</span>(nums[i]) != uset.<span class="built_in">end</span>()) {</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            uset.<span class="built_in">insert</span>(nums[i]);</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsetsWithDup</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>()); <span class="comment">// 去重需要排序</span></span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>本题也可以不使用used数组来去重，因为递归的时候下一个startIndex是i+1而不是0。</p>
+<p>如果要是全排列的话，每次要从0开始遍历，为了跳过已入栈的元素，需要使用used。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="comment">// 而我们要对同一树层使用过的元素进行跳过</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt; startIndex &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] ) { <span class="comment">// 注意这里使用i &gt; startIndex</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsetsWithDup</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>()); <span class="comment">// 去重需要排序</span></span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><p>其实这道题目的知识点，我们之前都讲过了，如果之前讲过的子集问题和去重问题都掌握的好，这道题目应该分分钟AC。</p>
+<p>当然本题去重的逻辑，也可以这么写</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (i &gt; startIndex &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] ) {</span><br><span class="line">	<span class="keyword">continue</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<h1 id="491-递增子序列"><a href="#491-递增子序列" class="headerlink" title="491.递增子序列"></a>491.递增子序列</h1><p><a class="link" target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-decreasing-subsequences/">力扣题目链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>给定一个整型数组, 你的任务是找到所有该数组的递增子序列，递增子序列的长度至少是2。</p>
+<p>示例:</p>
+<ul>
+<li>输入: [4, 6, 7, 7]</li>
+<li>输出: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7], [7,7], [4,7,7]]</li>
+</ul>
+<p>说明:</p>
+<ul>
+<li>给定数组的长度不会超过15。</li>
+<li>数组中的整数范围是 [-100,100]。</li>
+<li>给定数组中可能包含重复数字，相等的数字应该被视为递增的一种情况。</li>
+</ul>
+<h2 id="算法公开课-2"><a href="#算法公开课-2" class="headerlink" title="算法公开课"></a>算法公开课</h2><p><strong><a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/other/gongkaike.html">《代码随想录》算法视频公开课 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>：<a class="link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EG4y1h78v/">回溯算法精讲，树层去重与树枝去重 | LeetCode：491.递增子序列 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，相信结合视频再看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p>这个递增子序列比较像是取有序的子集。而且本题也要求不能有相同的递增子序列。</p>
+<p>这又是子集，又是去重，是不是不由自主的想起了刚刚讲过的<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0090.子集II.html">90.子集II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p>就是因为太像了，更要注意差别所在，要不就掉坑里了！</p>
+<p>在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0090.子集II.html">90.子集II <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中我们是通过排序，再加一个标记数组来达到去重的目的。</p>
+<p>而本题求自增子序列，是不能对原数组进行排序的，排完序的数组都是自增子序列了。</p>
+<p><strong>所以不能使用之前的去重逻辑！</strong></p>
+<p>本题给出的示例，还是一个有序数组 [4, 6, 7, 7]，这更容易误导大家按照排序的思路去做了。</p>
+<p>为了有鲜明的对比，我用[4, 7, 6, 7]这个数组来举例，抽象为树形结构如图：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124200229824.png" alt="491. 递增子序列1"></p>
+<h3 id="回溯三部曲-3"><a href="#回溯三部曲-3" class="headerlink" title="回溯三部曲"></a>回溯三部曲</h3><ul>
+<li>递归函数参数</li>
+</ul>
+<p>本题求子序列，很明显一个元素不能重复使用，所以需要startIndex，调整下一层递归的起始位置。</p>
+<p>代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span></span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>终止条件</li>
+</ul>
+<p>本题其实类似求子集问题，也是要遍历树形结构找每一个节点，所以和<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0078.子集.html">回溯算法：求子集问题！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>一样，可以不加终止条件，startIndex每次都会加1，并不会无限递归。</p>
+<p>但本题收集结果有所不同，题目要求递增子序列大小至少为2，所以代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (path.<span class="built_in">size</span>() &gt; <span class="number">1</span>) {</span><br><span class="line">    result.<span class="built_in">push_back</span>(path);</span><br><span class="line">    <span class="comment">// 注意这里不要加return，因为要取树上的所有节点</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单层搜索逻辑</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201124200229824-20230310131640070.png" alt="491. 递增子序列1"><br>在图中可以看出，<strong>同一父节点下的同层上使用过的元素就不能再使用了</strong></p>
+<p>那么单层搜索代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">unordered_set&lt;<span class="type">int</span>&gt; uset; <span class="comment">// 使用set来对本层元素进行去重</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">    <span class="keyword">if</span> ((!path.<span class="built_in">empty</span>() &amp;&amp; nums[i] &lt; path.<span class="built_in">back</span>())</span><br><span class="line">            || uset.<span class="built_in">find</span>(nums[i]) != uset.<span class="built_in">end</span>()) {</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">    }</span><br><span class="line">    uset.<span class="built_in">insert</span>(nums[i]); <span class="comment">// 记录这个元素在本层用过了，本层后面不能再用了</span></span><br><span class="line">    path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">    <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">    path.<span class="built_in">pop_back</span>();</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<p><strong>对于已经习惯写回溯的同学，看到递归函数上面的<code>uset.insert(nums[i]);</code>，下面却没有对应的pop之类的操作，应该很不习惯吧</strong></p>
+<p><strong>这也是需要注意的点，<code>unordered_set&lt;int&gt; uset;</code> 是记录本层元素是否重复使用，新的一层uset都会重新定义（清空），所以要知道uset只负责本层！</strong></p>
+<p>最后整体C++代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 版本一</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() &gt; <span class="number">1</span>) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="comment">// 注意这里不要加return，要取树上的节点</span></span><br><span class="line">        }</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; uset; <span class="comment">// 使用set对本层元素进行去重</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> ((!path.<span class="built_in">empty</span>() &amp;&amp; nums[i] &lt; path.<span class="built_in">back</span>())</span><br><span class="line">                    || uset.<span class="built_in">find</span>(nums[i]) != uset.<span class="built_in">end</span>()) {</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            uset.<span class="built_in">insert</span>(nums[i]); <span class="comment">// 记录这个元素在本层用过了，本层后面不能再用了</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">findSubsequences</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>时间复杂度: O(n * 2^n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<h2 id="优化-1"><a href="#优化-1" class="headerlink" title="优化"></a>优化</h2><p>以上代码用我用了<code>unordered_set&lt;int&gt;</code>来记录本层元素是否重复使用。</p>
+<p><strong>其实用数组来做哈希，效率就高了很多</strong>。</p>
+<p>注意题目中说了，数值范围[-100,100]，所以完全可以用数组来做哈希。</p>
+<p>程序运行的时候对unordered_set 频繁的insert，unordered_set需要做哈希映射（也就是把key通过hash function映射为唯一的哈希值）相对费时间，而且每次重新定义set，insert的时候其底层的符号表也要做相应的扩充，也是费事的。</p>
+<p>那么优化后的代码如下：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 版本二</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIndex)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (path.<span class="built_in">size</span>() &gt; <span class="number">1</span>) {</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        }</span><br><span class="line">        <span class="type">int</span> used[<span class="number">201</span>] = {<span class="number">0</span>}; <span class="comment">// 这里使用数组来进行去重操作，题目说数值范围[-100, 100]</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++) {</span><br><span class="line">            <span class="keyword">if</span> ((!path.<span class="built_in">empty</span>() &amp;&amp; nums[i] &lt; path.<span class="built_in">back</span>())</span><br><span class="line">                    || used[nums[i] + <span class="number">100</span>] == <span class="number">1</span>) {</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            used[nums[i] + <span class="number">100</span>] = <span class="number">1</span>; <span class="comment">// 记录这个元素在本层用过了，本层后面不能再用了</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">findSubsequences</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) {</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure></div>
+<p>这份代码在leetcode上提交，要比版本一耗时要好的多。</p>
+<p><strong>所以正如在<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/哈希表总结.html">哈希表：总结篇！（每逢总结必经典） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中说的那样，数组，set，map都可以做哈希表，而且数组干的活，map和set都能干，但如果数值范围小的话能用数组尽量用数组</strong>。</p>
+<h2 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h2><p>本题题解清一色都说是深度优先搜索，但我更倾向于说它用回溯法，而且本题我也是完全使用回溯法的逻辑来分析的。</p>
+<p>相信大家在本题中处处都能看到是<a class="link" target="_blank" rel="noopener" href="https://programmercarl.com/0090.子集II.html">回溯算法：求子集问题（二） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的身影，但处处又都是陷阱。</p>
+<p><strong>对于养成思维定式或者套模板套嗨了的同学，这道题起到了很好的警醒作用。更重要的是拓展了大家的思路！</strong></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/%E5%9B%9E%E6%BA%AF/">#回溯</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/12/12/BKT-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">模拟退火算法及其在BKT中的应用</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/10/11/%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95-%E7%BB%84%E5%90%88/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">代码随想录-回溯算法-组合问题</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">代码随想录-回溯法分割与子集</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="nav-text">131.分割回文串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E4%B8%89%E9%83%A8%E6%9B%B2"><span class="nav-text">回溯三部曲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2"><span class="nav-text">判断回文子串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-text">优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#93-%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80"><span class="nav-text">93.复原IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E4%B8%89%E9%83%A8%E6%9B%B2-1"><span class="nav-text">回溯三部曲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%AD%90%E4%B8%B2%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95"><span class="nav-text">判断子串是否合法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#78-%E5%AD%90%E9%9B%86"><span class="nav-text">78.子集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E4%B8%89%E9%83%A8%E6%9B%B2-2"><span class="nav-text">回溯三部曲</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-2"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#90-%E5%AD%90%E9%9B%86II"><span class="nav-text">90.子集II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE-1"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-text">补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-3"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#491-%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-text">491.递增子序列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE-2"><span class="nav-text">算法公开课</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E4%B8%89%E9%83%A8%E6%9B%B2-3"><span class="nav-text">回溯三部曲</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96-1"><span class="nav-text">优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-4"><span class="nav-text">总结</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 61 篇文章
+                    </span>
+                    
+                        <span>
+                            共 218k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/07/28/《mysql必知必会》09丨时间函数：时间类数据，mysql是怎么处理的？/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL必知必会 09丨时间函数：时间类数据，MySQL是怎么处理的？">
+<meta property="og:url" content="https://channinghsu.github.io/2023/07/28/%E3%80%8AMySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%8B09%E4%B8%A8%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%EF%BC%9A%E6%97%B6%E9%97%B4%E7%B1%BB%E6%95%B0%E6%8D%AE%EF%BC%8CMySQL%E6%98%AF%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120034020Khn9a3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120040665I0Z189.png">
+<meta property="article:published_time" content="2023-07-28T10:51:14.000Z">
+<meta property="article:modified_time" content="2023-08-03T04:00:46.488Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120034020Khn9a3.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            MySQL必知必会 09丨时间函数：时间类数据，MySQL是怎么处理的？ -
+        
+        Channing&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/anime.min.js"></script>
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Channing&#39;s Blog
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">61</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">MySQL必知必会 09丨时间函数：时间类数据，MySQL是怎么处理的？</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-07-28 18:51:14</span>
+        <span class="mobile">2023-07-28 18:51:14</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-08-03 12:46</span>
+            <span class="mobile">2023-08-03 12:46</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MySQL/">MySQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.2k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>13 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <p>时间函数就是用来处理时间的函数。时间，几乎可以说是各类项目中都会存在的数据，项目需求不同，需要的时间函数也不一样。</p>
+<ul>
+<li>如果要统计一天之中不同时间段的销售情况，就要获取时间值中的小时值，这就会用到函数 <code>HOUR()</code>；</li>
+<li><p>要计算与去年同期相比的增长率，这就要计算去年同期的日期时间，会用到函数 <code>DATE_ADD()</code>；</p>
+</li>
+<li><p>要计算今天是周几、有没有优惠活动，这就要用到函数 <code>DAYOFWEEK()</code>了；</p>
+</li>
+</ul>
+<h2 id="获取日期时间数据中部分信息的函数"><a href="#获取日期时间数据中部分信息的函数" class="headerlink" title="获取日期时间数据中部分信息的函数"></a>获取日期时间数据中部分信息的函数</h2><p>超市的经营者提出，他们希望通过实际的销售数据，了解到一天当中什么时间段卖得好，什么时间段卖得不好，这样他们就可以根据不同时间的销售情况，合理安排商品陈列和人员促销，以实现收益最大化。要达到这个目标，我们就需要统计一天中每小时的销售数量和销售金额。</p>
+<p>这里涉及 3 组数据，分别是<code>销售单头表（demo.transactionhead)、销售单明细表 (demo.transactiondetails) 和商品信息表（demo.goodsmaster）</code>（为了便于你理解，表的结构和表里的记录都是经过简化的）。</p>
+<p>销售单头表（<code>demo.transactionhead</code>)，包含了销售单的整体信息，包括流水单号、交易时间、收款机编号、会员编号和收银员编号等。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>transactionid</th>
+<th style="text-align:center">transactionno</th>
+<th style="text-align:right">cashierid</th>
+<th>memberid</th>
+<th>operatorid</th>
+<th>transdate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:center">0120191201000001</td>
+<td style="text-align:right">1</td>
+<td>1</td>
+<td>1</td>
+<td>2019-12-01 09:25:56</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:center">0120191202000001</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>2</td>
+<td>2019-12-02 09:50:50</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:center">0120191202000002</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2019-12-02 10:10:05</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center">0120201102000001</td>
+<td style="text-align:right">1</td>
+<td>2</td>
+<td>1</td>
+<td>2020-11-02 11:15:06</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align:center">0120201102000002</td>
+<td style="text-align:right">1</td>
+<td>1</td>
+<td>2</td>
+<td>2020-11-02 12:20:03</td>
+</tr>
+<tr>
+<td>6</td>
+<td style="text-align:center">0120201102000003</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2020-11-02 13:05:01</td>
+</tr>
+<tr>
+<td>7</td>
+<td style="text-align:center">0120201202000001</td>
+<td style="text-align:right">1</td>
+<td>2</td>
+<td>1</td>
+<td>2020-12-02 15:25:22</td>
+</tr>
+<tr>
+<td>8</td>
+<td style="text-align:center">0120201202000002</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2020-12-02 17:10:25</td>
+</tr>
+<tr>
+<td>9</td>
+<td style="text-align:center">0120201202000003</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2020-12-02 18:35:33</td>
+</tr>
+<tr>
+<td>10</td>
+<td style="text-align:center">0120201202000004</td>
+<td style="text-align:right">1</td>
+<td>NULL</td>
+<td>1</td>
+<td>2020-12-02 19:33:55</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>销售明细表（<code>demo.transactiondetails</code>)保存的是交易明细数据，包括商品编号、销售数量、价格、销售金额等。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>transactionid</th>
+<th>itemnumber</th>
+<th>quantity</th>
+<th>price</th>
+<th>salesvalue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>89</td>
+<td>178</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>5</td>
+<td>25</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+<td>89</td>
+<td>267</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>6</td>
+<td>5</td>
+<td>30</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>89</td>
+<td>89</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>10</td>
+<td>5</td>
+<td>50</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+<td>10</td>
+<td>3</td>
+<td>30</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>40</td>
+<td>5</td>
+<td>200</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1</td>
+<td>5</td>
+<td>89</td>
+<td>445</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2</td>
+<td>6</td>
+<td>5</td>
+<td>30</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1</td>
+<td>2</td>
+<td>89</td>
+<td>178</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>商品信息表（<code>demo.goodsmaster</code>）主要包括商品编号、条码、商品名称、规格、单位和售价。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>itemnumber</th>
+<th>barcode</th>
+<th>goodsname</th>
+<th>specification</th>
+<th>unit</th>
+<th>salesprice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>书</td>
+<td>16开</td>
+<td>本</td>
+<td>89</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>笔</td>
+<td>10支装</td>
+<td>包</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>橡皮</td>
+<td>NULL</td>
+<td>个</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>销售单明细表</strong>通过流水编号与<strong>销售单头表</strong>关联，其中流水编号是外键。通过流水编号，<strong><em>销售单明细表</em></strong>引用<em>销售单头表</em>里的交易时间、会员编号等信息，同时，通过商品编号与<strong><em>商品信息表</em></strong>关联，引用<strong><em>商品信息表</em></strong>里的商品名称等信息。如图所示：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120034020Khn9a3.png"
+                      alt=""
+                ></p>
+<p>需求：统计一天中每小时的销售数量和销售金额</p>
+<p>要统计一天中每小时的销售情况，实际上就是要把销售数据按照小时进行分组统计。那么，解决问题的关键，就是把交易时间的小时部分提取出来。这就要用到 MySQL 的日期时间处理函数 extract() 和 hour() 了。</p>
+<p><code>extract（type from date）</code>表示从日期时间数据“date”中抽取“type”指定的部分。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="built_in">extract</span>(<span class="keyword">hour</span> <span class="keyword">from</span> b.transdate) <span class="keyword">as</span> time_part,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">sum</span>(a.quantity) <span class="keyword">as</span> quantity,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">sum</span>(a.salesvalue) <span class="keyword">as</span> salesvalue</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.transactiondetails <span class="keyword">as</span> a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">join</span> demo.transactionhead <span class="keyword">as</span> b <span class="keyword">on</span> (b.transactionid <span class="operator">=</span> a.transactionid)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="built_in">extract</span>(<span class="keyword">hour</span> <span class="keyword">from</span> b.transdate)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="built_in">extract</span>(<span class="keyword">hour</span> <span class="keyword">from</span> b.transdate);</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+------------+</span></span><br><span class="line"><span class="operator">|</span> time_part <span class="operator">|</span> quantity <span class="operator">|</span> salesvalue <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+------------+</span></span><br><span class="line"><span class="operator">|</span>         <span class="number">9</span> <span class="operator">|</span>   <span class="number">16.000</span> <span class="operator">|</span>     <span class="number">500.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">10</span> <span class="operator">|</span>   <span class="number">11.000</span> <span class="operator">|</span>     <span class="number">139.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">11</span> <span class="operator">|</span>   <span class="number">10.000</span> <span class="operator">|</span>      <span class="number">30.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">12</span> <span class="operator">|</span>   <span class="number">40.000</span> <span class="operator">|</span>     <span class="number">200.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">13</span> <span class="operator">|</span>    <span class="number">5.000</span> <span class="operator">|</span>     <span class="number">445.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">15</span> <span class="operator">|</span>    <span class="number">6.000</span> <span class="operator">|</span>      <span class="number">30.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">17</span> <span class="operator">|</span>    <span class="number">1.000</span> <span class="operator">|</span>       <span class="number">3.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">18</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>     <span class="number">178.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">19</span> <span class="operator">|</span>    <span class="number">2.000</span> <span class="operator">|</span>       <span class="number">6.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+------------+</span></span><br><span class="line"><span class="number">9</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>查询的过程是这样的：</p>
+<ol>
+<li>从交易时间中抽取小时信息：<code>extract(hour from b.transdate)</code></li>
+<li>按交易的小时信息分组；</li>
+<li>按分组统计销售数量和销售金额的和；</li>
+<li>按交易的小时信息排序。</li>
+</ol>
+<p>需要获取其他时间部分的信息，可以参考下<a class="link"   target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals" >时间单位 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p><code>extract()</code> 函数中的 hour 表示要<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=获取时间&amp;spm=1001.2101.3001.7020" >获取时间 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的类型，而 <code>hour()</code> 是一个函数，<code>hour(time)</code> 可以单独使用，表示返回 time 的小时部分信息。可以把 EXTRACT 函数改成 HOUR 函数，来实现相同的功能，如下所示：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">HOUR</span>(b.transdate) <span class="keyword">AS</span> 时段, <span class="comment">-- 改为使用HOUR函数</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">SUM</span>(a.quantity) <span class="keyword">AS</span> 数量,</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="built_in">SUM</span>(a.salesvalue) <span class="keyword">AS</span> 金额</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">FROM</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> demo.transactiondetails a</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">JOIN</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> demo.transactionhead b <span class="keyword">ON</span> (a.transactionid <span class="operator">=</span> b.transactionid)</span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(b.transdate) <span class="comment">-- 改写为HOUR函数</span></span><br><span class="line"><span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(b.transdate);<span class="comment">-- 改写为HOUR函数</span></span><br></pre></td></tr></table></figure></div>
+<p>其他时间函数：</p>
+<ul>
+<li>YEAR（date）：获取 date 中的年</li>
+<li>MONTH（date）：获取 date 中的月</li>
+<li>DAY（date）：获取 date 中的日</li>
+<li>HOUR（date）：获取 date 中的小时</li>
+<li>MINUTE（date）：获取 date 中的分</li>
+<li>SECOND（date）：获取 date 中的秒</li>
+</ul>
+<h2 id="计算日期时间的函数"><a href="#计算日期时间的函数" class="headerlink" title="计算日期时间的函数"></a>计算日期时间的函数</h2><ul>
+<li>date_add（date, interval 表达式 type）：表示计算从时间点“date”开始，向前或者向后一段时间间隔的时间。“表达式”的值为时间间隔数，正数表示向后，负数表示向前，“type”表示时间间隔的单位（比如年、月、日等）</li>
+<li>last_day（date）：表示获取日期时间“date”所在月份的最后一天的日期。<br>需求：计算这个月单品销售金额的统计，以及与去年同期相比的增长率。</li>
+</ul>
+<p>假设今天是 2020 年 12 月 10 日，那么也就是要需要获取 2019 年 12 月的销售数据。</p>
+<p>步骤：</p>
+<ol>
+<li>用<code>date_add</code>函数，获取到 2020 年 12 月 10 日上一年的日期：2019 年 12 月 10 日</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-12</span><span class="number">-10</span>                                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>获取 2019 年 12 月 10 日这个时间节点开始上个月的日期，这样做的目的是方便获取月份的起始时间</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-11</span><span class="number">-10</span>                                                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li><p>获取 2019 年 11 月 10 日这个时间点月份的最后一天，继续接近的目标：2019 年 12 月 01 日</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> last_day(date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>));</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> last_day(date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>)) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-11</span><span class="number">-30</span>                                                                        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ol>
+<p>如果用 11-30 作为统计销售额的起始日期，可能就多算了这一天的销售，所以应该找这个时间的下一天。</p>
+<ol>
+<li>计算 2019 年 11 月 30 日后一天的日期</li>
+</ol>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_add(last_day(date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_add(last_day(date_add(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>), <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">month</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-12</span><span class="number">-01</span>                                                                                                   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>​    此时，终于获得了正确的起始日期：2019 年 12 月 01 日。</p>
+<p>同样类似方法，获得截止日期：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_add(last_day(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_add(last_day(date_add(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-01</span><span class="number">-01</span>                                                                     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p>可以用 <code>date_add()</code> 来计算从某个时间点开始，过去或者未来一个时间间隔的时间；通过<code>last_day()</code> 函数，获得某个时间节点当月的最后一天的日期。借助它们，就可以获取从某个时间节点出发的指定月份的起始日期和截止日期。</p>
+<p>除了 <code>date_add()，adddate()、date_sub()</code>和<code>subdate()</code>也能达到同样的效果：</p>
+<ul>
+<li><p>adddate()：跟 date_add() 用法一致</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> adddate(last_day(adddate(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> adddate(last_day(adddate(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="operator">-</span> <span class="number">1</span> <span class="keyword">year</span>)), <span class="type">interval</span> <span class="operator">+</span><span class="number">1</span> <span class="keyword">day</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2020</span><span class="number">-01</span><span class="number">-01</span>                                                                   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<ul>
+<li><p>date_sub()，subdate()：与 date_add() 用法类似，方向相反，执行日期的减操作</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_sub(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="number">1</span> <span class="keyword">year</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_sub(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="number">1</span> <span class="keyword">year</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2019</span><span class="number">-12</span><span class="number">-10</span>                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> subdate(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="number">-1</span> <span class="keyword">year</span>);</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> subdate(<span class="string">&#x27;2020-12-10&#x27;</span>, <span class="type">interval</span> <span class="number">-1</span> <span class="keyword">year</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2021</span><span class="number">-12</span><span class="number">-10</span>                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ul>
+<h2 id="其他日期时间函数"><a href="#其他日期时间函数" class="headerlink" title="其他日期时间函数"></a>其他日期时间函数</h2><p><code>curdate()、dayofweek()、date_format 、datediff()</code></p>
+<ul>
+<li><code>curdate()</code>：获取当前的日期。日期格式为“YYYY-MM-DD”，也就是年月日的格式。</li>
+<li><code>dayofweek(date)</code>：获取日期“date”是周几。1 表示周日，2 表示周一，以此类推，直到 7 表示周六。</li>
+</ul>
+<p>举例：按照周中不同的日期进行促销，<strong>单品促销信息</strong>（demo.discountrule）。</p>
+<p>这个表中的信息表示单品打折的时间和折扣率：</p>
+<ul>
+<li><p>编号是 1 的商品，周一、周三和周五打折，折扣率分别是 9 折、75 折和 88 折；</p>
+</li>
+<li><p>编号是 2 的商品，周二、周四和周六打折，折扣率分别是 5 折、65 折和 8 折。</p>
+</li>
+<li><p>周日，所有商品打 5 折。</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>branchid</th>
+<th>itemnumber</th>
+<th>weekday</th>
+<th>discountrate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>5</td>
+<td>0.88</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>0.65</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>6</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>7</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>7</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>3</td>
+<td>7</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> demo.discountrule </span><br><span class="line">(</span><br><span class="line">branchid <span class="type">int</span>,</span><br><span class="line">itemnumber text,</span><br><span class="line">weekday text,</span><br><span class="line">discountrate text</span><br><span class="line">);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> demo.discountrule;</span><br></pre></td></tr></table></figure></div>
+<p>查询今天商品的全部折后价格：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> curdate() <span class="keyword">as</span> 日期,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">case</span> dayofweek(curdate()) <span class="operator">-</span> <span class="number">1</span> <span class="keyword">when</span> <span class="number">0</span> <span class="keyword">then</span> <span class="number">7</span> <span class="keyword">else</span> dayofweek(curdate()) <span class="operator">-</span> <span class="number">1</span> <span class="keyword">end</span> <span class="keyword">as</span> 周几,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> a.goodsname <span class="keyword">as</span> 商品名称,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> a.salesprice <span class="keyword">as</span> 价格,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> ifnull(b.discountrate, <span class="number">1</span>) <span class="keyword">as</span> 折扣率,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> a.salesprice <span class="operator">*</span> ifnull(b.discountrate, <span class="number">1</span>) <span class="keyword">as</span> 折后价格</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">from</span> demo.goodsmaster a</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">left</span> <span class="keyword">join</span> demo.discountrule b <span class="keyword">on</span> (a.itemnumber <span class="operator">=</span> b.itemnumber <span class="keyword">and</span> <span class="keyword">case</span> dayofweek(curdate()) <span class="operator">-</span> <span class="number">1</span> <span class="keyword">when</span> <span class="number">0</span> <span class="keyword">then</span> <span class="number">7</span> <span class="keyword">else</span> dayofweek(curdate()) <span class="number">-1</span> <span class="keyword">end</span> <span class="operator">=</span> b.weekday);</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------+----------+--------+--------+----------+</span></span><br><span class="line"><span class="operator">|</span> 日期       <span class="operator">|</span> 周几 <span class="operator">|</span> 商品名称 <span class="operator">|</span> 价格   <span class="operator">|</span> 折扣率 <span class="operator">|</span> 折后价格 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------+----------+--------+--------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2022</span><span class="number">-03</span><span class="number">-09</span> <span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> 书       <span class="operator">|</span> <span class="number">89.000</span> <span class="operator">|</span> <span class="number">0.75</span>   <span class="operator">|</span>    <span class="number">66.75</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2022</span><span class="number">-03</span><span class="number">-09</span> <span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> 笔       <span class="operator">|</span>  <span class="number">5.000</span> <span class="operator">|</span> <span class="number">1</span>      <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2022</span><span class="number">-03</span><span class="number">-09</span> <span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> 橡皮     <span class="operator">|</span>  <span class="number">3.000</span> <span class="operator">|</span> <span class="number">1</span>      <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+------+----------+--------+--------+----------+</span></span><br></pre></td></tr></table></figure></div>
+<p>这个查询，用到了 CURDATE（）函数来获取当前日期，也用到了 DAYOFWEEK（）函数来获取当前是周几的信息。由于 DAYOFWEEK() 函数，以周日为 1 开始计，周一是2……，周六是 7，而数据表中是从周一为 1 开始计算，为了对齐，我用到了条件判断函数CASE，我来解释下这个函数。</p>
+<h3 id="MySQL-中-CASE-函数的语法如下："><a href="#MySQL-中-CASE-函数的语法如下：" class="headerlink" title="MySQL 中 CASE 函数的语法如下："></a>MySQL 中 CASE 函数的语法如下：</h3><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CASE</span> 表达式 <span class="keyword">WHEN</span> 值<span class="number">1</span> <span class="keyword">THEN</span> 表达式<span class="number">1</span> [ <span class="keyword">WHEN</span> 值<span class="number">2</span> <span class="keyword">THEN</span> 表达式<span class="number">2</span>] <span class="keyword">ELSE</span> 表达式m <span class="keyword">END</span></span><br></pre></td></tr></table></figure></div>
+<p>在当前业务查询中，“表达式”有 7 种可能的值。通过 case 函数，可以根据 dayofweek() 函数返回的值对每个返回值进行处理，从而跟促销信息表中的字段 weekday 对应。</p>
+<p>关系图：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/channinghsu/myPIC/main/Picsee/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemh1eXVwaW5nMjAyMA==,size_20,color_FFFFFF,t_70,g_se,x_16-20230803120040665I0Z189.png"
+                      alt=""
+                ></p>
+<p>除了获取特定的日期，还经常需要把日期按照一定的格式显示出来，这就要用到日期时间格式化的函数 <code>date_format()</code>，它表示将日期时间“date”按照指定格式显示。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%T&quot;);  <span class="comment">-- 24小时制</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%T&quot;) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">13</span>:<span class="number">25</span>:<span class="number">50</span>                                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%r&quot;);  <span class="comment">-- 上下午时间</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> date_format(&quot;2020-12-01 13:25:50&quot;, &quot;%r&quot;) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">01</span>:<span class="number">25</span>:<span class="number">50</span> PM                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------------+</span></span><br></pre></td></tr></table></figure></div>
+<p><code>datediff(date1,date2)</code>，表示日期“date1”与日期“date2”之间差几天</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> datediff(&quot;2021-02-01&quot;,&quot;2020-12-01&quot;);</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> datediff(&quot;2021-02-01&quot;,&quot;2020-12-01&quot;) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------+</span></span><br><span class="line"><span class="operator">|</span>                                  <span class="number">62</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------------------------------+</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>今天，我们学习了 MySQL 的<strong>时间处理函数</strong>，包括获取日期时间类型数据中部分信息的函数、计算日期时间的函数和获取特定日期的函数，我用图片来帮你汇总了下。</p>
+<ol>
+<li><p>获取日期时间 数据中部分信息函数</p>
+<ul>
+<li>extract() 获取日期时间中指定的值</li>
+<li>hour() 小时；</li>
+<li>year() 年份；</li>
+<li>month() 月份</li>
+<li>day() 日；</li>
+<li>minute() 分；</li>
+<li>second() 秒</li>
+</ul>
+</li>
+<li><p>日期时间计算函数</p>
+<ul>
+<li><code>date_add() 、adddate()</code>计算从某个时间点出发过去或未来一段时间间隔的时。</li>
+<li><code>subdate()、date_sub()</code>与<code>date_add()</code>相似，方向相反。</li>
+<li><code>datediff()</code>计算两个时间点之间相隔的天数</li>
+<li><code>last_day()</code>计算给定时间点当月的最后一天的日期</li>
+</ul>
+</li>
+<li><p>其他时间函数</p>
+<ul>
+<li><code>curdate()</code>当前时间</li>
+<li><code>weekofday()</code> 今天是星期几，周日为1，周一为2，递推</li>
+<li><code>date_format()</code>格式化日期时间</li>
+</ul>
+</li>
+</ol>
+<p>MySQL 中获取的时间，其实就是 MySQL 服务器计算机的系统时间。如果你的系统有一定规模，需要在多台计算机上运行，就要注意时间校准的问题。</p>
+<p>比如我们的信息系统受门店经营环境和操作人员的素质所限，有时会遇到误操作、停电等故障而导致的计算机系统时间失准问题。这对整个信息系统的可靠性影响非常大。</p>
+<p>针对这个问题，有 2 种解决办法。</p>
+<ul>
+<li><p>第一种方法是，可以利用 Windows 系统自带的网络同步的方式，来校准系统时间。</p>
+</li>
+<li><p>另一种办法就是，门店统一从总部 MySQL 服务器获取时间。</p>
+</li>
+</ul>
+<p>由于总部的服务器的配置和运维状况一般要好于门店，所以系统时间出现误差的可能性也较小。如果采用云服务器，系统时间的可靠性会更高。</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/MySQL/">#MySQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/07/29/%E3%80%8AMySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%8B08%E4%B8%A8%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%EF%BC%9A%E6%80%8E%E4%B9%88%E9%AB%98%E6%95%88%E5%9C%B0%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1%EF%BC%9F/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">MySQL必知必会 08丨聚合函数：怎么高效地进行分组统计？</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/07/25/%E3%80%8AMySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%8B07%E4%B8%A8%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%EF%BC%9AWHERE%E4%B8%8EHAVING%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">MySQL必知必会 07丨条件语句：WHERE与HAVING有什么不同</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">MySQL必知必会 09丨时间函数：时间类数据，MySQL是怎么处理的？</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%95%B0%E6%8D%AE%E4%B8%AD%E9%83%A8%E5%88%86%E4%BF%A1%E6%81%AF%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-text">获取日期时间数据中部分信息的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-text">计算日期时间的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0"><span class="nav-text">其他日期时间函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-%E4%B8%AD-CASE-%E5%87%BD%E6%95%B0%E7%9A%84%E8%AF%AD%E6%B3%95%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-text">MySQL 中 CASE 函数的语法如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">小结</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 61 篇文章
+                    </span>
+                    
+                        <span>
+                            共 218k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

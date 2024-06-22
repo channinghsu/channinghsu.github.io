@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/12/28/c++ 11 新特性/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++新特性">
+<meta property="og:url" content="https://channinghsu.github.io/2023/12/28/C++%2011%20%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-28T01:08:18.000Z">
+<meta property="article:modified_time" content="2024-06-20T06:29:16.211Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            C++新特性 -
+        
+        Channing&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/anime.min.js"></script>
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Channing&#39;s Blog
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">61</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">C++新特性</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-12-28 09:08:18</span>
+        <span class="mobile">2023-12-28 09:08:18</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-06-20 14:29:16</span>
+            <span class="mobile">2024-06-20 14:29:16</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C-C/">C/C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>4.5k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>18 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><h4 id="1-shared-ptr"><a href="#1-shared-ptr" class="headerlink" title="1. shared_ptr"></a>1. <code>shared_ptr</code></h4><ol>
+<li><p><strong>指向实际对象的指针 (<code>T* ptr</code>):</strong></p>
+<ul>
+<li><code>shared_ptr</code> 内部有一个指针，指向通过 <code>new</code> 分配的实际对象。</li>
+</ul>
+</li>
+<li><p><strong>引用计数 (<code>shared_count</code>):</strong></p>
+<ul>
+<li>每个 <code>shared_ptr</code> 都有一个引用计数，记录有多少个 <code>shared_ptr</code> 共享对同一对象的所有权。</li>
+</ul>
+</li>
+<li><p><strong>拷贝构造和赋值运算符的重载:</strong></p>
+<ul>
+<li>在拷贝构造时，新的 <code>shared_ptr</code> 会指向相同的对象，并增加引用计数。</li>
+<li>在赋值运算符中，原有的 <code>shared_ptr</code> 会减少引用计数，如果引用计数变为零，表示没有其他 <code>shared_ptr</code> 指向该对象，此时释放对象的内存。然后将新的 <code>shared_ptr</code> 指向相同的对象，并增加引用计数。</li>
+</ul>
+</li>
+<li><p><strong>析构函数的重载:</strong></p>
+<ul>
+<li>在 <code>shared_ptr</code> 的析构函数中，引用计数减一。如果引用计数变为零，表示没有其他 <code>shared_ptr</code> 指向该对象，此时释放对象的内存。</li>
+</ul>
+</li>
+<li><p><strong>线程安全问题:</strong></p>
+<ul>
+<li><p><strong>同一个 <code>shared_ptr</code> 被多个线程“读”是安全的：</strong>因为 <code>shared_ptr</code> 的引用计数是原子操作，多个线程对同一个 <code>shared_ptr</code> 进行读操作是安全的。引用计数的增加和减少操作都是原子的，不会导致竞态条件。</p>
+</li>
+<li><p><strong>同一个 <code>shared_ptr</code> 被多个线程“写”是不安全的：</strong>如果多个线程同时对同一个 <code>shared_ptr</code> 进行写操作，例如修改 <code>shared_ptr</code> 所指向的对象，这样的操作可能会导致竞态条件。因为这涉及到对实际对象的修改，而不仅仅是 <code>shared_ptr</code> 内部的引用计数。在这种情况下，需要使用其他同步机制来保证线程安全，比如使用互斥锁 (<code>std::mutex</code>)。</p>
+</li>
+<li><p><strong>共享引用计数的不同 <code>shared_ptr</code> 被多个线程“写”是安全的：</strong>如果多个线程操作不同的 <code>shared_ptr</code> 实例，但这些 <code>shared_ptr</code> 共享对同一对象的所有权（即引用同一块内存），这是安全的。因为引用计数是共享的，而且其操作是原子的。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h3><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyClass</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;MyClass constructed.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">MyClass</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;MyClass destructed.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建 shared_ptr1，引用计数为 1</span></span><br><span class="line">    std::shared_ptr&lt;MyClass&gt; sharedPtr1 = std::<span class="built_in">make_shared</span>&lt;MyClass&gt;();</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 创建 sharedPtr2，引用计数加一为 2</span></span><br><span class="line">        std::shared_ptr&lt;MyClass&gt; sharedPtr2 = sharedPtr1;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// sharedPtr2 被销毁，引用计数减一为 1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// sharedPtr1 被销毁，引用计数减一为 0，MyClass 被销毁</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>这个例子中，<code>sharedPtr1</code> 和 <code>sharedPtr2</code> 共享对同一 <code>MyClass</code> 对象的所有权，当 <code>sharedPtr2</code> 被销毁时，引用计数减一，但对象并不会立即销毁，只有当 <code>sharedPtr1</code> 也被销毁时，引用计数减为零，<code>MyClass</code> 才会被销毁。</p>
+<h4 id="2-unique-ptr-详解与示例"><a href="#2-unique-ptr-详解与示例" class="headerlink" title="2. unique_ptr 详解与示例"></a>2. <code>unique_ptr</code> 详解与示例</h4><p><code>unique_ptr</code> 是一种独占所有权的智能指针，同一时刻只能有一个 <code>unique_ptr</code> 指向给定对象。下面是 <code>unique_ptr</code> 的详细解释和示例：</p>
+<h5 id="详细解释："><a href="#详细解释：" class="headerlink" title="详细解释："></a>详细解释：</h5><ul>
+<li><p><code>unique_ptr</code> 拥有指向的对象，通过 <code>std::move</code> 或者直接初始化进行所有权的转移。</p>
+</li>
+<li><p><code>unique_ptr</code> 不支持普通的拷贝和赋值操作，因为它独占指向对象的所有权。可以通过 <code>release</code> 或 <code>reset</code> 来转移指针的所有权。</p>
+</li>
+</ul>
+<h5 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h5><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个 unique_ptr，拥有对内存的唯一所有权</span></span><br><span class="line">    std::unique_ptr&lt;<span class="type">int</span>&gt; ptr1 = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不支持拷贝构造和拷贝赋值</span></span><br><span class="line">    <span class="comment">// std::unique_ptr&lt;int&gt; ptr2 = ptr1; // 错误</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以通过 std::move 转移所有权</span></span><br><span class="line">    std::unique_ptr&lt;<span class="type">int</span>&gt; ptr2 = std::<span class="built_in">move</span>(ptr1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ptr1 现在为空指针</span></span><br><span class="line">    <span class="keyword">if</span> (!ptr1) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;ptr1 is null.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ptr2 拥有唯一所有权，可以正常使用</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Value in ptr2: &quot;</span> &lt;&lt; *ptr2 &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="3-weak-ptr-详解与示例"><a href="#3-weak-ptr-详解与示例" class="headerlink" title="3. weak_ptr 详解与示例"></a>3. <code>weak_ptr</code> 详解与示例</h4><p><code>weak_ptr</code> 是为了配合 <code>shared_ptr</code> 而引入的一种智能指针，用于协助观测资源的使用情况。下面是 <code>weak_ptr</code> 的详细解释和示例：</p>
+<h5 id="详细解释：-1"><a href="#详细解释：-1" class="headerlink" title="详细解释："></a>详细解释：</h5><ul>
+<li><p><code>weak_ptr</code> 不共享资源，构造时不会增加引用计数。它是一种观察者，可以观察被 <code>shared_ptr</code> 管理的对象。</p>
+</li>
+<li><p>可以通过 <code>lock()</code> 函数来获取一个指向对象的 <code>shared_ptr</code>，如果 <code>shared_ptr</code> 已经销毁，返回空指针。</p>
+</li>
+</ul>
+<h5 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h5><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::shared_ptr&lt;<span class="type">int</span>&gt; sharedPtr = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line">    std::weak_ptr&lt;<span class="type">int</span>&gt; weakPtr = sharedPtr;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用 lock() 获取 shared_ptr，避免悬挂指针</span></span><br><span class="line">    <span class="keyword">if</span> (std::shared_ptr&lt;<span class="type">int</span>&gt; sharedPtrCopy = weakPtr.<span class="built_in">lock</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Value in sharedPtrCopy: &quot;</span> &lt;&lt; *sharedPtrCopy &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;sharedPtr is expired.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// sharedPtr 被销毁后，weakPtr.lock() 返回空指针</span></span><br><span class="line">    sharedPtr.<span class="built_in">reset</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (std::shared_ptr&lt;<span class="type">int</span>&gt; sharedPtrCopy = weakPtr.<span class="built_in">lock</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Value in sharedPtrCopy: &quot;</span> &lt;&lt; *sharedPtrCopy &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;sharedPtr is expired.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>这些示例演示了 <code>shared_ptr</code>、<code>unique_ptr</code> 和 <code>weak_ptr</code> 的基本用法和特性。这些智能指针是 C++ 中管理内存的重要工具，能够帮助程序员避免内存泄漏和提高代码的安全性。</p>
+<h2 id="类型推导"><a href="#类型推导" class="headerlink" title="类型推导"></a>类型推导</h2><h3 id="1-auto"><a href="#1-auto" class="headerlink" title="1. auto:"></a>1. <code>auto</code>:</h3><ol>
+<li><strong>初始化：</strong> <code>auto</code> 可以让编译器在编译期推导变量的类型。使用时需要立即初始化，否则编译器无法推导类型。</li>
+<li><strong>一行多变量：</strong> 在一行定义多个变量时，各个变量的推导不能产生二义性，否则编译失败。</li>
+<li><strong>函数参数和非静态成员变量：</strong> 不能用作函数参数，在类中不能用作非静态成员变量。</li>
+<li><strong>数组和指针：</strong> 不能定义数组，但可以定义指针。</li>
+<li><strong>模板参数和引用类型：</strong> 无法推导出模板参数。在不声明为引用或指针时，会忽略等号右边的引用类型和cv限定；在声明为引用或指针时，会保留等号右边的引用和cv属性。</li>
+</ol>
+<h3 id="2-decltype"><a href="#2-decltype" class="headerlink" title="2. decltype:"></a>2. <code>decltype</code>:</h3><ol>
+<li><strong>表达式类型：</strong> 用于推导表达式的类型，实际上并不执行运算，而是在编译期进行分析。</li>
+<li><strong>类型保留：</strong> 不会像 <code>auto</code> 一样忽略引用和cv属性，而是保留表达式的引用和cv属性。</li>
+<li><strong>规则：</strong><ul>
+<li>若表达式是一个变量，<code>decltype(exp)</code> 和 <code>exp</code> 的类型相同。</li>
+<li>若表达式是一个函数调用，<code>decltype(exp)</code> 和函数返回值类型相同。</li>
+<li>对于其他情况，若表达式是左值，<code>decltype(exp)</code> 是表达式类型的左值引用。</li>
+</ul>
+</li>
+</ol>
+<h3 id="配合使用："><a href="#配合使用：" class="headerlink" title="配合使用："></a>配合使用：</h3><p>在给出的示例中，<code>decltype(t + u)</code> 用于推导 <code>add</code> 函数的返回类型，这样可以确保函数返回值的类型与参数 <code>t</code> 和 <code>u</code> 相加后的类型一致。这在泛型编程中很有用，可以保证函数返回类型的正确性。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">add</span><span class="params">(T t, U u)</span> -&gt; <span class="title">decltype</span><span class="params">(t + u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> t + u;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>上述代码中，<code>decltype(t + u)</code> 会推导出 <code>t</code> 和 <code>u</code> 相加的类型，并将其作为 <code>add</code> 函数的返回类型。这样可以保证在不同类型的参数传递给 <code>add</code> 函数时，返回值类型能够正确地匹配相应的运算结果类型。</p>
+<h2 id="右值引用："><a href="#右值引用：" class="headerlink" title="右值引用："></a>右值引用：</h2><h3 id="左值和右值："><a href="#左值和右值：" class="headerlink" title="左值和右值："></a>左值和右值：</h3><ol>
+<li><p><strong>左值（Lvalue）：</strong></p>
+<ul>
+<li><strong>定义：</strong> 可以放在等号左边进行赋值操作的表达式。</li>
+<li><strong>性质：</strong> 有名字，可以取地址，通常表示一个具体的对象或变量。</li>
+</ul>
+</li>
+<li><p><strong>右值（Rvalue）：</strong></p>
+<ul>
+<li><strong>定义：</strong> 不能放在等号左边进行赋值操作的表达式。</li>
+<li><strong>性质：</strong> 通常是临时的、无名的值，不可以取地址。</li>
+</ul>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">5</span>; <span class="comment">// x 是左值</span></span><br><span class="line"><span class="type">int</span> y = x + <span class="number">3</span>; <span class="comment">// x + 3 是右值</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ol>
+<h3 id="将亡值（Rvalue-Reference）："><a href="#将亡值（Rvalue-Reference）：" class="headerlink" title="将亡值（Rvalue Reference）："></a>将亡值（Rvalue Reference）：</h3><p>将亡值是指 C++11 中引入的右值引用的值。用 <code>&amp;&amp;</code> 表示，它可以绑定到右值，并且在移动语义中发挥重要作用。</p>
+<h3 id="左值引用（Lvalue-Reference）："><a href="#左值引用（Lvalue-Reference）：" class="headerlink" title="左值引用（Lvalue Reference）："></a>左值引用（Lvalue Reference）：</h3><p>左值引用是对左值进行引用的类型，用 <code>&amp;</code> 表示。左值引用可以修改被引用的对象，但不能绑定到右值。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">42</span>;</span><br><span class="line"><span class="type">int</span>&amp; lvalueRef = a; <span class="comment">// lvalueRef 是左值引用</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="右值引用（Rvalue-Reference）："><a href="#右值引用（Rvalue-Reference）：" class="headerlink" title="右值引用（Rvalue Reference）："></a>右值引用（Rvalue Reference）：</h3><p>右值引用是对右值进行引用的类型，用 <code>&amp;&amp;</code> 表示。右值引用允许绑定到右值，并且在移动语义中用于资源的转移。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>&amp;&amp; rvalueRef = <span class="number">42</span>; <span class="comment">// rvalueRef 是右值引用</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="移动语义："><a href="#移动语义：" class="headerlink" title="移动语义："></a>移动语义：</h3><p>移动语义是 C++11 中引入的概念，通过右值引用实现。它允许在资源拥有者之间转移资源，避免不必要的深拷贝，提高性能。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">getVector</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; v = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> v; <span class="comment">// v 是将亡值，触发移动语义</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="深拷贝和浅拷贝："><a href="#深拷贝和浅拷贝：" class="headerlink" title="深拷贝和浅拷贝："></a>深拷贝和浅拷贝：</h3><ol>
+<li><p><strong>浅拷贝：</strong> 多个对象共享同一块内存，修改一个对象的数据会影响其他对象。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* arr1 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>];</span><br><span class="line"><span class="type">int</span>* arr2 = arr1; <span class="comment">// 浅拷贝</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>深拷贝：</strong> 每个对象拥有自己的一份数据，修改一个对象的数据不会影响其他对象。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* arr1 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>];</span><br><span class="line"><span class="type">int</span>* arr2 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>];</span><br><span class="line">std::<span class="built_in">copy</span>(arr1, arr1 + <span class="number">5</span>, arr2); <span class="comment">// 深拷贝</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ol>
+<h3 id="完美转发："><a href="#完美转发：" class="headerlink" title="完美转发："></a>完美转发：</h3><p>完美转发是 C++11 中引入的技术，用于在模板中保留参数的值类别。通过 <code>std::forward</code> 实现，在实现泛型函数时确保参数的类型信息不丢失。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">forwarder</span><span class="params">(T&amp;&amp; arg)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">target</span>(std::forward&lt;T&gt;(arg)); <span class="comment">// 保留参数的值类别进行转发</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><code>std::forward</code> 用于在泛型函数中将参数完美地转发到目标函数，保持参数的值类别。这在实现通用容器、智能指针等类时非常有用。</p>
+<h2 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr:"></a>nullptr:</h2><ol>
+<li><p><strong>背景：</strong></p>
+<ul>
+<li>在早期，C++使用 <code>NULL</code> 表示空指针，但不同编译器对 <code>NULL</code> 的定义可能有所不同，有的定义为 <code>(void*)0</code>，有的定义为 <code>0</code>。</li>
+<li>这可能导致在某些情况下发生类型混淆，例如在函数重载中。</li>
+</ul>
+</li>
+<li><p><strong>C++11 引入 nullptr:</strong></p>
+<ul>
+<li><code>nullptr</code> 是 C++11 引入的关键字，用于代替 <code>NULL</code>。</li>
+<li><code>nullptr</code> 的类型是 <code>nullptr_t</code>，可以隐式转换为任何指针类型，避免了类型混淆问题。</li>
+<li>使用 <code>nullptr</code> 还能提供更好的类型安全性。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="type">char</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="type">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span>* ch = <span class="literal">nullptr</span>; <span class="comment">// 使用 nullptr</span></span><br><span class="line"><span class="built_in">foo</span>(<span class="literal">nullptr</span>); <span class="comment">// 调用 foo(char*)</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ol>
+<h2 id="范围for循环"><a href="#范围for循环" class="headerlink" title="范围for循环:"></a>范围for循环:</h2><ol>
+<li><p><strong>语法：</strong></p>
+<ul>
+<li>范围for循环是 C++11 引入的语法糖，用于遍历容器中的元素。</li>
+<li><code>for (变量 : 容器)</code> 表达式。</li>
+</ul>
+</li>
+<li><p><strong>示例：</strong></p>
+<ul>
+<li><p>遍历字符串中的每个字符：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::string <span class="title">str</span><span class="params">(<span class="string">&quot;some thing&quot;</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">char</span> c : str) &#123;</span><br><span class="line">    std::cout &lt;&lt; c &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>遍历 vector 中的元素：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">arr</span><span class="params">(<span class="number">5</span>, <span class="number">100</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; i : arr) &#123;</span><br><span class="line">    std::cout &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>范围for循环简化了遍历容器的代码，提高了可读性。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="列表初始化"><a href="#列表初始化" class="headerlink" title="列表初始化:"></a>列表初始化:</h2><ol>
+<li><p><strong>背景：</strong></p>
+<ul>
+<li>C++提供了多种初始化方式，例如 <code>int x = 0;</code>，<code>int x&#123;0&#125;;</code>，<code>int x(0);</code> 等。</li>
+</ul>
+</li>
+<li><p><strong>列表初始化:</strong></p>
+<ul>
+<li>使用花括号 <code>&#123;&#125;</code> 进行初始化称为列表初始化。</li>
+<li>对于内置类型，如果存在丢失信息的风险，使用列表初始化时，编译器会报错。</li>
+</ul>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="type">double</span> d = <span class="number">3.1415926536</span>;</span><br><span class="line"><span class="type">int</span> a = &#123;d&#125;; <span class="comment">// 存在丢失信息风险，编译器报错</span></span><br><span class="line"><span class="type">int</span> a = d;   <span class="comment">// 丢失信息，编译器允许</span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>列表初始化可以提高类型安全性，避免一些潜在的错误。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h2><p>Lambda 表达式是 C++11 引入的一种匿名函数形式，用于在需要函数的地方提供一个简洁的函数定义。以下是关于 Lambda 表达式的一些语法和特性：</p>
+<ol>
+<li><p><strong>Lambda 表达式的语法：</strong></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[capture list] (parameter list) -&gt; <span class="keyword">return</span> type &#123;function body&#125;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><strong>捕获列表 (<code>capture list</code>)：</strong> 用于捕获外部变量。</li>
+<li><strong>参数列表 (<code>parameter list</code>)：</strong> 与普通函数的参数列表相似。</li>
+<li><strong>返回类型 (<code>return type</code>)：</strong> 指定返回值的类型，可以省略。</li>
+<li><strong>函数体 (<code>function body</code>)：</strong> 匿名函数的实现。</li>
+</ul>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> lam = []() -&gt; <span class="type">int</span> &#123; cout &lt;&lt; <span class="string">&quot;Hello, World!&quot;</span>; <span class="keyword">return</span> <span class="number">88</span>; &#125;;</span><br><span class="line"><span class="keyword">auto</span> ret = <span class="built_in">lam</span>();</span><br><span class="line">cout &lt;&lt; ret &lt;&lt; endl; <span class="comment">// 输出 88</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>Lambda 表达式的特点：</strong></p>
+<ul>
+<li><strong>变量捕获：</strong> Lambda 的独特之处在于其能够捕获外部变量。<ol>
+<li><code>[]</code> 不捕获任何变量。</li>
+<li><code>[&amp;]</code> 以引用方式捕获所有变量。</li>
+<li><code>[=]</code> 以值的方式捕获所有变量。</li>
+<li><code>[=, &amp;foo]</code> 以引用捕获变量 <code>foo</code>，其余变量值捕获。</li>
+<li><code>[&amp;, foo]</code> 以值捕获变量 <code>foo</code>，其余变量引用捕获。</li>
+<li><code>[bar]</code> 以值方式捕获变量 <code>bar</code>。</li>
+<li><code>[this]</code> 捕获所在类的 <code>this</code> 指针。</li>
+</ol>
+</li>
+</ul>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">auto</span> lam2 = [&amp;, a]() &#123; b = <span class="number">5</span>; c = <span class="number">6</span>; cout &lt;&lt; a &lt;&lt; b &lt;&lt; c &lt;&lt; endl; &#125;;</span><br><span class="line"><span class="built_in">lam2</span>(); <span class="comment">// 输出 1 5 6</span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><strong>可变 lambda (<code>mutable</code>)：</strong> 允许在 Lambda 表达式内部修改值捕获的变量。</li>
+</ul>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">fcn</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> v1 = <span class="number">42</span>;</span><br><span class="line">    <span class="keyword">auto</span> f = [v1]() <span class="keyword">mutable</span> &#123; <span class="keyword">return</span> ++v1; &#125;;</span><br><span class="line">    <span class="keyword">auto</span> j = <span class="built_in">f</span>(); <span class="comment">// j = 43</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><strong>引用捕获：</strong> 使用引用方式捕获外部变量。</li>
+</ul>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">fcn</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> v1 = <span class="number">42</span>;</span><br><span class="line">    <span class="keyword">auto</span> f = [&amp;v1]() &#123; <span class="keyword">return</span> ++v1; &#125;;</span><br><span class="line">    v1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">auto</span> j = <span class="built_in">f</span>(); <span class="comment">// 注意此时 j = 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>Lambda 表达式在 STL 中的应用：</strong></p>
+<ul>
+<li>Lambda 表达式最常用于 STL 中的算法库，用于提供简洁的函数对象。</li>
+</ul>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[] = &#123;<span class="number">6</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用函数对象</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">int</span>&amp; a, <span class="type">int</span>&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line">std::<span class="built_in">sort</span>(arr, arr + <span class="number">6</span>, compare);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Lambda 表达式</span></span><br><span class="line">std::<span class="built_in">sort</span>(arr, arr + <span class="number">6</span>, [](<span class="type">const</span> <span class="type">int</span>&amp; a, <span class="type">const</span> <span class="type">int</span>&amp; b) &#123; <span class="keyword">return</span> a &gt; b; &#125;); <span class="comment">// 降序</span></span><br><span class="line"></span><br><span class="line">std::for_each(<span class="built_in">begin</span>(arr), <span class="built_in">end</span>(arr), [](<span class="type">const</span> <span class="type">int</span>&amp; e) &#123; cout &lt;&lt; <span class="string">&quot;After:&quot;</span> &lt;&lt; e &lt;&lt; endl; &#125;);</span><br><span class="line"><span class="comment">// 输出：6, 5, 4, 3, 2, 1</span></span><br></pre></td></tr></table></figure></div>
+</li>
+</ol>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p>在 C++ 中，为了进行线程同步和互斥，有一些常用的工具，其中包括 <code>std::thread</code>、<code>std::lock_guard</code>、<code>std::unique_lock</code> 等。以下是对这些工具的简要介绍：</p>
+<h4 id="1-std-thread"><a href="#1-std-thread" class="headerlink" title="1. std::thread"></a>1. <strong>std::thread</strong></h4><ul>
+<li><strong>默认构造函数：</strong> 创建一个空的 <code>thread</code> 执行对象。</li>
+<li><strong>初始化构造函数：</strong> 创建一个 <code>thread</code> 对象，该对象可被 <code>joinable</code>，新产生的线程会调用 <code>fn</code> 函数，该函数的参数由 <code>args</code> 给出。</li>
+<li><strong>拷贝构造函数 (被禁用)：</strong> 意味着 <code>thread</code> 不可被拷贝构造。</li>
+<li><strong>移动构造函数：</strong> 调用成功之后 <code>x</code> 不代表任何 <code>thread</code> 执行对象。</li>
+</ul>
+<p>注意：可被 <code>joinable</code> 的 <code>thread</code> 对象必须在它们销毁之前被主线程 <code>join</code> 或者将其设置为 <code>detached</code>。</p>
+<p>示例代码中展示了 <code>std::thread</code> 在使用时容易出错的一种情况。确保在线程函数运行期间 <code>std::thread</code> 对象有效。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">threadproc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I am New Thread!&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">t</span><span class="params">(threadproc)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">func</span>();</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;&#125; <span class="comment">// 让主线程不要退出</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="2-std-lock-guard"><a href="#2-std-lock-guard" class="headerlink" title="2. std::lock_guard"></a>2. <strong>std::lock_guard</strong></h4><p><code>std::lock_guard</code> 是一个互斥量包装程序，提供了 RAII （Resource Acquisition Is Initialization）风格的机制，用于在作用域块的持续时间内拥有一个互斥量。创建 <code>lock_guard</code> 对象时，它将尝试获取提供给它的互斥锁的所有权。当控制流离开 <code>lock_guard</code> 对象的作用域时，<code>lock_guard</code> 析构并释放互斥量。</p>
+<p>特点：</p>
+<ol>
+<li>创建即加锁，作用域结束自动析构并解锁，无需手工解锁。</li>
+<li>不能中途解锁，必须等作用域结束才解锁。</li>
+<li>不能复制。</li>
+</ol>
+<h4 id="3-std-unique-lock"><a href="#3-std-unique-lock" class="headerlink" title="3. std::unique_lock"></a>3. <strong>std::unique_lock</strong></h4><p><code>std::unique_lock</code> 是一个通用的互斥量锁定包装器，具有比 <code>std::lock_guard</code> 更多的功能。它允许延迟锁定，限时深度锁定，递归锁定，锁定所有权的转移以及与条件变量一起使用。</p>
+<p>特点：</p>
+<ol>
+<li><p>创建时可以不锁定（通过指定第二个参数为 <code>std::defer_lock</code>），而在需要时再锁定。</p>
+</li>
+<li><p>可以随时加锁解锁。</p>
+</li>
+<li><p>作用域规则同 <code>std::lock_guard</code>，析构时自动释放锁。</p>
+</li>
+<li><p>不可复制，可移动。</p>
+</li>
+<li><p>条件变量需要该类型的锁作为参数（此时必须使用 <code>std::unique_lock</code>）。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::mutex myMutex;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sharedResourceFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(myMutex, std::defer_lock)</span></span>; <span class="comment">// 创建但不立即锁定互斥量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在需要时手动锁定互斥量</span></span><br><span class="line">    lock.<span class="built_in">lock</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里执行对共享资源的操作</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Thread ID: &quot;</span> &lt;&lt; std::this_thread::<span class="built_in">get_id</span>() &lt;&lt; <span class="string">&quot; is accessing the shared resource.\n&quot;</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在需要时手动解锁互斥量</span></span><br><span class="line">    lock.<span class="built_in">unlock</span>();z</span><br><span class="line">&#125; <span class="comment">// 离开作用域时，unique_lock 自动析构，自动释放锁</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">t1</span><span class="params">(sharedResourceFunction)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(sharedResourceFunction)</span></span>;</span><br><span class="line"></span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>在这个示例中，<code>std::unique_lock</code> 对象 <code>lock</code> 创建时不立即锁定互斥量，然后在需要的时候手动调用 <code>lock()</code> 锁定互斥量，调用 <code>unlock()</code> 解锁互斥量。这种灵活性可以用于更复杂的锁定和解锁策略。</p>
+</li>
+</ol>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>为了更好地理解 C++ 中并发编程工具的使用，我们可以通过一个简单的例子来演示。在这个例子中，我们将使用 <code>std::thread</code> 创建两个线程，使用 <code>std::mutex</code> 进行互斥访问共享资源，并通过 <code>std::lock_guard</code> 来确保互斥的正确性。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::mutex myMutex; <span class="comment">// 用于保护共享资源的互斥量</span></span><br><span class="line"><span class="type">int</span> sharedResource = <span class="number">0</span>; <span class="comment">// 共享资源</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">incrementSharedResource</span><span class="params">(<span class="type">int</span> id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        <span class="comment">// 使用 std::lock_guard 确保互斥锁的正确性</span></span><br><span class="line">        <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(myMutex)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在临界区内对共享资源进行访问</span></span><br><span class="line">        sharedResource++;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Thread &quot;</span> &lt;&lt; id &lt;&lt; <span class="string">&quot; incremented sharedResource to: &quot;</span> &lt;&lt; sharedResource &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建两个线程，分别调用 incrementSharedResource 函数</span></span><br><span class="line">    <span class="function">std::thread <span class="title">t1</span><span class="params">(incrementSharedResource, <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(incrementSharedResource, <span class="number">2</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 等待线程执行完毕</span></span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>在这个例子中，我们定义了一个互斥量 <code>myMutex</code> 用于保护共享资源 <code>sharedResource</code>。两个线程 <code>t1</code> 和 <code>t2</code> 分别调用 <code>incrementSharedResource</code> 函数，其中通过 <code>std::lock_guard</code> 来确保对共享资源的互斥访问。</p>
+<p>这样可以避免多个线程同时修改共享资源导致的竞态条件和数据不一致性问题。通过在临界区内使用互斥量，我们确保了线程安全的共享资源访问。</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/C-C/">#C/C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/12/31/C++%20effective%20STL/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Effective STL</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/12/27/C++%20STL/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">C++ STL</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">C++新特性</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-text">智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC"><span class="nav-text">类型推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-auto"><span class="nav-text">1. auto:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-decltype"><span class="nav-text">2. decltype:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-text">配合使用：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%EF%BC%9A"><span class="nav-text">右值引用：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC%EF%BC%9A"><span class="nav-text">左值和右值：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E4%BA%A1%E5%80%BC%EF%BC%88Rvalue-Reference%EF%BC%89%EF%BC%9A"><span class="nav-text">将亡值（Rvalue Reference）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%EF%BC%88Lvalue-Reference%EF%BC%89%EF%BC%9A"><span class="nav-text">左值引用（Lvalue Reference）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%EF%BC%88Rvalue-Reference%EF%BC%89%EF%BC%9A"><span class="nav-text">右值引用（Rvalue Reference）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%EF%BC%9A"><span class="nav-text">移动语义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%EF%BC%9A"><span class="nav-text">深拷贝和浅拷贝：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91%EF%BC%9A"><span class="nav-text">完美转发：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nullptr"><span class="nav-text">nullptr:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4for%E5%BE%AA%E7%8E%AF"><span class="nav-text">范围for循环:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">列表初始化:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-text">Lambda 表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91"><span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B"><span class="nav-text">举例</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 61 篇文章
+                    </span>
+                    
+                        <span>
+                            共 218k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

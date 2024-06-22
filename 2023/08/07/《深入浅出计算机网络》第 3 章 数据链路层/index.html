@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/08/07/《深入浅出计算机网络》第 3 章 数据链路层/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入浅出计算机网络》第三章 数据链路层">
+<meta property="og:url" content="https://channinghsu.github.io/2023/08/07/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E7%AC%AC%203%20%E7%AB%A0%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/290a66fc1fa246a0827c40904c734c7bV3s5eP.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/bcfc710c63d94cef87d141ec4be49389uonNTF.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/a290ea2b5d494649a9c4776dd40537e7GTppOA.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/4b950da775644401b4db0d97eb5b12aclK6mNo.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/bb31aade5b014e5b891718f96621961d580ZwN.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/ef1b0be3512c480a9192d27aa253517dDaUnBZ.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/a9c1489e471b46febbe7d979a9ed6110sBBqFv.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/92069985a93841da8b24219112492c6cAltxNx.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/f5672ff519a34539ab864cd7de04b01dVNhnej.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/85dcfe7717eb458d8be38c426187c966rsX9Az.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/f16aa6a3a7d34285bfc908e93907a93dE3zjb3ipzZdV.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/7d0ccf0c3ecb42a587b52b65fbe94e081EAIxF.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/3e826e8177f04986b7ad955b7049813emNHTZz.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/8c6ce97cb2464418a89dfa5a3b278b0eNdcsL6.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/5971b7f249a44e65b8f2aa117bd3f3d6MFK1Hd.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/2d1491fae5c24b66b4a2aef87b1377ae0qrZcL.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171702288jIw1It.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171800939poYWtJ.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171813940WAjvyv.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807172944684YJriqL.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/9bbf0e1633e64310a8fd49be1da77eadPc1Y6A.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/78e687324a8e4813be191fbf6bd2a756IolHEg.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/3306958d03f7471e90fd6abfafe498eeeW0xIa.png">
+<meta property="article:published_time" content="2023-08-07T05:46:25.000Z">
+<meta property="article:modified_time" content="2023-10-08T06:15:07.570Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/290a66fc1fa246a0827c40904c734c7bV3s5eP.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            《深入浅出计算机网络》第三章 数据链路层 -
+        
+        Channing&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/anime.min.js"></script>
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Channing&#39;s Blog
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">61</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">《深入浅出计算机网络》第三章 数据链路层</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-07 13:46:25</span>
+        <span class="mobile">2023-08-07 13:46:25</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-08 14:15:07</span>
+            <span class="mobile">2023-10-08 14:15:07</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.8k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>9 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h2 id="3-1-数据链路层概述"><a href="#3-1-数据链路层概述" class="headerlink" title="3.1 数据链路层概述"></a>3.1 数据链路层概述</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/290a66fc1fa246a0827c40904c734c7bV3s5eP.png"
+                      alt="290a66fc1fa246a0827c40904c734c7b"
+                ></p>
+<p>在讨论链路层传输过程时，不考虑解封问题，只看成水平层传输的过程。及局域网1中的主机 H1 经过路由器 R1，广域网，以及路由器 R2 连接到局域网2中的主机 H2。不同的数据链路层可能采取不同的数据链路层协议。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/bcfc710c63d94cef87d141ec4be49389uonNTF.png"
+                      alt="bcfc710c63d94cef87d141ec4be49389"
+                ></p>
+<p><strong>链路</strong>（Link）是指从一个节点到相邻节点的一段物理线路（有线或无线），而中间没有任何其他的交换节点。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/a290ea2b5d494649a9c4776dd40537e7GTppOA.png"
+                      alt="a290ea2b5d494649a9c4776dd40537e7"
+                ></p>
+<p><strong>数据链路</strong>（Data Link）是基于链路的。当在一条链路上传送数据时，除需要链路本身，还需要一些必要的通信协议来控制这些数据的传输，把实现这些协议的硬件和软件加到链路上，就构成了数据链路。<br>计算机中的网络适配器（俗称网卡）和其相应的软件驱动程序就实现了这些协议。一般的网络适配器都包含了物理层和数据链路层这两层的功能。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/4b950da775644401b4db0d97eb5b12aclK6mNo.png"
+                      alt="4b950da775644401b4db0d97eb5b12ac"
+                ></p>
+<p><strong>帧</strong>（Frame）是数据链路层对等实体之间在水平方向进行逻辑通信的协议数据单元PDU。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/bb31aade5b014e5b891718f96621961d580ZwN.png"
+                      alt="bb31aade5b014e5b891718f96621961d"
+                ></p>
+<h2 id="3-2-数据链路层三个重要问题"><a href="#3-2-数据链路层三个重要问题" class="headerlink" title="3.2 数据链路层三个重要问题"></a>3.2 数据链路层三个重要问题</h2><h3 id="3-2-1-封装成帧和透明传输"><a href="#3-2-1-封装成帧和透明传输" class="headerlink" title="3.2.1 封装成帧和透明传输"></a>3.2.1 封装成帧和透明传输</h3><p><strong>封装成帧</strong>是指数据链路层给上层交付下来的协议数据单元PDU添加一个首部和一个尾部，使之成为帧。</p>
+<p><strong>透明传输</strong>是指数据链路层对上层交付下来的协议数据单元PDU没有任何限制，就好像数据链路层不存在一样。</p>
+<ul>
+<li>面向字节的物理链路使用字节填充的方法实现透明传输。</li>
+<li>面向比特的物理链路使用比特填充的方法实现透明传输。</li>
+<li>帧的首部和尾部中包含有一些重要的控制信息。</li>
+<li>帧首部和尾部的作用之一就是帧定界。并不是每一种数据链路层协议的帧都包含有帧定界标志。</li>
+</ul>
+<p>在传输过程中，如果帧定界和网络协议数据单元的数据发生重合，那还能鉴定出帧定界符么？<br>答案是否定的。解决这个问题时，可以在发送帧之前，对帧的数据部分进行扫描，每出现一个帧定界符，就在其前面插入一个转义字符。接收方数据链路层在物理层交付的比特流中提取帧，遇到第一个帧定界符时，认为这是帧的开始。当遇到转义字符时就知道，其后面的 1 字节内容虽然与帧定界符相同，但它是数据而不是定界符，剔除转义字符后，将其后面的内容作为数据继续提取。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/ef1b0be3512c480a9192d27aa253517dDaUnBZ.png"
+                      alt="ef1b0be3512c480a9192d27aa253517d"
+                ></p>
+<p>要是在传输过程中遇到既包含帧定界符，又包含了转义字符，应该怎么处理？<br>方法依旧是对帧的数据部分进行扫描，每出现一个帧定界符或转义字符，就在其前面插入一个转义字符。转义字符是一个特殊的字符，其长度为1个字节，十进制为27，而并不是E、S、C这三个字符。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/a9c1489e471b46febbe7d979a9ed6110sBBqFv.png"
+                      alt="a9c1489e471b46febbe7d979a9ed6110"
+                ></p>
+<p><strong>MAC 帧</strong>不需要帧尾，用的是帧间间隔。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/92069985a93841da8b24219112492c6cAltxNx.png"
+                      alt="92069985a93841da8b24219112492c6c"
+                ></p>
+<h3 id="3-2-2-差错检测"><a href="#3-2-2-差错检测" class="headerlink" title="3.2.2 差错检测"></a>3.2.2 差错检测</h3><ul>
+<li>实际的通信链路都不是理想的，比特在传输过程中可能会<strong>产生差错</strong>（称为比特差错）：比特1可能变成比特0，比特0可能变成比特1。</li>
+<li>在一段时间内，传输错误的比特数量占所传输比特总数的比率称为<strong>误率</strong>（Bit Error Rate，BER）。</li>
+<li>提高链路的<strong>信噪比</strong>，可以降低误码率。但在实际的通信链路上，不可能使误码率下降为零。</li>
+<li>使用<strong>差错检测技术</strong>来检测数据在传输过程中是否产生了比特差错，是数据链路层所要解决的重要问题之一。</li>
+</ul>
+<h4 id="1-奇偶校验"><a href="#1-奇偶校验" class="headerlink" title="1. 奇偶校验"></a>1. 奇偶校验</h4><ul>
+<li>奇校验是在待发送的数据后面添加1个校验位，使得添加该校验位后的整个数据中比特1的个数为奇数。</li>
+<li>偶校验是在待发送的数据后面添加1个校验位，使得添加该校验位后的整个数据中比特1的个数为偶数。</li>
+<li>在所传输的数据中，若有<strong>奇</strong>数个位发生误码，则所包含比特1的数量的奇偶性会发生改变，可以检测出误码。</li>
+<li>在所传输的数据中，若有<strong>偶</strong>数个位发生误码，则所包含比特1的数量的奇偶性不会发生改变，无法检测出误码（漏检）。</li>
+<li>在实际使用时，奇偶校验又可分为垂直奇偶校验、水平奇偶校验以及水平垂直奇偶校验。</li>
+</ul>
+<h4 id="2-循环冗余校验CRC"><a href="#2-循环冗余校验CRC" class="headerlink" title="2. 循环冗余校验CRC"></a>2. 循环冗余校验CRC</h4><p>数据链路层广泛使用漏检率极低的循环冗余校验（Cyclic Redundancy Check，CRC）检错技术。<br>循环冗余校验CRC的基本思想：</p>
+<ul>
+<li>收发双方约定好一个生成多项式G(X)。</li>
+<li>发送方基于待发送的数据和生成多项式G(X)，计算出差错检测码（冗余码），将冗余码添加到待发送数据的后面一起传输。</li>
+<li>接收方收到数据和冗余码后，通过生成多项式G(X)来计算收到的数据和冗余码是否产生了误码。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/f5672ff519a34539ab864cd7de04b01dVNhnej.png"
+                      alt="f5672ff519a34539ab864cd7de04b01d"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/85dcfe7717eb458d8be38c426187c966rsX9Az.png"
+                      alt="85dcfe7717eb458d8be38c426187c966"
+                ></p>
+<h3 id="3-2-3-可靠传输"><a href="#3-2-3-可靠传输" class="headerlink" title="3.2.3 可靠传输"></a>3.2.3 可靠传输</h3><h4 id="1-可靠传输的相关基本概念"><a href="#1-可靠传输的相关基本概念" class="headerlink" title="1. 可靠传输的相关基本概念"></a>1. 可靠传输的相关基本概念</h4><p>使用差错检测技术（例如循环冗余校验CRC），接收方的数据链路层就可检测出帧在传输过程中是否产生了误码（比特差错）。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/f16aa6a3a7d34285bfc908e93907a93dE3zjb3ipzZdV.png"
+                      alt="f16aa6a3a7d34285bfc908e93907a93d"
+                ></p>
+<p>数据链路层向其上层提供的服务类型：</p>
+<ul>
+<li>不可靠传输服务：仅仅丢弃有误码的帧，其他什么也不做；</li>
+<li>可靠传输服务：通过某种机制实现发送方发送什么，接收方最终就能收到什么。</li>
+</ul>
+<blockquote>
+<p> 一般情况下，有线链路的误码率比较低。为了减小开销，并不要求数据链路层向其上层提供可靠传输服务。即使出现了误码，可靠传输的问题由其上层处理。</p>
+<p>无线链路易受干扰，误码率比较高，因此要求数据链路层必须向其上层提供可靠传输服务。</p>
+</blockquote>
+<ul>
+<li>可靠传输服务并不局限于数据链路层，其他各层均可选择实现可靠传输。</li>
+<li>可靠传输的实现比较复杂，开销比较大，是否使用可靠传输取决于应用需求。</li>
+</ul>
+<h4 id="2-停止-等待协议的实现原理"><a href="#2-停止-等待协议的实现原理" class="headerlink" title="2. 停止-等待协议的实现原理"></a>2. 停止-等待协议的实现原理</h4><h5 id="确认、否认和重传"><a href="#确认、否认和重传" class="headerlink" title="确认、否认和重传"></a>确认、否认和重传</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/7d0ccf0c3ecb42a587b52b65fbe94e081EAIxF.png"
+                      alt="7d0ccf0c3ecb42a587b52b65fbe94e08"
+                ></p>
+<h5 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/3e826e8177f04986b7ad955b7049813emNHTZz.png"
+                      alt="3e826e8177f04986b7ad955b7049813e"
+                ></p>
+<h5 id="确认丢失"><a href="#确认丢失" class="headerlink" title="确认丢失"></a>确认丢失</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/8c6ce97cb2464418a89dfa5a3b278b0eNdcsL6.png"
+                      alt="8c6ce97cb2464418a89dfa5a3b278b0e"
+                ></p>
+<h5 id="确认迟到"><a href="#确认迟到" class="headerlink" title="确认迟到"></a>确认迟到</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/5971b7f249a44e65b8f2aa117bd3f3d6MFK1Hd.png"
+                      alt="5971b7f249a44e65b8f2aa117bd3f3d6"
+                ></p>
+<p>请注意‍‍该数据分组与之前序号为0的数据分组，不是同一个数据分组，我们用给确认分组编号的方法，‍‍解决了确认迟到所导致的重复确认的问题。需要说明的是‍‍对于数据链路层的点对点信道，往返时间比较固定，不会出现确认迟到的情况。‍‍因此‍‍如果只在数据链路层实现停止等待协议，可以不用给确认分组编号。</p>
+<h5 id="信道利用率"><a href="#信道利用率" class="headerlink" title="信道利用率"></a>信道利用率</h5><p>TD：发送方发送数据分组所耗费的发送时延<br>RTT：收发双方之间的往返时间<br>TA：接收方发送确认分组‍‍所耗费的发送时延<br>途中忽略了接收方对数据分组的处理时延，‍‍以及发送方对确认分组的处理时延</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/2d1491fae5c24b66b4a2aef87b1377ae0qrZcL.png"
+                      alt="2d1491fae5c24b66b4a2aef87b1377ae"
+                ></p>
+<ul>
+<li>若出现超时重传，对于传送有用的数据信息来说，信道利用率还要降低。</li>
+<li>在往返时间RTT相对较大的情况下，为了提高信道利用率，收发双方不适合采用停止-等待协议，而可以选择使用回退N帧（GBN）协议或选择重传（SR）协议。</li>
+</ul>
+<h4 id="3-回退N帧协议"><a href="#3-回退N帧协议" class="headerlink" title="3. 回退N帧协议"></a>3. 回退N帧协议</h4><p>回退N帧协议采用流水线传输方式，并利用发送窗口来显示发送方连续发送数据分组的数据，这属于连续ARQ协议。</p>
+<h5 id="流水线传输"><a href="#流水线传输" class="headerlink" title="流水线传输"></a>流水线传输</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171702288jIw1It.png"
+                      alt="image-20230807171702288"
+                ></p>
+<h5 id="发送窗口"><a href="#发送窗口" class="headerlink" title="发送窗口"></a>发送窗口</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171800939poYWtJ.png"
+                      alt="image-20230807171800939"
+                ></p>
+<h5 id="接收窗口"><a href="#接收窗口" class="headerlink" title="接收窗口"></a>接收窗口</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807171813940WAjvyv.png"
+                      alt="image-20230807171813940"
+                ></p>
+<ul>
+<li>接收方每正确收到一个序号落入接收窗口的数据分组，就将接收窗口向前滑动一个位置，这样就有一个新的序号落入接收窗口。与此同时，接收方还要给发送方发送针对该数据分组的确认分组。</li>
+<li>发送方每收到一个按序确认的确认分组，就将发送窗口向前滑动一个位置，这样就有一个新的序号落入发送窗口，序号落入发送窗口内的数据分组可继续被发送。</li>
+<li>在回退N帧协议的工作过程中，发送方的发送窗口和接收方的接收窗口按上述规则不断向前滑动。因此，这类协议又称为滑动窗口协议。</li>
+</ul>
+<h5 id="回退N帧含义"><a href="#回退N帧含义" class="headerlink" title="回退N帧含义"></a>回退N帧含义</h5><p>若序号落入发送窗口内的已发送数据分组出现超时，则该数据分组及其后续已发送的数据分组被重传，这就是回退N帧名称的由来，即一旦出错就需要退回去重传已发送过的N个数据分组。</p>
+<h5 id="累计确认"><a href="#累计确认" class="headerlink" title="累计确认"></a>累计确认</h5><ol>
+<li>回退N帧协议采用累计确认方式<ul>
+<li>接收方不必对收到的每一个数据分组都发送一个确认分组，而是可以在收到几个序号连续的数据分组后，对按序到达的最后一个数据分组发送确认分组。</li>
+<li>接收方何时发送累积确认分组，由具体实现决定。</li>
+<li>确认分组ACKn表名序号为n及之前的所有数据分组都已正确接收。</li>
+</ul>
+</li>
+<li>优缺点<ul>
+<li>优点：<ul>
+<li>减少向网络中注入确认分组的数量。</li>
+<li>即使确认分组丢失，也可能不必重传数据分组。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>不能向发送方及时准确地放映出接收方已正确接受的所有数据分组的数量。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="发送窗口的尺寸超越上限"><a href="#发送窗口的尺寸超越上限" class="headerlink" title="发送窗口的尺寸超越上限"></a>发送窗口的尺寸超越上限</h5><p>将出现接收方无法分辨新旧数据分组的情况</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/image-20230807172944684YJriqL.png"
+                      alt="image-20230807172944684"
+                ></p>
+<h5 id="信道利用率-1"><a href="#信道利用率-1" class="headerlink" title="信道利用率"></a>信道利用率</h5><ol>
+<li><p>无差错的情况</p>
+<p>信道利用率比停止-等待协议高不少</p>
+</li>
+<li><p>有差错的情况</p>
+<p>一个数据分组的差错就可能引起大量数据分组的重传，而这些重传的数据分组原本已经正确到达接收方，但由于序号未落入接收窗口内而被接收方丢弃。显然，这些数据分组的重传是对通信资源的严重浪费。</p>
+</li>
+</ol>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/9bbf0e1633e64310a8fd49be1da77eadPc1Y6A.png"
+                      alt="9bbf0e1633e64310a8fd49be1da77ead"
+                ></p>
+<h4 id="4-选择重传协议"><a href="#4-选择重传协议" class="headerlink" title="4. 选择重传协议"></a>4. 选择重传协议</h4><p>为了进一步提高信道利用率，可以设法只穿出现差错的数据分组，这就需要接受窗口尺寸要大于1，以便先收下时序但正确到接收方且序号落入接收窗口内的数据分组，等到所缺数据分组收齐后再一并送交上层。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/78e687324a8e4813be191fbf6bd2a756IolHEg.png"
+                      alt="78e687324a8e4813be191fbf6bd2a756"
+                ></p>
+<h5 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/3306958d03f7471e90fd6abfafe498eeeW0xIa.png"
+                      alt="3306958d03f7471e90fd6abfafe498ee"
+                ></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/08/11/%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E4%BA%8C%E5%8F%89%E6%A0%91/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">代码随想录-二叉树的遍历方式</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/08/04/%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">代码随想录-栈与队列</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">《深入浅出计算机网络》第三章 数据链路层</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-text">3.1 数据链路层概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E4%B8%89%E4%B8%AA%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98"><span class="nav-text">3.2 数据链路层三个重要问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E5%B0%81%E8%A3%85%E6%88%90%E5%B8%A7%E5%92%8C%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93"><span class="nav-text">3.2.1 封装成帧和透明传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B"><span class="nav-text">3.2.2 差错检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="nav-text">3.2.3 可靠传输</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 61 篇文章
+                    </span>
+                    
+                        <span>
+                            共 218k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

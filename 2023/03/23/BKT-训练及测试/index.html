@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/03/23/bkt-训练及测试/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BKT训练及测试-大规模拟合隐马尔科夫模型工具">
+<meta property="og:url" content="https://channinghsu.github.io/2023/03/23/BKT-%E8%AE%AD%E7%BB%83%E5%8F%8A%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-23T13:20:55.000Z">
+<meta property="article:modified_time" content="2023-05-05T02:03:57.781Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="BKT">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            BKT训练及测试-大规模拟合隐马尔科夫模型工具 -
+        
+        Channing&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/anime.min.js"></script>
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Channing&#39;s Blog
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">61</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">BKT训练及测试-大规模拟合隐马尔科夫模型工具</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-03-23 21:20:55</span>
+        <span class="mobile">2023-03-23 21:20:55</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-05-05 10:03:57</span>
+            <span class="mobile">2023-05-05 10:03:57</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/BKT/">BKT</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>14 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <p>此<strong>命令行工具</strong>由C/C++编写，目的是为了在大型数据集中拟合隐马尔可夫模型（HMM）。它针对一种用于教育领域的特殊HMM，称为<strong>贝叶斯知识追踪（BKT）</strong>模型。</p>
+<h2 id="贝叶斯知识追踪"><a href="#贝叶斯知识追踪" class="headerlink" title="贝叶斯知识追踪"></a>贝叶斯知识追踪</h2><p>贝叶斯知识训练（Bayesian Knowledge Training，BKT）是一种在智能辅导系统（ITS）领域广泛使用的用户建模方法。在ITS中，通常会使用<strong>知识点</strong>标记学生正在解答得问题。我们认为学生解答问题的过程是练习了一个或多个技能的过程。学生模型（BKT是其中之一）判断解决问题过程中一系列正确或不正确的结果，以确定该技能是否被掌握。BKT使用<strong>隐马尔可夫模型</strong>计算学生技能掌握的概率，其中有两种类型的节点：<strong>状态节点</strong>表示技能掌握情况，它们的值为<strong>掌握</strong>或<strong>未掌握</strong>，以及<strong>观察节点</strong>，它们的值为<strong>正确</strong>或<strong>不正确</strong>。</p>
+<p>标准BKT中，每一个知识点都有如下的参数：</p>
+<ol>
+<li>p-init/<code>P(Lo)</code>：知识点先验已掌握的概率；</li>
+<li>p-learn/<code>P(T)</code>：经过学习之后，某一知识点由不会到会的学习转移概率；</li>
+<li>p-forget/<code>P(F)</code>：学习过程中，某一知识点由会到不会的遗忘概率；通常情况下<code>p(F)</code>被设为<code>0</code>，不计入参数中；</li>
+<li>p-slip/<code>P(S)</code>：在知道某一知识点时，做题表现为错误的失误概率；</li>
+<li>p-guess/<code>P(G)</code>：在不知道某一知识点时，做题表现为正确的猜测概率。</li>
+</ol>
+<p>BKT参数可以用向量或矩阵形式表示。全局先验的向量<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.697ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 750 680"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A0" d="M128 619Q121 626 117 628T101 631T58 634H25V680H724V634H691Q651 633 640 631T622 619V61Q628 51 639 49T691 46H724V0H713Q692 3 569 3Q434 3 425 0H414V46H447Q489 47 498 49T517 61V634H232V348L233 61Q239 51 250 49T302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V619Z"></path></g></g></g></svg></mjx-container>包含<code>P(Lo)</code>参数。在先验向量中有<code>N=2</code>个元素，假设<code>P(Lo)</code>是<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.697ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 750 680"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A0" d="M128 619Q121 626 117 628T101 631T58 634H25V680H724V634H691Q651 633 640 631T622 619V61Q628 51 639 49T691 46H724V0H713Q692 3 569 3Q434 3 425 0H414V46H447Q489 47 498 49T517 61V634H232V348L233 61Q239 51 250 49T302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V619Z"></path></g></g></g></svg></mjx-container>向量的第一个元素。</p>
+<p>在状态转移矩阵<code>A</code>中，<code>p(T)</code>是一个元素，涵盖掌握状态变化的概率，其大小为<code>N * N</code>。设置<code>A [1,2]=0</code>将不予捕获遗忘过程（从掌握到未掌握）。<code>P(T)</code>对应于<code>A [2,1]</code> - 从未掌握到掌握。</p>
+<p>观测矩阵<code>B</code>中指定了<code>P(G)</code>和<code>P(S)</code>，该矩阵的大小为<code>N*M</code>，其中<code>M</code>是观察数（在标准BKT中为M=2）。第一列对应于<strong>正确</strong>的观察结果，第二列对应于<strong>错误</strong>的观察结果。在具有两个观察结果的标准BKT中，<code>P(G)</code>是B[2,1] - 未掌握的技能但是正确的响应，<code>P(S)</code>是B[1,2] - 掌握的技能但是错误的响应。</p>
+<hr>
+<script type="math/tex; mode=display">\Pi=\begin{bmatrix}掌握知识点的先验概率 & 没有掌握知识点的先验概率 \\\ P(Lo) & 1 - P(Lo) \end{bmatrix}</script><hr>
+<script type="math/tex; mode=display">A=\begin{bmatrix} &掌握知识点 & 未掌握知识点 \\\ 掌握知识点 & 1 & 0 \\\ 未掌握知识点 & P(T) & 1-P(T) \end{bmatrix}</script><hr>
+<script type="math/tex; mode=display">B=\begin{bmatrix} &回答正确 & 回答错误 \\\ 掌握知识点 & 1 - P(S) & P(S) \\\ 未掌握知识点 & P(G) & 1-P(G) \end{bmatrix}</script><h2 id="获取并编译代码"><a href="#获取并编译代码" class="headerlink" title="获取并编译代码"></a>获取并编译代码</h2><p>标准BKT代码的公开版本可以通过<a class="link" target="_blank" rel="noopener" href="https://github.com/myudelson/hmm-scalable">GitHub仓库 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>获得。如果你安装了git工具，使用下面的命令来获取源代码。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/myudelson/hmm-scalable</span><br></pre></td></tr></table></figure></div>
+<p>使用<code>make all</code>指令编译。如果在Linux上，g++/gcc编译器和Open MP库应该已经安装了。在Mac OX上，你需要通过<code>xcode-select --install</code>命令来安装Xcode命令行工具。<code>g++/gcc</code>编译器与Open MP（默认情况下不再与Mac OS X捆绑）可以从<a href="hpc.sourceforge.net">这里</a>下载。如果你是在Windows上，你可能需要安装<code>cygwin</code>，并有<code>g++/gcc</code>编译器可用，并确保也安装<code>make</code>工具。</p>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><h3 id="输入文件"><a href="#输入文件" class="headerlink" title="输入文件"></a>输入文件</h3><p>输入的数据文件应该是一个具有Unix行末编码的文本文件。其格式为四个以<code>Tab</code>分隔的列：<code>观测、学生、问题/问题步骤、知识点</code>。观测值是一个以1开头的整数。对于双状态的BKT，建议使用1表示<strong>正确</strong>，2表示<strong>不正确</strong>。学生、问题或一个问题步骤、以及知识点都是一个字符串标签。多知识点标签应该由你选择的字符来分隔（不要使用Tab）。下面是一个有几行输入的例子。在这里<code>~</code>被用作分隔符。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- input file --</span><br><span class="line">2   student_001 unit1-section1-problem5-step1  addition~multiplication</span><br><span class="line">1   student_001 unit1-section1-problem5-step2  multiplication</span><br><span class="line">1   student_001 unit1-section1-problem5-step3  addition</span><br><span class="line">-- input file --</span><br></pre></td></tr></table></figure></div>
+<p>如果某一行的数据没有知识点标签，则使用<code>.</code>符号。在测试数据中，该工具将使用已知的观测值进行训练，并对缺失的观测值进行预测，这些观测值应该有<code>.</code>而不是观测的数值（1、2或其他）。</p>
+<h3 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h3><p>输出文件是<strong>模型文件</strong>和<strong>预测文件</strong>。</p>
+<h4 id="模型文件"><a href="#模型文件" class="headerlink" title="模型文件"></a>模型文件</h4><p>模型文件包含关于数据的一般信息，例如观测数、知识点数和问题/问题步骤的数量，也包括模型的参数。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-- model file --</span><br><span class="line">SolverId    1.1</span><br><span class="line">nK    1</span><br><span class="line">nG    1</span><br><span class="line">nS    2</span><br><span class="line">nO    2</span><br><span class="line">Null skill ratios      1.0000000      0.0000000</span><br><span class="line">0    multiplication-skill</span><br><span class="line">PI    0.45000000    0.55000000</span><br><span class="line">A    1.00000000  0.00000000    0.40000000    0.60000000</span><br><span class="line">B    0.79000000    0.21000000    0.22000000    0.78000000</span><br><span class="line">-- model file --</span><br></pre></td></tr></table></figure></div>
+<p>例子包括</p>
+<ul>
+<li>具体的求解器算法（<code>1.1</code>）</li>
+<li>一个知识点（<code>nK=1</code>）</li>
+<li>一个学生（<code>nG=1</code>）</li>
+<li>两个隐藏状态（<code>nS=2</code>）</li>
+<li>两个观测值（<code>nO=2</code>）</li>
+<li>知识点的编号从<code>0</code>开始</li>
+<li><p>知识点名称为 <code>multiplication-skill</code></p>
+</li>
+<li><p><code>PI</code>对应初始化概率向量；<code>PI</code>的第一个元素<code>p(Lo)=0.45</code></p>
+</li>
+<li><code>A</code>对应状态转移矩阵；<code>A</code>的第三个元素<code>p(T)=0.4</code></li>
+<li><code>B</code>对应confusion矩阵，表示可观察变量与隐藏变量的转换概率；<code>B</code>的第二和第三个元素分别是<code>p(S)=0.21</code>和<code>p(G)=0.22</code>。</li>
+</ul>
+<h4 id="预测文件"><a href="#预测文件" class="headerlink" title="预测文件"></a>预测文件</h4><p>预测文件由<strong>对输入文件的每一行的模型预测</strong>组成。根据选项的不同（见下面的参数说明），输出学生回答的概率分布（正确和不正确的概率）。此外还可以输出针对特定知识节点隐藏状态值的概率分布。概率值以<code>Tab</code>分隔。请看下面的输出文件的例子。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- prediction file --</span><br><span class="line">0.73    0.27</span><br><span class="line">0.88    0.12</span><br><span class="line">0.94    0.06</span><br><span class="line">0.99    0.01</span><br><span class="line">-- prediction file --</span><br></pre></td></tr></table></figure></div>
+<p>上述例子是一个有nO=2个观测值的标准BKT模型，它将包含两列，中间用<code>Tab</code>分隔开。</p>
+<ul>
+<li>第一列是BKT模型估计学生在此次观察中回答正确的先验概率。</li>
+<li>第二列是对正确概率的补充，也就是答错的概率。</li>
+</ul>
+<h2 id="训练BKT模型"><a href="#训练BKT模型" class="headerlink" title="训练BKT模型"></a>训练BKT模型</h2><p><code>trainhmm</code>使用以下的参数：</p>
+<p><code>trainhmm [选项] 输入文件 [[模型文件] 预测文件]</code></p>
+<p>选项：</p>
+<p><code>-s</code>:格式<code>-s 结构.求解器[求解器设置]</code></p>
+<ul>
+<li>结构:<ul>
+<li>1- 知识点</li>
+<li>2- 用户</li>
+</ul>
+</li>
+<li>求解器:<ul>
+<li>1-Baum-Welch算法</li>
+<li>2-梯度下降法</li>
+<li>3-共轭梯度法<ul>
+<li>1-Polak-Ribière-Polyak</li>
+<li>2-Fletcher–Reeves</li>
+<li>3-Hestenes-Stiefel</li>
+<li>4-Dai-Yuan</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>例如：<code>-s 1.3.1</code>指按<strong>知识点</strong>结构，求解器使用<strong>共轭梯度</strong>下降，求解器设置为<strong>Polak-Ribière-Polyak</strong></p>
+<p>​            <code>-s 2.1</code>指按<strong>学生</strong>结构，求解器使用<strong>Baum-Welch</strong>。</p>
+<p><code>-S</code>：对前向/后向变量进行缩放：0-关闭（默认），1-打开。只在Baum-Welch求解器中生效<code>-s 1.1</code>，否则自动设置为关闭。</p>
+<p><code>-e</code>：设置允许的终止判据(默认0.001)；可以被计算为对数似然中每个数据点的变化，例如<code>-e 0.00001,l</code>。</p>
+<p><code>-i</code>：最大迭代数（默认200）</p>
+<p><code>-q</code>：无输出的安静模式，0-否（默认），1-是</p>
+<p><code>-n</code>：隐藏状态的个数，应大于等于2（默认2）</p>
+<p><code>-0</code>：逗号分隔的初始参数，用于初始概率、状态转移概率和混淆概率，跳过每个向量（矩阵行）的最后一个值，因为它们的总和应该是1；默认是0.5,1.0,0.4,0.8,0.2。</p>
+<p><code>-l</code>：参数的下限，以逗号分隔的初始概率、状态转移概率和混淆概率（无跳转）；默认为0,0,1,0,0,0,0,0。</p>
+<p><code>-u</code>：参数的上限，用逗号分隔的初始概率、状态转移概率和混淆概率（无跳转）；默认为1,1,1,1,1,1,0.3,0.3,1，滑动和猜测的上限为0.3。</p>
+<p><code>-c</code>：用于 L2 惩罚的 C 权重和中心点的规格，空（默认）。对于标准BKT - 4个逗号分隔的数字： 惩罚的C权重和中心点，分别用于PI、A和B矩阵。如果用于有学生效应的iBKT，将使用8个值，其中4个附加值用于学生矩阵。例如，-c 1.0,0.5,0.5,0.0。</p>
+<p><code>-f</code>：拟合为一个知识点，0-否（默认），1-拟合为一个知识点并使用参数作为多知识点的起点，2-强制使用一个知识点。</p>
+<p><code>-m</code>：输出模型拟合指标（AIC、BIC、RMSE） 0-否（默认），1-是。要指定要报告指标的观测值，请在,后面列出。例如，<code>-m 0</code>, <code>-m 1</code>(默认情况下，假设观测值为1), <code>-m 1,2</code> (计算观测值2的度量)。与<code>-v</code>选项不兼容。</p>
+<p><code>-v</code>：交叉验证折数、分层采样法、验证目标状态、折数输入/输出文件，默认0（无交叉验证），如<code>-v 5,i,2</code>，5折，项目分层的c.-v.，预测状态2， <code>-v 10</code> - 10折，主题分层的c.-v. v.默认预测状态1，或者<code>-v 10,g,1</code>,<code>-v 5,n,2,folds.txt,o</code> - 5折非分层c.-v.预测状态2，[o]输出折叠到<code>folds.txt</code>，这里<code>-v 5,n,2,folds.txt,i</code>，折叠实际上是从文件中读取[i]n。</p>
+<p><code>-p</code>：输出模型对训练集的预测，0-否（默认），1-是；2-是，加上输出状态概率；与<code>-v</code>和<code>-m</code>参数一起工作。</p>
+<p><code>-U</code>：控制状态的概率分布如何被更新。采取以下格式<code>-U r|g[,t|g]</code>，其中</p>
+<ul>
+<li>第一个字符-控制预测如何处理已知观测值</li>
+<li>第二个字符-预测如何处理未知观测值</li>
+<li>第三个字符-是否输出先验概率。</li>
+</ul>
+<p>处理已知观测值<code>r</code>—揭示实际观测值以更新状态概率分布（对模拟实际系统如何工作有意义），<code>g</code>—根据预测结果猜测观测值（arg max）—在比较模型时更合适（这样就不会有关于观测的信息被揭示）。处理未知的观测值（标记为.-点）：<code>t</code>-仅使用过渡矩阵，<code>g</code>-猜测观测值。默认（如果省略）是<code>-U r,t</code>。例如，<code>-U g,g</code>需要使用模型参数和状态分布概率的运行值来猜测观察结果是什么。</p>
+<p><code>-d</code>：分隔符，用于每次观察中的多种知识点；每次观察单一知识点（默认），否则 - 分隔符，例如 <code>-d ~</code>。</p>
+<p><code>-b</code>：将输入文件转换为由<code>inputconvert</code>工具从文本文件创建的二进制输入文件。</p>
+<p><code>-B</code>：分别阻止对先验、过渡或排放参数的重新估计（默认为<code>-B 0,0,0</code>），要阻止对过渡概率的重新估计，请指定<code>-B 0,1,0</code>。?????????????????</p>
+<p><code>-P</code>：使用并行处理，</p>
+<ul>
+<li>默认 - 0（无并行处理）</li>
+<li>1 - 分别拟合单独的知识点/学生</li>
+<li>2 - 分别拟合知识点/学生中的单独序列。</li>
+</ul>
+<p><code>-o</code>：除了打印到控制台外，还可以打印输出到该选项中指定的文件（默认为空，不做额外的打印）。</p>
+<h2 id="使用模型预测"><a href="#使用模型预测" class="headerlink" title="使用模型预测"></a>使用模型预测</h2><p><code>predicthmm</code>使用以下格式：</p>
+<p><code>predicthmm [选项] 输入文件 模型文件 [预测文件]</code></p>
+<p><code>-q</code>：没有输出的安静模式，0-否（默认），1-是。</p>
+<p><code>-m</code>：输出模型拟合质量评判（赤池信息量（AIC），贝叶斯信息量（BIC），均方根误差（RMSE）），0-否（默认），1-是。要指定要报告哪些指标的观察，请在<code>,</code>之后列出。例如<code>-m 0</code>，<code>-m 1</code>(默认使用观察<code>1</code>)，<code>-m 1,2</code>(为观察<code>2</code>计算度量指标)。不能与<code>-v</code> 同时运行。</p>
+<p><code>-d</code>：每个观察中多种知识点使用分隔符号；每个观察一个知识点（默认），否则使用分隔符，如<code>-d~</code>。</p>
+<p><code>-b</code>：将输入文件视为由<code>inputconvert</code>工具从文本文件创建的二进制文件。</p>
+<p><code>-p</code>：输出模型对训练集的预测，0-否（默认），1-是；2-是，并且加上输出状态概率；与<code>-v</code>和<code>-m</code>参数一起工作</p>
+<p><code>-U</code>：控制状态的概率分布如何被更新。采用<code>-U r|[g,t|g]</code>其中</p>
+<ul>
+<li>第一个字符—控制如何预测已知的观测值</li>
+<li>第二个字符—预测如何处理未知的观测值</li>
+<li>第三个字符—是否输出先验概率</li>
+</ul>
+<p>处理已知观测值<code>r</code>—揭示实际观测值以更新状态概率分布（对模拟实际系统如何工作有意义），<code>g</code>—根据预测结果猜测观测值（arg max）—在比较模型时更合适（这样就不会有关于观测的信息被揭示）。处理未知的观测值（标记为.-点）：<code>t</code>-仅使用过渡矩阵，<code>g</code>-猜测观测值。默认（如果省略）是<code>-U r,t</code>。例如，<code>-U g,g</code>需要使用模型参数和状态分布概率的运行值来猜测观察结果是什么。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>小样本数据文件<code>toy_data.txt</code>使用一下BKT参数生成的：<code>pLo=0.4, pT=0.35, pS=0.25, pG=0.12.</code></p>
+<p>为了使用EM算法拟合这些数据的BKT模型，运行以下命令：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./trainhmm -s 1.1 -m 1 -p 1 toy_data.txt model.txt predict.txt</span><br></pre></td></tr></table></figure></div>
+<p>该模型将有90%的准确性，均方根误差（RMSE）= 0.302691，恢复的BKT参数将是：</p>
+<p><code>pLo=0.00000000，pT=0.16676161，pS=0.00044059，pG=0.00038573</code>。整体的对数似然，在三次迭代中从<code>9.3763477</code>上升到<code>10.4379501</code>。</p>
+<p>如果使用<code>-s 1.2</code>参数的<strong>梯度下降法</strong>来拟合BKT模型，恢复的参数将是</p>
+<p><code>pLo=0.00000000，pT=0.3095828498，pS=0.18955371，pG=0.16195590</code>，准确率仍保持在90%，同时<code>RMSE</code>=<code>0.344145</code>。经过19次迭代后，对数似然从<code>9.3763477</code>变为<code>8.0992564</code>。</p>
+<p>运行以下命令生成用先前模型拟合的预测结果：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./predicthmm -p 1 toy_data_test.txt model.txt predict.txt</span><br></pre></td></tr></table></figure></div>
+<p>可以使用<code>KDD Cup 2010数据集</code>进行测试，此数据集可以从<a class="link" target="_blank" rel="noopener" href="http://pslcdatashop.web.cmu.edu/KDDCup/">这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>下载，它由训练集和挑战集组成。为了测试该工具，请下载挑战代数集，它有超过3300名学生的大约900万个事务。训练文件应该被修剪成工具的格式。请看下面的shell命令，可以做到这一点。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gawk -F"\t" 'BEGIN{OFS="\t"} {if(NR==1)next; skill=$20; gsub("~~", "~", skill); if(skill=="") skill="."; else { skill=$3"__"skill; gsub(/~/, "~"$3"__",skill);} print 2-$14,$2,$3"__"$4,skill;}' algebra_2008_2009_train.txt &gt; a89_kts_train.txt</span><br></pre></td></tr></table></figure></div>
+<p>为了此数据集能够使用梯度下降法拟合此BKT模型，同时计算拟合指标和预测值，请运行以下命令：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./trainhmm -s 1.2 -d ~ -m 1 -p 1 a89_kts_train.txt model.txt predict.txt</span><br></pre></td></tr></table></figure></div>
+<p>根据你的硬件设备情况，模型大约1-2分钟内拟合成功。</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/BKT/">#BKT</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/03/24/%E3%80%8AC++%20Primer%E3%80%8B%E7%AC%AC%209%20%E7%AB%A0%20%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">《C++ Primer》第九章 顺序容器</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/03/21/%E3%80%8AC++%20Primer%E3%80%8B%E7%AC%AC%208%20%E7%AB%A0%20IO%E5%BA%93/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">《C++ Primer》第八章 IO库</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">BKT训练及测试-大规模拟合隐马尔科夫模型工具</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%9F%A5%E8%AF%86%E8%BF%BD%E8%B8%AA"><span class="nav-text">贝叶斯知识追踪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B9%B6%E7%BC%96%E8%AF%91%E4%BB%A3%E7%A0%81"><span class="nav-text">获取并编译代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE"><span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%96%87%E4%BB%B6"><span class="nav-text">输入文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6"><span class="nav-text">输出文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83BKT%E6%A8%A1%E5%9E%8B"><span class="nav-text">训练BKT模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B"><span class="nav-text">使用模型预测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-text">例子</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 61 篇文章
+                    </span>
+                    
+                        <span>
+                            共 218k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

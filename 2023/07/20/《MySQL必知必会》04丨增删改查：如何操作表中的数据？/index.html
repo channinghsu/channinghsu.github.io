@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/07/20/《mysql必知必会》04丨增删改查：如何操作表中的数据？/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL必知必会 04丨增删改查：如何操作表中的数据？">
+<meta property="og:url" content="https://channinghsu.github.io/2023/07/20/%E3%80%8AMySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%8B04%E4%B8%A8%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-20T02:01:23.000Z">
+<meta property="article:modified_time" content="2023-07-20T06:24:52.481Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            MySQL必知必会 04丨增删改查：如何操作表中的数据？ -
+        
+        Channing&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/anime.min.js"></script>
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Channing&#39;s Blog
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">61</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">MySQL必知必会 04丨增删改查：如何操作表中的数据？</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-07-20 10:01:23</span>
+        <span class="mobile">2023-07-20 10:01:23</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-07-20 14:24:52</span>
+            <span class="mobile">2023-07-20 14:24:52</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MySQL/">MySQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>13 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <p>在超市项目中，我们给用户设计好了一个数据表 demo.goodsmaster，定义好了里面的字段，以及各种约束，如下所示：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">DESCRIBE</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+--------------+------+-----+---------+--+</span></span><br><span class="line"><span class="operator">|</span> Field 		 		<span class="operator">|</span> Type 					<span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+------+-----+---------+------------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber 		<span class="operator">|</span> <span class="type">int</span>  					<span class="operator">|</span> <span class="keyword">NO</span> 		<span class="operator">|</span> PRI <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span>auto_increment <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> barcode 	 		<span class="operator">|</span> text 					<span class="operator">|</span> <span class="keyword">NO</span> 		<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> goodsname  		<span class="operator">|</span> text 					<span class="operator">|</span> <span class="keyword">NO</span> 		<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span>							 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> specification <span class="operator">|</span> text 					<span class="operator">|</span> YES 	<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> unit 					<span class="operator">|</span> text 					<span class="operator">|</span> YES		<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> price 				<span class="operator">|</span> <span class="type">decimal</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="operator">|</span> <span class="keyword">NO</span> 		<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="number">6</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.02</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>接下来，我就给你讲讲操作表中的数据的方法，也就是常说的“增删改查”。</p>
+<h2 id="1-添加数据"><a href="#1-添加数据" class="headerlink" title="1. 添加数据"></a>1. 添加数据</h2><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">TABLE</span> 表名 [(字段名[,字段名] ...)] <span class="keyword">VALUE</span> (值的列表);</span><br></pre></td></tr></table></figure></div>
+<p>这里方括号“[]”表示里面的内容可选，也就是说，根据 MySQL 的语法要求，写不写都可以。</p>
+<p>添加数据分为两种情况：插入数据记录和插入查询结果。</p>
+<h3 id="1-1-插入数据记录"><a href="#1-1-插入数据记录" class="headerlink" title="1.1 插入数据记录"></a>1.1 插入数据记录</h3><p>MySQL 支持的数据插入操作十分灵活。既可以通过给表里面所有的字段赋值，完整地插入一条数据记录，也可以在插入记录的时候，只给部分字段赋值。</p>
+<p>比如，有一个叫 <code>demo.goodsmaster</code>的表，包括了 <code>itemnumber、barcode、goodsname、specification、unit</code>和<code>price</code> 共 6 个字段。我想要插入一条数据记录，其中包含了所有字段的值，就可以这样操作：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> demo.goodsmaster </span><br><span class="line">(</span><br><span class="line">  itemnumber,</span><br><span class="line">  barcode,</span><br><span class="line">  goodsname,</span><br><span class="line">  specification,</span><br><span class="line">  unit,</span><br><span class="line">  price</span><br><span class="line">) </span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(</span><br><span class="line">	<span class="number">4</span>,</span><br><span class="line">  <span class="string">&#x27;0003&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;尺子&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;三角形&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;把&#x27;</span>,</span><br><span class="line">  <span class="number">5</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></div>
+<p>运行上面的SQL语句，然后对表进行查询，得到以下结果。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span><span class="keyword">FROM</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> price <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span> 				 <span class="operator">|</span> <span class="number">0003</span> 	 <span class="operator">|</span> 尺子 			<span class="operator">|</span> 三角型 			  <span class="operator">|</span> 把 	<span class="operator">|</span> <span class="number">5.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>如果我想插入一条记录，但是只给部分字段赋值，比如说，客户有个商品，需要马上上线销售，目前只知道条码、名称和价格，其它的信息先不录入，等之后再补，可以实现吗？</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> demo.goodsmaster </span><br><span class="line">(</span><br><span class="line">  barcode,</span><br><span class="line">  goodsname,</span><br><span class="line">  price</span><br><span class="line">) </span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(</span><br><span class="line">  <span class="string">&#x27;0004&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;测试&#x27;</span>,</span><br><span class="line">  <span class="number">10</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></div>
+<p>运行这条 SQL 语句，我们来查询表的内容，就会发现，显然是可以的。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span><span class="keyword">FROM</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> price <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span> 				 <span class="operator">|</span> <span class="number">0003</span> 	 <span class="operator">|</span> 尺子		  <span class="operator">|</span> 三角型 					<span class="operator">|</span> 把 	 <span class="operator">|</span> <span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span> 				 <span class="operator">|</span> <span class="number">0004</span> 	 <span class="operator">|</span> 测试		  <span class="operator">|</span> <span class="keyword">NULL</span> 						<span class="operator">|</span> <span class="keyword">NULL</span>  <span class="operator">|</span> <span class="number">10.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>我们之所以能够在插入一条数据记录的时候，只给部分字段赋值，原因就在于我们对<strong>字段的定义方式</strong>。</p>
+<p>那字段是怎么定义的呢？我们来查看一下表的结构，看看各个字段的定义：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">DESCRIBE</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="operator">|</span> Field 			  <span class="operator">|</span> Type 					<span class="operator">|</span> <span class="keyword">Null</span>  <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra 				<span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber 	  <span class="operator">|</span> <span class="type">int</span> 					<span class="operator">|</span> <span class="keyword">NO</span> 		<span class="operator">|</span> PRI <span class="operator">|</span> <span class="keyword">NULL</span> 		<span class="operator">|</span> auto_increment <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> barcode			  <span class="operator">|</span> text 					<span class="operator">|</span> <span class="keyword">NO</span> 		<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> 		<span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> goodsname 		<span class="operator">|</span> text					<span class="operator">|</span> <span class="keyword">NO</span> 		<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> 		<span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> specification <span class="operator">|</span> text 					<span class="operator">|</span> YES 	<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> 		<span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> unit 					<span class="operator">|</span> text 					<span class="operator">|</span> YES 	<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> 		<span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> price 				<span class="operator">|</span> <span class="type">decimal</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="operator">|</span> <span class="keyword">NO</span> 		<span class="operator">|</span> 		<span class="operator">|</span> <span class="keyword">NULL</span> 		<span class="operator">|</span> 							 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="number">6</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>可以看到，我们在插入数据时没有明确赋值的 3 个字段，都有着各自的特点。<code>specification</code>和<code>unit</code>都可以是空值，而<code>itemnumber</code> 则定义了自增约束。</p>
+<p>我们在插入一条数据记录的时候，必须要考虑字段约束的 3 种情况。</p>
+<ul>
+<li>第一种情况是，如果字段允许为<strong>空</strong>，而我们没有给它赋值，那么 MySQL 会自动给它们赋予空值。<ul>
+<li>在刚刚的代码中，<code>specification, unit</code>字段都允许为空，因此，如果数据插入语句没有指定这几个字段的值，MySQL 会自动插入空值。</li>
+</ul>
+</li>
+<li><p>第二种情况是，如果字段是主键，就不能为空，这个时候，MySQL 会按照我们添加的约束进行处理。</p>
+<ul>
+<li>比如字段<code>itemnumber</code>是主键，不能为空，而我们定义了自增约束，所以MySQL 自动在之前的最大值基础上加了 1。因此，<code>itemnumber</code>也有了自己该有的值。</li>
+</ul>
+</li>
+<li><p>第三种情况是，如果有一个字段定义不能为空，又不是主键，当你插入一条数据记录的时候，就必须给这个记录赋值。</p>
+</li>
+</ul>
+<p>如果我们的操作违反了字段的约束限制，会出现什么情况呢？</p>
+<p>比如说，我们尝试把表 <code>demo.goodsmaster</code>的字段<code>speicification</code>改为不能为空：系统会提示错误，需要把字段<code>speicification</code>的值为空的数据记录删除，然后再修改字段约束，再给字段“specification”添加非空约束。</p>
+<p>部分插入一条数据记录是可以的，但前提是，没有赋值的字段，一定要让 MySQL 知道如何处理，比如可以为空、有默认值，或者是自增约束字段等等。</p>
+<p>好了，到这里，我们就学会了给 MySQL 的数据表插入一条数据记录。但是，在实际工作中，一次只插入一条数据，有时候会不够用。</p>
+<p>我们的项目就有这样的场景：门店每天的销售流水都很多，日积月累，流水表变得越来越大。如果就让它这么不断地增长，数据量甚至会达到数亿条，占据的存储空间达到几十个G。虽然 MySQL 可以处理这样比较大的数据表，但是每次操作的响应时间就会延长，这会导致系统的整体效率下降。</p>
+<p>刚开始的时候，我们开发了一个日结处理，当天算清所有账目。其中一个步骤就是，把当天流水表的数据全部转到历史流水表当中去。现在，我们就可以用上数据插入语句了。具体有 2 步：</p>
+<ol>
+<li>从流水表中取出一条数据；</li>
+<li>把这条数据插入到历史流水表中。</li>
+</ol>
+<p>然后不断重复这两个步骤，一直到把今天流水表的数据全部插入到历史流水表当中去。你肯定会说，这种做法的效率也太低了吧？有没有更好的办法呢？当然是有的。这个时候，我们就要用到 MySQL 的另一种数据插入操作了：把查询结果插入到数据表中。</p>
+<h3 id="1-2-插入查询记录"><a href="#1-2-插入查询记录" class="headerlink" title="1.2 插入查询记录"></a>1.2 插入查询记录</h3><p>MySQL 支持把查询的结果插入到数据表中，我们可以指定字段，甚至是数值，插入到数据表中。语法结构如下：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 (字段名)</span><br><span class="line"><span class="keyword">SELECT</span> 字段名或值</span><br><span class="line"><span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">WHERE</span> 条件</span><br></pre></td></tr></table></figure></div>
+<p>举个例子，在我们的超市信息系统的 MySQL 数据库中，历史流水表设计与流水表非常类似。不同的是，历史流水表增加了一些字段来标识历史流水的状态，比如日结时间字段，是用来记录日结操作是什么时候进行的。</p>
+<p>用 INSERT 语句实现起来也很简单：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 历史流水表 （日结时间字段，其他字段）</span><br><span class="line"><span class="keyword">SELECT</span> 获取当前时间函数，其他字段</span><br><span class="line"><span class="keyword">FROM</span> 流水表</span><br></pre></td></tr></table></figure></div>
+<p>现在我们给一张数据表插入一条数据记录的时候，可以给所有的字段赋值，也可以给部分字段赋值。这取决于字段的定义。如果字段</p>
+<p>不能为空并且没有默认值，就必须赋值。另外，我们还可以通过把一个查询结果插入数据表中的方式，提高添加数据的效率。</p>
+<h2 id="2-删除数据"><a href="#2-删除数据" class="headerlink" title="2. 删除数据"></a>2. 删除数据</h2><p>数据删除的语法很简单，如下所示：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 条件 </span><br></pre></td></tr></table></figure></div>
+<p>如果我们现在想把刚才用过的表 <code>demo.goodsmaster</code>里的内容清理一下，删除全部数据，可以通过下面的 SQL 语句来实现：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> demo.foodsmaster; </span><br></pre></td></tr></table></figure></div>
+<p>这个时候，Workbench 会提示错误。这是因为，Workbench 自动处于安全模式，它要求对数据的删除或修改操作中必须包含WHERE 条件。而且，这个 WHERE 条件中，必须用到主键约束或者唯一性约束的字段。MySQL 的这种安全性设置，主要就是为了防止删除或者修改数据时出现误操作，导致删除或修改了不相关的数据。因此，我们要习惯在删除数据的时候，添加条件语句 WHERE，防止误操作。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> demo.foodsmaster <span class="keyword">WHERE</span> itemnumber <span class="operator">&gt;</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure></div>
+<h2 id="3-修改数据"><a href="#3-修改数据" class="headerlink" title="3. 修改数据"></a>3. 修改数据</h2><p>我们来看一下 MySQL 的数据修改语法：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 表名 <span class="keyword">SET</span> 字段名<span class="operator">=</span>值 <span class="keyword">WHERE</span> 条件</span><br></pre></td></tr></table></figure></div>
+<p>语法很简单，需要注意的一点是，不要修改主键的值。因为主键是数据记录的唯一标识，如果修改了主键的值，就有可能会破坏数据的完整性。</p>
+<h2 id="4-查询数据"><a href="#4-查询数据" class="headerlink" title="4. 查询数据"></a>4. 查询数据</h2><p>经过了前面的操作之后，现在，我们知道了把数据存入数据表里，以及删除和修改表里数据的方法。</p>
+<p>那么如何知道数据操作的结果呢？这就要用到数据查询了。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span><span class="operator">|</span>字段列表</span><br><span class="line"><span class="keyword">FROM</span> 数据源</span><br><span class="line"><span class="keyword">WHERE</span> 条件</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> 字段</span><br><span class="line"><span class="keyword">HAVING</span> 条件</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> 字段</span><br><span class="line">LIMIT 起始点，行数</span><br></pre></td></tr></table></figure></div>
+<p>其中，</p>
+<ul>
+<li><code>SELECT</code>：是查询关键字，表示我们要做一个查询。*是一个通配符，表示我们要查询表中所有的字段。你也可以把要查询的字段罗列出来，这样，查询的结果可以只显示你想要查询的字段内容。</li>
+<li><code>WHERE</code>：表示查询条件。你可以把你要查询的数据所要满足的条件，放在 WHERE 关键字之后。</li>
+<li><code>GROUP BY</code>：作用是告诉 MySQL，查询结果要如何分组，经常与 MySQL 的<strong>聚合函数</strong>一起使用。</li>
+<li><code>HAVING</code>：用于筛选查询结果，跟 WHERE 类似。</li>
+</ul>
+<p>FROM、ORDER BY 和 LIMIT 相对来说比较复杂，需要注意的地方比较多，我来具体给你解释一下。</p>
+<h3 id="4-1-FROM"><a href="#4-1-FROM" class="headerlink" title="4.1 FROM"></a>4.1 FROM</h3><p>FROM 关键字表示<strong>查询的数据源</strong>。我们现在只学习了单个数据表，你可以把你要查询的数据表名，直接写在 FROM 关键字之后。</p>
+<p>以后学习关联表的时候，FROM 关键字后面，还可以跟着更复杂的数据表联接。所以，数据源也不一定是表，也可以是一个查询的结果。比如下面的查询：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.goodsname, a.price </span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">(<span class="keyword">SELECT</span> <span class="operator">*</span><span class="keyword">FROM</span> demo.goodsmaster) </span><br><span class="line"><span class="keyword">AS</span> a;</span><br></pre></td></tr></table></figure></div>
+<p>括号里的部分叫做派生表（derived table），或者子查询（subquery），意思是我们把一个查询结果数据集当做一个虚拟的数据表来看待。MySQL 规定，必须要用 <code>AS</code> 关键字给这个派生表起一个别名。在这张图中，我给这个派生表起了个名字，叫做<code>a</code>。</p>
+<h3 id="4-2-ORDER-BY"><a href="#4-2-ORDER-BY" class="headerlink" title="4.2 ORDER BY"></a>4.2 ORDER BY</h3><p>ORDER BY 的作用，是告诉 MySQL，查询结果如何排序。<code>ASC</code> 表示升序，<code>DESC</code> 表示降序。</p>
+<p>我来举个简单的小例子，带你看看 <code>ORDER BY</code> 是怎么使用的（这里我们仍然假设字段<code>specification</code>和<code>unit</code>允许为空）。我们向表 <code>demo.goodsmaster</code>中插入 2 条数据：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> demo.goodsmaster </span><br><span class="line">(</span><br><span class="line">	barcode,</span><br><span class="line">  goodsname,</span><br><span class="line">  price</span><br><span class="line">)</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(</span><br><span class="line">	<span class="string">&#x27;0003&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;尺子1&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;15&#x27;</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> demo.goodsmaster </span><br><span class="line">(</span><br><span class="line">	barcode,</span><br><span class="line">  goodsname,</span><br><span class="line">  price</span><br><span class="line">)</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(</span><br><span class="line">	<span class="string">&#x27;0004&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;测试1&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;20&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></div>
+<p>如果我们使用 ORDER BY 对查询结果进行控制时：<br><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span><span class="keyword">FROM</span> demo.goodsmaster <span class="keyword">ORDER</span> <span class="keyword">BY</span> barcode <span class="keyword">ASC</span>,price <span class="keyword">DESC</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> price <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span> 					<span class="operator">|</span> <span class="number">0003</span> 	 <span class="operator">|</span> 尺子<span class="number">1</span> 			<span class="operator">|</span> <span class="keyword">NULL</span> 					<span class="operator">|</span> <span class="keyword">NULL</span> 	<span class="operator">|</span> <span class="number">15.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span> 					<span class="operator">|</span> <span class="number">0003</span> 	 <span class="operator">|</span> 尺子 			<span class="operator">|</span> 三角型 				<span class="operator">|</span> 把		 <span class="operator">|</span> 	<span class="number">5.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span> 					<span class="operator">|</span> <span class="number">0004</span> 	 <span class="operator">|</span> 测试<span class="number">1</span>			<span class="operator">|</span> <span class="keyword">NULL</span> 					<span class="operator">|</span> <span class="keyword">NULL</span> 	<span class="operator">|</span> <span class="number">20.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span> 					<span class="operator">|</span> <span class="number">0004</span> 	 <span class="operator">|</span> 测试 			<span class="operator">|</span> <span class="keyword">NULL</span> 					<span class="operator">|</span> <span class="keyword">NULL</span> 	<span class="operator">|</span> <span class="number">10.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div></p>
+<p>可以看到，查询结果会先按照字段 <code>barcode</code> 的升序排序，相同 <code>barcode</code>里面的字段，按照 <code>price</code> 的降序排序。</p>
+<h3 id="4-3-LIMIT"><a href="#4-3-LIMIT" class="headerlink" title="4.3 LIMIT"></a>4.3 LIMIT</h3><p><code>LIMIT</code> 的作用是告诉 MySQL 只显示<strong>部分</strong>查询的结果。比如，现在我们的数据表<code>demo.goodsmaster</code>中有 4 条数据，我们只想要显示第 2、3 条数据，就可以用 LIMIT 关键字来实现：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">FROM</span> demo.goodsmater LIMIT <span class="number">1</span>,<span class="number">2</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> price <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span> 					<span class="operator">|</span> <span class="number">0004</span> 		<span class="operator">|</span> 测试 			<span class="operator">|</span> <span class="keyword">NULL</span> 					<span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="number">10.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span> 					<span class="operator">|</span> <span class="number">0003</span> 		<span class="operator">|</span> 尺子<span class="number">1</span>			<span class="operator">|</span> <span class="keyword">NULL</span>					<span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="number">15.00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+-------+</span></span><br></pre></td></tr></table></figure></div>
+<p>这里的<code>LIMIT 1,2</code>中，<code>1</code>表示起始位置，MySQL 中，起始位置的起点是 0，1 表示从第 2 条记录开始；<code>2</code>表示 2 条数据。因此，“LIMIT 1,2”就表示<strong>从第 2 条数据开始，显示 2 条数据</strong>，也就是显示了第 2、3 条数据。</p>
+<h2 id="5-ON-DUPLICATE-KEY-UPDATE"><a href="#5-ON-DUPLICATE-KEY-UPDATE" class="headerlink" title="5. ON DUPLICATE KEY UPDATE"></a>5. ON DUPLICATE KEY UPDATE</h2><p>这个关键字的作用是，告诉MySQL，如果遇到重复的数据，该如何处理。当执行INSTER操作时，若已经有存在的记录，执行UPDATE操作。</p>
+<p>举个例子。</p>
+<p>假设用户有 2 个各自独立的门店，分别有自己的系统。现在需要引入连锁经营的模式，把2 个店用一套系统统一管理。那么首先遇到的问题就是，需要进行数据整合。下面我们就以商品信息表为例，来说明如何通过使用<code>ON DUPLICATE</code>关键字，把两个门店的商品</p>
+<p>信息数据整合到一起。</p>
+<ul>
+<li>假设门店 A 的商品信息表是<code>demo.goodsmaster</code>，代码如下：</li>
+</ul>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span><span class="keyword">FROM</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> salesprice <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span> 				 <span class="operator">|</span> <span class="number">0001</span> 	 <span class="operator">|</span> 书 				<span class="operator">|</span> <span class="number">16</span>开   				<span class="operator">|</span> 本 	<span class="operator">|</span> <span class="number">89.00</span>			 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span> 				 <span class="operator">|</span> <span class="number">0002</span> 	 <span class="operator">|</span> 笔 				<span class="operator">|</span> <span class="number">10</span>支装  			 <span class="operator">|</span> 包    <span class="operator">|</span> <span class="number">5.00</span> 			<span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span> 				 <span class="operator">|</span> <span class="number">0003</span> 	 <span class="operator">|</span> 橡皮			 <span class="operator">|</span> <span class="keyword">NULL</span>   				<span class="operator">|</span> 个 	<span class="operator">|</span> <span class="number">3.00</span> 			 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>假设门店 B 的商品信息表是<code>demo.goodsmaster1</code>：</li>
+</ul>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> demo.goodsmaster1;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> salesprice <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span> 				 <span class="operator">|</span> <span class="number">0001</span> 	 <span class="operator">|</span> 教科书		 <span class="operator">|</span> <span class="keyword">NULL</span> 				 <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="number">89.00</span> 			<span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span> 				 <span class="operator">|</span> <span class="number">0004</span> 	 <span class="operator">|</span> 馒头 			<span class="operator">|</span> 							<span class="operator">|</span> 			<span class="operator">|</span> <span class="number">1.50</span> 			<span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<p>假设我们要把门店 B 的商品数据，插入到门店 A 的商品表中去</p>
+<ul>
+<li><p>如果有重复的商品编号，就用门店 B 的条码，替换门店 A 的条码，用门店 B 的商品名称，替换门店 A 的商品名称。</p>
+</li>
+<li><p>如果没有重复的编号，就直接把门店 B 的商品数据插入到门店 A 的商品表中。</p>
+<p>这个操作，就可以用下面的 SQL 语句实现：</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> demo.goodsmaster</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> demo.goodsmaster1 <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">ON</span> DUPLICATE KEY <span class="keyword">UPDATE</span> barcode <span class="operator">=</span> a.barcode,goodsname<span class="operator">=</span>a.goodsname;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行结果如下</span></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span><span class="keyword">FROM</span> demo.goodsmaster;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="operator">|</span> itemnumber <span class="operator">|</span> barcode <span class="operator">|</span> goodsname <span class="operator">|</span> specification <span class="operator">|</span> unit <span class="operator">|</span> salesprice <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span> 				 <span class="operator">|</span> <span class="number">0001</span> 	 <span class="operator">|</span> 教科书		  <span class="operator">|</span> <span class="number">16</span>开 				<span class="operator">|</span> 本 	 <span class="operator">|</span> <span class="number">89.00</span> 			<span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span> 				 <span class="operator">|</span> <span class="number">0002</span> 	 <span class="operator">|</span> 笔 				 <span class="operator">|</span><span class="number">10</span>支装 				 <span class="operator">|</span> 包    <span class="operator">|</span> <span class="number">5.00</span> 			 <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span> 				 <span class="operator">|</span> <span class="number">0003</span> 	 <span class="operator">|</span> 橡皮 			<span class="operator">|</span> <span class="keyword">NULL</span> 					<span class="operator">|</span> 个  	<span class="operator">|</span> <span class="number">3.00</span> 			  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span> 				 <span class="operator">|</span> <span class="number">0004</span> 	 <span class="operator">|</span> 馒头 			<span class="operator">|</span>  							<span class="operator">|</span> 		 <span class="operator">|</span> <span class="number">1.50</span> 			<span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+---------+-----------+---------------+------+------------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></div>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><p>今天，学习了<strong>添加、删除、修改和查询数据</strong>的方法。下面的这些 SQL 语句，一定要重点掌握。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 [(字段名 [,字段名] ...)] <span class="keyword">VALUES</span> (值的列表);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 （字段名）</span><br><span class="line"><span class="keyword">SELECT</span> 字段名或值</span><br><span class="line"><span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">WHERE</span> 条件</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">WHERE</span> 条件</span><br><span class="line"><span class="keyword">UPDATE</span> 表名</span><br><span class="line"><span class="keyword">SET</span> 字段名<span class="operator">=</span>值</span><br><span class="line"><span class="keyword">WHERE</span> 条件</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span><span class="operator">|</span>字段列表</span><br><span class="line"><span class="keyword">FROM</span> 数据源</span><br><span class="line"><span class="keyword">WHERE</span> 条件</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> 字段</span><br><span class="line"><span class="keyword">HAVING</span> 条件</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> 字段</span><br><span class="line">LIMIT 起始点，行数</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> 表名 <span class="keyword">as</span> 别名</span><br><span class="line"><span class="keyword">ON</span> DUPLICATE KEY <span class="keyword">UPDATE</span> 字段名 <span class="operator">=</span> 别名.字段名,别名.字段名;</span><br></pre></td></tr></table></figure></div>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/MySQL/">#MySQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/07/20/%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E9%93%BE%E8%A1%A8/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">代码随想录-链表</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/07/18/%E3%80%8AMySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%8B03%E4%B8%A8%E8%A1%A8%EF%BC%9A%E6%80%8E%E4%B9%88%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BF%AE%E6%94%B9%E8%A1%A8%EF%BC%9F/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">MySQL必知必会 03丨表：怎么创建和修改表？</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">MySQL必知必会 04丨增删改查：如何操作表中的数据？</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-text">1. 添加数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95"><span class="nav-text">1.1 插入数据记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%8F%92%E5%85%A5%E6%9F%A5%E8%AF%A2%E8%AE%B0%E5%BD%95"><span class="nav-text">1.2 插入查询记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-text">2. 删除数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-text">3. 修改数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-text">4. 查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-FROM"><span class="nav-text">4.1 FROM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-ORDER-BY"><span class="nav-text">4.2 ORDER BY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-LIMIT"><span class="nav-text">4.3 LIMIT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-ON-DUPLICATE-KEY-UPDATE"><span class="nav-text">5. ON DUPLICATE KEY UPDATE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%80%BB%E7%BB%93"><span class="nav-text">6. 总结</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 61 篇文章
+                    </span>
+                    
+                        <span>
+                            共 218k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

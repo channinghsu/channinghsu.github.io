@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Channing Hsu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://channinghsu.github.io/2023/08/03/《深入浅出计算机网络》第 1 章 概述/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入浅出计算机网络》第一章 概述">
+<meta property="og:url" content="https://channinghsu.github.io/2023/08/03/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E7%AC%AC%201%20%E7%AB%A0%20%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Channing Blog">
+<meta property="og:description" content="false">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/39abd09e271f46cbb1a0d4404244d2e265kTBB.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/e539e2a4a74e4946ad318d800d2bd82bAh2r5g.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/dd40d303cf1349719dae2a5c5c83c459UKTYsg.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/c358bea6520b4977af36f58a13e08d34UR7srO.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/6a85cc0fef414b2ebe5af697cec082d8oMmDHy.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/67a8a469714d44c19ecea519d1037b83xxJtEH.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/7df2c3b6aac048e0a3879c27e9f418b5hCypp8.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/5f18227be9794bdaa83a3c62521080feWP2yXA.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/a64fc23cc60a4b46b2112ff74990673awm8CSQ.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/baf3143957c040a98c7c2d17a2dba1a6D6MFVc3pLujo.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/2767665600824f5baf8995769b5d070ag9fZD8.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/ca67e1236b7140f2abde49665933f6dfDh0tIG.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/e702cc8cf0c34c8bade327ca268c64c0YjciXl.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/cf5e842d1ca342ef98c69e3cd9a343e9o4kskf.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/0a3a24fc0706499ba091b23e7c81c9543pABGx.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/6183c881c76145b59209fb6751a9a2992HyzBK.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/7bf46e811314401d8e42c2ba0d36bcebW3eRKM.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/fd5262a51a684fbfbeb308f406fea52clHTzWj.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/164d2353d7254d49bf9d44c6e3f2ea7au7Xvfk.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/196be52fbeee4c3a93e1b256e45aa530ccOHAX.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/dd659788bc1541b6ae0ef95c89efb4f8grQGwL.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/87ba5454bb484f11b6791069468622c5-20230803110904484pdNZl6.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/0bb4d9af07f945fb9a07ef5412215254N5YHpF.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/image-20230803100312341aRJMKd.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/68c510dec8a34efcb2f69f567afa5d2bKVI0ZR.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/16d8da3d37c146a7a3f88ec5bc9bb6c66y7MbE.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/d6f21d73d1cf4f0a9434a30a498cf8b62DtdLp.png">
+<meta property="article:published_time" content="2023-08-03T01:06:32.000Z">
+<meta property="article:modified_time" content="2023-12-24T07:57:09.096Z">
+<meta property="article:author" content="Channing Hsu">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/39abd09e271f46cbb1a0d4404244d2e265kTBB.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/elasticcloud.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/elasticcloud.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/elasticcloud.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            《深入浅出计算机网络》第一章 概述 -
+        
+        Channing&#39;s Blog
+    </title>
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/anime.min.js"></script>
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"channinghsu.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light.jpg","dark":"/images/dark.jpg"},"title":"蟹 堡 王 年 度 优 秀 老 板","subtitle":{"text":["永远 是学生","永远 热爱生活","永远 年轻","永远 热泪盈眶","蟹堡王汉堡~好好好~"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/channinghsu","instagram":"https://www.instagram.com/hsuchanning/","zhihu":null,"twitter":null,"email":"xu.baicheng@foxmail.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/03/01 15:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Channing&#39;s Blog
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Channing&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">61</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">《深入浅出计算机网络》第一章 概述</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/me.JPG">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Channing Hsu</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-03 09:06:32</span>
+        <span class="mobile">2023-08-03 09:06:32</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-12-24 15:57:09</span>
+            <span class="mobile">2023-12-24 15:57:09</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>6 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h2 id="1-1-因特网概述"><a href="#1-1-因特网概述" class="headerlink" title="1.1 因特网概述"></a>1.1 因特网概述</h2><ol>
+<li><p>若干节点和链路互连形成网络</p>
+</li>
+<li><p>若干网络通过路由器互连形成互连网（互联网）</p>
+</li>
+<li><p>因特网是当今世界上最大的互联网</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/39abd09e271f46cbb1a0d4404244d2e265kTBB.png"
+                      alt="在这里插入图片描述"
+                ></p>
+</li>
+</ol>
+<h2 id="1-2-电路交换、分组交换和报文交换"><a href="#1-2-电路交换、分组交换和报文交换" class="headerlink" title="1.2 电路交换、分组交换和报文交换"></a>1.2 电路交换、分组交换和报文交换</h2><h3 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h3><p>由于链路一直存在，占用资源，导致线路传输效率一般都会很低。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/e539e2a4a74e4946ad318d800d2bd82bAh2r5g.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><p>将 h1 的数据传输到 h3 的设备上来，考虑到中间交换机的缓存容量，所以采用报文的方式，<strong>将长数据分解成一段段的带首部的短数据</strong>。</p>
+<p>分组交换网中的节点先缓存短数据，然后从首部中提取出目的地址，按照目的地址查找自己的转发表，找到相应的转发接口后，将分组转发出去把分组交给下一个转发节点，经过多个节点的存储转发后，分组最终转发到目的主机。</p>
+<p>主机 h3 接收到数据后，去掉首部，将各数据段组合还原出原始报文。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/dd40d303cf1349719dae2a5c5c83c459UKTYsg.png"
+                      alt=""
+                ></p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>没有建立连接和释放连接诶的过程</li>
+<li>分组传输过程中逐段占用通信链路，有较高的通信线路利用率。</li>
+<li>交换节点可以为每一个分组独立选择转发路由，使得网络有很好的生存性。</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>分组首部带来了额外的传输开销。</li>
+<li>交换节点存储转发分组会造成一定的时延。</li>
+<li>无法确保通信时端到端通信资源全部可用，在通信量较大时可能造成网络拥塞</li>
+<li>分组可能会出现失序和丢失等问题。</li>
+</ul>
+<h3 id="报文交换"><a href="#报文交换" class="headerlink" title="报文交换"></a>报文交换</h3><ul>
+<li>报文交换是分组交换的前身。</li>
+<li>在报文交换中，报文被整个地发送，而不是拆分成若干个分组进行发送。</li>
+<li>交换节点将报文整体接收完成后才能查找转发表，将整个报文转发到下一个节点。</li>
+<li>因此，报文交换比分组交换带来的转发时延要长很多，需要交换节点具有的缓存空间也大很多。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/c358bea6520b4977af36f58a13e08d34UR7srO.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<ul>
+<li>若要<strong>连续传送大量的数据</strong>，并且<strong>数据传送时间远大于建立连接的时间</strong>，则使用<strong>电路交换</strong>可以有较高的传输效率。然而计算机的数据传送往往是突发式的，采用电路交换时通信线路的<strong>利用率会很低</strong>。</li>
+<li><strong>报文</strong>交换和<strong>分组</strong>交换都<strong>不需要建立连接</strong>（即预先分配通信资源），在传送计算机的突发数据时可以提高通信线路的利用率。</li>
+<li>将报文构造成若干个更小的分组进行<strong>分组</strong>交换，比将整个报文进行报文交换的<strong>时延</strong>要小，并且还可以避免太长的报文长时间<strong>占用链路</strong>，有利于差错控制，同时具有更好的<strong>灵活性</strong>。</li>
+</ul>
+<h2 id="1-3-计算机网络的定义和分类"><a href="#1-3-计算机网络的定义和分类" class="headerlink" title="1.3 计算机网络的定义和分类"></a>1.3 计算机网络的定义和分类</h2><h3 id="1-3-1-计算机网络的定义"><a href="#1-3-1-计算机网络的定义" class="headerlink" title="1.3.1 计算机网络的定义"></a>1.3.1 计算机网络的定义</h3><p>现阶段计算机网络的一个较好的定义：计算机网络主要是由一些<strong>通用的、可编程的硬件</strong>互连而成的，而这些硬件并非专门用来实现某一特定目的（例如，传送数据或视频信号）。这些可编程的硬件能够用来<strong>传送多种不同类型的数据</strong>，并能<strong>支持广泛的和日益增长的应用</strong>。</p>
+<ul>
+<li>可编程的硬件：不限于计算机，而是包括了智能手机、具有网络功能的传感器以及智能家电等智能硬件，这些硬件一定包含有中央处理单元（CPU）。</li>
+<li>各类应用：计算机网络并非只用来传送数据，而是能够基于数据传送，进而实现各种各样的应用，包括今后可能出现的各种应用。</li>
+</ul>
+<h3 id="1-3-1-计算机网络的分类"><a href="#1-3-1-计算机网络的分类" class="headerlink" title="1.3.1 计算机网络的分类"></a>1.3.1 计算机网络的分类</h3><ul>
+<li><p>交换方式：电路交换、报文交换、分组交换</p>
+</li>
+<li><p>使用者：公用网（因特网）、专用网（军队、铁路、电力、银行）</p>
+</li>
+<li><p>传输介质：有线网络、无线网络</p>
+</li>
+<li><p>覆盖范围：</p>
+<ul>
+<li>广域网（WAN）：几十~几千千米</li>
+<li>城域网（MAN）：5~50千米</li>
+<li>局域网（LAN）：1千米</li>
+<li>个域网（PAN）：10米</li>
+</ul>
+</li>
+<li><p>拓扑结构</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/6a85cc0fef414b2ebe5af697cec082d8oMmDHy.png"
+                      alt="在这里插入图片描述"
+                ></p>
+</li>
+</ul>
+<h3 id="1-4-计算机网络的性能指标"><a href="#1-4-计算机网络的性能指标" class="headerlink" title="1.4 计算机网络的性能指标"></a>1.4 计算机网络的性能指标</h3><p>计算机网络的性能指标被用来从不同方面度量计算机网络的性能，常用的八个计算机网络性能指标：<strong>速率、带宽、吞吐量、时延、时延带宽积、往返时间、利用率、丢包率</strong>。</p>
+<ul>
+<li><strong>比特</strong>（bit，记为小写b）是计算机中数据量的基本单位，一个比特就是<strong>二进制数字中的一个1或0</strong>。</li>
+<li><strong>数据量</strong>的常用单位有字节（byte，记为B）、千字节（KB）、兆字节（MB）、吉字节（GB）以及太字（TB）</li>
+<li><strong>速率</strong>是指数据的传送速率（即每秒传送多少个比特），也称为数据率（Data Rate）或比特率（Bit Rate）<ul>
+<li><strong>速率</strong>的基本单位是<strong>比特/秒</strong>（bit/s，可简记为b/s，有时也记为bps，即bit per second）。</li>
+<li><strong>速率</strong>的常用单位有<ul>
+<li>千比特/秒（kb/s或kbps）</li>
+<li>兆比特/秒（Mb/s或Mbps）</li>
+<li>吉比特/秒（Gb/s或Gbps）</li>
+<li>太比特/秒（Tb/s或Tbps）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-1速率"><a href="#1-4-1速率" class="headerlink" title="1.4.1速率"></a>1.4.1速率</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/67a8a469714d44c19ecea519d1037b83xxJtEH.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/7df2c3b6aac048e0a3879c27e9f418b5hCypp8.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="1-4-2-带宽"><a href="#1-4-2-带宽" class="headerlink" title="1.4.2 带宽"></a>1.4.2 带宽</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/5f18227be9794bdaa83a3c62521080feWP2yXA.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/a64fc23cc60a4b46b2112ff74990673awm8CSQ.png"
+                      alt=""
+                ></p>
+<h3 id="1-4-3-吞吐量"><a href="#1-4-3-吞吐量" class="headerlink" title="1.4.3 吞吐量"></a>1.4.3 吞吐量</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/baf3143957c040a98c7c2d17a2dba1a6D6MFVc3pLujo.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="1-4-4-时延"><a href="#1-4-4-时延" class="headerlink" title="1.4.4 时延"></a>1.4.4 时延</h3><p>时延是指<strong>数据从网络的一端传送到另一端所耗费的时间</strong>，也称为<strong>延迟</strong>或迟延。 数据可由一个或多个分组、甚至是一个比特构成。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/2767665600824f5baf8995769b5d070ag9fZD8.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/ca67e1236b7140f2abde49665933f6dfDh0tIG.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="1-4-5-时延带宽积"><a href="#1-4-5-时延带宽积" class="headerlink" title="1.4.5 时延带宽积"></a>1.4.5 时延带宽积</h3><p>时延带宽积是<strong>传播时延和带宽的乘积。</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/e702cc8cf0c34c8bade327ca268c64c0YjciXl.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/cf5e842d1ca342ef98c69e3cd9a343e9o4kskf.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="1-4-6-往返时间"><a href="#1-4-6-往返时间" class="headerlink" title="1.4.6 往返时间"></a>1.4.6 往返时间</h3><p>往返时间（Round-Trip Time，RTT）是指从发送端<strong>发送数据分组</strong>开始，到发送端收到接收端发来的相应<strong>确认分组</strong>为止，总共耗费的时间。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/0a3a24fc0706499ba091b23e7c81c9543pABGx.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="1-4-7-利用率"><a href="#1-4-7-利用率" class="headerlink" title="1.4.7 利用率"></a>1.4.7 利用率</h3><h2 id="1-5-计算机网络的体系结构"><a href="#1-5-计算机网络的体系结构" class="headerlink" title="1.5 计算机网络的体系结构"></a>1.5 计算机网络的体系结构</h2><h3 id="1-5-1-常见的三种计算机网络体系结构"><a href="#1-5-1-常见的三种计算机网络体系结构" class="headerlink" title="1.5.1 常见的三种计算机网络体系结构"></a>1.5.1 常见的三种计算机网络体系结构</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/6183c881c76145b59209fb6751a9a2992HyzBK.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/7bf46e811314401d8e42c2ba0d36bcebW3eRKM.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="1-5-2-计算机网络体系结构分层的必要性"><a href="#1-5-2-计算机网络体系结构分层的必要性" class="headerlink" title="1.5.2 计算机网络体系结构分层的必要性"></a>1.5.2 计算机网络体系结构分层的必要性</h3><p>计算机网络是个非常复杂的系统，“分层”可将庞大复杂的问题转化为若干较小的局部问题。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/fd5262a51a684fbfbeb308f406fea52clHTzWj.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/164d2353d7254d49bf9d44c6e3f2ea7au7Xvfk.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/196be52fbeee4c3a93e1b256e45aa530ccOHAX.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC//Picsee/dd659788bc1541b6ae0ef95c89efb4f8grQGwL.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/87ba5454bb484f11b6791069468622c5-20230803110904484pdNZl6.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/0bb4d9af07f945fb9a07ef5412215254N5YHpF.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h3 id="1-5-3-计算机网络体系结构分层思想举例"><a href="#1-5-3-计算机网络体系结构分层思想举例" class="headerlink" title="1.5.3 计算机网络体系结构分层思想举例"></a>1.5.3 计算机网络体系结构分层思想举例</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/image-20230803100312341aRJMKd.png"
+                      alt="image-20230803100312341"
+                ></p>
+<h3 id="1-5-4-计算机网络体系结构中的专用术语"><a href="#1-5-4-计算机网络体系结构中的专用术语" class="headerlink" title="1.5.4 计算机网络体系结构中的专用术语"></a>1.5.4 计算机网络体系结构中的专用术语</h3><h4 id="实体"><a href="#实体" class="headerlink" title="实体"></a>实体</h4><ul>
+<li>实体是指任何可发送或接收信息的硬件或软件进程。</li>
+<li>对等实体是指通信双方相同层次中的实体。</li>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/68c510dec8a34efcb2f69f567afa5d2bKVI0ZR.png"
+                      alt="在这里插入图片描述"
+                ></li>
+</ul>
+<h4 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/16d8da3d37c146a7a3f88ec5bc9bb6c66y7MbE.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<h4 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h4><ul>
+<li>在协议的控制下，两个对等实体在水平方向的逻辑通信使得本层能够向上一层提供服务。要实现本层协议，还需要使用下面一层所提供的服务。</li>
+<li>协议是“水平”的，而服务是“垂直”的。实体看得见下层提供的服务，但并不知道实现该服务的具体协议。下层的协议对上层的实体是“透明”的。</li>
+<li>在同一系统中相邻两层的实体交换信息的逻辑接口称为服务访问点SAP，它被用于区分不同的服务类型。帧的“类型”字段、IP数据报的“协议”字段，TCP报文段或UDP用户数据报的“端口号”字段都是SAP。</li>
+<li>上层要使用下层所提供的服务，必须通过与下层交换一些命令，这些命令称为服务原语。</li>
+<li>对等层次之间传送的数据包称为该层的协议数据单元（Protocol Data Unit，PDU）。同一系统内层与层之交换的数据包称为服务数据单元（Service Data Unit，SDU）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://cdn.jsdelivr.net/gh/channinghsu/myPIC/Picsee/d6f21d73d1cf4f0a9434a30a498cf8b62DtdLp.png"
+                      alt="在这里插入图片描述"
+                ></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/08/03/%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8F%8C%E6%8C%87%E9%92%88/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">代码随想录-双指针总结</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/08/02/%E3%80%8AMySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%8B10%E4%B8%A8%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E5%AD%A6%E8%AE%A1%E7%AE%97%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%92%8C%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%EF%BC%9F/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">MySQL必知必会 10丨如何进行数学计算、字符串处理和条件判断？</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-comments-lazzyxi3p-channinghsu.vercel.app/',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">《深入浅出计算机网络》第一章 概述</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%9B%A0%E7%89%B9%E7%BD%91%E6%A6%82%E8%BF%B0"><span class="nav-text">1.1 因特网概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E3%80%81%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%E5%92%8C%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2"><span class="nav-text">1.2 电路交换、分组交换和报文交换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="nav-text">电路交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-text">分组交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2"><span class="nav-text">报文交换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%86%E7%B1%BB"><span class="nav-text">1.3 计算机网络的定义和分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">1.3.1 计算机网络的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">1.3.1 计算机网络的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-text">1.4 计算机网络的性能指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1%E9%80%9F%E7%8E%87"><span class="nav-text">1.4.1速率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E5%B8%A6%E5%AE%BD"><span class="nav-text">1.4.2 带宽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-text">1.4.3 吞吐量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4-%E6%97%B6%E5%BB%B6"><span class="nav-text">1.4.4 时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-5-%E6%97%B6%E5%BB%B6%E5%B8%A6%E5%AE%BD%E7%A7%AF"><span class="nav-text">1.4.5 时延带宽积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-6-%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4"><span class="nav-text">1.4.6 往返时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-7-%E5%88%A9%E7%94%A8%E7%8E%87"><span class="nav-text">1.4.7 利用率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">1.5 计算机网络的体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%89%E7%A7%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">1.5.1 常见的三种计算机网络体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%88%86%E5%B1%82%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7"><span class="nav-text">1.5.2 计算机网络体系结构分层的必要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-text">物理层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-text">数据链路层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82"><span class="nav-text">运输层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3%E4%B8%BE%E4%BE%8B"><span class="nav-text">1.5.3 计算机网络体系结构分层思想举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-4-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%B8%AD%E7%9A%84%E4%B8%93%E7%94%A8%E6%9C%AF%E8%AF%AD"><span class="nav-text">1.5.4 计算机网络体系结构中的专用术语</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Channing Hsu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 61 篇文章
+                    </span>
+                    
+                        <span>
+                            共 218k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine/2.6.4/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
