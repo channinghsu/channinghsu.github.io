@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ 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 }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
       - name: Use Node.js 20
