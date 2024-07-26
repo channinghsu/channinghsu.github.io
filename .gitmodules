@@ -1,3 +1,6 @@
 [submodule "themes/redefine"]
 	path = themes/redefine
 	url = https://github.com/EvanNotFound/hexo-theme-redefine
+[submodule "source/_posts"]
+	path = source/_posts
+	url = https://github.com/channinghsu/Blog-Post
