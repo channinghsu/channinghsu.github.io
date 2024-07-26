@@ -13,39 +13,14 @@ jobs:
           token: ${{ secrets.DEPLOY_KEY }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
-          fetch-depth: 0 
 
-      - name: Set Git Config
+      - name: Clone latest posts
         run: |
-          git config --global user.email "xu.baicheng@foxmail.com"
-          git config --global user.name "Channing Hsu"
-
-      - name: Reset submodule
-        run: |
-          # 删除 .gitmodules 文件中的子模块条目
-          sed -i '/\[submodule "source\/_posts"\]/,+2d' .gitmodules
-          
-          # 删除 .git/config 中的子模块条目
-          git config --local --remove-section submodule.source/_posts || true
-          
-          # 删除 .git/modules 中的子模块
-          rm -rf .git/modules/source/_posts
-          
-          # 删除子模块目录
+          # 删除现有的 _posts 目录（如果存在）
           rm -rf source/_posts
-          
-          # 重新添加子模块
-          git submodule add -b main https://github.com/channinghsu/Blog-Post.git source/_posts
-          
-          # 初始化和更新子模块
-          git submodule update --init --recursive
-          
-          # 提交更改
-          git add .gitmodules source/_posts
-          git commit -m "Reset source/_posts submodule to latest main" || echo "No changes to commit"
-          
-          # 推送更改
-          git push
+          # 克隆最新的文章仓库
+          git clone https://github.com/channinghsu/Blog-Post.git source/_posts
+
       - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
