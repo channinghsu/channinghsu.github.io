@@ -14,6 +14,11 @@ jobs:
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
 
+      - name: Set Git Config
+        run: |
+          git config --global user.email "xu.baicheng@foxmail.com"
+          git config --global user.name "Channing Hsu"
+
       - name: Update Submodules
         run: |
           git submodule sync
