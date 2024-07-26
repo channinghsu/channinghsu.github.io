@@ -13,6 +13,7 @@ jobs:
           token: ${{ secrets.DEPLOY_KEY }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
+          fetch-depth: 0 
 
       - name: Set Git Config
         run: |
@@ -21,9 +22,13 @@ jobs:
 
       - name: Update submodules
         run: |
-          git submodule update --remote --recursive
-          git add .
-          git commit -m "Update submodules to latest" || echo "No changes to commit"
+          git submodule update --init --recursive
+          cd source/_posts
+          git fetch --all
+          git reset --hard origin/main
+          cd ../..
+          git add source/_posts
+          git commit -m "Update submodule source/_posts to latest main" || echo "No changes to commit"
           git push
 
       - name: Use Node.js 20
