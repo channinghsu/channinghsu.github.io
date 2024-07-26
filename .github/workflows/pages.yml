@@ -19,13 +19,28 @@ jobs:
           git config --global user.email "xu.baicheng@foxmail.com"
           git config --global user.name "Channing Hsu"
 
-      - name: Update Submodules
+      - name: Update Submodules to Latest Commit
         run: |
-          git submodule sync
-          git submodule update --init --force --recursive || echo "Failed to update submodules"
-          git submodule foreach 'git fetch origin main || echo "Failed to fetch"; git merge -X theirs origin/main --allow-unrelated-histories || echo "Failed to merge"'
+          # Update submodules to ensure they are initialized
+          git submodule update --init --recursive
+
+          # Loop through each submodule and update
+          git submodule foreach '
+            echo "Updating submodule $path"
+            git checkout main
+            git fetch origin
+            latest_commit=$(git rev-parse origin/main)
+            echo "Latest commit in main branch: $latest_commit"
+            git checkout $latest_commit
+          '
+
+          # Stage the changes in the main repository
           git add .
-          git commit -m "Update submodules to latest commit" || echo "No changes to commit"
+
+          # Commit the changes
+          git commit -m "Update submodules to latest commit from main branch" || echo "No changes to commit"
+
+          # Push the changes to the remote repository
           git push || echo "No changes to push"
 
       - name: Use Node.js 20
