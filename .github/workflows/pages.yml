@@ -18,10 +18,8 @@ jobs:
         env:
           GH_PAT: ${{ secrets.MY_TOKEN }}
         run: |
-          # 删除现有的 _posts 目录（如果存在）
           rm -rf source/_posts
-          # 克隆最新的文章仓库
-          git clone https://github.com/channinghsu/Blog-Post.git source/_posts
+          git clone https://$GH_PAT@github.com/channinghsu/Blog-Post.git source/_posts
 
       - name: Use Node.js 20
         uses: actions/setup-node@v4
