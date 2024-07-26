@@ -22,8 +22,8 @@ jobs:
       - name: Update Submodules
         run: |
           git submodule sync
-          git submodule update --init --recursive
-          git submodule foreach 'git fetch origin main && git merge -X theirs origin/main --allow-unrelated-histories'
+          git submodule update --init --force --recursive || echo "Failed to update submodules"
+          git submodule foreach 'git fetch origin main || echo "Failed to fetch"; git merge -X theirs origin/main --allow-unrelated-histories || echo "Failed to merge"'
           git add .
           git commit -m "Update submodules to latest commit" || echo "No changes to commit"
           git push || echo "No changes to push"
