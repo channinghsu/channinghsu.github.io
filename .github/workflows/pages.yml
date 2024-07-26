@@ -20,26 +20,37 @@ jobs:
           git config --global user.email "xu.baicheng@foxmail.com"
           git config --global user.name "Channing Hsu"
 
-      - name: Remove and re-add submodule
+      - name: Update submodule
         run: |
-          # 移除子模块
-          git submodule deinit -f -- source/_posts
-          rm -rf .git/modules/source/_posts
-          git rm -f source/_posts
+          # 删除现有的子模块目录
+          rm -rf source/_posts
           
-          # 重新添加子模块
-          git submodule add -b main https://github.com/channinghsu/Blog-Post.git source/_posts
+          # 克隆子模块仓库
+          git clone https://github.com/channinghsu/Blog-Post.git source/_posts
           
-          # 更新和初始化子模块
-          git submodule update --init --recursive
+          # 进入子模块目录
+          cd source/_posts
+          
+          # 获取最新的提交 hash
+          LATEST_COMMIT=$(git rev-parse HEAD)
+          
+          # 返回主仓库目录
+          cd ../..
+          
+          # 更新 .gitmodules 文件
+          git config -f .gitmodules submodule.source/_posts.url https://github.com/channinghsu/Blog-Post.git
+          git config -f .gitmodules submodule.source/_posts.branch main
+          
+          # 更新子模块
+          git submodule init
+          git submodule update --remote source/_posts
           
           # 提交更改
           git add .gitmodules source/_posts
-          git commit -m "Re-add source/_posts submodule pointing to main branch" || echo "No changes to commit"
+          git commit -m "Update submodule source/_posts to latest commit: $LATEST_COMMIT" || echo "No changes to commit"
           
           # 推送更改
           git push
-
       - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
