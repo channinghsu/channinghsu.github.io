@@ -18,10 +18,11 @@ jobs:
         run: |
           git submodule sync
           git submodule update --init --recursive
-          git submodule foreach 'git config pull.rebase true && git pull origin main'
+          git submodule foreach 'git fetch origin main && git merge -X theirs origin/main'
           git add .
           git commit -m "Update submodules to latest commit"
           git push
+
           
       - name: Use Node.js 20
         uses: actions/setup-node@v4
