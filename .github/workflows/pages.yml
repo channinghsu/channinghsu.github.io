@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.DEPLOY_KEY }}
+          token: ${{ secrets.MY_TOKEN }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
 
       - name: Clone latest posts
         env:
-          GH_PAT: ${{ secrets.DEPLOY_KEY }}
+          GH_PAT: ${{ secrets.MY_TOKEN }}
         run: |
           # 删除现有的 _posts 目录（如果存在）
           rm -rf source/_posts
