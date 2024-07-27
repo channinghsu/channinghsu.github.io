@@ -180,9 +180,9 @@ navbar:
     Tags:
       path: /tags
       icon: fa-regular fa-tags
-    # Categories: #取名随意
-    #   icon: fa-regular fa-folder #图标
-    #   path: /categories/ #链接
+    Categories: #取名随意
+      icon: fa-regular fa-folder #图标
+      path: /categories/ #链接
     Archives:
       path: /archives
       icon: fa-regular fa-archive # can be empty
