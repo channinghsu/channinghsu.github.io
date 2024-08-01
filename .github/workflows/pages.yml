@@ -57,3 +57,16 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+  deploy-zeabur:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Zeabur
+        run: |
+          curl -X POST https://gateway.zeabur.com/api/v1/projects/66ab312e2b149fee81b95b4b/deployments \
+          -H "Authorization: Bearer ${{ secrets.ZEABUR_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+                "branch": "main",
+                "directory": "./public"
+              }'
