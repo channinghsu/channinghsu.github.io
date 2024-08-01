@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Compress built files
-        run: zip -r site.zip ./public
+        run: zip -r site.zip ./source
 
       - name: Deploy to Zeabur
         env:
