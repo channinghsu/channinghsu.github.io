@@ -63,7 +63,7 @@ jobs:
     steps:
       - name: Deploy to Zeabur
         run: |
-          curl -X POST https://gateway.zeabur.com/api/v1/projects/66ab312e2b149fee81b95b4b/deployments \
+          curl -X POST https://gateway.zeabur.com/api/v1/users/me \
           -H "Authorization: Bearer ${{ secrets.ZEABUR_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{
