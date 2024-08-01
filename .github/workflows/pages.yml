@@ -11,7 +11,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.MY_TOKEN }}
-          # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
 
       - name: Clone latest posts
@@ -44,26 +43,34 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-  deploy-zeabur:
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - name: Compress built files
-          run: zip -r site.zip public
 
-        - name: Deploy to Zeabur
-          env:
-            ZEABUR_API_KEY: ${{ secrets.ZEABUR_TOKEN }}
-            PROJECT_ID: 66ab309eee5fff299348eda0
-            SERVICE_ID: 66ab312eee5fff299348edaf
-            ENVIRONMENT_ID: 66ab309e654859a82e0754bb
-          run: |
-            curl --request POST \
-              --url https://gateway.zeabur.com/projects/$PROJECT_ID/services/$SERVICE_ID/deploy \
-              --header "Authorization: Bearer $ZEABUR_API_KEY" \
-              --header "Content-Type: application/json" \
-              --data-binary @site.zip \
-              --data '{"environment": "'$ENVIRONMENT_ID'"}'
+  deploy-zeabur:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print working directory
+        run: pwd
+
+      - name: List files
+        run: ls -la
+
+      - name: Compress built files
+        run: zip -r site.zip ./public
+
+      - name: Deploy to Zeabur
+        env:
+          ZEABUR_API_KEY: ${{ secrets.ZEABUR_TOKEN }}
+          PROJECT_ID: 66ab309eee5fff299348eda0
+          SERVICE_ID: 66ab312eee5fff299348edaf
+          ENVIRONMENT_ID: 66ab309e654859a82e0754bb
+        run: |
+          curl --request POST \
+            --url https://gateway.zeabur.com/projects/$PROJECT_ID/services/$SERVICE_ID/deploy \
+            --header "Authorization: Bearer $ZEABUR_API_KEY" \
+            --header "Content-Type: application/json" \
+            --data-binary @site.zip \
+            --data '{"environment": "'$ENVIRONMENT_ID'"}'
+
   deploy:
     needs: build
     permissions:
@@ -77,4 +84,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
