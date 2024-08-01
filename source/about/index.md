@@ -3,7 +3,7 @@ title: 👋🏻Hi there
 date: 2023-03-02 18:49:20
 ---
 
-## 👋🏻Hi there, This is *Channing Hsu* <span style="float: right; transform: scale(0.7); margin-top: -28px;">{% btn center::::https://channinghsu.github.io/about_zh/::fa-solid fa-language %}</span>
+## 👋🏻Hi there, This is *Channing Hsu* <span style="float: right; transform: scale(0.7); margin-top: -28px;">{% btn center::::https://channinghsu.com/about_zh/::fa-solid fa-language %}</span>
 
 {% btn regular::GitHub::https://github.com/channinghsu::fa-brands fa-github %}
 {% btn regular::Blog::https://channinghsu.github.io/::fa-solid fa-blog %}

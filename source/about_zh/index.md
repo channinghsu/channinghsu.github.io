@@ -3,7 +3,7 @@ title: 👋🏻你好呀
 date: 2023-03-09 10:27:07
 ---
 
-## 👋🏻你好呀，我叫 *徐百成* <span style="float: right; transform: scale(0.7); margin-top: -28px;">{% btn center::::https://channinghsu.github.io/about/::fa-solid fa-language %}</span>
+## 👋🏻你好呀，我叫 *徐百成* <span style="float: right; transform: scale(0.7); margin-top: -28px;">{% btn center::::https://channinghsu.com/about/::fa-solid fa-language %}</span>
 
 {% btn regular::GitHub::https://github.com/channinghsu::fa-brands fa-github %} 
 {% btn regular::Blog::https://channinghsu.github.io/::fa-solid fa-blog %} 
