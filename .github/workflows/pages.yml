@@ -43,21 +43,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-
-  deploy:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
+          
       - name: Checkout deploy repo
         uses: actions/checkout@v3
         with:
@@ -77,4 +63,18 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git add .
           git commit -m "Deploy new static files"
-          git push origin main
+          git push origin gh-pages
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
