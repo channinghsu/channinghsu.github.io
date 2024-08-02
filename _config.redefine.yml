@@ -112,7 +112,7 @@ home_banner:
   # Home banner image
   image:
     light: /images/light.webp # light mode
-    dark: /images/dark.webp# dark mode
+    dark: /images/dark.jpg# dark mode
   # Home banner title
   title: 蟹 堡 王 年 度 优 秀 老 板
   # Home banner subtitle
