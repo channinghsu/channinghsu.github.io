@@ -9,11 +9,12 @@
     "server": "hexo server"
   },
   "hexo": {
-    "version": "6.3.0"
+    "version": "7.3.0"
   },
   "dependencies": {
     "@waline/client": "^3.3.0",
     "hexo": "^7.3.0",
+    "hexo-all-minifier": "^0.5.7",
     "hexo-deployer-git": "^4.0.0",
     "hexo-filter-mathjax": "^0.9.0",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
@@ -30,11 +31,8 @@
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^1.0.0",
     "hexo-theme-redefine": "^2.6.4",
-    "hexo-theme-volantis": "^5.7.7",
     "hexo-wordcount": "^6.0.1",
-    "live2d-widget-model-hijiki": "^1.0.5",
-    "live2d-widget-model-tororo": "^1.0.5"
+    "live2d-widget-model-hijiki": "^1.0.5"
   }
 }
