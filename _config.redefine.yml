@@ -63,7 +63,7 @@ global:
   # Effects on mouse hover
   hover:
     shadow: true # shadow effect
-    scale: false # scale effect
+    scale: true # scale effect
   # Scroll progress
   scroll_progress:
     bar: false # progress bar
@@ -78,7 +78,7 @@ global:
   # Whether to enable single page experience (using swup). See https://swup.js.org/. similar to pjax
   single_page: true
   # Whether to enable Preloader.
-  preloader: true
+  preloader: false
   # Whether to enable open graph
   open_graph: true
   # Google Analytics
@@ -211,7 +211,7 @@ navbar:
     # Whether to enable
     enable: true
     # Preload search data when the page loads
-    preload: true
+    preload: false
 # NAVIGATION BAR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
