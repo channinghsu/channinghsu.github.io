@@ -117,7 +117,7 @@ home_banner:
   title: 蟹 堡 王 年 度 优 秀 老 板
   # Home banner subtitle
   subtitle:
-    text: ['永远 是学生','永远 热爱生活','永远 年轻','永远 热泪盈眶','蟹堡王汉堡~好好好~'] # subtitle text, array
+    text: ['永远 是学生','永远 热爱生活','永远 年轻','永远 热泪盈眶','When you know you know~'] # subtitle text, array
     typing_speed: 100 # Typing speed (ms)
     backing_speed: 80 # Backing speed (ms)
     starting_delay: 500 # Start delay (ms)
