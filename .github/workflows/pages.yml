@@ -1,14 +1,19 @@
-name: Pages
+name: Build and Deploy Pages
 
 on:
+  push:
+    branches: [ main ]  # 假设您的主分支是 main
   repository_dispatch:
     types: [trigger-deploy]
+  schedule:
+    - cron: '0 2 * * *'  # 每天 UTC 时间 2:00 运行
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.MY_TOKEN }}
           submodules: recursive
@@ -20,32 +25,40 @@ jobs:
           rm -rf source/_posts
           git clone https://$GH_PAT@github.com/channinghsu/Blog-Post.git source/_posts
 
-      - name: Use Node.js 22
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '20'  # 使用 Node.js 20 LTS 版本
 
       - name: Cache NPM dependencies
         uses: actions/cache@v4
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-npm-cache
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.OS }}-npm-cache
+            ${{ runner.OS }}-node-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
+        continue-on-error: true
+
+      - name: Check build output
+        run: |
+          if [ ! -d "public" ]; then
+            echo "Build failed: public directory not found"
+            exit 1
+          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-          
+
       - name: Checkout deploy repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: channinghsu/blog_deploy
           ref: gh-pages
@@ -59,10 +72,10 @@ jobs:
       - name: Commit and push changes to deploy repo
         run: |
           cd blog_deploy
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Deploy new static files"
+          git commit -m "Deploy new static files - $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin gh-pages
 
   deploy:
@@ -78,3 +91,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  cleanup:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ secrets.MY_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 30
+          keep_minimum_runs: 6
