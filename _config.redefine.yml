@@ -114,7 +114,7 @@ home_banner:
     light: /images/light.webp # light mode
     dark: /images/dark.webp # dark mode
   # Home banner title
-  title: Do what you think is right 🎉
+  title: Do What You Think Is Right
   # Home banner subtitle
   subtitle:
     text: ['永远 是学生','永远 热爱生活','永远 年轻','永远 热泪盈眶'] # subtitle text, array
