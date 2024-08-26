@@ -56,4 +56,3 @@ h1 {
 - 🧠 Researching Bayesian Knowledge Tracing
 - 💻 Proficient in `C++`, `Java`, `Python`, `Qt`
 - 🎬 Movies, 🎵 Music, 📷 Photography, 🎸 Guitar, 🚴‍♂️ Cycling, 📚 English
-- 🍔 Krabby Patty Burger~Good Good Good~~
