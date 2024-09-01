@@ -37,14 +37,14 @@ colors:
   # Secondary color (TBD)
   secondary:
   # Default theme mode initial value (will be overwritten by prefer-color-scheme)
-  # default_mode: dark # light, dark
+  default_mode: light # light, dark
 # COLORS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
 # SITE CUSTOMIZATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/global
 global:
-  # Custom fonts
+  # Custom global fonts
   fonts:
     # Chinese fonts
     chinese:
@@ -56,6 +56,11 @@ global:
       enable: false # Whether to enable custom english fonts
       family:  # Font family
       url:  # Font URL to CSS file
+    # Custom title fonts (navbar, sidebar)
+    title:
+      enable: false # Whether to enable custom title fonts
+      family:  # Font family
+      url:  # Font URL to CSS file
   # Content max width
   content_max_width: 1000px
   # Sidebar width
@@ -63,7 +68,7 @@ global:
   # Effects on mouse hover
   hover:
     shadow: true # shadow effect
-    scale: true # scale effect
+    scale: false # scale effect
   # Scroll progress
   scroll_progress:
     bar: false # progress bar
@@ -113,7 +118,8 @@ home_banner:
   image:
     light: /images/light.webp # light mode
     dark: /images/dark.webp # dark mode
-    title: Life Is About Moments
+  # Home banner title
+  title: Life Is About Moments
   # Home banner subtitle
   subtitle:
     text: ['永远 是学生','永远 热爱生活','永远 年轻','永远 热泪盈眶'] # subtitle text, array
@@ -159,7 +165,9 @@ home_banner:
 
 
 # NAVIGATION BAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# Docs: https://redefine-docs.ohevan.com/home/navbar
 navbar:
+
   # Auto hide navbar
   auto_hide: false
   # Navbar background color
@@ -236,6 +244,8 @@ home:
       # ...... # you can add more
   # Article date format
   article_date_format: auto # auto, relative, YYYY-MM-DD, YYYY-MM-DD HH:mm:ss etc.
+  # Article excerpt length
+  excerpt_length: 200 # Max length of article excerpt
   # Article categories visibility
   categories:
     enable: true  # Whether to enable
@@ -279,6 +289,9 @@ articles:
   code_block:
     copy: true # Whether to enable code block copy button
     style: mac # mac | simple
+    highlight_theme: # Color scheme for highlightjs code highlighting. For preview, see https://highlightjs.org/examples
+      light: github # light mode theme, support: github, atom-one-light, default
+      dark: vs2015 # dark mode theme, support: github-dark, monokai-sublime, vs2015, night-owl, atom-one-dark, nord, tokyo-night-dark, a11y-dark, agate
     font: # Custom font
       enable: false # Whether to enable
       family: # Font family
