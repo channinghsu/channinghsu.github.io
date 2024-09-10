@@ -12,7 +12,7 @@
     "version": "7.3.0"
   },
   "dependencies": {
-    "@waline/client": "^3.3.0",
+    "@waline/client": "^3.3.1",
     "hexo": "^7.3.0",
     "hexo-all-minifier": "^0.5.7",
     "hexo-deployer-git": "^4.0.0",
