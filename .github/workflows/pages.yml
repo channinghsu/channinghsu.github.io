@@ -15,7 +15,12 @@ jobs:
         with:
           token: ${{ secrets.MY_TOKEN }}
           submodules: recursive
-
+      - name: Update submodules
+        run: |
+          git submodule update --remote themes/redefine
+          git add themes/redefine
+          git commit -m "Update submodule 'redefine' to the latest version"
+          git push
       - name: Clone latest posts
         env:
           GH_PAT: ${{ secrets.MY_TOKEN }}
