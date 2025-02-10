@@ -52,7 +52,7 @@ h1 {
 
 ---
 
-- 🎓 NENU '25, pursuing Master's in Software Engineering
+- 🎓 Pursuing Master's in Software Engineering
 - 🧠 Researching Bayesian Knowledge Tracing
 - 💻 Proficient in `C++`, `Java`, `Python`, `Qt`
 - 🎬 Movies, 🎵 Music, 📷 Photography, 🎸 Guitar, 🚴‍♂️ Cycling, 📚 English
