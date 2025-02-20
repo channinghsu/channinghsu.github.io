@@ -3,7 +3,7 @@ title:
 date: 2023-03-09 10:27:07
 ---
 
-# 👋🏻你好呀，我叫 *徐百成* <a class="btn aright" href="/about"><i class="fa-regular fa-language"></i></a>
+# 👋🏻你好呀，我叫 *Channing* <a class="btn aright" href="/about"><i class="fa-regular fa-language"></i></a>
 
 <style>
 h1 {

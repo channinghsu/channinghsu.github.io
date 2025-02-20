@@ -3,7 +3,7 @@ title:
 date: 2023-03-02 18:49:20
 ---
 
-# 👋🏻Hi there, This is *Channing Hsu* <a class="btn aright" href="/about_zh"><i class="fa-regular fa-language"></i></a>
+# 👋🏻Hi there, This is *Channing* <a class="btn aright" href="/about_zh"><i class="fa-regular fa-language"></i></a>
 
 <style>
 h1 {

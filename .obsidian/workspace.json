@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "96e6e7040480ed28",
+        "id": "a42cc6e4cba87104",
         "type": "tabs",
         "children": [
           {
-            "id": "dd95b8a51b74399b",
+            "id": "909925f65d39f037",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "source/about/index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "index"
             }
           }
         ]
@@ -36,10 +40,11 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "文件列表"
             }
           },
           {
@@ -146,17 +151,17 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
     }
   },
-  "active": "dd95b8a51b74399b",
+  "active": "909925f65d39f037",
   "lastOpenFiles": [
-    "source/about/index.md",
-    "source/about_zh/index.md"
+    "source/about_zh/index.md",
+    "source/about/index.md"
   ]
 }
