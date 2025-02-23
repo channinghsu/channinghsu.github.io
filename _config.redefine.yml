@@ -190,8 +190,8 @@ navbar:
     Archives:
       path: /archives
       icon: fa-regular fa-archive # can be empty
-    Pics:
-      path: pic.channinghsu.com
+    图片:
+      path: https://pic.channinghsu.com/
       icon: fa-regular fa-image
     # Status:
     #   path: https://status.evanluo.top/
